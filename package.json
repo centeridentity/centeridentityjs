@@ -15,7 +15,8 @@
     "blockchain"
   ],
   "dependencies": {
-    "node-forge": "^0.9.1"
+    "node-forge": "^0.9.1",
+    "jquery": "3.4.1"
   },
   "author": "Matthew Vogel",
   "license": "MIT",
