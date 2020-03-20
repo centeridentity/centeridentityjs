@@ -13,7 +13,7 @@ exports.CenterIdentity = function(strength) {
             this.strength = 0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
             break;
     }
-    this.bury = async function(username, seed, longitude, latitude) {
+    this.set = async function(username, seed, longitude, latitude) {
         return new Promise(function(resolve, reject){
             this.username = username;
             this.seed = seed;
@@ -35,7 +35,7 @@ exports.CenterIdentity = function(strength) {
         }.bind(this));
     }.bind(this);
 
-    this.dig = async function(username, longitude, latitude) {
+    this.get = async function(username, longitude, latitude) {
         return new Promise(function(resolve, reject){
             this.username = username;
             this.longitude = longitude;
