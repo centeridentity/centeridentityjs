@@ -32,6 +32,9 @@ exports.CenterIdentity = function(strength) {
         }.bind(this))
         .then(function(position){
             return this.encryptSeed();
+        }.bind(this))
+        .catch(function(err) {
+            console.log(err)
         }.bind(this));
     }.bind(this);
 
@@ -53,6 +56,9 @@ exports.CenterIdentity = function(strength) {
         }.bind(this))
         .then(function(position){
             return this.decryptSeed();
+        }.bind(this))
+        .catch(function(err) {
+            console.log(err)
         }.bind(this));
     }.bind(this);
 
