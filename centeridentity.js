@@ -1,6 +1,6 @@
 var forge = require('node-forge');
 var $ = require('jquery-lite');
-exports.CenterIdentity = function(strength) {
+module.exports = function(strength) {
     switch(strength) {
         case 'low':
             this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
