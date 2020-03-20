@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "node-forge": "^0.9.1",
-    "jquery": "3.4.1"
+    "jquery-lite": "2.2.3"
   },
   "author": "Matthew Vogel",
   "license": "MIT",
