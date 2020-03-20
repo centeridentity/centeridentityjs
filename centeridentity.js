@@ -1,4 +1,4 @@
-function CenterIdentity(strength) {
+exports.CenterIdentity = function(strength) {
     switch(strength) {
         case 'low':
             this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
