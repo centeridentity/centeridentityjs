@@ -64,7 +64,7 @@ exports.CenterIdentity = function(strength) {
 
     this.getLocation = async function() {
         return new Promise(function(resolve, reject){
-            if (navigator && navigator.geolocation && !(this.longitude && this.latitude)) {
+            if (typeof navigator !== 'undefined' && navigator.geolocation && !(this.longitude && this.latitude)) {
                 navigator.geolocation.getCurrentPosition(function(position) { 
                     return resolve(position); 
                 }.bind(this));
