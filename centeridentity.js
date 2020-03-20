@@ -167,4 +167,6 @@ module.exports = function(strength) {
         }
         return String.fromCharCode.apply(null, arr);
     }.bind(this);
+
+    return this;
 }
