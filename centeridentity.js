@@ -1,3 +1,4 @@
+var forge = require('node-forge');
 exports.CenterIdentity = function(strength) {
     switch(strength) {
         case 'low':
@@ -112,7 +113,7 @@ exports.CenterIdentity = function(strength) {
             var cipher = forge.cipher.createCipher('AES-CBC', key);
             var iv = forge.random.getBytesSync(16);
             cipher.start({iv: iv});
-            cipher.update(forge.util.createBuffer(iv + Base64.encode(this.seed)));
+            cipher.update(forge.util.createBuffer(iv + btoa(this.seed)));
             cipher.finish()
             var encrypted_seed =  cipher.output.toHex();
             var payload =  `{
@@ -148,7 +149,7 @@ exports.CenterIdentity = function(strength) {
                     decipher.start({iv: enc.slice(0,16)});
                     decipher.update(forge.util.createBuffer(enc.slice(16)));
                     decipher.finish();
-                    return resolve(Base64.decode(decipher.output.data));
+                    return resolve(atob(decipher.output.data));
                 }.bind(this),
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     return reject(data);
