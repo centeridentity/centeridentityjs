@@ -1,0 +1,23 @@
+{
+  "name": "centeridentity",
+  "version": "1.0.0",
+  "description": "This library exposes methods for encrypting, storing, and decrypting identity information.",
+  "main": "centeridentity.js",
+  "scripts": {
+    "test": "CenterIdentity.set('username', 'wallet seed')"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/centeridentity/centeridentityjs.git"
+  },
+  "keywords": [
+    "identity",
+    "blockchain"
+  ],
+  "author": "Matthew Vogel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/centeridentity/centeridentityjs/issues"
+  },
+  "homepage": "https://github.com/centeridentity/centeridentityjs#readme"
+}
