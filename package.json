@@ -2,9 +2,10 @@
   "name": "centeridentity",
   "version": "1.0.15",
   "description": "This library exposes methods for encrypting, storing, and decrypting identity information.",
-  "main": "centeridentity.js",
+  "main": "main.js",
   "scripts": {
-    "test": "CenterIdentity.set('username', 'wallet seed')"
+    "test": "CenterIdentity.set('username', 'wallet seed')",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
