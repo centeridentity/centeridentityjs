@@ -1,10 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './centeridentity.js',
   output: {
-    filename: 'main.js',
+    filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'var',
+    library: 'CenterIdentity'
   },
   mode: 'development'
 };
