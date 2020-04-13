@@ -4,7 +4,7 @@
   "description": "This library exposes methods for encrypting, storing, and decrypting identity information.",
   "main": "main.js",
   "scripts": {
-    "test": "CenterIdentity.set('username', 'wallet seed')",
+    "test": "jest",
     "build": "webpack"
   },
   "repository": {
@@ -16,13 +16,27 @@
     "blockchain"
   ],
   "dependencies": {
-    "node-forge": "^0.9.1",
-    "jquery-lite": "2.2.3"
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^25.3.0",
+    "base64-js": "^1.3.1",
+    "bitcoinjs-lib": "3.3.2",
+    "chai": "^4.2.0",
+    "isparta": "^4.1.1",
+    "jest": "^25.3.0",
+    "jquery": "^3.5.0",
+    "jquery-lite": "2.2.3",
+    "node-forge": "^0.9.1"
   },
   "author": "Matthew Vogel",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/centeridentity/centeridentityjs/issues"
   },
-  "homepage": "https://github.com/centeridentity/centeridentityjs#readme"
+  "homepage": "https://github.com/centeridentity/centeridentityjs#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "mocha": "^7.1.1",
+    "mocha-loader": "^5.0.0"
+  }
 }
