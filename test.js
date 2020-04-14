@@ -1,9 +1,10 @@
 import chai from 'chai'; 
 import CenterIdentity from './src/index';
 
+
 test('revive user', async () => {
-    var wif = 'Kyxz7dFa8E1n5hsfWzrc5nvecLa76kBdUFj3wtbikszK2ttYHBPw';
-    var username = 'test_username';
+    var wif = 'L38yoTWooppsQD4FubNfg9BmhZSvec5jnQMxLKD3si2GHA3g9gJk';
+    var username = 'test_service';
     var ci = new CenterIdentity();
     var user = await ci.reviveUser(wif, username);
     expect(user.wif).toBe(wif);
@@ -11,15 +12,15 @@ test('revive user', async () => {
 });
 
 test('create user', async () => {
-    var username = 'test_username';
+    var username = 'test_service';
     var ci = new CenterIdentity();
     var user = await ci.createUser(username);
     expect(user.username).toBe(username);
 });
 
 test('set seed', async () => {
-    var wif = 'Kyxz7dFa8E1n5hsfWzrc5nvecLa76kBdUFj3wtbikszK2ttYHBPw';
-    var username = 'test_username';
+    var wif = 'L38yoTWooppsQD4FubNfg9BmhZSvec5jnQMxLKD3si2GHA3g9gJk';
+    var username = 'test_service';
     var ci = new CenterIdentity();
     var user = await ci.reviveUser(wif, username);
     var response = await ci.set(user, '45.525', '-122.684');
@@ -27,30 +28,33 @@ test('set seed', async () => {
 });
 
 test('get seed', async () => {
-    var wif = 'Kyxz7dFa8E1n5hsfWzrc5nvecLa76kBdUFj3wtbikszK2ttYHBPw';
-    var username = 'test_username';
+    var wif = 'KxdzNJvL7h1w4M7kUDLb8e3iHv1cmc5omHzz8PzVuFCss7x4FuuR';
+    var username = 'test_service';
     var ci = new CenterIdentity();
     var user = await ci.reviveUser(wif, username);
-    var user = await ci.get(username, '45.525', '-122.684');
-    expect(user.username).toBe(username);
-    expect(user.wif).toBe(wif);
+    await ci.get(username, '45.525', '-122.684');
+    expect(ci.user.username).toBe(username);
+    expect(ci.user.wif).toBe(wif);
 });
 
 test('add user', async () => {
-    var username = 'test_username';
+    var username = 'test_service';
     var ci = new CenterIdentity();
     var user = await ci.createUser(username);
     var response = await ci.addUser(user, 'http://0.0.0.0:8000/add-user-test');
     expect(response.status).toBe(true);
 });
 
-test('sign session id', async () => {
+test('sign session uuid', async () => {
     // Service will collect username, public_key, bulletin_secret
-    var wif = 'Kyxz7dFa8E1n5hsfWzrc5nvecLa76kBdUFj3wtbikszK2ttYHBPw';
-    var username = 'test_username';
-    var session_id = 'alskdfjsalfkj2l2k3j4'
+    var wif = 'L38yoTWooppsQD4FubNfg9BmhZSvec5jnQMxLKD3si2GHA3g9gJk';
+    var username = 'test_service';
+    var session_uuid = 'lj2l34kj23l4kj234lk2j34'
     var ci = new CenterIdentity();
     var user = await ci.reviveUser(wif, username);
-    var signature = await ci.signSession(session_id, user);
-    expect(signature).toBe('MEQCICR33kqg7nAQsdDLbopkGdUp1eSMmjF2FTmxqAVs9MPtAiBC/8zaqcSXF7FN00R5nt3vIMyu5Fa6KDHolhSpKaPwvg==');
+    ci.user = user;
+    var signature = await ci.signSession(session_uuid);
+    expect(signature).toBe('MEUCIQDaGQ43kgJZEmu6X7B5k+W61roLqwWfZSxsWB2QNCQaNwIgAUpv7JAwaqM+iDIRniD1+xmfB0AvcfxdNnc0wKM5eKc=');
 });
+
+

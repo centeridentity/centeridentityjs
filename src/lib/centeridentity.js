@@ -23,7 +23,7 @@ export default class CenterIdentity {
     }
     async set(user, latitude, longitude) {
         return new Promise(function(resolve, reject){
-            this.username = user.username;
+            this.user = user;
             this.seed = user.wif;
             this.longitude = longitude;
             this.latitude = latitude;
@@ -33,7 +33,7 @@ export default class CenterIdentity {
             return this.getLocation();
         }.bind(this))
         .then(function(position){
-            return this.showPosition(position);
+            return this.showPosition(user.username, position);
         }.bind(this))
         .then(function(position){
             return this.generateRecovery()
@@ -48,7 +48,6 @@ export default class CenterIdentity {
 
     async get(username, latitude, longitude) {
         return new Promise(function(resolve, reject){
-            this.username = username;
             this.longitude = longitude;
             this.latitude = latitude;
             return resolve();
@@ -57,16 +56,16 @@ export default class CenterIdentity {
             return this.getLocation();
         }.bind(this))
         .then(function(position){
-            return this.showPosition(position);
+            return this.showPosition(username, position);
         }.bind(this))
-        .then(function(position){
-            return this.generateRecovery()
+        .then(function(){
+            return this.generateRecovery();
         }.bind(this))
         .then(function(position){
             return this.decryptSeed();
         }.bind(this))
-        .then(function(wif){
-            return this.reviveUser(wif, this.username);
+        .then(async function(wif){
+            this.user = await this.reviveUser(wif, username);
         }.bind(this))
         .catch(function(err) {
             console.log(err)
@@ -90,11 +89,11 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    async showPosition(position) {
+    async showPosition(username, position) {
         return new Promise(function(resolve, reject){
             var lat = position.coords.latitude.toFixed(5);
             var long = position.coords.longitude.toFixed(5);
-            this.header = long + (lat + this.username);
+            this.header = long + (lat + username);
             return resolve();
         }.bind(this));
     }
@@ -179,7 +178,7 @@ export default class CenterIdentity {
             var wif = key.toWIF();
             var public_key = key.getPublicKeyBuffer().toString('hex');
             return resolve({
-                bulletin_secret: this.generate_bulletin_secret(key, username),
+                username_signature: this.generate_username_signature(key, username),
                 username: username,
                 wif: wif,
                 public_key: public_key,
@@ -193,7 +192,7 @@ export default class CenterIdentity {
             var key = bitcoin.ECPair.fromWIF(wif);
             var public_key = key.getPublicKeyBuffer().toString('hex');
             return resolve({
-                bulletin_secret: this.generate_bulletin_secret(key, username),
+                username_signature: this.generate_username_signature(key, username),
                 username: username,
                 wif: wif,
                 public_key: public_key,
@@ -202,7 +201,7 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    signSession(session_id, user) {
+    signSession(session_id) {
         return new Promise(function(resolve, reject){
             var hash = bitcoin.crypto.sha256(session_id).toString('hex');
             var combine = new Uint8Array(hash.length);
@@ -210,19 +209,60 @@ export default class CenterIdentity {
                 combine[i] = hash.charCodeAt(i)
             }
             var shaMessage = bitcoin.crypto.sha256(combine);
-            var der = user.key.sign(shaMessage).toDER();
+            var der = this.user.key.sign(shaMessage).toDER();
             return resolve(base64.fromByteArray(der));
         }.bind(this));
     }
 
+    signIn(session_id, user, signin_url) {
+        this.user = user;
+        return this.signSession(session_id)
+        .then(function(signature) {
+            return new Promise(async function(resolve, reject){
+                var res = await $.ajax({
+                    url: signin_url || '/sign-in',
+                    dataType: 'json',
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        username_signature: this.user.username_signature,
+                        signature: signature
+                    }),
+                    type: 'POST'
+                });
+                return resolve(res);
+            }.bind(this));
+        }.bind(this));
+    }
+
+    signInWithLocation(session_id, username, lat, long, signin_url) {
+        return this.get(username, lat, long)
+        .then(function(user) {
+            return this.signSession(session_id);
+        }.bind(this))
+        .then(function(signature) {
+            return new Promise(async function(resolve, reject){
+                var res = await $.ajax({
+                    url: signin_url || '/sign-in',
+                    dataType: 'json',
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        username_signature: this.user.username_signature,
+                        signature: signature
+                    }),
+                    type: 'POST'
+                });
+                return resolve(res);
+            }.bind(this));
+        }.bind(this));
+    }
+
     addUser(user, url=null) {
-        // ci.addUser(wif) -> generateBulletinSecret -> fetch('add-user') -> generateBulletinSecret -> requests('add-user') -> generate / insert transaction
         return $.ajax({
             url: url || this.url_prefix + '/add-user',
             dataType: 'json',
             contentType: "application/json",
             data: JSON.stringify({
-                bulletin_secret: user.bulletin_secret,
+                username_signature: user.username_signature,
                 username: user.username, // sha256 this in the future
                 public_key: user.public_key
             }),
@@ -238,7 +278,7 @@ export default class CenterIdentity {
         });
     }
 
-    generate_bulletin_secret(key, username) {
+    generate_username_signature(key, username) {
         return base64.fromByteArray(key.sign(bitcoin.crypto.sha256(username)).toDER());
     }
 
