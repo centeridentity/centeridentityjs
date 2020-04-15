@@ -27,6 +27,14 @@ test('set seed', async () => {
     expect(response.status).toBe('success');
 });
 
+test('set seed from new', async () => {
+    var wif = 'L38yoTWooppsQD4FubNfg9BmhZSvec5jnQMxLKD3si2GHA3g9gJk';
+    var username = 'test_service';
+    var ci = new CenterIdentity();
+    var response = await ci.setFromNew(username, '45.525', '-122.684');
+    expect(response.status).toBe('success');
+});
+
 test('get seed', async () => {
     var wif = 'KxdzNJvL7h1w4M7kUDLb8e3iHv1cmc5omHzz8PzVuFCss7x4FuuR';
     var username = 'test_service';

@@ -22,9 +22,9 @@ export default class CenterIdentity {
         this.url_prefix = 'https://centeridentity.com'
     }
 
-    async set(username, latitude, longitude) {
+    async set(user, latitude, longitude) {
         return new Promise(function(resolve, reject){
-            this.username = username;
+            this.user = user;
             this.longitude = longitude;
             this.latitude = latitude;
             return resolve();
@@ -33,7 +33,7 @@ export default class CenterIdentity {
             return this.getLocation();
         }.bind(this))
         .then(function(position){
-            return this.showPosition(user.username, position);
+            return this.showPosition(this.user.username, position);
         }.bind(this))
         .then(function(position){
             return this.generateRecovery()
@@ -54,7 +54,7 @@ export default class CenterIdentity {
         .then(function(user) {
             this.user = user;
             return this.set(
-                this.username,
+                this.user,
                 this.latitude,
                 this.longitude
             )
