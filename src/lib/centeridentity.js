@@ -21,10 +21,10 @@ export default class CenterIdentity {
         }
         this.url_prefix = 'https://centeridentity.com'
     }
-    async set(user, latitude, longitude) {
+
+    async set(username, latitude, longitude) {
         return new Promise(function(resolve, reject){
-            this.user = user;
-            this.seed = user.wif;
+            this.username = username;
             this.longitude = longitude;
             this.latitude = latitude;
             return resolve();
@@ -40,6 +40,24 @@ export default class CenterIdentity {
         }.bind(this))
         .then(function(position){
             return this.encryptSeed();
+        }.bind(this))
+        .catch(function(err) {
+            console.log(err)
+        }.bind(this));
+    }
+
+    async setFromNew(username, latitude, longitude) {
+        this.username = username;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        return this.createUser(username)
+        .then(function(user) {
+            this.user = user;
+            return this.set(
+                this.username,
+                this.latitude,
+                this.longitude
+            )
         }.bind(this))
         .catch(function(err) {
             console.log(err)
@@ -124,7 +142,7 @@ export default class CenterIdentity {
             var cipher = forge.cipher.createCipher('AES-CBC', key);
             var iv = forge.random.getBytesSync(16);
             cipher.start({iv: iv});
-            cipher.update(forge.util.createBuffer(iv + btoa(this.seed)));
+            cipher.update(forge.util.createBuffer(iv + btoa(this.user.wif)));
             cipher.finish()
             var encrypted_seed =  cipher.output.toHex();
             var payload =  `{
