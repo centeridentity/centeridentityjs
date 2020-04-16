@@ -59,6 +59,11 @@ export default class CenterIdentity {
                 this.longitude
             )
         }.bind(this))
+        .then(function() {
+            return new Promise(function(resolve, reject) {
+                return resolve(this.user);
+            }.bind(this));
+        }.bind(this))
         .catch(function(err) {
             console.log(err)
         }.bind(this));
@@ -273,6 +278,27 @@ export default class CenterIdentity {
                 return resolve(res);
             }.bind(this));
         }.bind(this));
+    }
+
+    registerWithLocation(username, lat, long, other_args, register_url) {
+        return this.setFromNew(username, lat, long)
+        .then(function(user) {
+            return new Promise(async function(resolve, reject){
+                var post_vars = {
+                    username: username,
+                    public_key: user.public_key,
+                    username_signature: user.username_signature
+                }
+                post_vars = {...post_vars, ...other_args}
+                return resolve(await $.ajax({
+                    url: register_url || '/create-customer',
+                    dataType: 'json',
+                    contentType: "application/json",
+                    data: JSON.stringify(post_vars),
+                    type: 'POST'
+                }));
+            })
+        }.bind(this))
     }
 
     addUser(user, url=null) {

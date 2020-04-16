@@ -7,5 +7,5 @@ module.exports = {
     libraryTarget: 'var',
     library: 'CenterIdentity'
   },
-  mode: 'production'
+  mode: 'development'
 };

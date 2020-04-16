@@ -28,11 +28,10 @@ test('set seed', async () => {
 });
 
 test('set seed from new', async () => {
-    var wif = 'L38yoTWooppsQD4FubNfg9BmhZSvec5jnQMxLKD3si2GHA3g9gJk';
     var username = 'test_service';
     var ci = new CenterIdentity();
-    var response = await ci.setFromNew(username, '45.525', '-122.684');
-    expect(response.status).toBe('success');
+    var user = await ci.setFromNew(username, '45.525', '-122.684');
+    expect(user.username).toBe('test_service');
 });
 
 test('get seed', async () => {
