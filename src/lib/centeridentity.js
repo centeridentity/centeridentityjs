@@ -83,7 +83,7 @@ export default class CenterIdentity {
             return this.decryptSeed();
         }.bind(this))
         .then(async function(wif){
-            this.user = await this.reviveUser(wif, username);
+            return await this.reviveUser(wif, username);
         }.bind(this))
         .catch(function(err) {
             console.log(err)
@@ -209,13 +209,14 @@ export default class CenterIdentity {
         return new Promise(function(resolve, reject){
             var key = bitcoin.ECPair.fromWIF(wif);
             var public_key = key.getPublicKeyBuffer().toString('hex');
-            return resolve({
+            this.user = {
                 username_signature: this.generate_username_signature(key, username),
                 username: username,
                 wif: wif,
                 public_key: public_key,
                 key: key
-            })
+            }
+            return resolve(this.user);
         }.bind(this));
     }
 
