@@ -271,7 +271,7 @@ export default class CenterIdentity {
                     contentType: "application/json",
                     data: JSON.stringify({
                         username_signature: this.user.username_signature,
-                        signature: signature
+                        session_id_signature: signature
                     }),
                     type: 'POST'
                 });
