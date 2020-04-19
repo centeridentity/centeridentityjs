@@ -313,7 +313,27 @@ export default class CenterIdentity {
             }),
             type: 'POST',
             success: function(data, textStatus, jqXHR) {
-                if (data.status === 'failed') {
+                if (data.status === 'error') {
+                    return reject(data);
+                }
+            }.bind(this),
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                return reject(errorThrown);
+            }.bind(this)
+        });
+    }
+
+    getUser(user, url=null) {
+        return $.ajax({
+            url: url || this.url_prefix + '/get-user',
+            dataType: 'json',
+            contentType: "application/json",
+            data: JSON.stringify({
+                username_signature: user.username_signature
+            }),
+            type: 'POST',
+            success: function(data, textStatus, jqXHR) {
+                if (data.status === 'error') {
                     return reject(data);
                 }
             }.bind(this),
