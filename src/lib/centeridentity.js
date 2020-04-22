@@ -89,9 +89,6 @@ export default class CenterIdentity {
         }.bind(this))
         .then(async function(wif){
             return await this.reviveUser(wif, username);
-        }.bind(this))
-        .catch(function(err) {
-            console.log(err)
         }.bind(this));
     }
 
@@ -225,7 +222,7 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    signSession(session_id) {
+    signSession(session_id, user) {
         return new Promise(function(resolve, reject){
             var hash = bitcoin.crypto.sha256(session_id).toString('hex');
             var combine = new Uint8Array(hash.length);
@@ -233,14 +230,13 @@ export default class CenterIdentity {
                 combine[i] = hash.charCodeAt(i)
             }
             var shaMessage = bitcoin.crypto.sha256(combine);
-            var der = this.user.key.sign(shaMessage).toDER();
+            var der = user.key.sign(shaMessage).toDER();
             return resolve(base64.fromByteArray(der));
         }.bind(this));
     }
 
     signIn(session_id, user, signin_url) {
-        this.user = user;
-        return this.signSession(session_id)
+        return this.signSession(session_id, user)
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
                 var res = await $.ajax({
@@ -248,7 +244,7 @@ export default class CenterIdentity {
                     dataType: 'json',
                     contentType: "application/json",
                     data: JSON.stringify({
-                        username_signature: this.user.username_signature,
+                        username_signature: user.username_signature,
                         session_id_signature: signature
                     }),
                     type: 'POST'
@@ -261,7 +257,7 @@ export default class CenterIdentity {
     signInWithLocation(session_id, username, lat, long, signin_url) {
         return this.get(username, lat, long)
         .then(function(user) {
-            return this.signSession(session_id);
+            return this.signSession(session_id, user);
         }.bind(this))
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
@@ -277,6 +273,9 @@ export default class CenterIdentity {
                 });
                 return resolve(res);
             }.bind(this));
+        }.bind(this))
+        .catch(function(err) {
+            return {'status': 'error', 'message': err}
         }.bind(this));
     }
 
