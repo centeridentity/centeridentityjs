@@ -60,7 +60,7 @@ test('sign session uuid', async () => {
     var ci = new CenterIdentity();
     var user = await ci.reviveUser(wif, username);
     ci.user = user;
-    var signature = await ci.signSession(session_uuid);
+    var signature = await ci.signSession(session_uuid, user);
     expect(signature).toBe('MEUCIQDaGQ43kgJZEmu6X7B5k+W61roLqwWfZSxsWB2QNCQaNwIgAUpv7JAwaqM+iDIRniD1+xmfB0AvcfxdNnc0wKM5eKc=');
 });
 
