@@ -174,7 +174,7 @@ export default class CenterIdentity {
                 dataType: 'json',
                 type: 'GET',
                 success: function(data, textStatus, jqXHR) {
-                    if (data.status === 'not found') {
+                    if (data.status === 'error') {
                         return reject(data);
                     }
                     var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(this.symmetric_key).digest().toHex(), 'salt', 400, 32);
