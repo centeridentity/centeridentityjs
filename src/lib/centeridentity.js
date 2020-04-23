@@ -275,7 +275,7 @@ export default class CenterIdentity {
             }.bind(this));
         }.bind(this))
         .catch(function(err) {
-            return {'status': 'error', 'message': err}
+            return err
         }.bind(this));
     }
 
@@ -298,6 +298,9 @@ export default class CenterIdentity {
                 }));
             })
         }.bind(this))
+        .catch(function(err) {
+            return err
+        }.bind(this));
     }
 
     addUser(user, url=null) {
