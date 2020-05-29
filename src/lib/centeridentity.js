@@ -161,12 +161,12 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    encrypt() {
-        var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(this.symmetric_key).digest().toHex(), 'salt', 400, 32);
+    encrypt(keyStr, message) {
+        var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(keyStr).digest().toHex(), 'salt', 400, 32);
         var cipher = forge.cipher.createCipher('AES-CBC', key);
         var iv = forge.random.getBytesSync(16);
         cipher.start({iv: iv});
-        cipher.update(forge.util.createBuffer(iv + btoa(this.user.wif)));
+        cipher.update(forge.util.createBuffer(iv + btoa(message)));
         cipher.finish()
         return cipher.output.toHex();
     }
@@ -181,19 +181,24 @@ export default class CenterIdentity {
                     if (data.status === 'error') {
                         return reject(data);
                     }
-                    var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(this.symmetric_key).digest().toHex(), 'salt', 400, 32);
-                    var decipher = forge.cipher.createDecipher('AES-CBC', key);
-                    var enc = this.hexToBytes(data.relationship);
-                    decipher.start({iv: enc.slice(0,16)});
-                    decipher.update(forge.util.createBuffer(enc.slice(16)));
-                    decipher.finish();
-                    return resolve(atob(decipher.output.data));
+                    let decryptedData = this.decrypt(this.symmetric_key, data.relationship);
+                    return resolve(atob(decryptedData));
                 }.bind(this),
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     return reject(errorThrown);
                 }.bind(this)
             });
         }.bind(this));
+    }
+
+    decrypt(keyStr, message) {
+        var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(keyStr).digest().toHex(), 'salt', 400, 32);
+        var decipher = forge.cipher.createDecipher('AES-CBC', key);
+        var enc = this.hexToBytes(message);
+        decipher.start({iv: enc.slice(0,16)});
+        decipher.update(forge.util.createBuffer(enc.slice(16)));
+        decipher.finish();
+        return decipher.output.data;
     }
 
     createUser(username) {
