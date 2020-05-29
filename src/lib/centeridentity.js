@@ -140,13 +140,7 @@ export default class CenterIdentity {
 
     async encryptSeed() {
         return new Promise(function(resolve, reject){
-            var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(this.symmetric_key).digest().toHex(), 'salt', 400, 32);
-            var cipher = forge.cipher.createCipher('AES-CBC', key);
-            var iv = forge.random.getBytesSync(16);
-            cipher.start({iv: iv});
-            cipher.update(forge.util.createBuffer(iv + btoa(this.user.wif)));
-            cipher.finish()
-            var encrypted_seed =  cipher.output.toHex();
+            var encrypted_seed = this.encrypt(this.symmetric_key, this.user.wif);
             var payload =  `{
                 "rid": "` + this.rid + `",
                 "relationship": "` + encrypted_seed + `"
@@ -165,6 +159,16 @@ export default class CenterIdentity {
                 }
             });
         }.bind(this));
+    }
+
+    encrypt() {
+        var key = forge.pkcs5.pbkdf2(forge.sha256.create().update(this.symmetric_key).digest().toHex(), 'salt', 400, 32);
+        var cipher = forge.cipher.createCipher('AES-CBC', key);
+        var iv = forge.random.getBytesSync(16);
+        cipher.start({iv: iv});
+        cipher.update(forge.util.createBuffer(iv + btoa(this.user.wif)));
+        cipher.finish()
+        return cipher.output.toHex();
     }
 
     async decryptSeed() {
@@ -356,5 +360,12 @@ export default class CenterIdentity {
             arr.push(parseInt(c, 16));
         }
         return String.fromCharCode.apply(null, arr);
+    }
+
+    generate_rid(user1, user2) {
+        var bulletin_secrets = [user1.username_signature, user2.username_signature].sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+        return forge.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1]).digest().toHex();
     }
 }

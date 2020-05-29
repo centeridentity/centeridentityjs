@@ -30,12 +30,12 @@ test('set seed', async () => {
 test('set seed from new', async () => {
     var username = 'test_service';
     var ci = new CenterIdentity();
-    var user = await ci.setFromNew(username, '45.525', '-122.684');
+    var user = await ci.setFromNew(username, '45.522', '-122.685');
     expect(user.username).toBe('test_service');
 });
 
 test('get seed', async () => {
-    var wif = 'KxdzNJvL7h1w4M7kUDLb8e3iHv1cmc5omHzz8PzVuFCss7x4FuuR';
+    var wif = 'L38yoTWooppsQD4FubNfg9BmhZSvec5jnQMxLKD3si2GHA3g9gJk';
     var username = 'test_service';
     var ci = new CenterIdentity();
     var user = await ci.reviveUser(wif, username);
