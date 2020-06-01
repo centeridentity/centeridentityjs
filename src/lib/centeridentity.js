@@ -22,6 +22,35 @@ export default class CenterIdentity {
         this.url_prefix = 'https://centeridentity.com'
     }
 
+    async createRelationship(user, extra_data) {
+        let relationship = {
+            their_username: user.username,
+            their_username_signature: user.username_signature,
+            their_public_key: user.public_key,
+            my_username: me.username,
+            my_username_signature: me.username_signature,
+            my_public_key: me.public_key
+        }
+        relationship.assign(extra_data);
+        return user;
+    }
+
+    async createRelationshipFromNew(name, extra_data) {
+        let user = await this.createUser(name);
+        let relationship = {
+            their_username: user.username,
+            their_username_signature: user.username_signature,
+            their_public_key: user.public_key,
+            their_wif: user.wif,
+            my_username: me.username,
+            my_username_signature: me.username_signature,
+            my_public_key: me.public_key
+        }
+        relationship.assign(extra_data);
+        user.relationship = relationship;
+        return user;
+    }
+
     async set(user, latitude, longitude) {
         return new Promise(function(resolve, reject){
             this.user = user;
@@ -325,11 +354,11 @@ export default class CenterIdentity {
             type: 'POST',
             success: function(data, textStatus, jqXHR) {
                 if (data.status === 'error') {
-                    return reject(data);
+                    throw data;
                 }
             }.bind(this),
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                return reject(errorThrown);
+                throw XMLHttpRequest;
             }.bind(this)
         });
     }
@@ -345,11 +374,11 @@ export default class CenterIdentity {
             type: 'POST',
             success: function(data, textStatus, jqXHR) {
                 if (data.status === 'error') {
-                    return reject(data);
+                    throw data;
                 }
             }.bind(this),
             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                return reject(errorThrown);
+                throw errorThrown;
             }.bind(this)
         });
     }
@@ -367,10 +396,10 @@ export default class CenterIdentity {
         return String.fromCharCode.apply(null, arr);
     }
 
-    generate_rid(user1, user2) {
+    generate_rid(user1, user2, extra_data='') {
         var bulletin_secrets = [user1.username_signature, user2.username_signature].sort(function (a, b) {
             return a.toLowerCase().localeCompare(b.toLowerCase());
         });
-        return forge.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1]).digest().toHex();
+        return forge.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1] + extra_data).digest().toHex();
     }
 }
