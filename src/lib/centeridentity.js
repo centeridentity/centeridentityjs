@@ -22,7 +22,7 @@ export default class CenterIdentity {
         this.url_prefix = 'https://centeridentity.com'
     }
 
-    async createRelationship(user, extra_data) {
+    async createRelationship(me, user, extra_data) {
         let relationship = {
             their_username: user.username,
             their_username_signature: user.username_signature,
@@ -35,7 +35,7 @@ export default class CenterIdentity {
         return user;
     }
 
-    async createRelationshipFromNew(name, extra_data) {
+    async createRelationshipFromNew(me, name, extra_data) {
         let user = await this.createUser(name);
         let relationship = {
             their_username: user.username,
