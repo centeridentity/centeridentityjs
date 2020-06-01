@@ -1,6 +1,6 @@
 {
   "name": "centeridentity",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "This library exposes methods for encrypting, storing, and decrypting identity information.",
   "main": "main.js",
   "scripts": {

@@ -31,7 +31,7 @@ export default class CenterIdentity {
             my_username_signature: me.username_signature,
             my_public_key: me.public_key
         }
-        relationship.assign(extra_data);
+        Object.assign(relationship, extra_data);
         return user;
     }
 
@@ -46,7 +46,7 @@ export default class CenterIdentity {
             my_username_signature: me.username_signature,
             my_public_key: me.public_key
         }
-        relationship.assign(extra_data);
+        Object.assign(relationship, extra_data);
         user.relationship = relationship;
         return user;
     }
