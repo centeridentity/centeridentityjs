@@ -1,6 +1,6 @@
 {
   "name": "centeridentity",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "description": "This library exposes methods for encrypting, storing, and decrypting identity information.",
   "main": "main.js",
   "scripts": {
@@ -23,10 +23,12 @@
     "bitcoinjs-lib": "3.3.2",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "elliptic": "^6.5.3",
     "isparta": "^4.1.1",
     "jest": "^25.3.0",
     "jquery": "^3.5.0",
     "jquery-lite": "2.2.3",
+    "js-x25519": "https://github.com/CryptoEsel/js-x25519",
     "node-forge": "^0.9.1"
   },
   "author": "Matthew Vogel",

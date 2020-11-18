@@ -2,6 +2,7 @@ import forge from 'node-forge';
 import jQuery from 'jquery';
 import * as bitcoin from 'bitcoinjs-lib';
 import base64 from 'base64-js';
+import X25519 from 'js-x25519';
 var $ = jQuery;
 export default class CenterIdentity {
     constructor(strength) {
@@ -32,7 +33,58 @@ export default class CenterIdentity {
             my_public_key: me.public_key
         }
         Object.assign(relationship, extra_data);
+        user.relationship = relationship;
         return user;
+    }
+
+    async createRelationshipTransaction(me, user, group) {
+        var join = await this.createRelationship(me, user);
+        var dh_keys = this.get_dh_keys(me.wif, user.username_signature);
+        join.relationship.dh_private_key = dh_keys.dh_private_key
+        var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
+        var meObject = this.toObject(me)
+        var requested_rid = null;
+        var requester_rid = null;
+        if (group) {
+            requested_rid = ci.generate_rid(
+                group,
+                active_group,
+            )
+            requester_rid = ci.generate_rid(
+                group,
+                me,
+            )
+        }
+        return await this.generateTransaction(
+            me,
+            meObject.public_key,
+            dh_keys.dh_public_key,
+            this.generate_rid(me, user),
+            encryptedRelationship,
+            0,
+            requester_rid,
+            requested_rid
+        );
+    }
+
+    async approveRelationshipTransaction(me, user, request) {
+        var join = await this.createRelationship(me, user);
+        var dh_keys = this.get_dh_keys(me.wif, user.username_signature);
+        join.relationship.dh_private_key = dh_keys.dh_private_key
+        var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
+        var meObject = this.toObject(me)
+        var requested_rid = request.requested_rid;
+        var requester_rid = request.requester_rid;
+        return await this.generateTransaction(
+            me,
+            meObject.public_key,
+            dh_keys.dh_public_key,
+            this.generate_rid(me, user),
+            encryptedRelationship,
+            0,
+            requester_rid,
+            requested_rid
+        );
     }
 
     async createRelationshipFromNew(me, name, extra_data) {
@@ -117,6 +169,8 @@ export default class CenterIdentity {
             return this.decryptSeed();
         }.bind(this))
         .then(async function(wif){
+            window.localStorage.setItem('wif', wif);
+            window.localStorage.setItem('username', username);
             return await this.reviveUser(wif, username);
         }.bind(this));
     }
@@ -227,7 +281,7 @@ export default class CenterIdentity {
         decipher.start({iv: enc.slice(0,16)});
         decipher.update(forge.util.createBuffer(enc.slice(16)));
         decipher.finish();
-        return decipher.output.data;
+        return atob(decipher.output.data);
     }
 
     createUser(username) {
@@ -260,9 +314,9 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    signSession(session_id, user) {
+    sign(message, user) {
         return new Promise(function(resolve, reject){
-            var hash = bitcoin.crypto.sha256(session_id).toString('hex');
+            var hash = bitcoin.crypto.sha256(message).toString('hex');
             var combine = new Uint8Array(hash.length);
             for (var i = 0; i < hash.length; i++) {
                 combine[i] = hash.charCodeAt(i)
@@ -274,7 +328,7 @@ export default class CenterIdentity {
     }
 
     signIn(session_id, user, signin_url) {
-        return this.signSession(session_id, user)
+        return this.sign(session_id, user)
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
                 var res = await $.ajax({
@@ -295,7 +349,7 @@ export default class CenterIdentity {
     signInWithLocation(session_id, username, lat, long, signin_url) {
         return this.get(username, lat, long)
         .then(function(user) {
-            return this.signSession(session_id, user);
+            return this.sign(session_id, user);
         }.bind(this))
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
@@ -320,6 +374,8 @@ export default class CenterIdentity {
     registerWithLocation(username, lat, long, other_args, register_url) {
         return this.setFromNew(username, lat, long)
         .then(function(user) {
+            window.localStorage.setItem('wif', user.wif);
+            window.localStorage.setItem('username', user.username);
             return new Promise(async function(resolve, reject){
                 var post_vars = {
                     username: username,
@@ -383,8 +439,35 @@ export default class CenterIdentity {
         });
     }
 
+    get_dh_keys(me, their_username_signature) {
+        
+        var raw_dh_private_key = bitcoin.crypto.sha256(me.wif + their_username_signature);
+        var raw_dh_public_key = X25519.getPublic(raw_dh_private_key);
+        return {
+            dh_private_key: this.toHex(raw_dh_private_key),
+            dh_public_key: this.toHex(raw_dh_public_key)
+        }
+    }
+
+    getSharedSecret(dh_private_key, dh_public_key) {
+        var privk = new Uint8Array(dh_private_key.match(/[\da-f]{2}/gi).map(function (h) {
+            return parseInt(h, 16)
+        }));
+        var pubk = new Uint8Array(dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
+            return parseInt(h, 16)
+        }));
+        return this.toHex(X25519.getSharedKey(privk, pubk));
+    }
+
     generate_username_signature(key, username) {
         return base64.fromByteArray(key.sign(bitcoin.crypto.sha256(username)).toDER());
+    }
+
+    toHex(byteArray) {
+        var callback = function(byte) {
+            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+        }
+        return Array.from(byteArray, callback).join('')
     }
 
     hexToBytes(s) {
@@ -401,5 +484,83 @@ export default class CenterIdentity {
             return a.toLowerCase().localeCompare(b.toLowerCase());
         });
         return forge.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1] + extra_data).digest().toHex();
+    }
+
+    async generateTransaction(
+        user,
+        public_key,
+        dh_public_key,
+        rid,
+        relationship,
+        fee,
+        requester_rid,
+        requested_rid
+    ) {
+        var transaction = {
+            rid:  rid,
+            fee: fee,
+            dh_public_key: dh_public_key,
+            requester_rid: requester_rid || '',
+            requested_rid: requested_rid || '',
+            outputs: [],
+            inputs: [],
+            time: parseInt(((+ new Date()) / 1000).toString()).toString(),
+            public_key: public_key,
+            relationship: relationship
+        };
+        transaction.hash = foobar.bitcoin.crypto.sha256(
+            transaction.public_key +
+            transaction.time +
+            transaction.dh_public_key +
+            transaction.rid +
+            transaction.relationship +
+            transaction.fee.toFixed(8) +
+            transaction.requester_rid +
+            transaction.requested_rid
+        ).toString('hex')
+
+        transaction.id = await ci.sign(transaction.hash, user);
+        return transaction;
+    }
+
+    theirIdentityFromTransaction(txn) {
+        return {
+            username: txn.relationship.their_username,
+            username_signature: txn.relationship.their_username_signature,
+            public_key: txn.relationship.their_public_key
+        }
+    }
+
+    async generatePrivateMessageTransaction(me, my_txn, their_txn, message) {
+
+        var shared_secret = this.getSharedSecret(my_txn.relationship.dh_private_key, their_txn.dh_public_key);
+        var encryptedChatRelationship = await ci.encrypt(shared_secret, message);
+        return await this.generateTransaction(
+            me,
+            my_txn.public_key,
+            '',
+            this.generate_rid(me, ci.theirIdentityFromTransaction(my_txn)),
+            encryptedChatRelationship,
+            0,
+            my_txn.requester_rid,
+            my_txn.requested_rid
+        );
+    }
+
+    toObject(user) {
+        return {
+            username: user.username,
+            username_signature: user.username_signature,
+            public_key: user.public_key
+        }
+    }
+
+    toJson(user) {
+        return JSON.stringify({
+            username: user.username,
+            username_signature: user.username_signature,
+            public_key: user.public_key,
+            wif: user.wif
+        })
     }
 }
