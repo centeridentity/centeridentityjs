@@ -3,6 +3,7 @@ import jQuery from 'jquery';
 import * as bitcoin from 'bitcoinjs-lib';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
+import * as buffer from 'buffer';
 var $ = jQuery;
 export default class CenterIdentity {
     constructor(strength) {
@@ -39,18 +40,18 @@ export default class CenterIdentity {
 
     async createRelationshipTransaction(me, user, group) {
         var join = await this.createRelationship(me, user);
-        var dh_keys = this.get_dh_keys(me.wif, user.username_signature);
+        var dh_keys = this.get_dh_keys(me, user);
         join.relationship.dh_private_key = dh_keys.dh_private_key
         var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
         var meObject = this.toObject(me)
         var requested_rid = null;
         var requester_rid = null;
         if (group) {
-            requested_rid = ci.generate_rid(
+            requested_rid = this.generate_rid(
                 group,
-                active_group,
+                user,
             )
-            requester_rid = ci.generate_rid(
+            requester_rid = this.generate_rid(
                 group,
                 me,
             )
@@ -69,7 +70,7 @@ export default class CenterIdentity {
 
     async approveRelationshipTransaction(me, user, request) {
         var join = await this.createRelationship(me, user);
-        var dh_keys = this.get_dh_keys(me.wif, user.username_signature);
+        var dh_keys = this.get_dh_keys(me, user);
         join.relationship.dh_private_key = dh_keys.dh_private_key
         var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
         var meObject = this.toObject(me)
@@ -439,9 +440,8 @@ export default class CenterIdentity {
         });
     }
 
-    get_dh_keys(me, their_username_signature) {
-        
-        var raw_dh_private_key = bitcoin.crypto.sha256(me.wif + their_username_signature);
+    get_dh_keys(me, them) {
+        var raw_dh_private_key = bitcoin.crypto.sha256(me.wif + them.username_signature);
         var raw_dh_public_key = X25519.getPublic(raw_dh_private_key);
         return {
             dh_private_key: this.toHex(raw_dh_private_key),
@@ -449,11 +449,12 @@ export default class CenterIdentity {
         }
     }
 
-    getSharedSecret(dh_private_key, dh_public_key) {
-        var privk = new Uint8Array(dh_private_key.match(/[\da-f]{2}/gi).map(function (h) {
+    getSharedSecret(me, them) {
+        var dh_keys = this.get_dh_keys(me, them);
+        var privk = new Uint8Array(dh_keys.dh_private_key.match(/[\da-f]{2}/gi).map(function (h) {
             return parseInt(h, 16)
         }));
-        var pubk = new Uint8Array(dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
+        var pubk = new Uint8Array(dh_keys.dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
             return parseInt(h, 16)
         }));
         return this.toHex(X25519.getSharedKey(privk, pubk));
@@ -508,7 +509,7 @@ export default class CenterIdentity {
             public_key: public_key,
             relationship: relationship
         };
-        transaction.hash = foobar.bitcoin.crypto.sha256(
+        transaction.hash = bitcoin.crypto.sha256(
             transaction.public_key +
             transaction.time +
             transaction.dh_public_key +
@@ -519,27 +520,60 @@ export default class CenterIdentity {
             transaction.requested_rid
         ).toString('hex')
 
-        transaction.id = await ci.sign(transaction.hash, user);
+        transaction.id = await this.sign(transaction.hash, user);
         return transaction;
     }
 
-    theirIdentityFromTransaction(txn) {
-        return {
+    theirIdentityFromTransaction(txn, their_txn) {
+        var out = {
             username: txn.relationship.their_username,
             username_signature: txn.relationship.their_username_signature,
-            public_key: txn.relationship.their_public_key
+            public_key: txn.relationship.their_public_key,
+            dh_private_key: txn.relationship.dh_private_key
+        }
+        if (their_txn) {
+            out.dh_public_key = their_txn.dh_public_key
+        }
+        return out;
+    }
+
+    theirIdentityFromEncryptedTransaction(me, txn, their_txn) {
+      var relationship = JSON.parse(this.decrypt(me.wif, txn.relationship));
+      txn.relationship = relationship;
+      return this.theirIdentityFromTransaction(txn, their_txn);
+    }
+
+    myIdentityFromTransaction(txn) {
+        return {
+            username: txn.relationship.my_username,
+            username_signature: txn.relationship.my_username_signature,
+            public_key: txn.relationship.my_public_key,
         }
     }
 
-    async generatePrivateMessageTransaction(me, my_txn, their_txn, message) {
-
-        var shared_secret = this.getSharedSecret(my_txn.relationship.dh_private_key, their_txn.dh_public_key);
-        var encryptedChatRelationship = await ci.encrypt(shared_secret, message);
+    async generateGroupMessageTransaction(me, them, group, message) {
+        var shared_secret = this.getSharedSecret(me, them);
+        var encryptedChatRelationship = await this.encrypt(shared_secret, message);
         return await this.generateTransaction(
             me,
             my_txn.public_key,
             '',
-            this.generate_rid(me, ci.theirIdentityFromTransaction(my_txn)),
+            this.generate_rid(me, this.theirIdentityFromTransaction(my_txn)),
+            encryptedChatRelationship,
+            0,
+            my_txn.requester_rid,
+            my_txn.requested_rid
+        );
+    }
+
+    async generatePrivateMessageTransaction(me, them, message) {
+        var shared_secret = this.getSharedSecret(me, them);
+        var encryptedChatRelationship = await this.encrypt(shared_secret, message);
+        return await this.generateTransaction(
+            me,
+            my_txn.public_key,
+            '',
+            this.generate_rid(me, this.theirIdentityFromTransaction(my_txn)),
             encryptedChatRelationship,
             0,
             my_txn.requester_rid,
