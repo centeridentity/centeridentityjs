@@ -37,8 +37,8 @@ export default class CenterIdentity {
         return user;
     }
 
-    async createRelationshipTransaction(me, user, group) {
-        var join = await this.createRelationship(me, user);
+    async createRelationshipTransaction(me, user, group, extra_data) {
+        var join = await this.createRelationship(me, user, extra_data);
         var dh_keys = this.get_dh_keys(me, user);
         join.relationship.dh_private_key = dh_keys.dh_private_key
         var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
@@ -314,9 +314,8 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    sign(message, user) {
+    sign(hash, user) {
         return new Promise(function(resolve, reject){
-            var hash = bitcoin.crypto.sha256(message).toString('hex');
             var combine = new Uint8Array(hash.length);
             for (var i = 0; i < hash.length; i++) {
                 combine[i] = hash.charCodeAt(i)
@@ -325,6 +324,22 @@ export default class CenterIdentity {
             var der = user.key.sign(shaMessage).toDER();
             return resolve(base64.fromByteArray(der));
         }.bind(this));
+    }
+
+    verify(hash, user, signature) {
+        var combine = new Uint8Array(hash.length);
+        for (var i = 0; i < hash.length; i++) {
+            combine[i] = hash.charCodeAt(i)
+        }
+        var shaMessage = bitcoin.crypto.sha256(combine);
+        var pubKey = bitcoin.ECPair.fromPublicKeyBuffer(Buffer.Buffer.from(user.public_key, 'hex'));
+        var sig = bitcoin.ECSignature.fromDER(base64.toByteArray(signature));
+        var result = pubKey.verify(shaMessage, sig);
+        return result;
+    }
+
+    verifyCredential(message, issuer) {
+        return this.verify(JSON.stringify(message.credential), issuer, message.credential_signature);
     }
 
     signIn(session_id, user, signin_url) {
@@ -448,12 +463,12 @@ export default class CenterIdentity {
         }
     }
 
-    getSharedSecret(me, them) {
+    getSharedSecret(me, them, their_txn) {
         var dh_keys = this.get_dh_keys(me, them);
         var privk = new Uint8Array(dh_keys.dh_private_key.match(/[\da-f]{2}/gi).map(function (h) {
             return parseInt(h, 16)
         }));
-        var pubk = new Uint8Array(dh_keys.dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
+        var pubk = new Uint8Array(their_txn.dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
             return parseInt(h, 16)
         }));
         return this.toHex(X25519.getSharedKey(privk, pubk));
@@ -537,9 +552,10 @@ export default class CenterIdentity {
     }
 
     theirIdentityFromEncryptedTransaction(me, txn, their_txn) {
-      var relationship = JSON.parse(this.decrypt(me.wif, txn.relationship));
-      txn.relationship = relationship;
-      return this.theirIdentityFromTransaction(txn, their_txn);
+      var copy_txn = JSON.parse(JSON.stringify(txn));
+      var relationship = JSON.parse(this.decrypt(me.wif, copy_txn.relationship));
+      copy_txn.relationship = relationship;
+      return this.theirIdentityFromTransaction(copy_txn, their_txn);
     }
 
     myIdentityFromTransaction(txn) {
@@ -550,33 +566,55 @@ export default class CenterIdentity {
         }
     }
 
+    messageFromEncryptedTransaction(me, them, their_txn, txn) {
+      var copy_txn = JSON.parse(JSON.stringify(txn));
+      var shared_secret = this.getSharedSecret(me, them, their_txn);
+      var relationship = JSON.parse(this.decrypt(shared_secret, copy_txn.relationship));
+      return relationship;
+    }
+
     async generateGroupMessageTransaction(me, them, group, message) {
-        var shared_secret = this.getSharedSecret(me, them);
+        var shared_secret = this.getSharedSecret(me, them, their_txn);
         var encryptedChatRelationship = await this.encrypt(shared_secret, message);
+
+        if (group) {
+            requested_rid = this.generate_rid(
+                group,
+                user,
+            )
+            requester_rid = this.generate_rid(
+                group,
+                me,
+            )
+        } else {
+          requester_rid = '';
+          requested_rid = '';
+        }
+
         return await this.generateTransaction(
             me,
-            my_txn.public_key,
+            me.public_key,
             '',
-            this.generate_rid(me, this.theirIdentityFromTransaction(my_txn)),
+            this.generate_rid(me, them),
             encryptedChatRelationship,
             0,
-            my_txn.requester_rid,
-            my_txn.requested_rid
+            requester_rid,
+            requested_rid
         );
     }
 
-    async generatePrivateMessageTransaction(me, them, message) {
-        var shared_secret = this.getSharedSecret(me, them);
+    async generatePrivateMessageTransaction(me, them, their_txn, message) {
+        var shared_secret = this.getSharedSecret(me, them, their_txn);
         var encryptedChatRelationship = await this.encrypt(shared_secret, message);
         return await this.generateTransaction(
             me,
-            my_txn.public_key,
+            me.public_key,
             '',
-            this.generate_rid(me, this.theirIdentityFromTransaction(my_txn)),
+            this.generate_rid(me, them),
             encryptedChatRelationship,
             0,
-            my_txn.requester_rid,
-            my_txn.requested_rid
+            '',
+            ''
         );
     }
 
