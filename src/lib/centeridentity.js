@@ -3,6 +3,7 @@ import jQuery from 'jquery';
 import * as bitcoin from 'bitcoinjs-lib';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
+import Buffer from 'buffer';
 var $ = jQuery;
 export default class CenterIdentity {
     constructor(strength) {
