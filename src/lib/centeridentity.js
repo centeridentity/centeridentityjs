@@ -266,7 +266,7 @@ export default class CenterIdentity {
                         return reject(data);
                     }
                     let decryptedData = this.decrypt(this.symmetric_key, data.relationship);
-                    return resolve(atob(decryptedData));
+                    return resolve(decryptedData);
                 }.bind(this),
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     return reject(errorThrown);
