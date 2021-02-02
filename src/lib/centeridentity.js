@@ -6,7 +6,7 @@ import X25519 from 'js-x25519';
 import Buffer from 'buffer';
 var $ = jQuery;
 export default class CenterIdentity {
-    constructor(strength) {
+    constructor(url_prefix, strength) {
         switch(strength) {
             case 'low':
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
@@ -21,7 +21,8 @@ export default class CenterIdentity {
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
                 break;
         }
-        this.url_prefix = 'https://centeridentity.com'
+        this.url_prefix = url_prefix || 'https://centeridentity.com';
+        this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
     }
 
     async createRelationship(me, user, extra_data) {
@@ -135,6 +136,8 @@ export default class CenterIdentity {
         return this.createUser(username)
         .then(function(user) {
             this.user = user;
+            window.localStorage.setItem('wif', user.wif);
+            window.localStorage.setItem('username', user.username);
             return this.set(
                 this.user,
                 this.latitude,
@@ -315,8 +318,9 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    sign(hash, user) {
+    sign(message, user) {
         return new Promise(function(resolve, reject){
+            var hash = bitcoin.crypto.sha256(message).toString('hex')
             var combine = new Uint8Array(hash.length);
             for (var i = 0; i < hash.length; i++) {
                 combine[i] = hash.charCodeAt(i)
@@ -327,7 +331,8 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    verify(hash, user, signature) {
+    verify(message, user, signature) {
+        var hash = bitcoin.crypto.sha256(message).toString('hex')
         var combine = new Uint8Array(hash.length);
         for (var i = 0; i < hash.length; i++) {
             combine[i] = hash.charCodeAt(i)
@@ -339,12 +344,24 @@ export default class CenterIdentity {
         return result;
     }
 
-    verifyCredential(message, issuer) {
-        return this.verify(JSON.stringify(message.credential), issuer, message.credential_signature);
+    verifyIssuedCredential(issuer, message) {
+        return this.verify(JSON.stringify(message.credential), issuer, message.issuer_signature);
+    }
+
+    verifySubjectRequestedCredential(subject, message) {
+        return this.verify(JSON.stringify(message.credential), subject, message.subject_signature);
+    }
+
+    verifyVerifierRequestedCredential(verifier, message) {
+        return this.verify(JSON.stringify(message.credential), verifier, message.verifier_signature);
+    }
+
+    signSession(session_id, user) {
+        return this.sign(session_id, user)
     }
 
     signIn(session_id, user, signin_url) {
-        return this.sign(session_id, user)
+        return this.signSession(session_id, user)
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
                 var res = await $.ajax({
@@ -390,8 +407,6 @@ export default class CenterIdentity {
     registerWithLocation(username, lat, long, other_args, register_url) {
         return this.setFromNew(username, lat, long)
         .then(function(user) {
-            window.localStorage.setItem('wif', user.wif);
-            window.localStorage.setItem('username', user.username);
             return new Promise(async function(resolve, reject){
                 var post_vars = {
                     username: username,
@@ -524,7 +539,7 @@ export default class CenterIdentity {
             public_key: public_key,
             relationship: relationship
         };
-        transaction.hash = bitcoin.crypto.sha256(
+        var header = (
             transaction.public_key +
             transaction.time +
             transaction.dh_public_key +
@@ -533,9 +548,10 @@ export default class CenterIdentity {
             transaction.fee.toFixed(8) +
             transaction.requester_rid +
             transaction.requested_rid
-        ).toString('hex')
+        )
+        transaction.hash = bitcoin.crypto.sha256(header).toString('hex')
 
-        transaction.id = await this.sign(transaction.hash, user);
+        transaction.id = await this.sign(header, user);
         return transaction;
     }
 
@@ -604,19 +620,306 @@ export default class CenterIdentity {
         );
     }
 
-    async generatePrivateMessageTransaction(me, them, their_txn, message) {
+    async generatePrivateMessageTransaction(me, them, their_txn, message, collection) {
         var shared_secret = this.getSharedSecret(me, them, their_txn);
         var encryptedChatRelationship = await this.encrypt(shared_secret, message);
         return await this.generateTransaction(
             me,
             me.public_key,
             '',
-            this.generate_rid(me, them),
+            this.generate_rid(me, them, collection),
             encryptedChatRelationship,
             0,
             '',
             ''
         );
+    }
+
+    async getTransactionsByRid(rid) {
+      return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + rid)
+    }
+
+    async getTransactionsByRequestedRid(rid) {
+      return fetch(this.url_prefix + '/get-transaction-by-rid?requested_rid=' + rid)
+    }
+
+    async getTransactionsByRequesterRid(rid) {
+      return fetch(this.url_prefix + '/get-transaction-by-rid?requester_rid=' + rid)
+    }
+
+    async getRelationshipTransactions(me, them, collection) {
+      var theirRel = '';
+      var myRel = '';
+      var rid = this.generate_rid(me, them, collection);
+
+      return this.getTransactionsByRid(rid)
+      .then(async (res) => {
+        var txns = await res.json()
+        for (var i=0;i<txns.length;i++) {
+          if (me.public_key === txns[i].public_key && txns[i].dh_public_key) {
+            myRel = txns[i];
+            if (theirRel) break;
+          }
+          if (me.public_key !== txns[i].public_key && txns[i].dh_public_key) {
+            theirRel = txns[i];
+            if (myRel) break;
+          }
+        }
+        return {mine: myRel, theirs: theirRel}
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+    async getIdentitiesByCollection(me, collection, friendList) {
+      var group = await this.reviveUser(this.friends_list_wif, collection);
+      if(friendList) {
+        group = friendList;
+      }
+      var rid = this.generate_rid(me, group);
+      var result = await this.getTransactionsByRequesterRid(rid);
+      var txns = await result.json();
+      var collection = await Promise.all(txns.map(async (txn) => {
+        return await this.theirIdentityFromEncryptedTransaction(me, txn)
+      }));
+      return collection;
+    }
+
+    async getDataByCollection(me, collection, friendList) {
+      var group = await this.reviveUser(this.friends_list_wif, collection);
+      if(friendList) {
+        group = friendList;
+      }
+      var rid = this.generate_rid(me, group);
+      var result = await this.getTransactionsByRequesterRid(rid);
+      var txns = await result.json();
+      var collection = await Promise.all(txns.map(async (txn) => {
+        var copy_txn = JSON.parse(JSON.stringify(txn));
+        var relationship = JSON.parse(this.decrypt(me.wif, copy_txn.relationship));
+        return relationship;
+      }));
+      return collection;
+    }
+
+    async getFriendsLists(me, listName) {
+      var friendsList = await this.reviveUser(this.friends_list_wif, listName);
+      var rid = this.generate_rid(me, friendsList, me.wif + ':all_friends_lists');
+      return this.getTransactionsByRid(rid)
+      .then(async (txns) => {
+        return txns;
+      });
+    }
+
+    async getFriendsList(me, listName) {
+      var friendsList = await this.reviveUser(this.friends_list_wif, listName);
+      var rid = this.generate_rid(me, friendsList, me.wif + ':all_friends_lists');
+      return this.getTransactionsByRid(rid)
+      .then(async (txns) => {
+        if (txns.length === 0) {
+          var friendsList = await this.reviveUser(this.friends_list_wif, 'default');
+          return this.createRelationshipTransaction(me, friendsList, null, me.wif + ':all_friends_lists');
+        }
+        for(var i=0; i < txns.length; i++) {
+          var friendList = await this.theirIdentityFromEncryptedTransaction(me);
+          if (friendList.username === listName) {
+            return friendList;
+          }
+        }
+      });
+    }
+
+    async setFriendsList(me, listName) {
+      var friendsList = await this.createUser(listName);
+      return this.createRelationshipTransaction(me, friendsList, null, me.wif + ':all_friends_lists');
+    }
+
+    async getPrivateMessages(me, them, collection, filter) {
+      var myRel = {};
+      var theirRel = {}
+      return this.getRelationshipTransactions(me, them)
+      .then(async (rels) => {
+        myRel = rels.mine;
+        theirRel = rels.theirs;
+        if (!myRel || !theirRel) return console.log('subject relationship not complete')
+        return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + this.generate_rid(me, them, collection))
+      })
+      .then(async (res) => {
+        var txn = await res.json()
+        var messages = []
+        for (var i=0; i < txn.length; i++) {
+          if(txn[i].dh_public_key === '') {
+            var messageTxn = txn[i];
+            var theirIdentity = this.theirIdentityFromEncryptedTransaction(me, myRel);
+            var message = this.messageFromEncryptedTransaction(me, theirIdentity, theirRel, messageTxn);
+            //if (filter && !filter(message)) continue;
+            messages.push(message);
+          }
+        }
+        return messages;
+      });
+    }
+
+    async sendPrivateMessage(me, them, collection, message) {
+      var myRel = {};
+      var theirRel = {}
+      return this.getRelationshipTransactions(me, them)
+      .then(async (rels) => {
+        myRel = rels.mine;
+        theirRel = rels.theirs;
+        //get verifier identity for subject
+        var theirIdentity = this.theirIdentityFromEncryptedTransaction(me, myRel);
+        ///create message
+        var privateMessage = await this.generatePrivateMessageTransaction(
+          me,
+          theirIdentity,
+          theirRel,
+          message,
+          collection
+        );
+        return fetch(this.url_prefix + '/transaction?bulletin_secret=fu&origin=' + window.location.origin, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(privateMessage)
+        });
+      })
+      .then(async (res) => {
+        var privateMessage = await res.json();
+        return privateMessage;
+      });
+    }
+
+    async issueCredential(me, them, credential) {
+      var collection = 'credential_issues';
+      credential = {
+        ...credential,
+        issuer: this.toObject(me),
+        subject: this.toObject(them)
+      };
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify({
+        credential: credential,
+        issuer_signature: signedCredential
+      });
+      return this.sendPrivateMessage(me, them, collection, message);
+    }
+
+    async getCredentialsIssued(me, them, credential) {
+      return this.getPrivateMessages(
+        me,
+        them,
+        'credential_issues',
+        credential
+      )
+    }
+
+    async getCredentialsRequested(me, them, credential) {
+      return this.getPrivateMessages(
+        me,
+        them,
+        'credential_requests',
+        credential
+      )
+    }
+
+    async requestCredentialFromIssuer(me, issuer, credential) { // me = subject
+      var collection = 'credential_requests';
+      credential = {
+        ...credential,
+        issuer: this.toObject(issuer),
+        subject: this.toObject(me)
+      };
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify({
+        credential: credential,
+        subject_signature: signedCredential
+      });
+      return this.sendPrivateMessage(me, issuer, collection, message);
+    }
+
+    async requestCredentialThroughSubject(me, issuer, subject, credential) { // me = verifier
+      var collection = 'credential_requests';
+      credential = {
+        ...credential,
+        issuer: this.toObject(issuer),
+        subject: this.toObject(subject),
+        verifier: this.toObject(me)
+      };
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify({
+        credential: credential,
+        verifier_signature: signedCredential
+      });
+      return this.sendPrivateMessage(me, subject, collection, message);
+    }
+
+    async forwardIssuedCredential(me, issuer, verifier, credential) { // me = subject, them = verifier
+      var signedCredential = await this.sign(JSON.stringify(credential.credential), me);
+      var message = JSON.stringify({
+        ...credential,
+        subject_signature: signedCredential
+      });
+      return this.sendPrivateMessage(me, verifier, 'credential_issues', message);
+    }
+  
+    async forwardRequestedCredential(me, issuer, verifier, credential) { // me = subject, them = issuer
+      var signedCredential = await this.sign(JSON.stringify(credential.credential), me);
+      var message = JSON.stringify({
+        ...credential,
+        subject_signature: signedCredential
+      });
+      return this.sendPrivateMessage(me, issuer, 'credential_requests', message);
+    }
+
+    async getIdentityLink(identity) {
+      return fetch(this.url_prefix + '/sia-upload?filename=' + encodeURIComponent(identity.username_signature), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({file: btoa(JSON.stringify(this.toObject(identity)))})
+      })
+      .then(async (res) => {
+        var json = await res.json();
+        return json.skylink;
+      });
+    }
+
+    async connectIdentities(me, them, friendList, collection, extra_data) {
+      if (!friendList) {
+        friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
+      }
+      var myRel = await this.createRelationshipTransaction(me, them, friendList, extra_data);
+      fetch(this.url_prefix + '/transaction?bulletin_secret=fu&origin=' + window.location.origin, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(myRel)
+      });
+      return them;
+    }
+
+    async importConnectionFromSkylink(me, skylink, collection, friendList, extra_data) {
+      var group = await this.reviveUser(this.friends_list_wif, collection || 'default');
+      if(friendList) {
+        group = friendList;
+      }
+      return fetch('https://siasky.net/' + skylink)
+      .then(async (res) => {
+        var them = await res.json();
+        return this.connectIdentities(me, them, group, collection, extra_data);
+      });
+    }
+
+    async signOut() {
+      window.localStorage.removeItem('wif');
+      window.localStorage.removeItem('username');
+    }
+
+    copy(data) {
+      return JSON.parse(JSON.stringify(data));
     }
 
     toObject(user) {

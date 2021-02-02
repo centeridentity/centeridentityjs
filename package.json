@@ -1,10 +1,10 @@
 {
   "name": "centeridentity",
-  "version": "1.0.33",
+  "version": "1.0.72",
   "description": "This library exposes methods for encrypting, storing, and decrypting identity information.",
   "main": "./src/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "build": "webpack"
   },
   "repository": {
