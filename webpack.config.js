@@ -1,4 +1,5 @@
 const path = require('path');
+const UglifyEsPlugin = require('uglify-es-webpack-plugin');
 
 module.exports = {
   output: {
@@ -7,5 +8,8 @@ module.exports = {
     libraryTarget: 'var',
     library: 'CenterIdentity'
   },
-  mode: 'development'
+  optimization: {
+      minimize: false
+  },
+  mode: 'production'
 };
