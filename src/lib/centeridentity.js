@@ -886,6 +886,20 @@ export default class CenterIdentity {
       });
     }
 
+    async getCredentialLink(credential) {
+      return fetch(this.url_prefix + '/sia-upload?filename=' + encodeURIComponent(credential.identity.username_signature), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({file: btoa(JSON.stringify(credential))})
+      })
+      .then(async (res) => {
+        var json = await res.json();
+        return json.skylink;
+      });
+    }
+
     async connectIdentities(me, them, friendList, collection, extra_data) {
       if (!friendList) {
         friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
@@ -899,6 +913,16 @@ export default class CenterIdentity {
         body: JSON.stringify(myRel)
       });
       return them;
+    }
+
+    async addCredential(me, credential, friendList, collection) {
+      await this.connectIdentities(
+        me,
+        this.copy(credential.identity),
+        friendList,
+        collection || 'credentials',
+        this.copy({credential: credential})
+      )
     }
 
     async importConnectionFromSkylink(me, skylink, collection, friendList, extra_data) {
