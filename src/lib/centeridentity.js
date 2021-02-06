@@ -665,6 +665,18 @@ export default class CenterIdentity {
             if (myRel) break;
           }
         }
+        if (!myRel) throw {
+          status: false,
+          message: 'relationship not complete: you have not added them',
+          mine: myRel,
+          theirs: theirRel
+        };
+        if (!theirRel) throw {
+          status: false,
+          message: 'relationship not complete: they have not added you',
+          mine: myRel,
+          theirs: theirRel
+        };
         return {mine: myRel, theirs: theirRel}
       })
       .catch((err) => {
@@ -740,7 +752,6 @@ export default class CenterIdentity {
       .then(async (rels) => {
         myRel = rels.mine;
         theirRel = rels.theirs;
-        if (!myRel || !theirRel) return console.log('subject relationship not complete')
         return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + this.generate_rid(me, them, collection))
       })
       .then(async (res) => {
