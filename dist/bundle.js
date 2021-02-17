@@ -48706,16 +48706,16 @@ class CenterIdentity {
         return result;
     }
 
-    verifyIssuedCredential(issuer, message) {
-        return this.verify(JSON.stringify(message.credential), issuer, message.issuer_signature);
+    verifyIssuedCredential(issuer, message, issuer_signature) {
+        return this.verify(message, issuer, issuer_signature);
     }
 
-    verifySubjectRequestedCredential(subject, message) {
-        return this.verify(JSON.stringify(message.credential), subject, message.subject_signature);
+    verifySubjectRequestedCredential(subject, message, subject_signature) {
+        return this.verify(message, subject, subject_signature);
     }
 
-    verifyVerifierRequestedCredential(verifier, message) {
-        return this.verify(JSON.stringify(message.credential), verifier, message.verifier_signature);
+    verifyVerifierRequestedCredential(verifier, message, verifier_signature) {
+        return this.verify(message, verifier, verifier_signature);
     }
 
     signSession(session_id, user) {
@@ -48766,14 +48766,18 @@ class CenterIdentity {
         }.bind(this));
     }
 
-    registerWithLocation(username, lat, long, other_args, register_url) {
-        return this.setFromNew(username, lat, long)
+    registerWithLocation(private_username, public_username, lat, long, other_args, register_url) {
+        return this.setFromNew(private_username, lat, long)
         .then(function(user) {
-            return new Promise(async function(resolve, reject){
+            return new Promise(async (resolve, reject) => {
+                var public_user = await this.reviveUser(
+                  user.wif,
+                  public_username
+                )
                 var post_vars = {
-                    username: username,
-                    public_key: user.public_key,
-                    username_signature: user.username_signature
+                    username: public_user.username,
+                    public_key: public_user.public_key,
+                    username_signature: public_user.username_signature
                 }
                 post_vars = {...post_vars, ...other_args}
                 return resolve(await $.ajax({
@@ -49027,6 +49031,18 @@ class CenterIdentity {
             if (myRel) break;
           }
         }
+        if (!myRel) throw {
+          status: false,
+          message: 'relationship not complete: you have not added them',
+          mine: myRel,
+          theirs: theirRel
+        };
+        if (!theirRel) throw {
+          status: false,
+          message: 'relationship not complete: they have not added you',
+          mine: myRel,
+          theirs: theirRel
+        };
         return {mine: myRel, theirs: theirRel}
       })
       .catch((err) => {
@@ -49096,16 +49112,14 @@ class CenterIdentity {
     }
 
     async getPrivateMessages(me, them, collection, filter) {
-      var myRel = {};
-      var theirRel = {}
-      return this.getRelationshipTransactions(me, them)
+      var res = {};
+      return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + this.generate_rid(me, them, collection))
+      .then(async (res) => {
+        return this.getRelationshipTransactions(me, them);
+      })
       .then(async (rels) => {
         myRel = rels.mine;
         theirRel = rels.theirs;
-        if (!myRel || !theirRel) return console.log('subject relationship not complete')
-        return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + this.generate_rid(me, them, collection))
-      })
-      .then(async (res) => {
         var txn = await res.json()
         var messages = []
         for (var i=0; i < txn.length; i++) {
@@ -49152,19 +49166,22 @@ class CenterIdentity {
       });
     }
 
-    async issueCredential(me, them, credential) {
+    async issueCredential(me, them, credential, credentialMessage) {
       var collection = 'credential_issues';
       credential = {
         ...credential,
         issuer: this.toObject(me),
         subject: this.toObject(them)
       };
-      var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        credential: credential,
-        issuer_signature: signedCredential
+      var issuerSignature = await this.sign(credentialMessage, me);
+      var relationshipMessage = JSON.stringify({
+        ...credential,
+        issuer_signature: issuerSignature
       });
-      return this.sendPrivateMessage(me, them, collection, message);
+      return {
+        transaction: await this.sendPrivateMessage(me, them, collection, relationshipMessage),
+        message: relationshipMessage
+      };
     }
 
     async getCredentialsIssued(me, them, credential) {
@@ -49197,7 +49214,7 @@ class CenterIdentity {
         credential: credential,
         subject_signature: signedCredential
       });
-      return this.sendPrivateMessage(me, issuer, collection, message);
+      return await this.sendPrivateMessage(me, issuer, collection, message);
     }
 
     async requestCredentialThroughSubject(me, issuer, subject, credential) { // me = verifier
@@ -49213,25 +49230,25 @@ class CenterIdentity {
         credential: credential,
         verifier_signature: signedCredential
       });
-      return this.sendPrivateMessage(me, subject, collection, message);
+      return await this.sendPrivateMessage(me, subject, collection, message);
     }
 
     async forwardIssuedCredential(me, issuer, verifier, credential) { // me = subject, them = verifier
-      var signedCredential = await this.sign(JSON.stringify(credential.credential), me);
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
       var message = JSON.stringify({
         ...credential,
         subject_signature: signedCredential
       });
-      return this.sendPrivateMessage(me, verifier, 'credential_issues', message);
+      return await this.sendPrivateMessage(me, verifier, 'credential_issues', message);
     }
   
     async forwardRequestedCredential(me, issuer, verifier, credential) { // me = subject, them = issuer
-      var signedCredential = await this.sign(JSON.stringify(credential.credential), me);
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
       var message = JSON.stringify({
         ...credential,
         subject_signature: signedCredential
       });
-      return this.sendPrivateMessage(me, issuer, 'credential_requests', message);
+      return await this.sendPrivateMessage(me, issuer, 'credential_requests', message);
     }
 
     async getIdentityLink(identity) {
