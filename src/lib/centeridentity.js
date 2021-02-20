@@ -136,8 +136,6 @@ export default class CenterIdentity {
         return this.createUser(username)
         .then(function(user) {
             this.user = user;
-            window.localStorage.setItem('wif', user.wif);
-            window.localStorage.setItem('username', user.username);
             return this.set(
                 this.user,
                 this.latitude,
@@ -173,8 +171,6 @@ export default class CenterIdentity {
             return this.decryptSeed();
         }.bind(this))
         .then(async function(wif){
-            window.localStorage.setItem('wif', wif);
-            window.localStorage.setItem('username', username);
             return await this.reviveUser(wif, username);
         }.bind(this));
     }
@@ -379,10 +375,21 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    signInWithLocation(session_id, username, lat, long, signin_url) {
-        return this.get(username, lat, long)
-        .then(function(user) {
-            return this.sign(session_id, user);
+    signInWithLocation(session_id_url, private_username, public_username, lat, long, signin_url) {
+        var session_uuid;
+        var public_user;
+        return fetch(session_id_url || '/generate-session-uuid')
+        .then(async function(result) {
+            var json = await result.json();
+            session_uuid = json.session_uuid;
+            return this.get(private_username, lat, long)
+        }.bind(this))
+        .then(async function(user) {
+            public_user = await this.reviveUser(
+                user.wif,
+                public_username
+            )
+            return this.sign(session_uuid, user);
         }.bind(this))
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
@@ -391,7 +398,9 @@ export default class CenterIdentity {
                     dataType: 'json',
                     contentType: "application/json",
                     data: JSON.stringify({
-                        username_signature: this.user.username_signature,
+                        username: public_user.username,
+                        username_signature: public_user.username_signature,
+                        public_key: public_user.public_key,
                         session_id_signature: signature
                     }),
                     type: 'POST'
@@ -955,8 +964,6 @@ export default class CenterIdentity {
     }
 
     async signOut() {
-      window.localStorage.removeItem('wif');
-      window.localStorage.removeItem('username');
     }
 
     copy(data) {
