@@ -34,7 +34,7 @@
     "jquery": "^3.5.0",
     "jquery-lite": "2.2.3",
     "js-x25519": "https://github.com/CryptoEsel/js-x25519",
-    "node-forge": "^0.9.1",
+    "node-forge": "^0.10.0",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
     "terser-webpack-plugin": "^5.1.1",
