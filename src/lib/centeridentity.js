@@ -4,9 +4,10 @@ import * as bitcoin from 'bitcoinjs-lib';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
 import Buffer from 'buffer';
-var $ = jQuery;
+
+
 export default class CenterIdentity {
-    constructor(url_prefix, strength) {
+    constructor(api_key, url_prefix, use_local_storage, strength) {
         switch(strength) {
             case 'low':
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
@@ -21,8 +22,11 @@ export default class CenterIdentity {
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
                 break;
         }
+        this.api_key = api_key;
         this.url_prefix = url_prefix || 'https://centeridentity.com';
+        this.use_local_storage = use_local_storage || false;
         this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
+        this.origin = window && window.location ? 'origin=' + encodeURIComponent(window.location.origin) : '';
     }
 
     async createRelationship(me, user, extra_data) {
@@ -228,20 +232,20 @@ export default class CenterIdentity {
                 "rid": "` + this.rid + `",
                 "relationship": "` + encrypted_seed + `"
             }`;
-            $.ajax({
-                url: this.url_prefix + '/bury',
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                data: payload,
-                success: function(data, textStatus, jqXHR) {
-                    return resolve(data);
+            fetch(this.url_prefix + '/bury', {
+                headers: {
+                  'Content-Type': 'application/json'
                 },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    return reject(errorThrown);
-                }
-            });
-        }.bind(this));
+                method: 'POST',
+                body: payload,
+            })
+            .then((res) => {
+                return resolve(data);
+            })
+            .catch((err) => {
+                return reject(err);
+            })
+        });
     }
 
     encrypt(keyStr, message) {
@@ -256,20 +260,23 @@ export default class CenterIdentity {
 
     async decryptSeed() {
         return new Promise(function(resolve, reject){
-            $.ajax({
-                url: this.url_prefix + '/digup?rid=' + this.rid,
-                dataType: 'json',
-                type: 'GET',
-                success: function(data, textStatus, jqXHR) {
-                    if (data.status === 'error') {
-                        return reject(data);
-                    }
-                    let decryptedData = this.decrypt(this.symmetric_key, data.relationship);
-                    return resolve(decryptedData);
-                }.bind(this),
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    return reject(errorThrown);
-                }.bind(this)
+            fetch(this.url_prefix + '/digup?rid=' + this.rid, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+            })
+            .then(async (result) => {
+                var data = await result.json();
+                console.log(data);
+                if (data.status === false) {
+                    return reject(data);
+                }
+                let decryptedData = this.decrypt(this.symmetric_key, data.relationship);
+                return resolve(decryptedData);
+            })
+            .catch((err) => {
+                return reject(err);
             });
         }.bind(this));
     }
@@ -360,17 +367,17 @@ export default class CenterIdentity {
         return this.signSession(session_id, user)
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
-                var res = await $.ajax({
-                    url: signin_url || '/sign-in',
-                    dataType: 'json',
-                    contentType: "application/json",
-                    data: JSON.stringify({
+                var res = await fetch(signin_url || this.url_prefix + '/sign-in', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
                         username_signature: user.username_signature,
                         session_id_signature: signature
-                    }),
-                    type: 'POST'
+                    })
                 });
-                return resolve(res);
+                return resolve(res.json());
             }.bind(this));
         }.bind(this));
     }
@@ -378,7 +385,8 @@ export default class CenterIdentity {
     signInWithLocation(session_id_url, private_username, public_username, lat, long, signin_url) {
         var session_uuid;
         var public_user;
-        return fetch(session_id_url || '/generate-session-uuid')
+        var url = session_id_url || this.url_prefix + '/generate-session-uuid';
+        return fetch(url + '?' + this.origin + '&api_key=' + encodeURIComponent(this.api_key || ''), {credentials: 'include'})
         .then(async function(result) {
             var json = await result.json();
             session_uuid = json.session_uuid;
@@ -389,51 +397,118 @@ export default class CenterIdentity {
                 user.wif,
                 public_username
             )
+            if (this.use_local_storage){
+                localStorage.setItem('wif', public_user.wif);
+                localStorage.setItem('public_key', public_user.public_key);
+                localStorage.setItem('username', public_user.username);
+            }
             return this.sign(session_uuid, user);
         }.bind(this))
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
-                var res = await $.ajax({
-                    url: signin_url || '/sign-in',
-                    dataType: 'json',
-                    contentType: "application/json",
-                    data: JSON.stringify({
+                var post_vars = {
+                    user: {
                         username: public_user.username,
-                        username_signature: public_user.username_signature,
                         public_key: public_user.public_key,
-                        session_id_signature: signature
-                    }),
-                    type: 'POST'
-                });
-                return resolve(res);
+                        username_signature: public_user.username_signature,
+                    },
+                    session_id_signature: signature
+                };
+                var url = signin_url || this.url_prefix + '/sign-in';
+                try {
+                    var res = await fetch(url + '?' + this.origin, {
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(post_vars),
+                        method: 'POST',
+                        credentials: 'include'
+                    });
+                    return resolve(res.json());
+                } catch(err) {
+                    return reject(err.responseJSON)
+                }
             }.bind(this));
+        }.bind(this))
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                res.user = public_user;
+                return resolve(res);
+            })
         }.bind(this))
         .catch(function(err) {
             return err
         }.bind(this));
     }
 
-    registerWithLocation(private_username, public_username, lat, long, other_args, register_url) {
-        return this.setFromNew(private_username, lat, long)
-        .then(function(user) {
+    registerWithLocation(session_id_url, private_username, public_username, lat, long, other_args, register_url) {
+        var session_uuid;
+        var public_user;
+        var url = session_id_url || this.url_prefix + '/generate-session-uuid';
+        var customer;
+        return fetch(url + '?' + this.origin + '&api_key=' + encodeURIComponent(this.api_key || ''), {credentials: 'include'})
+        .then(async function(result) {
+            var json = await result.json();
+            session_uuid = json.session_uuid;
+            customer = json.customer;
+            return this.setFromNew(private_username, lat, long);
+        }.bind(this))
+        .then(async function(user) {
+            public_user = await this.reviveUser(
+                user.wif,
+                public_username
+            )
+            return this.sign(session_uuid, user);
+        }.bind(this))
+        .then(function(signature) {
             return new Promise(async (resolve, reject) => {
-                var public_user = await this.reviveUser(
-                  user.wif,
-                  public_username
-                )
-                var post_vars = {
+                if (this.use_local_storage){
+                    localStorage.setItem('wif', public_user.wif);
+                    localStorage.setItem('public_key', public_user.public_key);
+                    localStorage.setItem('username', public_user.username);
+                }
+                var post_vars = {};
+                if (customer) {
+                    var join = await this.createRelationship(public_user, customer);
+                    var dh_keys = this.get_dh_keys(public_user, customer);
+                    join.relationship.dh_private_key = dh_keys.dh_private_key
+                    var encryptedRelationship = await this.encrypt(public_user.wif, JSON.stringify(join.relationship));
+                    post_vars = {
+                        api_key: this.api_key,
+                        dh_public_key: dh_keys.dh_public_key,
+                        relationship: encryptedRelationship
+                    }
+                }
+
+                post_vars.user = {
                     username: public_user.username,
                     public_key: public_user.public_key,
                     username_signature: public_user.username_signature
-                }
+                };
+
+                post_vars.session_id_signature = signature;
+
                 post_vars = {...post_vars, ...other_args}
-                return resolve(await $.ajax({
-                    url: register_url || '/create-customer',
-                    dataType: 'json',
-                    contentType: "application/json",
-                    data: JSON.stringify(post_vars),
-                    type: 'POST'
-                }));
+                var url = register_url || this.url_prefix + '/add-user';
+                try {
+                    var result = await fetch(url + '?' + this.origin, {
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(post_vars),
+                        method: 'POST',
+                        credentials: 'include'
+                    })
+                    return resolve(result.json());
+                } catch(err) {
+                    return reject(err);
+                }
+            })
+        }.bind(this))
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                res.user = public_user;
+                return resolve(res);
             })
         }.bind(this))
         .catch(function(err) {
@@ -442,44 +517,39 @@ export default class CenterIdentity {
     }
 
     addUser(user, url=null) {
-        return $.ajax({
-            url: url || this.url_prefix + '/add-user',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify({
+        return fetch(url || this.url_prefix + '/add-user', {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 username_signature: user.username_signature,
                 username: user.username, // sha256 this in the future
                 public_key: user.public_key
             }),
-            type: 'POST',
-            success: function(data, textStatus, jqXHR) {
-                if (data.status === 'error') {
-                    throw data;
-                }
-            }.bind(this),
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                throw XMLHttpRequest;
-            }.bind(this)
+            method: 'POST',
+        })
+        .then((res) => {
+            const data = res.json()
+            if (data.status === false) {
+                throw data;
+            }
         });
     }
 
     getUser(user, url=null) {
-        return $.ajax({
-            url: url || this.url_prefix + '/get-user',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify({
+        return fetch(url || this.url_prefix + '/get-user', {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 username_signature: user.username_signature
             }),
-            type: 'POST',
-            success: function(data, textStatus, jqXHR) {
-                if (data.status === 'error') {
-                    throw data;
-                }
-            }.bind(this),
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                throw errorThrown;
-            }.bind(this)
+            method: 'POST',
+        }).then((res) => {
+            const data = res.json()
+            if (data.status === false) {
+                throw data;
+            }
         });
     }
 
@@ -799,7 +869,7 @@ export default class CenterIdentity {
           message,
           collection
         );
-        return fetch(this.url_prefix + '/transaction?bulletin_secret=fu&origin=' + window.location.origin, {
+        return await fetch(this.url_prefix + '/transaction?bulletin_secret=fu&' + this.origin, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -931,7 +1001,7 @@ export default class CenterIdentity {
         friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
       }
       var myRel = await this.createRelationshipTransaction(me, them, friendList, extra_data);
-      fetch(this.url_prefix + '/transaction?bulletin_secret=fu&origin=' + window.location.origin, {
+      await fetch(this.url_prefix + '/transaction?bulletin_secret=fu&' + this.origin, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -942,6 +1012,7 @@ export default class CenterIdentity {
     }
 
     async addCredential(me, credential, friendList, collection) {
+      credential.identity = this.toObject(credential.identity)
       await this.connectIdentities(
         me,
         this.copy(credential.identity),
