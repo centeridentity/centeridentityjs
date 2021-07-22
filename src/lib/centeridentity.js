@@ -182,8 +182,8 @@ export default class CenterIdentity {
     async getLocation() {
         return new Promise(function(resolve, reject){
             if (typeof navigator !== 'undefined' && navigator.geolocation && !(this.longitude && this.latitude)) {
-                navigator.geolocation.getCurrentPosition(function(position) { 
-                    return resolve(position); 
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    return resolve(position);
                 });
             } else {
                 return resolve({
@@ -367,7 +367,7 @@ export default class CenterIdentity {
         return this.signSession(session_id, user)
         .then(function(signature) {
             return new Promise(async function(resolve, reject){
-                var res = await fetch(signin_url || this.url_prefix + '/sign-in', {
+                var res = await fetch(this.addHttp(signin_url || '/sign-in'), {
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json',
@@ -385,7 +385,7 @@ export default class CenterIdentity {
     signInWithLocation(session_id_url, private_username, public_username, lat, long, signin_url) {
         var session_uuid;
         var public_user;
-        var url = session_id_url || this.url_prefix + '/generate-session-uuid';
+        var url = this.addHttp(session_id_url || '/generate-session-uuid');
         return fetch(url + '?' + this.origin + '&api_key=' + encodeURIComponent(this.api_key || ''), {credentials: 'include'})
         .then(async function(result) {
             var json = await result.json();
@@ -414,7 +414,7 @@ export default class CenterIdentity {
                     },
                     session_id_signature: signature
                 };
-                var url = signin_url || this.url_prefix + '/sign-in';
+                var url = this.addHttp(signin_url || '/sign-in')
                 try {
                     var res = await fetch(url + '?' + this.origin, {
                         headers: {
@@ -444,7 +444,7 @@ export default class CenterIdentity {
     registerWithLocation(session_id_url, private_username, public_username, lat, long, other_args, register_url) {
         var session_uuid;
         var public_user;
-        var url = session_id_url || this.url_prefix + '/generate-session-uuid';
+        var url = this.addHttp(session_id_url || '/generate-session-uuid');
         var customer;
         return fetch(url + '?' + this.origin + '&api_key=' + encodeURIComponent(this.api_key || ''), {credentials: 'include'})
         .then(async function(result) {
@@ -489,7 +489,7 @@ export default class CenterIdentity {
                 post_vars.session_id_signature = signature;
 
                 post_vars = {...post_vars, ...other_args}
-                var url = register_url || this.url_prefix + '/add-user';
+                var url = this.addHttp(register_url || '/add-user');
                 try {
                     var result = await fetch(url + '?' + this.origin, {
                         headers: {
@@ -517,7 +517,7 @@ export default class CenterIdentity {
     }
 
     addUser(user, url=null) {
-        return fetch(url || this.url_prefix + '/add-user', {
+        return fetch(this.addHttp(url || '/add-user'), {
             headers: {
               'Content-Type': 'application/json'
             },
@@ -537,7 +537,7 @@ export default class CenterIdentity {
     }
 
     getUser(user, url=null) {
-        return fetch(url || this.url_prefix + '/get-user', {
+        return fetch(this.addHttp(url || '/get-user'), {
             headers: {
               'Content-Type': 'application/json'
             },
@@ -958,7 +958,7 @@ export default class CenterIdentity {
       });
       return await this.sendPrivateMessage(me, verifier, 'credential_issues', message);
     }
-  
+
     async forwardRequestedCredential(me, issuer, verifier, credential) { // me = subject, them = issuer
       var signedCredential = await this.sign(JSON.stringify(credential), me);
       var message = JSON.stringify({
@@ -1032,6 +1032,10 @@ export default class CenterIdentity {
         var them = await res.json();
         return this.connectIdentities(me, them, group, collection, extra_data);
       });
+    }
+
+    addHttp(url) {
+      return url.substr(0, 4) === 'http' ? url : this.url_prefix + url
     }
 
     async signOut() {
