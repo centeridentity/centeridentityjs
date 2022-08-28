@@ -1,6 +1,7 @@
 Center identity makes it easy for developers to manager their users without losing control.
 
 #Build
+`export NODE_OPTIONS=--openssl-legacy-provider`
 Issue this command:
 `webpack`
 
