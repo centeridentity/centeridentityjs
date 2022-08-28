@@ -4,10 +4,11 @@ import * as bitcoin from 'bitcoinjs-lib';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
 import Buffer from 'buffer';
+import { resolve } from 'path';
 
 
 export default class CenterIdentity {
-    constructor(api_key, url_prefix, use_local_storage, strength) {
+    constructor(api_key, url_prefix, use_local_storage, strength, selfGenerateTransaction) {
         switch(strength) {
             case 'low':
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
@@ -27,6 +28,7 @@ export default class CenterIdentity {
         this.use_local_storage = use_local_storage || false;
         this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
         this.origin = window && window.location ? 'origin=' + encodeURIComponent(window.location.origin) : '';
+        this.selfGenerateTransaction = selfGenerateTransaction || false;
     }
 
     async createRelationship(me, user, extra_data) {
@@ -128,6 +130,64 @@ export default class CenterIdentity {
         .then(function(position){
             return this.encryptSeed();
         }.bind(this))
+        .then(function(encryptedSeed){
+          return new Promise(async function(resolve, reject){
+            if (this.selfGenerateTransaction) {
+              var centerIdentityUser = {
+                public_key: '02a9aed3a4d69013246d24e25ded69855fbd590cb75b4a90fbfdc337111681feba',
+                address: '1EWkrpUezWMpByE6nys6VXubjFLorgbZuP',
+                username: '',
+                username_signature: 'MEQCIC7ADPLI3VPDNpQPaXAeB8gUk2LrvZDJIdEg9C12dj5PAiB61Te/sen1D++EJAcgnGLH4iq7HTZHv/FNByuvu4PrrA=='
+              }
+              const public_user = this.toObject(this.user);
+              var join = await this.createRelationship(public_user, centerIdentityUser);
+              var dh_keys = this.get_dh_keys(public_user, centerIdentityUser);
+              join.relationship.dh_private_key = dh_keys.dh_private_key
+              var encryptedRelationship = await this.encrypt(this.user.wif, JSON.stringify(join.relationship));
+
+              const friendTxn = await this.generateTransaction(
+                this.user,
+                this.user.public_key,
+                dh_keys.dh_public_key,
+                this.generate_rid(public_user, centerIdentityUser),
+                encryptedRelationship,
+                0,
+                '',
+                ''
+              )
+              const buryTxn = await this.generateTransaction(
+                this.user,
+                this.user.public_key,
+                '',
+                this.rid,
+                encryptedSeed,
+                0,
+                '',
+                ''
+              )
+              resolve([friendTxn, buryTxn])
+            } else {
+              var payload =  `{
+                  "rid": "` + this.rid + `",
+                  "relationship": "` + encryptedSeed + `"
+              }`;
+              return fetch(this.url_prefix + '/bury', {
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  method: 'POST',
+                  body: payload,
+              })
+              .then(async (res) => {
+                  const data = await res.json();
+                  return resolve(data);
+              })
+              .catch((err) => {
+                  return reject(err);
+              })
+            }
+          }.bind(this));
+        }.bind(this))
         .catch(function(err) {
             console.log(err)
         }.bind(this));
@@ -228,24 +288,8 @@ export default class CenterIdentity {
     async encryptSeed() {
         return new Promise(function(resolve, reject){
             var encrypted_seed = this.encrypt(this.symmetric_key, this.user.wif);
-            var payload =  `{
-                "rid": "` + this.rid + `",
-                "relationship": "` + encrypted_seed + `"
-            }`;
-            fetch(this.url_prefix + '/bury', {
-                headers: {
-                  'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: payload,
-            })
-            .then((res) => {
-                return resolve(data);
-            })
-            .catch((err) => {
-                return reject(err);
-            })
-        });
+            return resolve(encrypted_seed)
+        }.bind(this));
     }
 
     encrypt(keyStr, message) {
@@ -323,27 +367,17 @@ export default class CenterIdentity {
 
     sign(message, user) {
         return new Promise(function(resolve, reject){
-            var hash = bitcoin.crypto.sha256(message).toString('hex')
-            var combine = new Uint8Array(hash.length);
-            for (var i = 0; i < hash.length; i++) {
-                combine[i] = hash.charCodeAt(i)
-            }
-            var shaMessage = bitcoin.crypto.sha256(combine);
-            var der = user.key.sign(shaMessage).toDER();
+            var hash = bitcoin.crypto.sha256(message)
+            var der = user.key.sign(hash).toDER();
             return resolve(base64.fromByteArray(der));
         }.bind(this));
     }
 
     verify(message, user, signature) {
-        var hash = bitcoin.crypto.sha256(message).toString('hex')
-        var combine = new Uint8Array(hash.length);
-        for (var i = 0; i < hash.length; i++) {
-            combine[i] = hash.charCodeAt(i)
-        }
-        var shaMessage = bitcoin.crypto.sha256(combine);
+        var hash = bitcoin.crypto.sha256(message)
         var pubKey = bitcoin.ECPair.fromPublicKeyBuffer(Buffer.Buffer.from(user.public_key, 'hex'));
         var sig = bitcoin.ECSignature.fromDER(base64.toByteArray(signature));
-        var result = pubKey.verify(shaMessage, sig);
+        var result = pubKey.verify(hash, sig);
         return result;
     }
 
@@ -488,7 +522,7 @@ export default class CenterIdentity {
 
                 post_vars.session_id_signature = signature;
 
-                post_vars = {...post_vars, ...other_args}
+                post_vars = Object.assign({}, post_vars, other_args);
                 var url = this.addHttp(register_url || '/add-user');
                 try {
                     var result = await fetch(url + '?' + this.origin, {
@@ -885,16 +919,14 @@ export default class CenterIdentity {
 
     async issueCredential(me, them, credential, credentialMessage) {
       var collection = 'credential_issues';
-      credential = {
-        ...credential,
+      Object.assign(credential, {
         issuer: this.toObject(me),
         subject: this.toObject(them)
-      };
+      })
       var issuerSignature = await this.sign(credentialMessage, me);
-      var relationshipMessage = JSON.stringify({
-        ...credential,
+      var relationshipMessage = JSON.stringify(Object.assign({}, credential, {
         issuer_signature: issuerSignature
-      });
+      }))
       return {
         transaction: await this.sendPrivateMessage(me, them, collection, relationshipMessage),
         message: relationshipMessage
@@ -921,11 +953,10 @@ export default class CenterIdentity {
 
     async requestCredentialFromIssuer(me, issuer, credential) { // me = subject
       var collection = 'credential_requests';
-      credential = {
-        ...credential,
+      Object.assign(credential, {
         issuer: this.toObject(issuer),
         subject: this.toObject(me)
-      };
+      })
       var signedCredential = await this.sign(JSON.stringify(credential), me);
       var message = JSON.stringify({
         credential: credential,
@@ -936,12 +967,11 @@ export default class CenterIdentity {
 
     async requestCredentialThroughSubject(me, issuer, subject, credential) { // me = verifier
       var collection = 'credential_requests';
-      credential = {
-        ...credential,
+      Object.assign(credential, {
         issuer: this.toObject(issuer),
         subject: this.toObject(subject),
         verifier: this.toObject(me)
-      };
+      });
       var signedCredential = await this.sign(JSON.stringify(credential), me);
       var message = JSON.stringify({
         credential: credential,
@@ -952,19 +982,17 @@ export default class CenterIdentity {
 
     async forwardIssuedCredential(me, issuer, verifier, credential) { // me = subject, them = verifier
       var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        ...credential,
+      var message = JSON.stringify(Object.assign(credential, {
         subject_signature: signedCredential
-      });
+      }));
       return await this.sendPrivateMessage(me, verifier, 'credential_issues', message);
     }
 
     async forwardRequestedCredential(me, issuer, verifier, credential) { // me = subject, them = issuer
       var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        ...credential,
+      var message = JSON.stringify(Object.assign(credential, {
         subject_signature: signedCredential
-      });
+      }));
       return await this.sendPrivateMessage(me, issuer, 'credential_requests', message);
     }
 

@@ -82,7 +82,7 @@ var CenterIdentity =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 100);
+/******/ 	return __webpack_require__(__webpack_require__.s = 99);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -116,7 +116,7 @@ module.exports = {
  * Copyright (c) 2010-2018 Digital Bazaar, Inc.
  */
 var forge = __webpack_require__(0);
-var baseN = __webpack_require__(105);
+var baseN = __webpack_require__(104);
 
 /* Utilities API */
 var util = module.exports = forge.util = forge.util || {};
@@ -3109,7 +3109,7 @@ util.estimateCores = function(options, callback) {
   }
 };
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(15), __webpack_require__(58).setImmediate, __webpack_require__(13), __webpack_require__(6).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13), __webpack_require__(58).setImmediate, __webpack_require__(14), __webpack_require__(6).Buffer))
 
 /***/ }),
 /* 2 */
@@ -3715,8 +3715,8 @@ if (typeof Object.create === 'function') {
 
 
 
-var base64 = __webpack_require__(103)
-var ieee754 = __webpack_require__(104)
+var base64 = __webpack_require__(102)
+var ieee754 = __webpack_require__(103)
 var isArray = __webpack_require__(59)
 
 exports.Buffer = Buffer
@@ -5495,7 +5495,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14)))
 
 /***/ }),
 /* 7 */
@@ -5575,65 +5575,36 @@ module.exports = JSON.parse("{\"OP_FALSE\":0,\"OP_0\":0,\"OP_PUSHDATA1\":76,\"OP
  */
 module.exports = __webpack_require__(0);
 __webpack_require__(16);
-__webpack_require__(106);
-__webpack_require__(12);
+__webpack_require__(105);
+__webpack_require__(11);
 __webpack_require__(32);
 __webpack_require__(72);
 __webpack_require__(27);
-__webpack_require__(108);
+__webpack_require__(107);
 __webpack_require__(23);
-__webpack_require__(110);
+__webpack_require__(109);
 __webpack_require__(74);
-__webpack_require__(111);
+__webpack_require__(110);
 __webpack_require__(71);
 __webpack_require__(34);
 __webpack_require__(20);
 __webpack_require__(67);
 __webpack_require__(69);
-__webpack_require__(112);
+__webpack_require__(111);
 __webpack_require__(62);
 __webpack_require__(68);
 __webpack_require__(65);
 __webpack_require__(37);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(66);
+__webpack_require__(112);
 __webpack_require__(113);
-__webpack_require__(114);
 __webpack_require__(61);
 __webpack_require__(1);
 
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var script = __webpack_require__(4)
-
-var templates = __webpack_require__(39)
-for (var key in templates) {
-  script[key] = templates[key]
-}
-
-module.exports = {
-  bufferutils: __webpack_require__(82), // TODO: remove in 4.0.0
-
-  Block: __webpack_require__(132),
-  ECPair: __webpack_require__(51),
-  ECSignature: __webpack_require__(55),
-  HDNode: __webpack_require__(167),
-  Transaction: __webpack_require__(50),
-  TransactionBuilder: __webpack_require__(168),
-
-  address: __webpack_require__(52),
-  crypto: __webpack_require__(21),
-  networks: __webpack_require__(26),
-  opcodes: __webpack_require__(8),
-  script: script
-}
-
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -5830,7 +5801,7 @@ module.exports = forge.random;
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -7244,50 +7215,36 @@ asn1.prettyPrint = function(obj, level, indentation) {
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 14 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/**
- * Node.js module for Forge message digests.
- *
- * @author Dave Longley
- *
- * Copyright 2011-2017 Digital Bazaar, Inc.
- */
-var forge = __webpack_require__(0);
+var script = __webpack_require__(4)
 
-module.exports = forge.md = forge.md || {};
-forge.md.algorithms = forge.md.algorithms || {};
+var templates = __webpack_require__(39)
+for (var key in templates) {
+  script[key] = templates[key]
+}
+
+module.exports = {
+  bufferutils: __webpack_require__(82), // TODO: remove in 4.0.0
+
+  Block: __webpack_require__(132),
+  ECPair: __webpack_require__(51),
+  ECSignature: __webpack_require__(55),
+  HDNode: __webpack_require__(167),
+  Transaction: __webpack_require__(50),
+  TransactionBuilder: __webpack_require__(168),
+
+  address: __webpack_require__(52),
+  crypto: __webpack_require__(21),
+  networks: __webpack_require__(26),
+  opcodes: __webpack_require__(8),
+  script: script
+}
 
 
 /***/ }),
-/* 15 */
+/* 13 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -7474,6 +7431,49 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Node.js module for Forge message digests.
+ *
+ * @author Dave Longley
+ *
+ * Copyright 2011-2017 Digital Bazaar, Inc.
+ */
+var forge = __webpack_require__(0);
+
+module.exports = forge.md = forge.md || {};
+forge.md.algorithms = forge.md.algorithms || {};
 
 
 /***/ }),
@@ -9269,7 +9269,7 @@ module.exports = Hash
  * Copyright (c) 2010-2012 Digital Bazaar, Inc. All rights reserved.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(1);
 
 /* HMAC API */
@@ -9419,7 +9419,7 @@ hmac.create = function() {
  * Copyright (c) 2010-2015 Digital Bazaar, Inc.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(1);
 
 var sha1 = module.exports = forge.sha1 = forge.sha1 || {};
@@ -10459,12 +10459,12 @@ function _createCipher(options) {
  * The OID for the RSA key algorithm is: 1.2.840.113549.1.1.1
  */
 var forge = __webpack_require__(0);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(29);
 __webpack_require__(17);
 __webpack_require__(67);
 __webpack_require__(68);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(1);
 
 if(typeof BigInteger === 'undefined') {
@@ -13576,7 +13576,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
 
 /***/ }),
 /* 31 */
@@ -13985,7 +13985,7 @@ BlockCipher.prototype.finish = function(pad) {
  * Copyright (c) 2010-2014 Digital Bazaar, Inc.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(1);
 
 var md5 = module.exports = forge.md5 = forge.md5 || {};
@@ -14283,7 +14283,7 @@ function _update(s, w, bytes) {
  */
 var forge = __webpack_require__(0);
 __webpack_require__(23);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(1);
 
 var pkcs5 = forge.pkcs5 = forge.pkcs5 || {};
@@ -14607,10 +14607,10 @@ module.exports = forge.pbkdf2 = pkcs5.pbkdf2 = function(
  */
 var forge = __webpack_require__(0);
 __webpack_require__(16);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(27);
-__webpack_require__(14);
-__webpack_require__(107);
+__webpack_require__(15);
+__webpack_require__(106);
 __webpack_require__(17);
 __webpack_require__(20);
 __webpack_require__(37);
@@ -17843,7 +17843,7 @@ pki.verifyCertificateChain = function(caStore, chain, options) {
  * Copyright (c) 2012 Stefan Siegl <stesie@brokenpipe.de>
  */
 var forge = __webpack_require__(0);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(1);
 
 // shortcut for PSS API
@@ -19568,7 +19568,7 @@ Writable.prototype._destroy = function (err, cb) {
   this.end();
   cb(err);
 };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(15), __webpack_require__(58).setImmediate, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13), __webpack_require__(58).setImmediate, __webpack_require__(14)))
 
 /***/ }),
 /* 48 */
@@ -21246,7 +21246,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14)))
 
 /***/ }),
 /* 55 */
@@ -21834,7 +21834,7 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(102);
+__webpack_require__(101);
 // On some exotic environments, it's not clear which object `setimmediate` was
 // able to install onto.  Search each possibility in the same order as the
 // `setimmediate` library.
@@ -21845,7 +21845,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
                          (typeof global !== "undefined" && global.clearImmediate) ||
                          (this && this.clearImmediate);
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14)))
 
 /***/ }),
 /* 59 */
@@ -23100,12 +23100,12 @@ function from64To32(num) {
  * timing signal.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(23);
 __webpack_require__(33);
 __webpack_require__(20);
 __webpack_require__(62);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(24);
 __webpack_require__(1);
 
@@ -27164,7 +27164,7 @@ forge.tls.createConnection = tls.createConnection;
  * Copyright (c) 2010-2013 Digital Bazaar, Inc.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(17);
 __webpack_require__(63);
 __webpack_require__(20);
@@ -27284,13 +27284,13 @@ pki.privateKeyInfoToPem = function(pki, maxline) {
  */
 var forge = __webpack_require__(0);
 __webpack_require__(16);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(27);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(17);
 __webpack_require__(34);
 __webpack_require__(20);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(66);
 __webpack_require__(28);
 __webpack_require__(1);
@@ -28302,7 +28302,7 @@ function createPbkdf2Params(salt, countBytes, dkLen, prfAlgorithm) {
  * Copyright (c) 2010-2015 Digital Bazaar, Inc.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(1);
 
 var sha256 = module.exports = forge.sha256 = forge.sha256 || {};
@@ -29045,7 +29045,7 @@ prng.create = function(plugin) {
   return ctx;
 };
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
 
 /***/ }),
 /* 66 */
@@ -29514,7 +29514,7 @@ forge.rc2.createDecryptionCipher = function(key, bits) {
  */
 var forge = __webpack_require__(0);
 __webpack_require__(1);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(24);
 
 // shortcut for PKCS#1 API
@@ -29759,7 +29759,7 @@ function rsa_mgf1(seed, maskLength, hash) {
 var forge = __webpack_require__(0);
 __webpack_require__(1);
 __webpack_require__(29);
-__webpack_require__(11);
+__webpack_require__(10);
 
 (function() {
 
@@ -30148,12 +30148,12 @@ function getMillerRabinTests(bits) {
  * }
  */
 var forge = __webpack_require__(0);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(23);
 __webpack_require__(17);
 __webpack_require__(70);
 __webpack_require__(63);
-__webpack_require__(11);
+__webpack_require__(10);
 __webpack_require__(28);
 __webpack_require__(24);
 __webpack_require__(1);
@@ -31242,7 +31242,7 @@ p12.generateKey = forge.pbe.generatePkcs12Key;
  * EncryptedKey ::= OCTET STRING
  */
 var forge = __webpack_require__(0);
-__webpack_require__(12);
+__webpack_require__(11);
 __webpack_require__(1);
 
 // shortcut for ASN.1 API
@@ -31707,7 +31707,7 @@ forge.debug.clear = function(cat, name) {
  * Copyright (c) 2014-2015 Digital Bazaar, Inc.
  */
 var forge = __webpack_require__(0);
-__webpack_require__(14);
+__webpack_require__(15);
 __webpack_require__(1);
 
 var sha512 = module.exports = forge.sha512 = forge.sha512 || {};
@@ -34631,7 +34631,7 @@ function indexOf(xs, x) {
   }
   return -1;
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13), __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14), __webpack_require__(13)))
 
 /***/ }),
 /* 88 */
@@ -37457,6 +37457,5673 @@ module.exports = Curve
 
 /***/ }),
 /* 99 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const CenterIdentity = __webpack_require__(100).default;
+module.exports = CenterIdentity;
+
+/***/ }),
+/* 100 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CenterIdentity; });
+/* harmony import */ var node_forge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
+/* harmony import */ var node_forge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_forge__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(114);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(12);
+/* harmony import */ var bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var base64_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(31);
+/* harmony import */ var base64_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(base64_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var js_x25519__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(57);
+/* harmony import */ var js_x25519__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(js_x25519__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var buffer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
+/* harmony import */ var buffer__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(buffer__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(169);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+
+
+class CenterIdentity {
+    constructor(api_key, url_prefix, use_local_storage, strength, selfGenerateTransaction) {
+        switch(strength) {
+            case 'low':
+                this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+                break;
+            case 'medium':
+                this.strength = 0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+                break;
+            case 'high':
+                this.strength = 0x000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+                break;
+            default:
+                this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
+                break;
+        }
+        this.api_key = api_key;
+        this.url_prefix = url_prefix || 'https://centeridentity.com';
+        this.use_local_storage = use_local_storage || false;
+        this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
+        this.origin = window && window.location ? 'origin=' + encodeURIComponent(window.location.origin) : '';
+        this.selfGenerateTransaction = selfGenerateTransaction || false;
+    }
+
+    async createRelationship(me, user, extra_data) {
+        let relationship = {
+            their_username: user.username,
+            their_username_signature: user.username_signature,
+            their_public_key: user.public_key,
+            my_username: me.username,
+            my_username_signature: me.username_signature,
+            my_public_key: me.public_key
+        }
+        Object.assign(relationship, extra_data);
+        user.relationship = relationship;
+        return user;
+    }
+
+    async createRelationshipTransaction(me, user, group, extra_data) {
+        var join = await this.createRelationship(me, user, extra_data);
+        var dh_keys = this.get_dh_keys(me, user);
+        join.relationship.dh_private_key = dh_keys.dh_private_key
+        var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
+        var meObject = this.toObject(me)
+        var requested_rid = null;
+        var requester_rid = null;
+        if (group) {
+            requested_rid = this.generate_rid(
+                group,
+                user,
+            )
+            requester_rid = this.generate_rid(
+                group,
+                me,
+            )
+        }
+        return await this.generateTransaction(
+            me,
+            meObject.public_key,
+            dh_keys.dh_public_key,
+            this.generate_rid(me, user),
+            encryptedRelationship,
+            0,
+            requester_rid,
+            requested_rid
+        );
+    }
+
+    async approveRelationshipTransaction(me, user, request) {
+        var join = await this.createRelationship(me, user);
+        var dh_keys = this.get_dh_keys(me, user);
+        join.relationship.dh_private_key = dh_keys.dh_private_key
+        var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
+        var meObject = this.toObject(me)
+        var requested_rid = request.requested_rid;
+        var requester_rid = request.requester_rid;
+        return await this.generateTransaction(
+            me,
+            meObject.public_key,
+            dh_keys.dh_public_key,
+            this.generate_rid(me, user),
+            encryptedRelationship,
+            0,
+            requester_rid,
+            requested_rid
+        );
+    }
+
+    async createRelationshipFromNew(me, name, extra_data) {
+        let user = await this.createUser(name);
+        let relationship = {
+            their_username: user.username,
+            their_username_signature: user.username_signature,
+            their_public_key: user.public_key,
+            their_wif: user.wif,
+            my_username: me.username,
+            my_username_signature: me.username_signature,
+            my_public_key: me.public_key
+        }
+        Object.assign(relationship, extra_data);
+        user.relationship = relationship;
+        return user;
+    }
+
+    async set(user, latitude, longitude) {
+        return new Promise(function(resolve, reject){
+            this.user = user;
+            this.longitude = longitude;
+            this.latitude = latitude;
+            return resolve();
+        }.bind(this))
+        .then(function(){
+            return this.getLocation();
+        }.bind(this))
+        .then(function(position){
+            return this.showPosition(this.user.username, position);
+        }.bind(this))
+        .then(function(position){
+            return this.generateRecovery()
+        }.bind(this))
+        .then(function(position){
+            return this.encryptSeed();
+        }.bind(this))
+        .then(function(encryptedSeed){
+          return new Promise(async function(resolve, reject){
+            if (this.selfGenerateTransaction) {
+              var centerIdentityUser = {
+                public_key: '02a9aed3a4d69013246d24e25ded69855fbd590cb75b4a90fbfdc337111681feba',
+                address: '1EWkrpUezWMpByE6nys6VXubjFLorgbZuP',
+                username: '',
+                username_signature: 'MEQCIC7ADPLI3VPDNpQPaXAeB8gUk2LrvZDJIdEg9C12dj5PAiB61Te/sen1D++EJAcgnGLH4iq7HTZHv/FNByuvu4PrrA=='
+              }
+              const public_user = this.toObject(this.user);
+              var join = await this.createRelationship(public_user, centerIdentityUser);
+              var dh_keys = this.get_dh_keys(public_user, centerIdentityUser);
+              join.relationship.dh_private_key = dh_keys.dh_private_key
+              var encryptedRelationship = await this.encrypt(this.user.wif, JSON.stringify(join.relationship));
+
+              const friendTxn = await this.generateTransaction(
+                this.user,
+                this.user.public_key,
+                dh_keys.dh_public_key,
+                this.generate_rid(public_user, centerIdentityUser),
+                encryptedRelationship,
+                0,
+                '',
+                ''
+              )
+              const buryTxn = await this.generateTransaction(
+                this.user,
+                this.user.public_key,
+                '',
+                this.rid,
+                encryptedSeed,
+                0,
+                '',
+                ''
+              )
+              resolve([friendTxn, buryTxn])
+            } else {
+              var payload =  `{
+                  "rid": "` + this.rid + `",
+                  "relationship": "` + encryptedSeed + `"
+              }`;
+              return fetch(this.url_prefix + '/bury', {
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  method: 'POST',
+                  body: payload,
+              })
+              .then(async (res) => {
+                  const data = await res.json();
+                  return resolve(data);
+              })
+              .catch((err) => {
+                  return reject(err);
+              })
+            }
+          }.bind(this));
+        }.bind(this))
+        .catch(function(err) {
+            console.log(err)
+        }.bind(this));
+    }
+
+    async setFromNew(username, latitude, longitude) {
+        this.username = username;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        return this.createUser(username)
+        .then(function(user) {
+            this.user = user;
+            return this.set(
+                this.user,
+                this.latitude,
+                this.longitude
+            )
+        }.bind(this))
+        .then(function() {
+            return new Promise(function(resolve, reject) {
+                return resolve(this.user);
+            }.bind(this));
+        }.bind(this))
+        .catch(function(err) {
+            console.log(err)
+        }.bind(this));
+    }
+
+    async get(username, latitude, longitude) {
+        return new Promise(function(resolve, reject){
+            this.longitude = longitude;
+            this.latitude = latitude;
+            return resolve();
+        }.bind(this))
+        .then(function(){
+            return this.getLocation();
+        }.bind(this))
+        .then(function(position){
+            return this.showPosition(username, position);
+        }.bind(this))
+        .then(function(){
+            return this.generateRecovery();
+        }.bind(this))
+        .then(function(position){
+            return this.decryptSeed();
+        }.bind(this))
+        .then(async function(wif){
+            return await this.reviveUser(wif, username);
+        }.bind(this));
+    }
+
+    async getLocation() {
+        return new Promise(function(resolve, reject){
+            if (typeof navigator !== 'undefined' && navigator.geolocation && !(this.longitude && this.latitude)) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    return resolve(position);
+                });
+            } else {
+                return resolve({
+                    coords: {
+                        longitude: parseFloat(this.longitude),
+                        latitude: parseFloat(this.latitude)
+                    }
+                })
+            }
+        }.bind(this));
+    }
+
+    async showPosition(username, position) {
+        return new Promise(function(resolve, reject){
+            var lat = position.coords.latitude.toFixed(5);
+            var long = position.coords.longitude.toFixed(5);
+            this.header = long + (lat + username);
+            return resolve();
+        }.bind(this));
+    }
+
+    async generateRecovery() {
+        this.symmetric_key = '';
+        this.rid = '';
+        return new Promise(function(resolve, reject){
+            for(var i=0; i === i; i++) {
+                this.header = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(this.header).digest().toHex();
+                if (parseInt(this.header, 16) < this.strength && this.symmetric_key) {
+                    this.header = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(this.header).digest().toHex();
+                    this.rid = this.header;
+                    break
+                }
+                if (parseInt(this.header, 16) < this.strength && !this.symmetric_key) {
+                    this.header = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(this.header).digest().toHex();
+                    this.symmetric_key = this.header;
+                }
+            }
+            return resolve();
+        }.bind(this));
+    }
+
+    async encryptSeed() {
+        return new Promise(function(resolve, reject){
+            var encrypted_seed = this.encrypt(this.symmetric_key, this.user.wif);
+            return resolve(encrypted_seed)
+        }.bind(this));
+    }
+
+    encrypt(keyStr, message) {
+        var key = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.pkcs5.pbkdf2(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(keyStr).digest().toHex(), 'salt', 400, 32);
+        var cipher = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.cipher.createCipher('AES-CBC', key);
+        var iv = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.random.getBytesSync(16);
+        cipher.start({iv: iv});
+        cipher.update(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.util.createBuffer(iv + btoa(message)));
+        cipher.finish()
+        return cipher.output.toHex();
+    }
+
+    async decryptSeed() {
+        return new Promise(function(resolve, reject){
+            fetch(this.url_prefix + '/digup?rid=' + this.rid, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+            })
+            .then(async (result) => {
+                var data = await result.json();
+                console.log(data);
+                if (data.status === false) {
+                    return reject(data);
+                }
+                let decryptedData = this.decrypt(this.symmetric_key, data.relationship);
+                return resolve(decryptedData);
+            })
+            .catch((err) => {
+                return reject(err);
+            });
+        }.bind(this));
+    }
+
+    decrypt(keyStr, message) {
+        var key = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.pkcs5.pbkdf2(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(keyStr).digest().toHex(), 'salt', 400, 32);
+        var decipher = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.cipher.createDecipher('AES-CBC', key);
+        var enc = this.hexToBytes(message);
+        decipher.start({iv: enc.slice(0,16)});
+        decipher.update(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.util.createBuffer(enc.slice(16)));
+        decipher.finish();
+        return atob(decipher.output.data);
+    }
+
+    createUser(username) {
+        return new Promise(function(resolve, reject){
+            var key = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECPair"].makeRandom();
+            var wif = key.toWIF();
+            var public_key = key.getPublicKeyBuffer().toString('hex');
+            return resolve({
+                username_signature: this.generate_username_signature(key, username),
+                username: username,
+                wif: wif,
+                public_key: public_key,
+                key: key
+            })
+        }.bind(this));
+    }
+
+    reviveUser(wif, username) {
+        return new Promise(function(resolve, reject){
+            var key = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECPair"].fromWIF(wif);
+            var public_key = key.getPublicKeyBuffer().toString('hex');
+            this.user = {
+                username_signature: this.generate_username_signature(key, username),
+                username: username,
+                wif: wif,
+                public_key: public_key,
+                key: key
+            }
+            return resolve(this.user);
+        }.bind(this));
+    }
+
+    sign(message, user) {
+        return new Promise(function(resolve, reject){
+            var hash = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(message)
+            var der = user.key.sign(hash).toDER();
+            return resolve(base64_js__WEBPACK_IMPORTED_MODULE_3___default.a.fromByteArray(der));
+        }.bind(this));
+    }
+
+    verify(message, user, signature) {
+        var hash = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(message)
+        var pubKey = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECPair"].fromPublicKeyBuffer(buffer__WEBPACK_IMPORTED_MODULE_5___default.a.Buffer.from(user.public_key, 'hex'));
+        var sig = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECSignature"].fromDER(base64_js__WEBPACK_IMPORTED_MODULE_3___default.a.toByteArray(signature));
+        var result = pubKey.verify(hash, sig);
+        return result;
+    }
+
+    verifyIssuedCredential(issuer, message, issuer_signature) {
+        return this.verify(message, issuer, issuer_signature);
+    }
+
+    verifySubjectRequestedCredential(subject, message, subject_signature) {
+        return this.verify(message, subject, subject_signature);
+    }
+
+    verifyVerifierRequestedCredential(verifier, message, verifier_signature) {
+        return this.verify(message, verifier, verifier_signature);
+    }
+
+    signSession(session_id, user) {
+        return this.sign(session_id, user)
+    }
+
+    signIn(session_id, user, signin_url) {
+        return this.signSession(session_id, user)
+        .then(function(signature) {
+            return new Promise(async function(resolve, reject){
+                var res = await fetch(this.addHttp(signin_url || '/sign-in'), {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username_signature: user.username_signature,
+                        session_id_signature: signature
+                    })
+                });
+                return resolve(res.json());
+            }.bind(this));
+        }.bind(this));
+    }
+
+    signInWithLocation(session_id_url, private_username, public_username, lat, long, signin_url) {
+        var session_uuid;
+        var public_user;
+        var url = this.addHttp(session_id_url || '/generate-session-uuid');
+        return fetch(url + '?' + this.origin + '&api_key=' + encodeURIComponent(this.api_key || ''), {credentials: 'include'})
+        .then(async function(result) {
+            var json = await result.json();
+            session_uuid = json.session_uuid;
+            return this.get(private_username, lat, long)
+        }.bind(this))
+        .then(async function(user) {
+            public_user = await this.reviveUser(
+                user.wif,
+                public_username
+            )
+            if (this.use_local_storage){
+                localStorage.setItem('wif', public_user.wif);
+                localStorage.setItem('public_key', public_user.public_key);
+                localStorage.setItem('username', public_user.username);
+            }
+            return this.sign(session_uuid, user);
+        }.bind(this))
+        .then(function(signature) {
+            return new Promise(async function(resolve, reject){
+                var post_vars = {
+                    user: {
+                        username: public_user.username,
+                        public_key: public_user.public_key,
+                        username_signature: public_user.username_signature,
+                    },
+                    session_id_signature: signature
+                };
+                var url = this.addHttp(signin_url || '/sign-in')
+                try {
+                    var res = await fetch(url + '?' + this.origin, {
+                        headers: {
+                          'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(post_vars),
+                        method: 'POST',
+                        credentials: 'include'
+                    });
+                    return resolve(res.json());
+                } catch(err) {
+                    return reject(err.responseJSON)
+                }
+            }.bind(this));
+        }.bind(this))
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                res.user = public_user;
+                return resolve(res);
+            })
+        }.bind(this))
+        .catch(function(err) {
+            return err
+        }.bind(this));
+    }
+
+    registerWithLocation(session_id_url, private_username, public_username, lat, long, other_args, register_url) {
+        var session_uuid;
+        var public_user;
+        var url = this.addHttp(session_id_url || '/generate-session-uuid');
+        var customer;
+        return fetch(url + '?' + this.origin + '&api_key=' + encodeURIComponent(this.api_key || ''), {credentials: 'include'})
+        .then(async function(result) {
+            var json = await result.json();
+            session_uuid = json.session_uuid;
+            customer = json.customer;
+            return this.setFromNew(private_username, lat, long);
+        }.bind(this))
+        .then(async function(user) {
+            public_user = await this.reviveUser(
+                user.wif,
+                public_username
+            )
+            return this.sign(session_uuid, user);
+        }.bind(this))
+        .then(function(signature) {
+            return new Promise(async (resolve, reject) => {
+                if (this.use_local_storage){
+                    localStorage.setItem('wif', public_user.wif);
+                    localStorage.setItem('public_key', public_user.public_key);
+                    localStorage.setItem('username', public_user.username);
+                }
+                var post_vars = {};
+                if (customer) {
+                    var join = await this.createRelationship(public_user, customer);
+                    var dh_keys = this.get_dh_keys(public_user, customer);
+                    join.relationship.dh_private_key = dh_keys.dh_private_key
+                    var encryptedRelationship = await this.encrypt(public_user.wif, JSON.stringify(join.relationship));
+                    post_vars = {
+                        api_key: this.api_key,
+                        dh_public_key: dh_keys.dh_public_key,
+                        relationship: encryptedRelationship
+                    }
+                }
+
+                post_vars.user = {
+                    username: public_user.username,
+                    public_key: public_user.public_key,
+                    username_signature: public_user.username_signature
+                };
+
+                post_vars.session_id_signature = signature;
+
+                post_vars = Object.assign({}, post_vars, other_args);
+                var url = this.addHttp(register_url || '/add-user');
+                try {
+                    var result = await fetch(url + '?' + this.origin, {
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(post_vars),
+                        method: 'POST',
+                        credentials: 'include'
+                    })
+                    return resolve(result.json());
+                } catch(err) {
+                    return reject(err);
+                }
+            })
+        }.bind(this))
+        .then(function(res) {
+            return new Promise((resolve, reject) => {
+                res.user = public_user;
+                return resolve(res);
+            })
+        }.bind(this))
+        .catch(function(err) {
+            return err
+        }.bind(this));
+    }
+
+    addUser(user, url=null) {
+        return fetch(this.addHttp(url || '/add-user'), {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username_signature: user.username_signature,
+                username: user.username, // sha256 this in the future
+                public_key: user.public_key
+            }),
+            method: 'POST',
+        })
+        .then((res) => {
+            const data = res.json()
+            if (data.status === false) {
+                throw data;
+            }
+        });
+    }
+
+    getUser(user, url=null) {
+        return fetch(this.addHttp(url || '/get-user'), {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username_signature: user.username_signature
+            }),
+            method: 'POST',
+        }).then((res) => {
+            const data = res.json()
+            if (data.status === false) {
+                throw data;
+            }
+        });
+    }
+
+    get_dh_keys(me, them) {
+        var raw_dh_private_key = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(me.wif + them.username_signature);
+        var raw_dh_public_key = js_x25519__WEBPACK_IMPORTED_MODULE_4___default.a.getPublic(raw_dh_private_key);
+        return {
+            dh_private_key: this.toHex(raw_dh_private_key),
+            dh_public_key: this.toHex(raw_dh_public_key)
+        }
+    }
+
+    getSharedSecret(me, them, their_txn) {
+        var dh_keys = this.get_dh_keys(me, them);
+        var privk = new Uint8Array(dh_keys.dh_private_key.match(/[\da-f]{2}/gi).map(function (h) {
+            return parseInt(h, 16)
+        }));
+        var pubk = new Uint8Array(their_txn.dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
+            return parseInt(h, 16)
+        }));
+        return this.toHex(js_x25519__WEBPACK_IMPORTED_MODULE_4___default.a.getSharedKey(privk, pubk));
+    }
+
+    generate_username_signature(key, username) {
+        return base64_js__WEBPACK_IMPORTED_MODULE_3___default.a.fromByteArray(key.sign(bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(username)).toDER());
+    }
+
+    toHex(byteArray) {
+        var callback = function(byte) {
+            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+        }
+        return Array.from(byteArray, callback).join('')
+    }
+
+    hexToBytes(s) {
+        var arr = []
+        for (var i = 0; i < s.length; i += 2) {
+            var c = s.substr(i, 2);
+            arr.push(parseInt(c, 16));
+        }
+        return String.fromCharCode.apply(null, arr);
+    }
+
+    generate_rid(user1, user2, extra_data='') {
+        var bulletin_secrets = [user1.username_signature, user2.username_signature].sort(function (a, b) {
+            return a.toLowerCase().localeCompare(b.toLowerCase());
+        });
+        return node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1] + extra_data).digest().toHex();
+    }
+
+    async generateTransaction(
+        user,
+        public_key,
+        dh_public_key,
+        rid,
+        relationship,
+        fee,
+        requester_rid,
+        requested_rid
+    ) {
+        var transaction = {
+            rid:  rid,
+            fee: fee,
+            dh_public_key: dh_public_key,
+            requester_rid: requester_rid || '',
+            requested_rid: requested_rid || '',
+            outputs: [],
+            inputs: [],
+            time: parseInt(((+ new Date()) / 1000).toString()).toString(),
+            public_key: public_key,
+            relationship: relationship
+        };
+        var header = (
+            transaction.public_key +
+            transaction.time +
+            transaction.dh_public_key +
+            transaction.rid +
+            transaction.relationship +
+            transaction.fee.toFixed(8) +
+            transaction.requester_rid +
+            transaction.requested_rid
+        )
+        transaction.hash = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(header).toString('hex')
+
+        transaction.id = await this.sign(header, user);
+        return transaction;
+    }
+
+    theirIdentityFromTransaction(txn, their_txn) {
+        var out = {
+            username: txn.relationship.their_username,
+            username_signature: txn.relationship.their_username_signature,
+            public_key: txn.relationship.their_public_key,
+            dh_private_key: txn.relationship.dh_private_key
+        }
+        if (their_txn) {
+            out.dh_public_key = their_txn.dh_public_key
+        }
+        return out;
+    }
+
+    theirIdentityFromEncryptedTransaction(me, txn, their_txn) {
+      var copy_txn = JSON.parse(JSON.stringify(txn));
+      var relationship = JSON.parse(this.decrypt(me.wif, copy_txn.relationship));
+      copy_txn.relationship = relationship;
+      return this.theirIdentityFromTransaction(copy_txn, their_txn);
+    }
+
+    myIdentityFromTransaction(txn) {
+        return {
+            username: txn.relationship.my_username,
+            username_signature: txn.relationship.my_username_signature,
+            public_key: txn.relationship.my_public_key,
+        }
+    }
+
+    messageFromEncryptedTransaction(me, them, their_txn, txn) {
+      var copy_txn = JSON.parse(JSON.stringify(txn));
+      var shared_secret = this.getSharedSecret(me, them, their_txn);
+      var relationship = JSON.parse(this.decrypt(shared_secret, copy_txn.relationship));
+      return relationship;
+    }
+
+    async generateGroupMessageTransaction(me, them, group, message) {
+        var shared_secret = this.getSharedSecret(me, them, their_txn);
+        var encryptedChatRelationship = await this.encrypt(shared_secret, message);
+
+        if (group) {
+            requested_rid = this.generate_rid(
+                group,
+                user,
+            )
+            requester_rid = this.generate_rid(
+                group,
+                me,
+            )
+        } else {
+          requester_rid = '';
+          requested_rid = '';
+        }
+
+        return await this.generateTransaction(
+            me,
+            me.public_key,
+            '',
+            this.generate_rid(me, them),
+            encryptedChatRelationship,
+            0,
+            requester_rid,
+            requested_rid
+        );
+    }
+
+    async generatePrivateMessageTransaction(me, them, their_txn, message, collection) {
+        var shared_secret = this.getSharedSecret(me, them, their_txn);
+        var encryptedChatRelationship = await this.encrypt(shared_secret, message);
+        return await this.generateTransaction(
+            me,
+            me.public_key,
+            '',
+            this.generate_rid(me, them, collection),
+            encryptedChatRelationship,
+            0,
+            '',
+            ''
+        );
+    }
+
+    async getTransactionsByRid(rid) {
+      return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + rid)
+    }
+
+    async getTransactionsByRequestedRid(rid) {
+      return fetch(this.url_prefix + '/get-transaction-by-rid?requested_rid=' + rid)
+    }
+
+    async getTransactionsByRequesterRid(rid) {
+      return fetch(this.url_prefix + '/get-transaction-by-rid?requester_rid=' + rid)
+    }
+
+    async getRelationshipTransactions(me, them, collection) {
+      var theirRel = '';
+      var myRel = '';
+      var rid = this.generate_rid(me, them, collection);
+
+      return this.getTransactionsByRid(rid)
+      .then(async (res) => {
+        var txns = await res.json()
+        for (var i=0;i<txns.length;i++) {
+          if (me.public_key === txns[i].public_key && txns[i].dh_public_key) {
+            myRel = txns[i];
+            if (theirRel) break;
+          }
+          if (me.public_key !== txns[i].public_key && txns[i].dh_public_key) {
+            theirRel = txns[i];
+            if (myRel) break;
+          }
+        }
+        if (!myRel) throw {
+          status: false,
+          message: 'relationship not complete: you have not added them',
+          mine: myRel,
+          theirs: theirRel
+        };
+        if (!theirRel) throw {
+          status: false,
+          message: 'relationship not complete: they have not added you',
+          mine: myRel,
+          theirs: theirRel
+        };
+        return {mine: myRel, theirs: theirRel}
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+    async getIdentitiesByCollection(me, collection, friendList) {
+      var group = await this.reviveUser(this.friends_list_wif, collection);
+      if(friendList) {
+        group = friendList;
+      }
+      var rid = this.generate_rid(me, group);
+      var result = await this.getTransactionsByRequesterRid(rid);
+      var txns = await result.json();
+      var collection = await Promise.all(txns.map(async (txn) => {
+        return await this.theirIdentityFromEncryptedTransaction(me, txn)
+      }));
+      return collection;
+    }
+
+    async getDataByCollection(me, collection, friendList) {
+      var group = await this.reviveUser(this.friends_list_wif, collection);
+      if(friendList) {
+        group = friendList;
+      }
+      var rid = this.generate_rid(me, group);
+      var result = await this.getTransactionsByRequesterRid(rid);
+      var txns = await result.json();
+      var collection = await Promise.all(txns.map(async (txn) => {
+        var copy_txn = JSON.parse(JSON.stringify(txn));
+        var relationship = JSON.parse(this.decrypt(me.wif, copy_txn.relationship));
+        return relationship;
+      }));
+      return collection;
+    }
+
+    async getFriendsLists(me, listName) {
+      var friendsList = await this.reviveUser(this.friends_list_wif, listName);
+      var rid = this.generate_rid(me, friendsList, me.wif + ':all_friends_lists');
+      return this.getTransactionsByRid(rid)
+      .then(async (txns) => {
+        return txns;
+      });
+    }
+
+    async getFriendsList(me, listName) {
+      var friendsList = await this.reviveUser(this.friends_list_wif, listName);
+      var rid = this.generate_rid(me, friendsList, me.wif + ':all_friends_lists');
+      return this.getTransactionsByRid(rid)
+      .then(async (txns) => {
+        if (txns.length === 0) {
+          var friendsList = await this.reviveUser(this.friends_list_wif, 'default');
+          return this.createRelationshipTransaction(me, friendsList, null, me.wif + ':all_friends_lists');
+        }
+        for(var i=0; i < txns.length; i++) {
+          var friendList = await this.theirIdentityFromEncryptedTransaction(me);
+          if (friendList.username === listName) {
+            return friendList;
+          }
+        }
+      });
+    }
+
+    async setFriendsList(me, listName) {
+      var friendsList = await this.createUser(listName);
+      return this.createRelationshipTransaction(me, friendsList, null, me.wif + ':all_friends_lists');
+    }
+
+    async getPrivateMessages(me, them, collection, filter) {
+      var res = {};
+      return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + this.generate_rid(me, them, collection))
+      .then(async (res) => {
+        return this.getRelationshipTransactions(me, them);
+      })
+      .then(async (rels) => {
+        myRel = rels.mine;
+        theirRel = rels.theirs;
+        var txn = await res.json()
+        var messages = []
+        for (var i=0; i < txn.length; i++) {
+          if(txn[i].dh_public_key === '') {
+            var messageTxn = txn[i];
+            var theirIdentity = this.theirIdentityFromEncryptedTransaction(me, myRel);
+            var message = this.messageFromEncryptedTransaction(me, theirIdentity, theirRel, messageTxn);
+            //if (filter && !filter(message)) continue;
+            messages.push(message);
+          }
+        }
+        return messages;
+      });
+    }
+
+    async sendPrivateMessage(me, them, collection, message) {
+      var myRel = {};
+      var theirRel = {}
+      return this.getRelationshipTransactions(me, them)
+      .then(async (rels) => {
+        myRel = rels.mine;
+        theirRel = rels.theirs;
+        //get verifier identity for subject
+        var theirIdentity = this.theirIdentityFromEncryptedTransaction(me, myRel);
+        ///create message
+        var privateMessage = await this.generatePrivateMessageTransaction(
+          me,
+          theirIdentity,
+          theirRel,
+          message,
+          collection
+        );
+        return await fetch(this.url_prefix + '/transaction?bulletin_secret=fu&' + this.origin, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(privateMessage)
+        });
+      })
+      .then(async (res) => {
+        var privateMessage = await res.json();
+        return privateMessage;
+      });
+    }
+
+    async issueCredential(me, them, credential, credentialMessage) {
+      var collection = 'credential_issues';
+      Object.assign(credential, {
+        issuer: this.toObject(me),
+        subject: this.toObject(them)
+      })
+      var issuerSignature = await this.sign(credentialMessage, me);
+      var relationshipMessage = JSON.stringify(Object.assign({}, credential, {
+        issuer_signature: issuerSignature
+      }))
+      return {
+        transaction: await this.sendPrivateMessage(me, them, collection, relationshipMessage),
+        message: relationshipMessage
+      };
+    }
+
+    async getCredentialsIssued(me, them, credential) {
+      return this.getPrivateMessages(
+        me,
+        them,
+        'credential_issues',
+        credential
+      )
+    }
+
+    async getCredentialsRequested(me, them, credential) {
+      return this.getPrivateMessages(
+        me,
+        them,
+        'credential_requests',
+        credential
+      )
+    }
+
+    async requestCredentialFromIssuer(me, issuer, credential) { // me = subject
+      var collection = 'credential_requests';
+      Object.assign(credential, {
+        issuer: this.toObject(issuer),
+        subject: this.toObject(me)
+      })
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify({
+        credential: credential,
+        subject_signature: signedCredential
+      });
+      return await this.sendPrivateMessage(me, issuer, collection, message);
+    }
+
+    async requestCredentialThroughSubject(me, issuer, subject, credential) { // me = verifier
+      var collection = 'credential_requests';
+      Object.assign(credential, {
+        issuer: this.toObject(issuer),
+        subject: this.toObject(subject),
+        verifier: this.toObject(me)
+      });
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify({
+        credential: credential,
+        verifier_signature: signedCredential
+      });
+      return await this.sendPrivateMessage(me, subject, collection, message);
+    }
+
+    async forwardIssuedCredential(me, issuer, verifier, credential) { // me = subject, them = verifier
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify(Object.assign(credential, {
+        subject_signature: signedCredential
+      }));
+      return await this.sendPrivateMessage(me, verifier, 'credential_issues', message);
+    }
+
+    async forwardRequestedCredential(me, issuer, verifier, credential) { // me = subject, them = issuer
+      var signedCredential = await this.sign(JSON.stringify(credential), me);
+      var message = JSON.stringify(Object.assign(credential, {
+        subject_signature: signedCredential
+      }));
+      return await this.sendPrivateMessage(me, issuer, 'credential_requests', message);
+    }
+
+    async getIdentityLink(identity) {
+      return fetch(this.url_prefix + '/sia-upload?filename=' + encodeURIComponent(identity.username_signature), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({file: btoa(JSON.stringify(this.toObject(identity)))})
+      })
+      .then(async (res) => {
+        var json = await res.json();
+        return json.skylink;
+      });
+    }
+
+    async getCredentialLink(credential) {
+      return fetch(this.url_prefix + '/sia-upload?filename=' + encodeURIComponent(credential.identity.username_signature), {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({file: btoa(JSON.stringify(credential))})
+      })
+      .then(async (res) => {
+        var json = await res.json();
+        return json.skylink;
+      });
+    }
+
+    async connectIdentities(me, them, friendList, collection, extra_data) {
+      if (!friendList) {
+        friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
+      }
+      var myRel = await this.createRelationshipTransaction(me, them, friendList, extra_data);
+      await fetch(this.url_prefix + '/transaction?bulletin_secret=fu&' + this.origin, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(myRel)
+      });
+      return them;
+    }
+
+    async addCredential(me, credential, friendList, collection) {
+      credential.identity = this.toObject(credential.identity)
+      await this.connectIdentities(
+        me,
+        this.copy(credential.identity),
+        friendList,
+        collection || 'credentials',
+        this.copy({credential: credential})
+      )
+    }
+
+    async importConnectionFromSkylink(me, skylink, collection, friendList, extra_data) {
+      var group = await this.reviveUser(this.friends_list_wif, collection || 'default');
+      if(friendList) {
+        group = friendList;
+      }
+      return fetch('https://siasky.net/' + skylink)
+      .then(async (res) => {
+        var them = await res.json();
+        return this.connectIdentities(me, them, group, collection, extra_data);
+      });
+    }
+
+    addHttp(url) {
+      return url.substr(0, 4) === 'http' ? url : this.url_prefix + url
+    }
+
+    async signOut() {
+    }
+
+    copy(data) {
+      return JSON.parse(JSON.stringify(data));
+    }
+
+    toObject(user) {
+        return {
+            username: user.username,
+            username_signature: user.username_signature,
+            public_key: user.public_key
+        }
+    }
+
+    toJson(user) {
+        return JSON.stringify({
+            username: user.username,
+            username_signature: user.username_signature,
+            public_key: user.public_key,
+            wif: user.wif
+        })
+    }
+}
+
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
+    "use strict";
+
+    if (global.setImmediate) {
+        return;
+    }
+
+    var nextHandle = 1; // Spec says greater than zero
+    var tasksByHandle = {};
+    var currentlyRunningATask = false;
+    var doc = global.document;
+    var registerImmediate;
+
+    function setImmediate(callback) {
+      // Callback can either be a function or a string
+      if (typeof callback !== "function") {
+        callback = new Function("" + callback);
+      }
+      // Copy function arguments
+      var args = new Array(arguments.length - 1);
+      for (var i = 0; i < args.length; i++) {
+          args[i] = arguments[i + 1];
+      }
+      // Store and register the task
+      var task = { callback: callback, args: args };
+      tasksByHandle[nextHandle] = task;
+      registerImmediate(nextHandle);
+      return nextHandle++;
+    }
+
+    function clearImmediate(handle) {
+        delete tasksByHandle[handle];
+    }
+
+    function run(task) {
+        var callback = task.callback;
+        var args = task.args;
+        switch (args.length) {
+        case 0:
+            callback();
+            break;
+        case 1:
+            callback(args[0]);
+            break;
+        case 2:
+            callback(args[0], args[1]);
+            break;
+        case 3:
+            callback(args[0], args[1], args[2]);
+            break;
+        default:
+            callback.apply(undefined, args);
+            break;
+        }
+    }
+
+    function runIfPresent(handle) {
+        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
+        // So if we're currently running a task, we'll need to delay this invocation.
+        if (currentlyRunningATask) {
+            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
+            // "too much recursion" error.
+            setTimeout(runIfPresent, 0, handle);
+        } else {
+            var task = tasksByHandle[handle];
+            if (task) {
+                currentlyRunningATask = true;
+                try {
+                    run(task);
+                } finally {
+                    clearImmediate(handle);
+                    currentlyRunningATask = false;
+                }
+            }
+        }
+    }
+
+    function installNextTickImplementation() {
+        registerImmediate = function(handle) {
+            process.nextTick(function () { runIfPresent(handle); });
+        };
+    }
+
+    function canUsePostMessage() {
+        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
+        // where `global.postMessage` means something completely different and can't be used for this purpose.
+        if (global.postMessage && !global.importScripts) {
+            var postMessageIsAsynchronous = true;
+            var oldOnMessage = global.onmessage;
+            global.onmessage = function() {
+                postMessageIsAsynchronous = false;
+            };
+            global.postMessage("", "*");
+            global.onmessage = oldOnMessage;
+            return postMessageIsAsynchronous;
+        }
+    }
+
+    function installPostMessageImplementation() {
+        // Installs an event handler on `global` for the `message` event: see
+        // * https://developer.mozilla.org/en/DOM/window.postMessage
+        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
+
+        var messagePrefix = "setImmediate$" + Math.random() + "$";
+        var onGlobalMessage = function(event) {
+            if (event.source === global &&
+                typeof event.data === "string" &&
+                event.data.indexOf(messagePrefix) === 0) {
+                runIfPresent(+event.data.slice(messagePrefix.length));
+            }
+        };
+
+        if (global.addEventListener) {
+            global.addEventListener("message", onGlobalMessage, false);
+        } else {
+            global.attachEvent("onmessage", onGlobalMessage);
+        }
+
+        registerImmediate = function(handle) {
+            global.postMessage(messagePrefix + handle, "*");
+        };
+    }
+
+    function installMessageChannelImplementation() {
+        var channel = new MessageChannel();
+        channel.port1.onmessage = function(event) {
+            var handle = event.data;
+            runIfPresent(handle);
+        };
+
+        registerImmediate = function(handle) {
+            channel.port2.postMessage(handle);
+        };
+    }
+
+    function installReadyStateChangeImplementation() {
+        var html = doc.documentElement;
+        registerImmediate = function(handle) {
+            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
+            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
+            var script = doc.createElement("script");
+            script.onreadystatechange = function () {
+                runIfPresent(handle);
+                script.onreadystatechange = null;
+                html.removeChild(script);
+                script = null;
+            };
+            html.appendChild(script);
+        };
+    }
+
+    function installSetTimeoutImplementation() {
+        registerImmediate = function(handle) {
+            setTimeout(runIfPresent, 0, handle);
+        };
+    }
+
+    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
+    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
+    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
+
+    // Don't get fooled by e.g. browserify environments.
+    if ({}.toString.call(global.process) === "[object process]") {
+        // For Node.js before 0.9
+        installNextTickImplementation();
+
+    } else if (canUsePostMessage()) {
+        // For non-IE10 modern browsers
+        installPostMessageImplementation();
+
+    } else if (global.MessageChannel) {
+        // For web workers, where supported
+        installMessageChannelImplementation();
+
+    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
+        // For IE 6–8
+        installReadyStateChangeImplementation();
+
+    } else {
+        // For older browsers
+        installSetTimeoutImplementation();
+    }
+
+    attachTo.setImmediate = setImmediate;
+    attachTo.clearImmediate = clearImmediate;
+}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14), __webpack_require__(13)))
+
+/***/ }),
+/* 102 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
+}
+
+
+/***/ }),
+/* 103 */
+/***/ (function(module, exports) {
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+/* 104 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {/**
+ * Base-N/Base-X encoding/decoding functions.
+ *
+ * Original implementation from base-x:
+ * https://github.com/cryptocoinjs/base-x
+ *
+ * Which is MIT licensed:
+ *
+ * The MIT License (MIT)
+ *
+ * Copyright base-x contributors (c) 2016
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+var api = {};
+module.exports = api;
+
+// baseN alphabet indexes
+var _reverseAlphabets = {};
+
+/**
+ * BaseN-encodes a Uint8Array using the given alphabet.
+ *
+ * @param input the Uint8Array to encode.
+ * @param maxline the maximum number of encoded characters per line to use,
+ *          defaults to none.
+ *
+ * @return the baseN-encoded output string.
+ */
+api.encode = function(input, alphabet, maxline) {
+  if(typeof alphabet !== 'string') {
+    throw new TypeError('"alphabet" must be a string.');
+  }
+  if(maxline !== undefined && typeof maxline !== 'number') {
+    throw new TypeError('"maxline" must be a number.');
+  }
+
+  var output = '';
+
+  if(!(input instanceof Uint8Array)) {
+    // assume forge byte buffer
+    output = _encodeWithByteBuffer(input, alphabet);
+  } else {
+    var i = 0;
+    var base = alphabet.length;
+    var first = alphabet.charAt(0);
+    var digits = [0];
+    for(i = 0; i < input.length; ++i) {
+      for(var j = 0, carry = input[i]; j < digits.length; ++j) {
+        carry += digits[j] << 8;
+        digits[j] = carry % base;
+        carry = (carry / base) | 0;
+      }
+
+      while(carry > 0) {
+        digits.push(carry % base);
+        carry = (carry / base) | 0;
+      }
+    }
+
+    // deal with leading zeros
+    for(i = 0; input[i] === 0 && i < input.length - 1; ++i) {
+      output += first;
+    }
+    // convert digits to a string
+    for(i = digits.length - 1; i >= 0; --i) {
+      output += alphabet[digits[i]];
+    }
+  }
+
+  if(maxline) {
+    var regex = new RegExp('.{1,' + maxline + '}', 'g');
+    output = output.match(regex).join('\r\n');
+  }
+
+  return output;
+};
+
+/**
+ * Decodes a baseN-encoded (using the given alphabet) string to a
+ * Uint8Array.
+ *
+ * @param input the baseN-encoded input string.
+ *
+ * @return the Uint8Array.
+ */
+api.decode = function(input, alphabet) {
+  if(typeof input !== 'string') {
+    throw new TypeError('"input" must be a string.');
+  }
+  if(typeof alphabet !== 'string') {
+    throw new TypeError('"alphabet" must be a string.');
+  }
+
+  var table = _reverseAlphabets[alphabet];
+  if(!table) {
+    // compute reverse alphabet
+    table = _reverseAlphabets[alphabet] = [];
+    for(var i = 0; i < alphabet.length; ++i) {
+      table[alphabet.charCodeAt(i)] = i;
+    }
+  }
+
+  // remove whitespace characters
+  input = input.replace(/\s/g, '');
+
+  var base = alphabet.length;
+  var first = alphabet.charAt(0);
+  var bytes = [0];
+  for(var i = 0; i < input.length; i++) {
+    var value = table[input.charCodeAt(i)];
+    if(value === undefined) {
+      return;
+    }
+
+    for(var j = 0, carry = value; j < bytes.length; ++j) {
+      carry += bytes[j] * base;
+      bytes[j] = carry & 0xff;
+      carry >>= 8;
+    }
+
+    while(carry > 0) {
+      bytes.push(carry & 0xff);
+      carry >>= 8;
+    }
+  }
+
+  // deal with leading zeros
+  for(var k = 0; input[k] === first && k < input.length - 1; ++k) {
+    bytes.push(0);
+  }
+
+  if(typeof Buffer !== 'undefined') {
+    return Buffer.from(bytes.reverse());
+  }
+
+  return new Uint8Array(bytes.reverse());
+};
+
+function _encodeWithByteBuffer(input, alphabet) {
+  var i = 0;
+  var base = alphabet.length;
+  var first = alphabet.charAt(0);
+  var digits = [0];
+  for(i = 0; i < input.length(); ++i) {
+    for(var j = 0, carry = input.at(i); j < digits.length; ++j) {
+      carry += digits[j] << 8;
+      digits[j] = carry % base;
+      carry = (carry / base) | 0;
+    }
+
+    while(carry > 0) {
+      digits.push(carry % base);
+      carry = (carry / base) | 0;
+    }
+  }
+
+  var output = '';
+
+  // deal with leading zeros
+  for(i = 0; input.at(i) === 0 && i < input.length() - 1; ++i) {
+    output += first;
+  }
+  // convert digits to a string
+  for(i = digits.length - 1; i >= 0; --i) {
+    output += alphabet[digits[i]];
+  }
+
+  return output;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6).Buffer))
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * A Javascript implementation of AES Cipher Suites for TLS.
+ *
+ * @author Dave Longley
+ *
+ * Copyright (c) 2009-2015 Digital Bazaar, Inc.
+ *
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(16);
+__webpack_require__(61);
+
+var tls = module.exports = forge.tls;
+
+/**
+ * Supported cipher suites.
+ */
+tls.CipherSuites['TLS_RSA_WITH_AES_128_CBC_SHA'] = {
+  id: [0x00, 0x2f],
+  name: 'TLS_RSA_WITH_AES_128_CBC_SHA',
+  initSecurityParameters: function(sp) {
+    sp.bulk_cipher_algorithm = tls.BulkCipherAlgorithm.aes;
+    sp.cipher_type = tls.CipherType.block;
+    sp.enc_key_length = 16;
+    sp.block_length = 16;
+    sp.fixed_iv_length = 16;
+    sp.record_iv_length = 16;
+    sp.mac_algorithm = tls.MACAlgorithm.hmac_sha1;
+    sp.mac_length = 20;
+    sp.mac_key_length = 20;
+  },
+  initConnectionState: initConnectionState
+};
+tls.CipherSuites['TLS_RSA_WITH_AES_256_CBC_SHA'] = {
+  id: [0x00, 0x35],
+  name: 'TLS_RSA_WITH_AES_256_CBC_SHA',
+  initSecurityParameters: function(sp) {
+    sp.bulk_cipher_algorithm = tls.BulkCipherAlgorithm.aes;
+    sp.cipher_type = tls.CipherType.block;
+    sp.enc_key_length = 32;
+    sp.block_length = 16;
+    sp.fixed_iv_length = 16;
+    sp.record_iv_length = 16;
+    sp.mac_algorithm = tls.MACAlgorithm.hmac_sha1;
+    sp.mac_length = 20;
+    sp.mac_key_length = 20;
+  },
+  initConnectionState: initConnectionState
+};
+
+function initConnectionState(state, c, sp) {
+  var client = (c.entity === forge.tls.ConnectionEnd.client);
+
+  // cipher setup
+  state.read.cipherState = {
+    init: false,
+    cipher: forge.cipher.createDecipher('AES-CBC', client ?
+      sp.keys.server_write_key : sp.keys.client_write_key),
+    iv: client ? sp.keys.server_write_IV : sp.keys.client_write_IV
+  };
+  state.write.cipherState = {
+    init: false,
+    cipher: forge.cipher.createCipher('AES-CBC', client ?
+      sp.keys.client_write_key : sp.keys.server_write_key),
+    iv: client ? sp.keys.client_write_IV : sp.keys.server_write_IV
+  };
+  state.read.cipherFunction = decrypt_aes_cbc_sha1;
+  state.write.cipherFunction = encrypt_aes_cbc_sha1;
+
+  // MAC setup
+  state.read.macLength = state.write.macLength = sp.mac_length;
+  state.read.macFunction = state.write.macFunction = tls.hmac_sha1;
+}
+
+/**
+ * Encrypts the TLSCompressed record into a TLSCipherText record using AES
+ * in CBC mode.
+ *
+ * @param record the TLSCompressed record to encrypt.
+ * @param s the ConnectionState to use.
+ *
+ * @return true on success, false on failure.
+ */
+function encrypt_aes_cbc_sha1(record, s) {
+  var rval = false;
+
+  // append MAC to fragment, update sequence number
+  var mac = s.macFunction(s.macKey, s.sequenceNumber, record);
+  record.fragment.putBytes(mac);
+  s.updateSequenceNumber();
+
+  // TLS 1.1+ use an explicit IV every time to protect against CBC attacks
+  var iv;
+  if(record.version.minor === tls.Versions.TLS_1_0.minor) {
+    // use the pre-generated IV when initializing for TLS 1.0, otherwise use
+    // the residue from the previous encryption
+    iv = s.cipherState.init ? null : s.cipherState.iv;
+  } else {
+    iv = forge.random.getBytesSync(16);
+  }
+
+  s.cipherState.init = true;
+
+  // start cipher
+  var cipher = s.cipherState.cipher;
+  cipher.start({iv: iv});
+
+  // TLS 1.1+ write IV into output
+  if(record.version.minor >= tls.Versions.TLS_1_1.minor) {
+    cipher.output.putBytes(iv);
+  }
+
+  // do encryption (default padding is appropriate)
+  cipher.update(record.fragment);
+  if(cipher.finish(encrypt_aes_cbc_sha1_padding)) {
+    // set record fragment to encrypted output
+    record.fragment = cipher.output;
+    record.length = record.fragment.length();
+    rval = true;
+  }
+
+  return rval;
+}
+
+/**
+ * Handles padding for aes_cbc_sha1 in encrypt mode.
+ *
+ * @param blockSize the block size.
+ * @param input the input buffer.
+ * @param decrypt true in decrypt mode, false in encrypt mode.
+ *
+ * @return true on success, false on failure.
+ */
+function encrypt_aes_cbc_sha1_padding(blockSize, input, decrypt) {
+  /* The encrypted data length (TLSCiphertext.length) is one more than the sum
+   of SecurityParameters.block_length, TLSCompressed.length,
+   SecurityParameters.mac_length, and padding_length.
+
+   The padding may be any length up to 255 bytes long, as long as it results in
+   the TLSCiphertext.length being an integral multiple of the block length.
+   Lengths longer than necessary might be desirable to frustrate attacks on a
+   protocol based on analysis of the lengths of exchanged messages. Each uint8
+   in the padding data vector must be filled with the padding length value.
+
+   The padding length should be such that the total size of the
+   GenericBlockCipher structure is a multiple of the cipher's block length.
+   Legal values range from zero to 255, inclusive. This length specifies the
+   length of the padding field exclusive of the padding_length field itself.
+
+   This is slightly different from PKCS#7 because the padding value is 1
+   less than the actual number of padding bytes if you include the
+   padding_length uint8 itself as a padding byte. */
+  if(!decrypt) {
+    // get the number of padding bytes required to reach the blockSize and
+    // subtract 1 for the padding value (to make room for the padding_length
+    // uint8)
+    var padding = blockSize - (input.length() % blockSize);
+    input.fillWithByte(padding - 1, padding);
+  }
+  return true;
+}
+
+/**
+ * Handles padding for aes_cbc_sha1 in decrypt mode.
+ *
+ * @param blockSize the block size.
+ * @param output the output buffer.
+ * @param decrypt true in decrypt mode, false in encrypt mode.
+ *
+ * @return true on success, false on failure.
+ */
+function decrypt_aes_cbc_sha1_padding(blockSize, output, decrypt) {
+  var rval = true;
+  if(decrypt) {
+    /* The last byte in the output specifies the number of padding bytes not
+      including itself. Each of the padding bytes has the same value as that
+      last byte (known as the padding_length). Here we check all padding
+      bytes to ensure they have the value of padding_length even if one of
+      them is bad in order to ward-off timing attacks. */
+    var len = output.length();
+    var paddingLength = output.last();
+    for(var i = len - 1 - paddingLength; i < len - 1; ++i) {
+      rval = rval && (output.at(i) == paddingLength);
+    }
+    if(rval) {
+      // trim off padding bytes and last padding length byte
+      output.truncate(paddingLength + 1);
+    }
+  }
+  return rval;
+}
+
+/**
+ * Decrypts a TLSCipherText record into a TLSCompressed record using
+ * AES in CBC mode.
+ *
+ * @param record the TLSCipherText record to decrypt.
+ * @param s the ConnectionState to use.
+ *
+ * @return true on success, false on failure.
+ */
+function decrypt_aes_cbc_sha1(record, s) {
+  var rval = false;
+
+  var iv;
+  if(record.version.minor === tls.Versions.TLS_1_0.minor) {
+    // use pre-generated IV when initializing for TLS 1.0, otherwise use the
+    // residue from the previous decryption
+    iv = s.cipherState.init ? null : s.cipherState.iv;
+  } else {
+    // TLS 1.1+ use an explicit IV every time to protect against CBC attacks
+    // that is appended to the record fragment
+    iv = record.fragment.getBytes(16);
+  }
+
+  s.cipherState.init = true;
+
+  // start cipher
+  var cipher = s.cipherState.cipher;
+  cipher.start({iv: iv});
+
+  // do decryption
+  cipher.update(record.fragment);
+  rval = cipher.finish(decrypt_aes_cbc_sha1_padding);
+
+  // even if decryption fails, keep going to minimize timing attacks
+
+  // decrypted data:
+  // first (len - 20) bytes = application data
+  // last 20 bytes          = MAC
+  var macLen = s.macLength;
+
+  // create a random MAC to check against should the mac length check fail
+  // Note: do this regardless of the failure to keep timing consistent
+  var mac = forge.random.getBytesSync(macLen);
+
+  // get fragment and mac
+  var len = cipher.output.length();
+  if(len >= macLen) {
+    record.fragment = cipher.output.getBytes(len - macLen);
+    mac = cipher.output.getBytes(macLen);
+  } else {
+    // bad data, but get bytes anyway to try to keep timing consistent
+    record.fragment = cipher.output.getBytes();
+  }
+  record.fragment = forge.util.createBuffer(record.fragment);
+  record.length = record.fragment.length();
+
+  // see if data integrity checks out, update sequence number
+  var mac2 = s.macFunction(s.macKey, s.sequenceNumber, record);
+  s.updateSequenceNumber();
+  rval = compareMacs(s.macKey, mac, mac2) && rval;
+  return rval;
+}
+
+/**
+ * Safely compare two MACs. This function will compare two MACs in a way
+ * that protects against timing attacks.
+ *
+ * TODO: Expose elsewhere as a utility API.
+ *
+ * See: https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/february/double-hmac-verification/
+ *
+ * @param key the MAC key to use.
+ * @param mac1 as a binary-encoded string of bytes.
+ * @param mac2 as a binary-encoded string of bytes.
+ *
+ * @return true if the MACs are the same, false if not.
+ */
+function compareMacs(key, mac1, mac2) {
+  var hmac = forge.hmac.create();
+
+  hmac.start('SHA1', key);
+  hmac.update(mac1);
+  mac1 = hmac.digest().getBytes();
+
+  hmac.start(null, null);
+  hmac.update(mac2);
+  mac2 = hmac.digest().getBytes();
+
+  return mac1 === mac2;
+}
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Node.js module for Forge mask generation functions.
+ *
+ * @author Stefan Siegl
+ *
+ * Copyright 2012 Stefan Siegl <stesie@brokenpipe.de>
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(71);
+
+module.exports = forge.mgf = forge.mgf || {};
+forge.mgf.mgf1 = forge.mgf1;
+
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Buffer) {/**
+ * JavaScript implementation of Ed25519.
+ *
+ * Copyright (c) 2017-2019 Digital Bazaar, Inc.
+ *
+ * This implementation is based on the most excellent TweetNaCl which is
+ * in the public domain. Many thanks to its contributors:
+ *
+ * https://github.com/dchest/tweetnacl-js
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(29);
+__webpack_require__(10);
+__webpack_require__(73);
+__webpack_require__(1);
+var asn1Validator = __webpack_require__(108);
+var publicKeyValidator = asn1Validator.publicKeyValidator;
+var privateKeyValidator = asn1Validator.privateKeyValidator;
+
+if(typeof BigInteger === 'undefined') {
+  var BigInteger = forge.jsbn.BigInteger;
+}
+
+var ByteBuffer = forge.util.ByteBuffer;
+var NativeBuffer = typeof Buffer === 'undefined' ? Uint8Array : Buffer;
+
+/*
+ * Ed25519 algorithms, see RFC 8032:
+ * https://tools.ietf.org/html/rfc8032
+ */
+forge.pki = forge.pki || {};
+module.exports = forge.pki.ed25519 = forge.ed25519 = forge.ed25519 || {};
+var ed25519 = forge.ed25519;
+
+ed25519.constants = {};
+ed25519.constants.PUBLIC_KEY_BYTE_LENGTH = 32;
+ed25519.constants.PRIVATE_KEY_BYTE_LENGTH = 64;
+ed25519.constants.SEED_BYTE_LENGTH = 32;
+ed25519.constants.SIGN_BYTE_LENGTH = 64;
+ed25519.constants.HASH_BYTE_LENGTH = 64;
+
+ed25519.generateKeyPair = function(options) {
+  options = options || {};
+  var seed = options.seed;
+  if(seed === undefined) {
+    // generate seed
+    seed = forge.random.getBytesSync(ed25519.constants.SEED_BYTE_LENGTH);
+  } else if(typeof seed === 'string') {
+    if(seed.length !== ed25519.constants.SEED_BYTE_LENGTH) {
+      throw new TypeError(
+        '"seed" must be ' + ed25519.constants.SEED_BYTE_LENGTH +
+        ' bytes in length.');
+    }
+  } else if(!(seed instanceof Uint8Array)) {
+    throw new TypeError(
+      '"seed" must be a node.js Buffer, Uint8Array, or a binary string.');
+  }
+
+  seed = messageToNativeBuffer({message: seed, encoding: 'binary'});
+
+  var pk = new NativeBuffer(ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
+  var sk = new NativeBuffer(ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
+  for(var i = 0; i < 32; ++i) {
+    sk[i] = seed[i];
+  }
+  crypto_sign_keypair(pk, sk);
+  return {publicKey: pk, privateKey: sk};
+};
+
+/**
+ * Converts a private key from a RFC8410 ASN.1 encoding.
+ *
+ * @param obj - The asn1 representation of a private key.
+ *
+ * @returns {Object} keyInfo - The key information.
+ * @returns {Buffer|Uint8Array} keyInfo.privateKeyBytes - 32 private key bytes.
+ */
+ed25519.privateKeyFromAsn1 = function(obj) {
+  var capture = {};
+  var errors = [];
+  var valid = forge.asn1.validate(obj, privateKeyValidator, capture, errors);
+  if(!valid) {
+    var error = new Error('Invalid Key.');
+    error.errors = errors;
+    throw error;
+  }
+  var oid = forge.asn1.derToOid(capture.privateKeyOid);
+  var ed25519Oid = forge.oids.EdDSA25519;
+  if(oid !== ed25519Oid) {
+    throw new Error('Invalid OID "' + oid + '"; OID must be "' +
+      ed25519Oid + '".');
+  }
+  var privateKey = capture.privateKey;
+  // manually extract the private key bytes from nested octet string, see FIXME:
+  // https://github.com/digitalbazaar/forge/blob/master/lib/asn1.js#L542
+  var privateKeyBytes = messageToNativeBuffer({
+    message: forge.asn1.fromDer(privateKey).value,
+    encoding: 'binary'
+  });
+  // TODO: RFC8410 specifies a format for encoding the public key bytes along
+  // with the private key bytes. `publicKeyBytes` can be returned in the
+  // future. https://tools.ietf.org/html/rfc8410#section-10.3
+  return {privateKeyBytes: privateKeyBytes};
+};
+
+/**
+ * Converts a public key from a RFC8410 ASN.1 encoding.
+ *
+ * @param obj - The asn1 representation of a public key.
+ *
+ * @return {Buffer|Uint8Array} - 32 public key bytes.
+ */
+ed25519.publicKeyFromAsn1 = function(obj) {
+  // get SubjectPublicKeyInfo
+  var capture = {};
+  var errors = [];
+  var valid = forge.asn1.validate(obj, publicKeyValidator, capture, errors);
+  if(!valid) {
+    var error = new Error('Invalid Key.');
+    error.errors = errors;
+    throw error;
+  }
+  var oid = forge.asn1.derToOid(capture.publicKeyOid);
+  var ed25519Oid = forge.oids.EdDSA25519;
+  if(oid !== ed25519Oid) {
+    throw new Error('Invalid OID "' + oid + '"; OID must be "' +
+      ed25519Oid + '".');
+  }
+  var publicKeyBytes = capture.ed25519PublicKey;
+  if(publicKeyBytes.length !== ed25519.constants.PUBLIC_KEY_BYTE_LENGTH) {
+    throw new Error('Key length is invalid.');
+  }
+  return messageToNativeBuffer({
+    message: publicKeyBytes,
+    encoding: 'binary'
+  });
+};
+
+ed25519.publicKeyFromPrivateKey = function(options) {
+  options = options || {};
+  var privateKey = messageToNativeBuffer({
+    message: options.privateKey, encoding: 'binary'
+  });
+  if(privateKey.length !== ed25519.constants.PRIVATE_KEY_BYTE_LENGTH) {
+    throw new TypeError(
+      '"options.privateKey" must have a byte length of ' +
+      ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
+  }
+
+  var pk = new NativeBuffer(ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
+  for(var i = 0; i < pk.length; ++i) {
+    pk[i] = privateKey[32 + i];
+  }
+  return pk;
+};
+
+ed25519.sign = function(options) {
+  options = options || {};
+  var msg = messageToNativeBuffer(options);
+  var privateKey = messageToNativeBuffer({
+    message: options.privateKey,
+    encoding: 'binary'
+  });
+  if(privateKey.length === ed25519.constants.SEED_BYTE_LENGTH) {
+    var keyPair = ed25519.generateKeyPair({seed: privateKey});
+    privateKey = keyPair.privateKey;
+  } else if(privateKey.length !== ed25519.constants.PRIVATE_KEY_BYTE_LENGTH) {
+    throw new TypeError(
+      '"options.privateKey" must have a byte length of ' +
+      ed25519.constants.SEED_BYTE_LENGTH + ' or ' +
+      ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
+  }
+
+  var signedMsg = new NativeBuffer(
+    ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
+  crypto_sign(signedMsg, msg, msg.length, privateKey);
+
+  var sig = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH);
+  for(var i = 0; i < sig.length; ++i) {
+    sig[i] = signedMsg[i];
+  }
+  return sig;
+};
+
+ed25519.verify = function(options) {
+  options = options || {};
+  var msg = messageToNativeBuffer(options);
+  if(options.signature === undefined) {
+    throw new TypeError(
+      '"options.signature" must be a node.js Buffer, a Uint8Array, a forge ' +
+      'ByteBuffer, or a binary string.');
+  }
+  var sig = messageToNativeBuffer({
+    message: options.signature,
+    encoding: 'binary'
+  });
+  if(sig.length !== ed25519.constants.SIGN_BYTE_LENGTH) {
+    throw new TypeError(
+      '"options.signature" must have a byte length of ' +
+      ed25519.constants.SIGN_BYTE_LENGTH);
+  }
+  var publicKey = messageToNativeBuffer({
+    message: options.publicKey,
+    encoding: 'binary'
+  });
+  if(publicKey.length !== ed25519.constants.PUBLIC_KEY_BYTE_LENGTH) {
+    throw new TypeError(
+      '"options.publicKey" must have a byte length of ' +
+      ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
+  }
+
+  var sm = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
+  var m = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
+  var i;
+  for(i = 0; i < ed25519.constants.SIGN_BYTE_LENGTH; ++i) {
+    sm[i] = sig[i];
+  }
+  for(i = 0; i < msg.length; ++i) {
+    sm[i + ed25519.constants.SIGN_BYTE_LENGTH] = msg[i];
+  }
+  return (crypto_sign_open(m, sm, sm.length, publicKey) >= 0);
+};
+
+function messageToNativeBuffer(options) {
+  var message = options.message;
+  if(message instanceof Uint8Array || message instanceof NativeBuffer) {
+    return message;
+  }
+
+  var encoding = options.encoding;
+  if(message === undefined) {
+    if(options.md) {
+      // TODO: more rigorous validation that `md` is a MessageDigest
+      message = options.md.digest().getBytes();
+      encoding = 'binary';
+    } else {
+      throw new TypeError('"options.message" or "options.md" not specified.');
+    }
+  }
+
+  if(typeof message === 'string' && !encoding) {
+    throw new TypeError('"options.encoding" must be "binary" or "utf8".');
+  }
+
+  if(typeof message === 'string') {
+    if(typeof Buffer !== 'undefined') {
+      return Buffer.from(message, encoding);
+    }
+    message = new ByteBuffer(message, encoding);
+  } else if(!(message instanceof ByteBuffer)) {
+    throw new TypeError(
+      '"options.message" must be a node.js Buffer, a Uint8Array, a forge ' +
+      'ByteBuffer, or a string with "options.encoding" specifying its ' +
+      'encoding.');
+  }
+
+  // convert to native buffer
+  var buffer = new NativeBuffer(message.length());
+  for(var i = 0; i < buffer.length; ++i) {
+    buffer[i] = message.at(i);
+  }
+  return buffer;
+}
+
+var gf0 = gf();
+var gf1 = gf([1]);
+var D = gf([
+  0x78a3, 0x1359, 0x4dca, 0x75eb, 0xd8ab, 0x4141, 0x0a4d, 0x0070,
+  0xe898, 0x7779, 0x4079, 0x8cc7, 0xfe73, 0x2b6f, 0x6cee, 0x5203]);
+var D2 = gf([
+  0xf159, 0x26b2, 0x9b94, 0xebd6, 0xb156, 0x8283, 0x149a, 0x00e0,
+  0xd130, 0xeef3, 0x80f2, 0x198e, 0xfce7, 0x56df, 0xd9dc, 0x2406]);
+var X = gf([
+  0xd51a, 0x8f25, 0x2d60, 0xc956, 0xa7b2, 0x9525, 0xc760, 0x692c,
+  0xdc5c, 0xfdd6, 0xe231, 0xc0a4, 0x53fe, 0xcd6e, 0x36d3, 0x2169]);
+var Y = gf([
+  0x6658, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666,
+  0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666]);
+var L = new Float64Array([
+  0xed, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58,
+  0xd6, 0x9c, 0xf7, 0xa2, 0xde, 0xf9, 0xde, 0x14,
+  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x10]);
+var I = gf([
+  0xa0b0, 0x4a0e, 0x1b27, 0xc4ee, 0xe478, 0xad2f, 0x1806, 0x2f43,
+  0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83]);
+
+// TODO: update forge buffer implementation to use `Buffer` or `Uint8Array`,
+// whichever is available, to improve performance
+function sha512(msg, msgLen) {
+  // Note: `out` and `msg` are NativeBuffer
+  var md = forge.md.sha512.create();
+  var buffer = new ByteBuffer(msg);
+  md.update(buffer.getBytes(msgLen), 'binary');
+  var hash = md.digest().getBytes();
+  if(typeof Buffer !== 'undefined') {
+    return Buffer.from(hash, 'binary');
+  }
+  var out = new NativeBuffer(ed25519.constants.HASH_BYTE_LENGTH);
+  for(var i = 0; i < 64; ++i) {
+    out[i] = hash.charCodeAt(i);
+  }
+  return out;
+}
+
+function crypto_sign_keypair(pk, sk) {
+  var p = [gf(), gf(), gf(), gf()];
+  var i;
+
+  var d = sha512(sk, 32);
+  d[0] &= 248;
+  d[31] &= 127;
+  d[31] |= 64;
+
+  scalarbase(p, d);
+  pack(pk, p);
+
+  for(i = 0; i < 32; ++i) {
+    sk[i + 32] = pk[i];
+  }
+  return 0;
+}
+
+// Note: difference from C - smlen returned, not passed as argument.
+function crypto_sign(sm, m, n, sk) {
+  var i, j, x = new Float64Array(64);
+  var p = [gf(), gf(), gf(), gf()];
+
+  var d = sha512(sk, 32);
+  d[0] &= 248;
+  d[31] &= 127;
+  d[31] |= 64;
+
+  var smlen = n + 64;
+  for(i = 0; i < n; ++i) {
+    sm[64 + i] = m[i];
+  }
+  for(i = 0; i < 32; ++i) {
+    sm[32 + i] = d[32 + i];
+  }
+
+  var r = sha512(sm.subarray(32), n + 32);
+  reduce(r);
+  scalarbase(p, r);
+  pack(sm, p);
+
+  for(i = 32; i < 64; ++i) {
+    sm[i] = sk[i];
+  }
+  var h = sha512(sm, n + 64);
+  reduce(h);
+
+  for(i = 32; i < 64; ++i) {
+    x[i] = 0;
+  }
+  for(i = 0; i < 32; ++i) {
+    x[i] = r[i];
+  }
+  for(i = 0; i < 32; ++i) {
+    for(j = 0; j < 32; j++) {
+      x[i + j] += h[i] * d[j];
+    }
+  }
+
+  modL(sm.subarray(32), x);
+  return smlen;
+}
+
+function crypto_sign_open(m, sm, n, pk) {
+  var i, mlen;
+  var t = new NativeBuffer(32);
+  var p = [gf(), gf(), gf(), gf()],
+      q = [gf(), gf(), gf(), gf()];
+
+  mlen = -1;
+  if(n < 64) {
+    return -1;
+  }
+
+  if(unpackneg(q, pk)) {
+    return -1;
+  }
+
+  for(i = 0; i < n; ++i) {
+    m[i] = sm[i];
+  }
+  for(i = 0; i < 32; ++i) {
+    m[i + 32] = pk[i];
+  }
+  var h = sha512(m, n);
+  reduce(h);
+  scalarmult(p, q, h);
+
+  scalarbase(q, sm.subarray(32));
+  add(p, q);
+  pack(t, p);
+
+  n -= 64;
+  if(crypto_verify_32(sm, 0, t, 0)) {
+    for(i = 0; i < n; ++i) {
+      m[i] = 0;
+    }
+    return -1;
+  }
+
+  for(i = 0; i < n; ++i) {
+    m[i] = sm[i + 64];
+  }
+  mlen = n;
+  return mlen;
+}
+
+function modL(r, x) {
+  var carry, i, j, k;
+  for(i = 63; i >= 32; --i) {
+    carry = 0;
+    for(j = i - 32, k = i - 12; j < k; ++j) {
+      x[j] += carry - 16 * x[i] * L[j - (i - 32)];
+      carry = (x[j] + 128) >> 8;
+      x[j] -= carry * 256;
+    }
+    x[j] += carry;
+    x[i] = 0;
+  }
+  carry = 0;
+  for(j = 0; j < 32; ++j) {
+    x[j] += carry - (x[31] >> 4) * L[j];
+    carry = x[j] >> 8;
+    x[j] &= 255;
+  }
+  for(j = 0; j < 32; ++j) {
+    x[j] -= carry * L[j];
+  }
+  for(i = 0; i < 32; ++i) {
+    x[i + 1] += x[i] >> 8;
+    r[i] = x[i] & 255;
+  }
+}
+
+function reduce(r) {
+  var x = new Float64Array(64);
+  for(var i = 0; i < 64; ++i) {
+    x[i] = r[i];
+    r[i] = 0;
+  }
+  modL(r, x);
+}
+
+function add(p, q) {
+  var a = gf(), b = gf(), c = gf(),
+      d = gf(), e = gf(), f = gf(),
+      g = gf(), h = gf(), t = gf();
+
+  Z(a, p[1], p[0]);
+  Z(t, q[1], q[0]);
+  M(a, a, t);
+  A(b, p[0], p[1]);
+  A(t, q[0], q[1]);
+  M(b, b, t);
+  M(c, p[3], q[3]);
+  M(c, c, D2);
+  M(d, p[2], q[2]);
+  A(d, d, d);
+  Z(e, b, a);
+  Z(f, d, c);
+  A(g, d, c);
+  A(h, b, a);
+
+  M(p[0], e, f);
+  M(p[1], h, g);
+  M(p[2], g, f);
+  M(p[3], e, h);
+}
+
+function cswap(p, q, b) {
+  for(var i = 0; i < 4; ++i) {
+    sel25519(p[i], q[i], b);
+  }
+}
+
+function pack(r, p) {
+  var tx = gf(), ty = gf(), zi = gf();
+  inv25519(zi, p[2]);
+  M(tx, p[0], zi);
+  M(ty, p[1], zi);
+  pack25519(r, ty);
+  r[31] ^= par25519(tx) << 7;
+}
+
+function pack25519(o, n) {
+  var i, j, b;
+  var m = gf(), t = gf();
+  for(i = 0; i < 16; ++i) {
+    t[i] = n[i];
+  }
+  car25519(t);
+  car25519(t);
+  car25519(t);
+  for(j = 0; j < 2; ++j) {
+    m[0] = t[0] - 0xffed;
+    for(i = 1; i < 15; ++i) {
+      m[i] = t[i] - 0xffff - ((m[i - 1] >> 16) & 1);
+      m[i-1] &= 0xffff;
+    }
+    m[15] = t[15] - 0x7fff - ((m[14] >> 16) & 1);
+    b = (m[15] >> 16) & 1;
+    m[14] &= 0xffff;
+    sel25519(t, m, 1 - b);
+  }
+  for (i = 0; i < 16; i++) {
+    o[2 * i] = t[i] & 0xff;
+    o[2 * i + 1] = t[i] >> 8;
+  }
+}
+
+function unpackneg(r, p) {
+  var t = gf(), chk = gf(), num = gf(),
+      den = gf(), den2 = gf(), den4 = gf(),
+      den6 = gf();
+
+  set25519(r[2], gf1);
+  unpack25519(r[1], p);
+  S(num, r[1]);
+  M(den, num, D);
+  Z(num, num, r[2]);
+  A(den, r[2], den);
+
+  S(den2, den);
+  S(den4, den2);
+  M(den6, den4, den2);
+  M(t, den6, num);
+  M(t, t, den);
+
+  pow2523(t, t);
+  M(t, t, num);
+  M(t, t, den);
+  M(t, t, den);
+  M(r[0], t, den);
+
+  S(chk, r[0]);
+  M(chk, chk, den);
+  if(neq25519(chk, num)) {
+    M(r[0], r[0], I);
+  }
+
+  S(chk, r[0]);
+  M(chk, chk, den);
+  if(neq25519(chk, num)) {
+    return -1;
+  }
+
+  if(par25519(r[0]) === (p[31] >> 7)) {
+    Z(r[0], gf0, r[0]);
+  }
+
+  M(r[3], r[0], r[1]);
+  return 0;
+}
+
+function unpack25519(o, n) {
+  var i;
+  for(i = 0; i < 16; ++i) {
+    o[i] = n[2 * i] + (n[2 * i + 1] << 8);
+  }
+  o[15] &= 0x7fff;
+}
+
+function pow2523(o, i) {
+  var c = gf();
+  var a;
+  for(a = 0; a < 16; ++a) {
+    c[a] = i[a];
+  }
+  for(a = 250; a >= 0; --a) {
+    S(c, c);
+    if(a !== 1) {
+      M(c, c, i);
+    }
+  }
+  for(a = 0; a < 16; ++a) {
+    o[a] = c[a];
+  }
+}
+
+function neq25519(a, b) {
+  var c = new NativeBuffer(32);
+  var d = new NativeBuffer(32);
+  pack25519(c, a);
+  pack25519(d, b);
+  return crypto_verify_32(c, 0, d, 0);
+}
+
+function crypto_verify_32(x, xi, y, yi) {
+  return vn(x, xi, y, yi, 32);
+}
+
+function vn(x, xi, y, yi, n) {
+  var i, d = 0;
+  for(i = 0; i < n; ++i) {
+    d |= x[xi + i] ^ y[yi + i];
+  }
+  return (1 & ((d - 1) >>> 8)) - 1;
+}
+
+function par25519(a) {
+  var d = new NativeBuffer(32);
+  pack25519(d, a);
+  return d[0] & 1;
+}
+
+function scalarmult(p, q, s) {
+  var b, i;
+  set25519(p[0], gf0);
+  set25519(p[1], gf1);
+  set25519(p[2], gf1);
+  set25519(p[3], gf0);
+  for(i = 255; i >= 0; --i) {
+    b = (s[(i / 8)|0] >> (i & 7)) & 1;
+    cswap(p, q, b);
+    add(q, p);
+    add(p, p);
+    cswap(p, q, b);
+  }
+}
+
+function scalarbase(p, s) {
+  var q = [gf(), gf(), gf(), gf()];
+  set25519(q[0], X);
+  set25519(q[1], Y);
+  set25519(q[2], gf1);
+  M(q[3], X, Y);
+  scalarmult(p, q, s);
+}
+
+function set25519(r, a) {
+  var i;
+  for(i = 0; i < 16; i++) {
+    r[i] = a[i] | 0;
+  }
+}
+
+function inv25519(o, i) {
+  var c = gf();
+  var a;
+  for(a = 0; a < 16; ++a) {
+    c[a] = i[a];
+  }
+  for(a = 253; a >= 0; --a) {
+    S(c, c);
+    if(a !== 2 && a !== 4) {
+      M(c, c, i);
+    }
+  }
+  for(a = 0; a < 16; ++a) {
+    o[a] = c[a];
+  }
+}
+
+function car25519(o) {
+  var i, v, c = 1;
+  for(i = 0; i < 16; ++i) {
+    v = o[i] + c + 65535;
+    c = Math.floor(v / 65536);
+    o[i] = v - c * 65536;
+  }
+  o[0] += c - 1 + 37 * (c - 1);
+}
+
+function sel25519(p, q, b) {
+  var t, c = ~(b - 1);
+  for(var i = 0; i < 16; ++i) {
+    t = c & (p[i] ^ q[i]);
+    p[i] ^= t;
+    q[i] ^= t;
+  }
+}
+
+function gf(init) {
+  var i, r = new Float64Array(16);
+  if(init) {
+    for(i = 0; i < init.length; ++i) {
+      r[i] = init[i];
+    }
+  }
+  return r;
+}
+
+function A(o, a, b) {
+  for(var i = 0; i < 16; ++i) {
+    o[i] = a[i] + b[i];
+  }
+}
+
+function Z(o, a, b) {
+  for(var i = 0; i < 16; ++i) {
+    o[i] = a[i] - b[i];
+  }
+}
+
+function S(o, a) {
+  M(o, a, a);
+}
+
+function M(o, a, b) {
+  var v, c,
+     t0 = 0,  t1 = 0,  t2 = 0,  t3 = 0,  t4 = 0,  t5 = 0,  t6 = 0,  t7 = 0,
+     t8 = 0,  t9 = 0, t10 = 0, t11 = 0, t12 = 0, t13 = 0, t14 = 0, t15 = 0,
+    t16 = 0, t17 = 0, t18 = 0, t19 = 0, t20 = 0, t21 = 0, t22 = 0, t23 = 0,
+    t24 = 0, t25 = 0, t26 = 0, t27 = 0, t28 = 0, t29 = 0, t30 = 0,
+    b0 = b[0],
+    b1 = b[1],
+    b2 = b[2],
+    b3 = b[3],
+    b4 = b[4],
+    b5 = b[5],
+    b6 = b[6],
+    b7 = b[7],
+    b8 = b[8],
+    b9 = b[9],
+    b10 = b[10],
+    b11 = b[11],
+    b12 = b[12],
+    b13 = b[13],
+    b14 = b[14],
+    b15 = b[15];
+
+  v = a[0];
+  t0 += v * b0;
+  t1 += v * b1;
+  t2 += v * b2;
+  t3 += v * b3;
+  t4 += v * b4;
+  t5 += v * b5;
+  t6 += v * b6;
+  t7 += v * b7;
+  t8 += v * b8;
+  t9 += v * b9;
+  t10 += v * b10;
+  t11 += v * b11;
+  t12 += v * b12;
+  t13 += v * b13;
+  t14 += v * b14;
+  t15 += v * b15;
+  v = a[1];
+  t1 += v * b0;
+  t2 += v * b1;
+  t3 += v * b2;
+  t4 += v * b3;
+  t5 += v * b4;
+  t6 += v * b5;
+  t7 += v * b6;
+  t8 += v * b7;
+  t9 += v * b8;
+  t10 += v * b9;
+  t11 += v * b10;
+  t12 += v * b11;
+  t13 += v * b12;
+  t14 += v * b13;
+  t15 += v * b14;
+  t16 += v * b15;
+  v = a[2];
+  t2 += v * b0;
+  t3 += v * b1;
+  t4 += v * b2;
+  t5 += v * b3;
+  t6 += v * b4;
+  t7 += v * b5;
+  t8 += v * b6;
+  t9 += v * b7;
+  t10 += v * b8;
+  t11 += v * b9;
+  t12 += v * b10;
+  t13 += v * b11;
+  t14 += v * b12;
+  t15 += v * b13;
+  t16 += v * b14;
+  t17 += v * b15;
+  v = a[3];
+  t3 += v * b0;
+  t4 += v * b1;
+  t5 += v * b2;
+  t6 += v * b3;
+  t7 += v * b4;
+  t8 += v * b5;
+  t9 += v * b6;
+  t10 += v * b7;
+  t11 += v * b8;
+  t12 += v * b9;
+  t13 += v * b10;
+  t14 += v * b11;
+  t15 += v * b12;
+  t16 += v * b13;
+  t17 += v * b14;
+  t18 += v * b15;
+  v = a[4];
+  t4 += v * b0;
+  t5 += v * b1;
+  t6 += v * b2;
+  t7 += v * b3;
+  t8 += v * b4;
+  t9 += v * b5;
+  t10 += v * b6;
+  t11 += v * b7;
+  t12 += v * b8;
+  t13 += v * b9;
+  t14 += v * b10;
+  t15 += v * b11;
+  t16 += v * b12;
+  t17 += v * b13;
+  t18 += v * b14;
+  t19 += v * b15;
+  v = a[5];
+  t5 += v * b0;
+  t6 += v * b1;
+  t7 += v * b2;
+  t8 += v * b3;
+  t9 += v * b4;
+  t10 += v * b5;
+  t11 += v * b6;
+  t12 += v * b7;
+  t13 += v * b8;
+  t14 += v * b9;
+  t15 += v * b10;
+  t16 += v * b11;
+  t17 += v * b12;
+  t18 += v * b13;
+  t19 += v * b14;
+  t20 += v * b15;
+  v = a[6];
+  t6 += v * b0;
+  t7 += v * b1;
+  t8 += v * b2;
+  t9 += v * b3;
+  t10 += v * b4;
+  t11 += v * b5;
+  t12 += v * b6;
+  t13 += v * b7;
+  t14 += v * b8;
+  t15 += v * b9;
+  t16 += v * b10;
+  t17 += v * b11;
+  t18 += v * b12;
+  t19 += v * b13;
+  t20 += v * b14;
+  t21 += v * b15;
+  v = a[7];
+  t7 += v * b0;
+  t8 += v * b1;
+  t9 += v * b2;
+  t10 += v * b3;
+  t11 += v * b4;
+  t12 += v * b5;
+  t13 += v * b6;
+  t14 += v * b7;
+  t15 += v * b8;
+  t16 += v * b9;
+  t17 += v * b10;
+  t18 += v * b11;
+  t19 += v * b12;
+  t20 += v * b13;
+  t21 += v * b14;
+  t22 += v * b15;
+  v = a[8];
+  t8 += v * b0;
+  t9 += v * b1;
+  t10 += v * b2;
+  t11 += v * b3;
+  t12 += v * b4;
+  t13 += v * b5;
+  t14 += v * b6;
+  t15 += v * b7;
+  t16 += v * b8;
+  t17 += v * b9;
+  t18 += v * b10;
+  t19 += v * b11;
+  t20 += v * b12;
+  t21 += v * b13;
+  t22 += v * b14;
+  t23 += v * b15;
+  v = a[9];
+  t9 += v * b0;
+  t10 += v * b1;
+  t11 += v * b2;
+  t12 += v * b3;
+  t13 += v * b4;
+  t14 += v * b5;
+  t15 += v * b6;
+  t16 += v * b7;
+  t17 += v * b8;
+  t18 += v * b9;
+  t19 += v * b10;
+  t20 += v * b11;
+  t21 += v * b12;
+  t22 += v * b13;
+  t23 += v * b14;
+  t24 += v * b15;
+  v = a[10];
+  t10 += v * b0;
+  t11 += v * b1;
+  t12 += v * b2;
+  t13 += v * b3;
+  t14 += v * b4;
+  t15 += v * b5;
+  t16 += v * b6;
+  t17 += v * b7;
+  t18 += v * b8;
+  t19 += v * b9;
+  t20 += v * b10;
+  t21 += v * b11;
+  t22 += v * b12;
+  t23 += v * b13;
+  t24 += v * b14;
+  t25 += v * b15;
+  v = a[11];
+  t11 += v * b0;
+  t12 += v * b1;
+  t13 += v * b2;
+  t14 += v * b3;
+  t15 += v * b4;
+  t16 += v * b5;
+  t17 += v * b6;
+  t18 += v * b7;
+  t19 += v * b8;
+  t20 += v * b9;
+  t21 += v * b10;
+  t22 += v * b11;
+  t23 += v * b12;
+  t24 += v * b13;
+  t25 += v * b14;
+  t26 += v * b15;
+  v = a[12];
+  t12 += v * b0;
+  t13 += v * b1;
+  t14 += v * b2;
+  t15 += v * b3;
+  t16 += v * b4;
+  t17 += v * b5;
+  t18 += v * b6;
+  t19 += v * b7;
+  t20 += v * b8;
+  t21 += v * b9;
+  t22 += v * b10;
+  t23 += v * b11;
+  t24 += v * b12;
+  t25 += v * b13;
+  t26 += v * b14;
+  t27 += v * b15;
+  v = a[13];
+  t13 += v * b0;
+  t14 += v * b1;
+  t15 += v * b2;
+  t16 += v * b3;
+  t17 += v * b4;
+  t18 += v * b5;
+  t19 += v * b6;
+  t20 += v * b7;
+  t21 += v * b8;
+  t22 += v * b9;
+  t23 += v * b10;
+  t24 += v * b11;
+  t25 += v * b12;
+  t26 += v * b13;
+  t27 += v * b14;
+  t28 += v * b15;
+  v = a[14];
+  t14 += v * b0;
+  t15 += v * b1;
+  t16 += v * b2;
+  t17 += v * b3;
+  t18 += v * b4;
+  t19 += v * b5;
+  t20 += v * b6;
+  t21 += v * b7;
+  t22 += v * b8;
+  t23 += v * b9;
+  t24 += v * b10;
+  t25 += v * b11;
+  t26 += v * b12;
+  t27 += v * b13;
+  t28 += v * b14;
+  t29 += v * b15;
+  v = a[15];
+  t15 += v * b0;
+  t16 += v * b1;
+  t17 += v * b2;
+  t18 += v * b3;
+  t19 += v * b4;
+  t20 += v * b5;
+  t21 += v * b6;
+  t22 += v * b7;
+  t23 += v * b8;
+  t24 += v * b9;
+  t25 += v * b10;
+  t26 += v * b11;
+  t27 += v * b12;
+  t28 += v * b13;
+  t29 += v * b14;
+  t30 += v * b15;
+
+  t0  += 38 * t16;
+  t1  += 38 * t17;
+  t2  += 38 * t18;
+  t3  += 38 * t19;
+  t4  += 38 * t20;
+  t5  += 38 * t21;
+  t6  += 38 * t22;
+  t7  += 38 * t23;
+  t8  += 38 * t24;
+  t9  += 38 * t25;
+  t10 += 38 * t26;
+  t11 += 38 * t27;
+  t12 += 38 * t28;
+  t13 += 38 * t29;
+  t14 += 38 * t30;
+  // t15 left as is
+
+  // first car
+  c = 1;
+  v =  t0 + c + 65535; c = Math.floor(v / 65536);  t0 = v - c * 65536;
+  v =  t1 + c + 65535; c = Math.floor(v / 65536);  t1 = v - c * 65536;
+  v =  t2 + c + 65535; c = Math.floor(v / 65536);  t2 = v - c * 65536;
+  v =  t3 + c + 65535; c = Math.floor(v / 65536);  t3 = v - c * 65536;
+  v =  t4 + c + 65535; c = Math.floor(v / 65536);  t4 = v - c * 65536;
+  v =  t5 + c + 65535; c = Math.floor(v / 65536);  t5 = v - c * 65536;
+  v =  t6 + c + 65535; c = Math.floor(v / 65536);  t6 = v - c * 65536;
+  v =  t7 + c + 65535; c = Math.floor(v / 65536);  t7 = v - c * 65536;
+  v =  t8 + c + 65535; c = Math.floor(v / 65536);  t8 = v - c * 65536;
+  v =  t9 + c + 65535; c = Math.floor(v / 65536);  t9 = v - c * 65536;
+  v = t10 + c + 65535; c = Math.floor(v / 65536); t10 = v - c * 65536;
+  v = t11 + c + 65535; c = Math.floor(v / 65536); t11 = v - c * 65536;
+  v = t12 + c + 65535; c = Math.floor(v / 65536); t12 = v - c * 65536;
+  v = t13 + c + 65535; c = Math.floor(v / 65536); t13 = v - c * 65536;
+  v = t14 + c + 65535; c = Math.floor(v / 65536); t14 = v - c * 65536;
+  v = t15 + c + 65535; c = Math.floor(v / 65536); t15 = v - c * 65536;
+  t0 += c-1 + 37 * (c-1);
+
+  // second car
+  c = 1;
+  v =  t0 + c + 65535; c = Math.floor(v / 65536);  t0 = v - c * 65536;
+  v =  t1 + c + 65535; c = Math.floor(v / 65536);  t1 = v - c * 65536;
+  v =  t2 + c + 65535; c = Math.floor(v / 65536);  t2 = v - c * 65536;
+  v =  t3 + c + 65535; c = Math.floor(v / 65536);  t3 = v - c * 65536;
+  v =  t4 + c + 65535; c = Math.floor(v / 65536);  t4 = v - c * 65536;
+  v =  t5 + c + 65535; c = Math.floor(v / 65536);  t5 = v - c * 65536;
+  v =  t6 + c + 65535; c = Math.floor(v / 65536);  t6 = v - c * 65536;
+  v =  t7 + c + 65535; c = Math.floor(v / 65536);  t7 = v - c * 65536;
+  v =  t8 + c + 65535; c = Math.floor(v / 65536);  t8 = v - c * 65536;
+  v =  t9 + c + 65535; c = Math.floor(v / 65536);  t9 = v - c * 65536;
+  v = t10 + c + 65535; c = Math.floor(v / 65536); t10 = v - c * 65536;
+  v = t11 + c + 65535; c = Math.floor(v / 65536); t11 = v - c * 65536;
+  v = t12 + c + 65535; c = Math.floor(v / 65536); t12 = v - c * 65536;
+  v = t13 + c + 65535; c = Math.floor(v / 65536); t13 = v - c * 65536;
+  v = t14 + c + 65535; c = Math.floor(v / 65536); t14 = v - c * 65536;
+  v = t15 + c + 65535; c = Math.floor(v / 65536); t15 = v - c * 65536;
+  t0 += c-1 + 37 * (c-1);
+
+  o[ 0] = t0;
+  o[ 1] = t1;
+  o[ 2] = t2;
+  o[ 3] = t3;
+  o[ 4] = t4;
+  o[ 5] = t5;
+  o[ 6] = t6;
+  o[ 7] = t7;
+  o[ 8] = t8;
+  o[ 9] = t9;
+  o[10] = t10;
+  o[11] = t11;
+  o[12] = t12;
+  o[13] = t13;
+  o[14] = t14;
+  o[15] = t15;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6).Buffer))
+
+/***/ }),
+/* 108 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2019 Digital Bazaar, Inc.
+ */
+
+var forge = __webpack_require__(0);
+__webpack_require__(11);
+var asn1 = forge.asn1;
+
+exports.privateKeyValidator = {
+  // PrivateKeyInfo
+  name: 'PrivateKeyInfo',
+  tagClass: asn1.Class.UNIVERSAL,
+  type: asn1.Type.SEQUENCE,
+  constructed: true,
+  value: [{
+    // Version (INTEGER)
+    name: 'PrivateKeyInfo.version',
+    tagClass: asn1.Class.UNIVERSAL,
+    type: asn1.Type.INTEGER,
+    constructed: false,
+    capture: 'privateKeyVersion'
+  }, {
+    // privateKeyAlgorithm
+    name: 'PrivateKeyInfo.privateKeyAlgorithm',
+    tagClass: asn1.Class.UNIVERSAL,
+    type: asn1.Type.SEQUENCE,
+    constructed: true,
+    value: [{
+      name: 'AlgorithmIdentifier.algorithm',
+      tagClass: asn1.Class.UNIVERSAL,
+      type: asn1.Type.OID,
+      constructed: false,
+      capture: 'privateKeyOid'
+    }]
+  }, {
+    // PrivateKey
+    name: 'PrivateKeyInfo',
+    tagClass: asn1.Class.UNIVERSAL,
+    type: asn1.Type.OCTETSTRING,
+    constructed: false,
+    capture: 'privateKey'
+  }]
+};
+
+exports.publicKeyValidator = {
+  name: 'SubjectPublicKeyInfo',
+  tagClass: asn1.Class.UNIVERSAL,
+  type: asn1.Type.SEQUENCE,
+  constructed: true,
+  captureAsn1: 'subjectPublicKeyInfo',
+  value: [{
+    name: 'SubjectPublicKeyInfo.AlgorithmIdentifier',
+    tagClass: asn1.Class.UNIVERSAL,
+    type: asn1.Type.SEQUENCE,
+    constructed: true,
+    value: [{
+      name: 'AlgorithmIdentifier.algorithm',
+      tagClass: asn1.Class.UNIVERSAL,
+      type: asn1.Type.OID,
+      constructed: false,
+      capture: 'publicKeyOid'
+    }]
+  },
+  // capture group for ed25519PublicKey
+  {
+    tagClass: asn1.Class.UNIVERSAL,
+    type: asn1.Type.BITSTRING,
+    constructed: false,
+    composed: true,
+    captureBitStringValue: 'ed25519PublicKey'
+  }
+  // FIXME: this is capture group for rsaPublicKey, use it in this API or
+  // discard?
+  /* {
+    // subjectPublicKey
+    name: 'SubjectPublicKeyInfo.subjectPublicKey',
+    tagClass: asn1.Class.UNIVERSAL,
+    type: asn1.Type.BITSTRING,
+    constructed: false,
+    value: [{
+      // RSAPublicKey
+      name: 'SubjectPublicKeyInfo.subjectPublicKey.RSAPublicKey',
+      tagClass: asn1.Class.UNIVERSAL,
+      type: asn1.Type.SEQUENCE,
+      constructed: true,
+      optional: true,
+      captureAsn1: 'rsaPublicKey'
+    }]
+  } */
+  ]
+};
+
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Javascript implementation of RSA-KEM.
+ *
+ * @author Lautaro Cozzani Rodriguez
+ * @author Dave Longley
+ *
+ * Copyright (c) 2014 Lautaro Cozzani <lautaro.cozzani@scytl.com>
+ * Copyright (c) 2014 Digital Bazaar, Inc.
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(1);
+__webpack_require__(10);
+__webpack_require__(29);
+
+module.exports = forge.kem = forge.kem || {};
+
+var BigInteger = forge.jsbn.BigInteger;
+
+/**
+ * The API for the RSA Key Encapsulation Mechanism (RSA-KEM) from ISO 18033-2.
+ */
+forge.kem.rsa = {};
+
+/**
+ * Creates an RSA KEM API object for generating a secret asymmetric key.
+ *
+ * The symmetric key may be generated via a call to 'encrypt', which will
+ * produce a ciphertext to be transmitted to the recipient and a key to be
+ * kept secret. The ciphertext is a parameter to be passed to 'decrypt' which
+ * will produce the same secret key for the recipient to use to decrypt a
+ * message that was encrypted with the secret key.
+ *
+ * @param kdf the KDF API to use (eg: new forge.kem.kdf1()).
+ * @param options the options to use.
+ *          [prng] a custom crypto-secure pseudo-random number generator to use,
+ *            that must define "getBytesSync".
+ */
+forge.kem.rsa.create = function(kdf, options) {
+  options = options || {};
+  var prng = options.prng || forge.random;
+
+  var kem = {};
+
+  /**
+   * Generates a secret key and its encapsulation.
+   *
+   * @param publicKey the RSA public key to encrypt with.
+   * @param keyLength the length, in bytes, of the secret key to generate.
+   *
+   * @return an object with:
+   *   encapsulation: the ciphertext for generating the secret key, as a
+   *     binary-encoded string of bytes.
+   *   key: the secret key to use for encrypting a message.
+   */
+  kem.encrypt = function(publicKey, keyLength) {
+    // generate a random r where 1 < r < n
+    var byteLength = Math.ceil(publicKey.n.bitLength() / 8);
+    var r;
+    do {
+      r = new BigInteger(
+        forge.util.bytesToHex(prng.getBytesSync(byteLength)),
+        16).mod(publicKey.n);
+    } while(r.compareTo(BigInteger.ONE) <= 0);
+
+    // prepend r with zeros
+    r = forge.util.hexToBytes(r.toString(16));
+    var zeros = byteLength - r.length;
+    if(zeros > 0) {
+      r = forge.util.fillString(String.fromCharCode(0), zeros) + r;
+    }
+
+    // encrypt the random
+    var encapsulation = publicKey.encrypt(r, 'NONE');
+
+    // generate the secret key
+    var key = kdf.generate(r, keyLength);
+
+    return {encapsulation: encapsulation, key: key};
+  };
+
+  /**
+   * Decrypts an encapsulated secret key.
+   *
+   * @param privateKey the RSA private key to decrypt with.
+   * @param encapsulation the ciphertext for generating the secret key, as
+   *          a binary-encoded string of bytes.
+   * @param keyLength the length, in bytes, of the secret key to generate.
+   *
+   * @return the secret key as a binary-encoded string of bytes.
+   */
+  kem.decrypt = function(privateKey, encapsulation, keyLength) {
+    // decrypt the encapsulation and generate the secret key
+    var r = privateKey.decrypt(encapsulation, 'NONE');
+    return kdf.generate(r, keyLength);
+  };
+
+  return kem;
+};
+
+// TODO: add forge.kem.kdf.create('KDF1', {md: ..., ...}) API?
+
+/**
+ * Creates a key derivation API object that implements KDF1 per ISO 18033-2.
+ *
+ * @param md the hash API to use.
+ * @param [digestLength] an optional digest length that must be positive and
+ *          less than or equal to md.digestLength.
+ *
+ * @return a KDF1 API object.
+ */
+forge.kem.kdf1 = function(md, digestLength) {
+  _createKDF(this, md, 0, digestLength || md.digestLength);
+};
+
+/**
+ * Creates a key derivation API object that implements KDF2 per ISO 18033-2.
+ *
+ * @param md the hash API to use.
+ * @param [digestLength] an optional digest length that must be positive and
+ *          less than or equal to md.digestLength.
+ *
+ * @return a KDF2 API object.
+ */
+forge.kem.kdf2 = function(md, digestLength) {
+  _createKDF(this, md, 1, digestLength || md.digestLength);
+};
+
+/**
+ * Creates a KDF1 or KDF2 API object.
+ *
+ * @param md the hash API to use.
+ * @param counterStart the starting index for the counter.
+ * @param digestLength the digest length to use.
+ *
+ * @return the KDF API object.
+ */
+function _createKDF(kdf, md, counterStart, digestLength) {
+  /**
+   * Generate a key of the specified length.
+   *
+   * @param x the binary-encoded byte string to generate a key from.
+   * @param length the number of bytes to generate (the size of the key).
+   *
+   * @return the key as a binary-encoded string.
+   */
+  kdf.generate = function(x, length) {
+    var key = new forge.util.ByteBuffer();
+
+    // run counter from counterStart to ceil(length / Hash.len)
+    var k = Math.ceil(length / digestLength) + counterStart;
+
+    var c = new forge.util.ByteBuffer();
+    for(var i = counterStart; i < k; ++i) {
+      // I2OSP(i, 4): convert counter to an octet string of 4 octets
+      c.putInt32(i);
+
+      // digest 'x' and the counter and add the result to the key
+      md.start();
+      md.update(x + c.getBytes());
+      var hash = md.digest();
+      key.putBytes(hash.getBytes(digestLength));
+    }
+
+    // truncate to the correct key length
+    key.truncate(key.length() - length);
+    return key.getBytes();
+  };
+}
+
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Node.js module for all known Forge message digests.
+ *
+ * @author Dave Longley
+ *
+ * Copyright 2011-2017 Digital Bazaar, Inc.
+ */
+module.exports = __webpack_require__(15);
+
+__webpack_require__(33);
+__webpack_require__(24);
+__webpack_require__(64);
+__webpack_require__(73);
+
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Javascript implementation of PKCS#7 v1.5.
+ *
+ * @author Stefan Siegl
+ * @author Dave Longley
+ *
+ * Copyright (c) 2012 Stefan Siegl <stesie@brokenpipe.de>
+ * Copyright (c) 2012-2015 Digital Bazaar, Inc.
+ *
+ * Currently this implementation only supports ContentType of EnvelopedData,
+ * EncryptedData, or SignedData at the root level. The top level elements may
+ * contain only a ContentInfo of ContentType Data, i.e. plain data. Further
+ * nesting is not (yet) supported.
+ *
+ * The Forge validators for PKCS #7's ASN.1 structures are available from
+ * a separate file pkcs7asn1.js, since those are referenced from other
+ * PKCS standards like PKCS #12.
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(16);
+__webpack_require__(11);
+__webpack_require__(27);
+__webpack_require__(17);
+__webpack_require__(20);
+__webpack_require__(70);
+__webpack_require__(10);
+__webpack_require__(1);
+__webpack_require__(36);
+
+// shortcut for ASN.1 API
+var asn1 = forge.asn1;
+
+// shortcut for PKCS#7 API
+var p7 = module.exports = forge.pkcs7 = forge.pkcs7 || {};
+
+/**
+ * Converts a PKCS#7 message from PEM format.
+ *
+ * @param pem the PEM-formatted PKCS#7 message.
+ *
+ * @return the PKCS#7 message.
+ */
+p7.messageFromPem = function(pem) {
+  var msg = forge.pem.decode(pem)[0];
+
+  if(msg.type !== 'PKCS7') {
+    var error = new Error('Could not convert PKCS#7 message from PEM; PEM ' +
+      'header type is not "PKCS#7".');
+    error.headerType = msg.type;
+    throw error;
+  }
+  if(msg.procType && msg.procType.type === 'ENCRYPTED') {
+    throw new Error('Could not convert PKCS#7 message from PEM; PEM is encrypted.');
+  }
+
+  // convert DER to ASN.1 object
+  var obj = asn1.fromDer(msg.body);
+
+  return p7.messageFromAsn1(obj);
+};
+
+/**
+ * Converts a PKCS#7 message to PEM format.
+ *
+ * @param msg The PKCS#7 message object
+ * @param maxline The maximum characters per line, defaults to 64.
+ *
+ * @return The PEM-formatted PKCS#7 message.
+ */
+p7.messageToPem = function(msg, maxline) {
+  // convert to ASN.1, then DER, then PEM-encode
+  var pemObj = {
+    type: 'PKCS7',
+    body: asn1.toDer(msg.toAsn1()).getBytes()
+  };
+  return forge.pem.encode(pemObj, {maxline: maxline});
+};
+
+/**
+ * Converts a PKCS#7 message from an ASN.1 object.
+ *
+ * @param obj the ASN.1 representation of a ContentInfo.
+ *
+ * @return the PKCS#7 message.
+ */
+p7.messageFromAsn1 = function(obj) {
+  // validate root level ContentInfo and capture data
+  var capture = {};
+  var errors = [];
+  if(!asn1.validate(obj, p7.asn1.contentInfoValidator, capture, errors)) {
+    var error = new Error('Cannot read PKCS#7 message. ' +
+      'ASN.1 object is not an PKCS#7 ContentInfo.');
+    error.errors = errors;
+    throw error;
+  }
+
+  var contentType = asn1.derToOid(capture.contentType);
+  var msg;
+
+  switch(contentType) {
+    case forge.pki.oids.envelopedData:
+      msg = p7.createEnvelopedData();
+      break;
+
+    case forge.pki.oids.encryptedData:
+      msg = p7.createEncryptedData();
+      break;
+
+    case forge.pki.oids.signedData:
+      msg = p7.createSignedData();
+      break;
+
+    default:
+      throw new Error('Cannot read PKCS#7 message. ContentType with OID ' +
+        contentType + ' is not (yet) supported.');
+  }
+
+  msg.fromAsn1(capture.content.value[0]);
+  return msg;
+};
+
+p7.createSignedData = function() {
+  var msg = null;
+  msg = {
+    type: forge.pki.oids.signedData,
+    version: 1,
+    certificates: [],
+    crls: [],
+    // TODO: add json-formatted signer stuff here?
+    signers: [],
+    // populated during sign()
+    digestAlgorithmIdentifiers: [],
+    contentInfo: null,
+    signerInfos: [],
+
+    fromAsn1: function(obj) {
+      // validate SignedData content block and capture data.
+      _fromAsn1(msg, obj, p7.asn1.signedDataValidator);
+      msg.certificates = [];
+      msg.crls = [];
+      msg.digestAlgorithmIdentifiers = [];
+      msg.contentInfo = null;
+      msg.signerInfos = [];
+
+      if(msg.rawCapture.certificates) {
+        var certs = msg.rawCapture.certificates.value;
+        for(var i = 0; i < certs.length; ++i) {
+          msg.certificates.push(forge.pki.certificateFromAsn1(certs[i]));
+        }
+      }
+
+      // TODO: parse crls
+    },
+
+    toAsn1: function() {
+      // degenerate case with no content
+      if(!msg.contentInfo) {
+        msg.sign();
+      }
+
+      var certs = [];
+      for(var i = 0; i < msg.certificates.length; ++i) {
+        certs.push(forge.pki.certificateToAsn1(msg.certificates[i]));
+      }
+
+      var crls = [];
+      // TODO: implement CRLs
+
+      // [0] SignedData
+      var signedData = asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
+        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+          // Version
+          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
+            asn1.integerToDer(msg.version).getBytes()),
+          // DigestAlgorithmIdentifiers
+          asn1.create(
+            asn1.Class.UNIVERSAL, asn1.Type.SET, true,
+            msg.digestAlgorithmIdentifiers),
+          // ContentInfo
+          msg.contentInfo
+        ])
+      ]);
+      if(certs.length > 0) {
+        // [0] IMPLICIT ExtendedCertificatesAndCertificates OPTIONAL
+        signedData.value[0].value.push(
+          asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, certs));
+      }
+      if(crls.length > 0) {
+        // [1] IMPLICIT CertificateRevocationLists OPTIONAL
+        signedData.value[0].value.push(
+          asn1.create(asn1.Class.CONTEXT_SPECIFIC, 1, true, crls));
+      }
+      // SignerInfos
+      signedData.value[0].value.push(
+        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SET, true,
+          msg.signerInfos));
+
+      // ContentInfo
+      return asn1.create(
+        asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+          // ContentType
+          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+            asn1.oidToDer(msg.type).getBytes()),
+          // [0] SignedData
+          signedData
+        ]);
+    },
+
+    /**
+     * Add (another) entity to list of signers.
+     *
+     * Note: If authenticatedAttributes are provided, then, per RFC 2315,
+     * they must include at least two attributes: content type and
+     * message digest. The message digest attribute value will be
+     * auto-calculated during signing and will be ignored if provided.
+     *
+     * Here's an example of providing these two attributes:
+     *
+     * forge.pkcs7.createSignedData();
+     * p7.addSigner({
+     *   issuer: cert.issuer.attributes,
+     *   serialNumber: cert.serialNumber,
+     *   key: privateKey,
+     *   digestAlgorithm: forge.pki.oids.sha1,
+     *   authenticatedAttributes: [{
+     *     type: forge.pki.oids.contentType,
+     *     value: forge.pki.oids.data
+     *   }, {
+     *     type: forge.pki.oids.messageDigest
+     *   }]
+     * });
+     *
+     * TODO: Support [subjectKeyIdentifier] as signer's ID.
+     *
+     * @param signer the signer information:
+     *          key the signer's private key.
+     *          [certificate] a certificate containing the public key
+     *            associated with the signer's private key; use this option as
+     *            an alternative to specifying signer.issuer and
+     *            signer.serialNumber.
+     *          [issuer] the issuer attributes (eg: cert.issuer.attributes).
+     *          [serialNumber] the signer's certificate's serial number in
+     *           hexadecimal (eg: cert.serialNumber).
+     *          [digestAlgorithm] the message digest OID, as a string, to use
+     *            (eg: forge.pki.oids.sha1).
+     *          [authenticatedAttributes] an optional array of attributes
+     *            to also sign along with the content.
+     */
+    addSigner: function(signer) {
+      var issuer = signer.issuer;
+      var serialNumber = signer.serialNumber;
+      if(signer.certificate) {
+        var cert = signer.certificate;
+        if(typeof cert === 'string') {
+          cert = forge.pki.certificateFromPem(cert);
+        }
+        issuer = cert.issuer.attributes;
+        serialNumber = cert.serialNumber;
+      }
+      var key = signer.key;
+      if(!key) {
+        throw new Error(
+          'Could not add PKCS#7 signer; no private key specified.');
+      }
+      if(typeof key === 'string') {
+        key = forge.pki.privateKeyFromPem(key);
+      }
+
+      // ensure OID known for digest algorithm
+      var digestAlgorithm = signer.digestAlgorithm || forge.pki.oids.sha1;
+      switch(digestAlgorithm) {
+      case forge.pki.oids.sha1:
+      case forge.pki.oids.sha256:
+      case forge.pki.oids.sha384:
+      case forge.pki.oids.sha512:
+      case forge.pki.oids.md5:
+        break;
+      default:
+        throw new Error(
+          'Could not add PKCS#7 signer; unknown message digest algorithm: ' +
+          digestAlgorithm);
+      }
+
+      // if authenticatedAttributes is present, then the attributes
+      // must contain at least PKCS #9 content-type and message-digest
+      var authenticatedAttributes = signer.authenticatedAttributes || [];
+      if(authenticatedAttributes.length > 0) {
+        var contentType = false;
+        var messageDigest = false;
+        for(var i = 0; i < authenticatedAttributes.length; ++i) {
+          var attr = authenticatedAttributes[i];
+          if(!contentType && attr.type === forge.pki.oids.contentType) {
+            contentType = true;
+            if(messageDigest) {
+              break;
+            }
+            continue;
+          }
+          if(!messageDigest && attr.type === forge.pki.oids.messageDigest) {
+            messageDigest = true;
+            if(contentType) {
+              break;
+            }
+            continue;
+          }
+        }
+
+        if(!contentType || !messageDigest) {
+          throw new Error('Invalid signer.authenticatedAttributes. If ' +
+            'signer.authenticatedAttributes is specified, then it must ' +
+            'contain at least two attributes, PKCS #9 content-type and ' +
+            'PKCS #9 message-digest.');
+        }
+      }
+
+      msg.signers.push({
+        key: key,
+        version: 1,
+        issuer: issuer,
+        serialNumber: serialNumber,
+        digestAlgorithm: digestAlgorithm,
+        signatureAlgorithm: forge.pki.oids.rsaEncryption,
+        signature: null,
+        authenticatedAttributes: authenticatedAttributes,
+        unauthenticatedAttributes: []
+      });
+    },
+
+    /**
+     * Signs the content.
+     * @param options Options to apply when signing:
+     *    [detached] boolean. If signing should be done in detached mode. Defaults to false.
+     */
+    sign: function(options) {
+      options = options || {};
+      // auto-generate content info
+      if(typeof msg.content !== 'object' || msg.contentInfo === null) {
+        // use Data ContentInfo
+        msg.contentInfo = asn1.create(
+          asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+            // ContentType
+            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+              asn1.oidToDer(forge.pki.oids.data).getBytes())
+          ]);
+
+        // add actual content, if present
+        if('content' in msg) {
+          var content;
+          if(msg.content instanceof forge.util.ByteBuffer) {
+            content = msg.content.bytes();
+          } else if(typeof msg.content === 'string') {
+            content = forge.util.encodeUtf8(msg.content);
+          }
+
+          if (options.detached) {
+            msg.detachedContent = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false, content);
+          } else {
+            msg.contentInfo.value.push(
+              // [0] EXPLICIT content
+              asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
+                asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
+                  content)
+              ]));
+          }
+        }
+      }
+
+      // no signers, return early (degenerate case for certificate container)
+      if(msg.signers.length === 0) {
+        return;
+      }
+
+      // generate digest algorithm identifiers
+      var mds = addDigestAlgorithmIds();
+
+      // generate signerInfos
+      addSignerInfos(mds);
+    },
+
+    verify: function() {
+      throw new Error('PKCS#7 signature verification not yet implemented.');
+    },
+
+    /**
+     * Add a certificate.
+     *
+     * @param cert the certificate to add.
+     */
+    addCertificate: function(cert) {
+      // convert from PEM
+      if(typeof cert === 'string') {
+        cert = forge.pki.certificateFromPem(cert);
+      }
+      msg.certificates.push(cert);
+    },
+
+    /**
+     * Add a certificate revokation list.
+     *
+     * @param crl the certificate revokation list to add.
+     */
+    addCertificateRevokationList: function(crl) {
+      throw new Error('PKCS#7 CRL support not yet implemented.');
+    }
+  };
+  return msg;
+
+  function addDigestAlgorithmIds() {
+    var mds = {};
+
+    for(var i = 0; i < msg.signers.length; ++i) {
+      var signer = msg.signers[i];
+      var oid = signer.digestAlgorithm;
+      if(!(oid in mds)) {
+        // content digest
+        mds[oid] = forge.md[forge.pki.oids[oid]].create();
+      }
+      if(signer.authenticatedAttributes.length === 0) {
+        // no custom attributes to digest; use content message digest
+        signer.md = mds[oid];
+      } else {
+        // custom attributes to be digested; use own message digest
+        // TODO: optimize to just copy message digest state if that
+        // feature is ever supported with message digests
+        signer.md = forge.md[forge.pki.oids[oid]].create();
+      }
+    }
+
+    // add unique digest algorithm identifiers
+    msg.digestAlgorithmIdentifiers = [];
+    for(var oid in mds) {
+      msg.digestAlgorithmIdentifiers.push(
+        // AlgorithmIdentifier
+        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+          // algorithm
+          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+            asn1.oidToDer(oid).getBytes()),
+          // parameters (null)
+          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
+        ]));
+    }
+
+    return mds;
+  }
+
+  function addSignerInfos(mds) {
+    var content;
+
+    if (msg.detachedContent) {
+      // Signature has been made in detached mode.
+      content = msg.detachedContent;
+    } else {
+      // Note: ContentInfo is a SEQUENCE with 2 values, second value is
+      // the content field and is optional for a ContentInfo but required here
+      // since signers are present
+      // get ContentInfo content
+      content = msg.contentInfo.value[1];
+      // skip [0] EXPLICIT content wrapper
+      content = content.value[0];
+    }
+
+    if(!content) {
+      throw new Error(
+        'Could not sign PKCS#7 message; there is no content to sign.');
+    }
+
+    // get ContentInfo content type
+    var contentType = asn1.derToOid(msg.contentInfo.value[0].value);
+
+    // serialize content
+    var bytes = asn1.toDer(content);
+
+    // skip identifier and length per RFC 2315 9.3
+    // skip identifier (1 byte)
+    bytes.getByte();
+    // read and discard length bytes
+    asn1.getBerValueLength(bytes);
+    bytes = bytes.getBytes();
+
+    // digest content DER value bytes
+    for(var oid in mds) {
+      mds[oid].start().update(bytes);
+    }
+
+    // sign content
+    var signingTime = new Date();
+    for(var i = 0; i < msg.signers.length; ++i) {
+      var signer = msg.signers[i];
+
+      if(signer.authenticatedAttributes.length === 0) {
+        // if ContentInfo content type is not "Data", then
+        // authenticatedAttributes must be present per RFC 2315
+        if(contentType !== forge.pki.oids.data) {
+          throw new Error(
+            'Invalid signer; authenticatedAttributes must be present ' +
+            'when the ContentInfo content type is not PKCS#7 Data.');
+        }
+      } else {
+        // process authenticated attributes
+        // [0] IMPLICIT
+        signer.authenticatedAttributesAsn1 = asn1.create(
+          asn1.Class.CONTEXT_SPECIFIC, 0, true, []);
+
+        // per RFC 2315, attributes are to be digested using a SET container
+        // not the above [0] IMPLICIT container
+        var attrsAsn1 = asn1.create(
+          asn1.Class.UNIVERSAL, asn1.Type.SET, true, []);
+
+        for(var ai = 0; ai < signer.authenticatedAttributes.length; ++ai) {
+          var attr = signer.authenticatedAttributes[ai];
+          if(attr.type === forge.pki.oids.messageDigest) {
+            // use content message digest as value
+            attr.value = mds[signer.digestAlgorithm].digest();
+          } else if(attr.type === forge.pki.oids.signingTime) {
+            // auto-populate signing time if not already set
+            if(!attr.value) {
+              attr.value = signingTime;
+            }
+          }
+
+          // convert to ASN.1 and push onto Attributes SET (for signing) and
+          // onto authenticatedAttributesAsn1 to complete SignedData ASN.1
+          // TODO: optimize away duplication
+          attrsAsn1.value.push(_attributeToAsn1(attr));
+          signer.authenticatedAttributesAsn1.value.push(_attributeToAsn1(attr));
+        }
+
+        // DER-serialize and digest SET OF attributes only
+        bytes = asn1.toDer(attrsAsn1).getBytes();
+        signer.md.start().update(bytes);
+      }
+
+      // sign digest
+      signer.signature = signer.key.sign(signer.md, 'RSASSA-PKCS1-V1_5');
+    }
+
+    // add signer info
+    msg.signerInfos = _signersToAsn1(msg.signers);
+  }
+};
+
+/**
+ * Creates an empty PKCS#7 message of type EncryptedData.
+ *
+ * @return the message.
+ */
+p7.createEncryptedData = function() {
+  var msg = null;
+  msg = {
+    type: forge.pki.oids.encryptedData,
+    version: 0,
+    encryptedContent: {
+      algorithm: forge.pki.oids['aes256-CBC']
+    },
+
+    /**
+     * Reads an EncryptedData content block (in ASN.1 format)
+     *
+     * @param obj The ASN.1 representation of the EncryptedData content block
+     */
+    fromAsn1: function(obj) {
+      // Validate EncryptedData content block and capture data.
+      _fromAsn1(msg, obj, p7.asn1.encryptedDataValidator);
+    },
+
+    /**
+     * Decrypt encrypted content
+     *
+     * @param key The (symmetric) key as a byte buffer
+     */
+    decrypt: function(key) {
+      if(key !== undefined) {
+        msg.encryptedContent.key = key;
+      }
+      _decryptContent(msg);
+    }
+  };
+  return msg;
+};
+
+/**
+ * Creates an empty PKCS#7 message of type EnvelopedData.
+ *
+ * @return the message.
+ */
+p7.createEnvelopedData = function() {
+  var msg = null;
+  msg = {
+    type: forge.pki.oids.envelopedData,
+    version: 0,
+    recipients: [],
+    encryptedContent: {
+      algorithm: forge.pki.oids['aes256-CBC']
+    },
+
+    /**
+     * Reads an EnvelopedData content block (in ASN.1 format)
+     *
+     * @param obj the ASN.1 representation of the EnvelopedData content block.
+     */
+    fromAsn1: function(obj) {
+      // validate EnvelopedData content block and capture data
+      var capture = _fromAsn1(msg, obj, p7.asn1.envelopedDataValidator);
+      msg.recipients = _recipientsFromAsn1(capture.recipientInfos.value);
+    },
+
+    toAsn1: function() {
+      // ContentInfo
+      return asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+        // ContentType
+        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+          asn1.oidToDer(msg.type).getBytes()),
+        // [0] EnvelopedData
+        asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
+          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+            // Version
+            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
+              asn1.integerToDer(msg.version).getBytes()),
+            // RecipientInfos
+            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SET, true,
+              _recipientsToAsn1(msg.recipients)),
+            // EncryptedContentInfo
+            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true,
+              _encryptedContentToAsn1(msg.encryptedContent))
+          ])
+        ])
+      ]);
+    },
+
+    /**
+     * Find recipient by X.509 certificate's issuer.
+     *
+     * @param cert the certificate with the issuer to look for.
+     *
+     * @return the recipient object.
+     */
+    findRecipient: function(cert) {
+      var sAttr = cert.issuer.attributes;
+
+      for(var i = 0; i < msg.recipients.length; ++i) {
+        var r = msg.recipients[i];
+        var rAttr = r.issuer;
+
+        if(r.serialNumber !== cert.serialNumber) {
+          continue;
+        }
+
+        if(rAttr.length !== sAttr.length) {
+          continue;
+        }
+
+        var match = true;
+        for(var j = 0; j < sAttr.length; ++j) {
+          if(rAttr[j].type !== sAttr[j].type ||
+            rAttr[j].value !== sAttr[j].value) {
+            match = false;
+            break;
+          }
+        }
+
+        if(match) {
+          return r;
+        }
+      }
+
+      return null;
+    },
+
+    /**
+     * Decrypt enveloped content
+     *
+     * @param recipient The recipient object related to the private key
+     * @param privKey The (RSA) private key object
+     */
+    decrypt: function(recipient, privKey) {
+      if(msg.encryptedContent.key === undefined && recipient !== undefined &&
+        privKey !== undefined) {
+        switch(recipient.encryptedContent.algorithm) {
+          case forge.pki.oids.rsaEncryption:
+          case forge.pki.oids.desCBC:
+            var key = privKey.decrypt(recipient.encryptedContent.content);
+            msg.encryptedContent.key = forge.util.createBuffer(key);
+            break;
+
+          default:
+            throw new Error('Unsupported asymmetric cipher, ' +
+              'OID ' + recipient.encryptedContent.algorithm);
+        }
+      }
+
+      _decryptContent(msg);
+    },
+
+    /**
+     * Add (another) entity to list of recipients.
+     *
+     * @param cert The certificate of the entity to add.
+     */
+    addRecipient: function(cert) {
+      msg.recipients.push({
+        version: 0,
+        issuer: cert.issuer.attributes,
+        serialNumber: cert.serialNumber,
+        encryptedContent: {
+          // We simply assume rsaEncryption here, since forge.pki only
+          // supports RSA so far.  If the PKI module supports other
+          // ciphers one day, we need to modify this one as well.
+          algorithm: forge.pki.oids.rsaEncryption,
+          key: cert.publicKey
+        }
+      });
+    },
+
+    /**
+     * Encrypt enveloped content.
+     *
+     * This function supports two optional arguments, cipher and key, which
+     * can be used to influence symmetric encryption.  Unless cipher is
+     * provided, the cipher specified in encryptedContent.algorithm is used
+     * (defaults to AES-256-CBC).  If no key is provided, encryptedContent.key
+     * is (re-)used.  If that one's not set, a random key will be generated
+     * automatically.
+     *
+     * @param [key] The key to be used for symmetric encryption.
+     * @param [cipher] The OID of the symmetric cipher to use.
+     */
+    encrypt: function(key, cipher) {
+      // Part 1: Symmetric encryption
+      if(msg.encryptedContent.content === undefined) {
+        cipher = cipher || msg.encryptedContent.algorithm;
+        key = key || msg.encryptedContent.key;
+
+        var keyLen, ivLen, ciphFn;
+        switch(cipher) {
+          case forge.pki.oids['aes128-CBC']:
+            keyLen = 16;
+            ivLen = 16;
+            ciphFn = forge.aes.createEncryptionCipher;
+            break;
+
+          case forge.pki.oids['aes192-CBC']:
+            keyLen = 24;
+            ivLen = 16;
+            ciphFn = forge.aes.createEncryptionCipher;
+            break;
+
+          case forge.pki.oids['aes256-CBC']:
+            keyLen = 32;
+            ivLen = 16;
+            ciphFn = forge.aes.createEncryptionCipher;
+            break;
+
+          case forge.pki.oids['des-EDE3-CBC']:
+            keyLen = 24;
+            ivLen = 8;
+            ciphFn = forge.des.createEncryptionCipher;
+            break;
+
+          default:
+            throw new Error('Unsupported symmetric cipher, OID ' + cipher);
+        }
+
+        if(key === undefined) {
+          key = forge.util.createBuffer(forge.random.getBytes(keyLen));
+        } else if(key.length() != keyLen) {
+          throw new Error('Symmetric key has wrong length; ' +
+            'got ' + key.length() + ' bytes, expected ' + keyLen + '.');
+        }
+
+        // Keep a copy of the key & IV in the object, so the caller can
+        // use it for whatever reason.
+        msg.encryptedContent.algorithm = cipher;
+        msg.encryptedContent.key = key;
+        msg.encryptedContent.parameter = forge.util.createBuffer(
+          forge.random.getBytes(ivLen));
+
+        var ciph = ciphFn(key);
+        ciph.start(msg.encryptedContent.parameter.copy());
+        ciph.update(msg.content);
+
+        // The finish function does PKCS#7 padding by default, therefore
+        // no action required by us.
+        if(!ciph.finish()) {
+          throw new Error('Symmetric encryption failed.');
+        }
+
+        msg.encryptedContent.content = ciph.output;
+      }
+
+      // Part 2: asymmetric encryption for each recipient
+      for(var i = 0; i < msg.recipients.length; ++i) {
+        var recipient = msg.recipients[i];
+
+        // Nothing to do, encryption already done.
+        if(recipient.encryptedContent.content !== undefined) {
+          continue;
+        }
+
+        switch(recipient.encryptedContent.algorithm) {
+          case forge.pki.oids.rsaEncryption:
+            recipient.encryptedContent.content =
+              recipient.encryptedContent.key.encrypt(
+                msg.encryptedContent.key.data);
+            break;
+
+          default:
+            throw new Error('Unsupported asymmetric cipher, OID ' +
+              recipient.encryptedContent.algorithm);
+        }
+      }
+    }
+  };
+  return msg;
+};
+
+/**
+ * Converts a single recipient from an ASN.1 object.
+ *
+ * @param obj the ASN.1 RecipientInfo.
+ *
+ * @return the recipient object.
+ */
+function _recipientFromAsn1(obj) {
+  // validate EnvelopedData content block and capture data
+  var capture = {};
+  var errors = [];
+  if(!asn1.validate(obj, p7.asn1.recipientInfoValidator, capture, errors)) {
+    var error = new Error('Cannot read PKCS#7 RecipientInfo. ' +
+      'ASN.1 object is not an PKCS#7 RecipientInfo.');
+    error.errors = errors;
+    throw error;
+  }
+
+  return {
+    version: capture.version.charCodeAt(0),
+    issuer: forge.pki.RDNAttributesAsArray(capture.issuer),
+    serialNumber: forge.util.createBuffer(capture.serial).toHex(),
+    encryptedContent: {
+      algorithm: asn1.derToOid(capture.encAlgorithm),
+      parameter: capture.encParameter.value,
+      content: capture.encKey
+    }
+  };
+}
+
+/**
+ * Converts a single recipient object to an ASN.1 object.
+ *
+ * @param obj the recipient object.
+ *
+ * @return the ASN.1 RecipientInfo.
+ */
+function _recipientToAsn1(obj) {
+  return asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+    // Version
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
+      asn1.integerToDer(obj.version).getBytes()),
+    // IssuerAndSerialNumber
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+      // Name
+      forge.pki.distinguishedNameToAsn1({attributes: obj.issuer}),
+      // Serial
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
+        forge.util.hexToBytes(obj.serialNumber))
+    ]),
+    // KeyEncryptionAlgorithmIdentifier
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+      // Algorithm
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+        asn1.oidToDer(obj.encryptedContent.algorithm).getBytes()),
+      // Parameter, force NULL, only RSA supported for now.
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
+    ]),
+    // EncryptedKey
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
+      obj.encryptedContent.content)
+  ]);
+}
+
+/**
+ * Map a set of RecipientInfo ASN.1 objects to recipient objects.
+ *
+ * @param infos an array of ASN.1 representations RecipientInfo (i.e. SET OF).
+ *
+ * @return an array of recipient objects.
+ */
+function _recipientsFromAsn1(infos) {
+  var ret = [];
+  for(var i = 0; i < infos.length; ++i) {
+    ret.push(_recipientFromAsn1(infos[i]));
+  }
+  return ret;
+}
+
+/**
+ * Map an array of recipient objects to ASN.1 RecipientInfo objects.
+ *
+ * @param recipients an array of recipientInfo objects.
+ *
+ * @return an array of ASN.1 RecipientInfos.
+ */
+function _recipientsToAsn1(recipients) {
+  var ret = [];
+  for(var i = 0; i < recipients.length; ++i) {
+    ret.push(_recipientToAsn1(recipients[i]));
+  }
+  return ret;
+}
+
+/**
+ * Converts a single signer from an ASN.1 object.
+ *
+ * @param obj the ASN.1 representation of a SignerInfo.
+ *
+ * @return the signer object.
+ */
+function _signerFromAsn1(obj) {
+  // validate EnvelopedData content block and capture data
+  var capture = {};
+  var errors = [];
+  if(!asn1.validate(obj, p7.asn1.signerInfoValidator, capture, errors)) {
+    var error = new Error('Cannot read PKCS#7 SignerInfo. ' +
+      'ASN.1 object is not an PKCS#7 SignerInfo.');
+    error.errors = errors;
+    throw error;
+  }
+
+  var rval = {
+    version: capture.version.charCodeAt(0),
+    issuer: forge.pki.RDNAttributesAsArray(capture.issuer),
+    serialNumber: forge.util.createBuffer(capture.serial).toHex(),
+    digestAlgorithm: asn1.derToOid(capture.digestAlgorithm),
+    signatureAlgorithm: asn1.derToOid(capture.signatureAlgorithm),
+    signature: capture.signature,
+    authenticatedAttributes: [],
+    unauthenticatedAttributes: []
+  };
+
+  // TODO: convert attributes
+  var authenticatedAttributes = capture.authenticatedAttributes || [];
+  var unauthenticatedAttributes = capture.unauthenticatedAttributes || [];
+
+  return rval;
+}
+
+/**
+ * Converts a single signerInfo object to an ASN.1 object.
+ *
+ * @param obj the signerInfo object.
+ *
+ * @return the ASN.1 representation of a SignerInfo.
+ */
+function _signerToAsn1(obj) {
+  // SignerInfo
+  var rval = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+    // version
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
+      asn1.integerToDer(obj.version).getBytes()),
+    // issuerAndSerialNumber
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+      // name
+      forge.pki.distinguishedNameToAsn1({attributes: obj.issuer}),
+      // serial
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
+        forge.util.hexToBytes(obj.serialNumber))
+    ]),
+    // digestAlgorithm
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+      // algorithm
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+        asn1.oidToDer(obj.digestAlgorithm).getBytes()),
+      // parameters (null)
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
+    ])
+  ]);
+
+  // authenticatedAttributes (OPTIONAL)
+  if(obj.authenticatedAttributesAsn1) {
+    // add ASN.1 previously generated during signing
+    rval.value.push(obj.authenticatedAttributesAsn1);
+  }
+
+  // digestEncryptionAlgorithm
+  rval.value.push(asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+    // algorithm
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+      asn1.oidToDer(obj.signatureAlgorithm).getBytes()),
+    // parameters (null)
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
+  ]));
+
+  // encryptedDigest
+  rval.value.push(asn1.create(
+    asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false, obj.signature));
+
+  // unauthenticatedAttributes (OPTIONAL)
+  if(obj.unauthenticatedAttributes.length > 0) {
+    // [1] IMPLICIT
+    var attrsAsn1 = asn1.create(asn1.Class.CONTEXT_SPECIFIC, 1, true, []);
+    for(var i = 0; i < obj.unauthenticatedAttributes.length; ++i) {
+      var attr = obj.unauthenticatedAttributes[i];
+      attrsAsn1.values.push(_attributeToAsn1(attr));
+    }
+    rval.value.push(attrsAsn1);
+  }
+
+  return rval;
+}
+
+/**
+ * Map a set of SignerInfo ASN.1 objects to an array of signer objects.
+ *
+ * @param signerInfoAsn1s an array of ASN.1 SignerInfos (i.e. SET OF).
+ *
+ * @return an array of signers objects.
+ */
+function _signersFromAsn1(signerInfoAsn1s) {
+  var ret = [];
+  for(var i = 0; i < signerInfoAsn1s.length; ++i) {
+    ret.push(_signerFromAsn1(signerInfoAsn1s[i]));
+  }
+  return ret;
+}
+
+/**
+ * Map an array of signer objects to ASN.1 objects.
+ *
+ * @param signers an array of signer objects.
+ *
+ * @return an array of ASN.1 SignerInfos.
+ */
+function _signersToAsn1(signers) {
+  var ret = [];
+  for(var i = 0; i < signers.length; ++i) {
+    ret.push(_signerToAsn1(signers[i]));
+  }
+  return ret;
+}
+
+/**
+ * Convert an attribute object to an ASN.1 Attribute.
+ *
+ * @param attr the attribute object.
+ *
+ * @return the ASN.1 Attribute.
+ */
+function _attributeToAsn1(attr) {
+  var value;
+
+  // TODO: generalize to support more attributes
+  if(attr.type === forge.pki.oids.contentType) {
+    value = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+      asn1.oidToDer(attr.value).getBytes());
+  } else if(attr.type === forge.pki.oids.messageDigest) {
+    value = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
+      attr.value.bytes());
+  } else if(attr.type === forge.pki.oids.signingTime) {
+    /* Note per RFC 2985: Dates between 1 January 1950 and 31 December 2049
+      (inclusive) MUST be encoded as UTCTime. Any dates with year values
+      before 1950 or after 2049 MUST be encoded as GeneralizedTime. [Further,]
+      UTCTime values MUST be expressed in Greenwich Mean Time (Zulu) and MUST
+      include seconds (i.e., times are YYMMDDHHMMSSZ), even where the
+      number of seconds is zero.  Midnight (GMT) must be represented as
+      "YYMMDD000000Z". */
+    // TODO: make these module-level constants
+    var jan_1_1950 = new Date('1950-01-01T00:00:00Z');
+    var jan_1_2050 = new Date('2050-01-01T00:00:00Z');
+    var date = attr.value;
+    if(typeof date === 'string') {
+      // try to parse date
+      var timestamp = Date.parse(date);
+      if(!isNaN(timestamp)) {
+        date = new Date(timestamp);
+      } else if(date.length === 13) {
+        // YYMMDDHHMMSSZ (13 chars for UTCTime)
+        date = asn1.utcTimeToDate(date);
+      } else {
+        // assume generalized time
+        date = asn1.generalizedTimeToDate(date);
+      }
+    }
+
+    if(date >= jan_1_1950 && date < jan_1_2050) {
+      value = asn1.create(
+        asn1.Class.UNIVERSAL, asn1.Type.UTCTIME, false,
+        asn1.dateToUtcTime(date));
+    } else {
+      value = asn1.create(
+        asn1.Class.UNIVERSAL, asn1.Type.GENERALIZEDTIME, false,
+        asn1.dateToGeneralizedTime(date));
+    }
+  }
+
+  // TODO: expose as common API call
+  // create a RelativeDistinguishedName set
+  // each value in the set is an AttributeTypeAndValue first
+  // containing the type (an OID) and second the value
+  return asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+    // AttributeType
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+      asn1.oidToDer(attr.type).getBytes()),
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SET, true, [
+      // AttributeValue
+      value
+    ])
+  ]);
+}
+
+/**
+ * Map messages encrypted content to ASN.1 objects.
+ *
+ * @param ec The encryptedContent object of the message.
+ *
+ * @return ASN.1 representation of the encryptedContent object (SEQUENCE).
+ */
+function _encryptedContentToAsn1(ec) {
+  return [
+    // ContentType, always Data for the moment
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+      asn1.oidToDer(forge.pki.oids.data).getBytes()),
+    // ContentEncryptionAlgorithmIdentifier
+    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
+      // Algorithm
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
+        asn1.oidToDer(ec.algorithm).getBytes()),
+      // Parameters (IV)
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
+        ec.parameter.getBytes())
+    ]),
+    // [0] EncryptedContent
+    asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
+      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
+        ec.content.getBytes())
+    ])
+  ];
+}
+
+/**
+ * Reads the "common part" of an PKCS#7 content block (in ASN.1 format)
+ *
+ * This function reads the "common part" of the PKCS#7 content blocks
+ * EncryptedData and EnvelopedData, i.e. version number and symmetrically
+ * encrypted content block.
+ *
+ * The result of the ASN.1 validate and capture process is returned
+ * to allow the caller to extract further data, e.g. the list of recipients
+ * in case of a EnvelopedData object.
+ *
+ * @param msg the PKCS#7 object to read the data to.
+ * @param obj the ASN.1 representation of the content block.
+ * @param validator the ASN.1 structure validator object to use.
+ *
+ * @return the value map captured by validator object.
+ */
+function _fromAsn1(msg, obj, validator) {
+  var capture = {};
+  var errors = [];
+  if(!asn1.validate(obj, validator, capture, errors)) {
+    var error = new Error('Cannot read PKCS#7 message. ' +
+      'ASN.1 object is not a supported PKCS#7 message.');
+    error.errors = error;
+    throw error;
+  }
+
+  // Check contentType, so far we only support (raw) Data.
+  var contentType = asn1.derToOid(capture.contentType);
+  if(contentType !== forge.pki.oids.data) {
+    throw new Error('Unsupported PKCS#7 message. ' +
+      'Only wrapped ContentType Data supported.');
+  }
+
+  if(capture.encryptedContent) {
+    var content = '';
+    if(forge.util.isArray(capture.encryptedContent)) {
+      for(var i = 0; i < capture.encryptedContent.length; ++i) {
+        if(capture.encryptedContent[i].type !== asn1.Type.OCTETSTRING) {
+          throw new Error('Malformed PKCS#7 message, expecting encrypted ' +
+            'content constructed of only OCTET STRING objects.');
+        }
+        content += capture.encryptedContent[i].value;
+      }
+    } else {
+      content = capture.encryptedContent;
+    }
+    msg.encryptedContent = {
+      algorithm: asn1.derToOid(capture.encAlgorithm),
+      parameter: forge.util.createBuffer(capture.encParameter.value),
+      content: forge.util.createBuffer(content)
+    };
+  }
+
+  if(capture.content) {
+    var content = '';
+    if(forge.util.isArray(capture.content)) {
+      for(var i = 0; i < capture.content.length; ++i) {
+        if(capture.content[i].type !== asn1.Type.OCTETSTRING) {
+          throw new Error('Malformed PKCS#7 message, expecting ' +
+            'content constructed of only OCTET STRING objects.');
+        }
+        content += capture.content[i].value;
+      }
+    } else {
+      content = capture.content;
+    }
+    msg.content = forge.util.createBuffer(content);
+  }
+
+  msg.version = capture.version.charCodeAt(0);
+  msg.rawCapture = capture;
+
+  return capture;
+}
+
+/**
+ * Decrypt the symmetrically encrypted content block of the PKCS#7 message.
+ *
+ * Decryption is skipped in case the PKCS#7 message object already has a
+ * (decrypted) content attribute.  The algorithm, key and cipher parameters
+ * (probably the iv) are taken from the encryptedContent attribute of the
+ * message object.
+ *
+ * @param The PKCS#7 message object.
+ */
+function _decryptContent(msg) {
+  if(msg.encryptedContent.key === undefined) {
+    throw new Error('Symmetric key not available.');
+  }
+
+  if(msg.content === undefined) {
+    var ciph;
+
+    switch(msg.encryptedContent.algorithm) {
+      case forge.pki.oids['aes128-CBC']:
+      case forge.pki.oids['aes192-CBC']:
+      case forge.pki.oids['aes256-CBC']:
+        ciph = forge.aes.createDecryptionCipher(msg.encryptedContent.key);
+        break;
+
+      case forge.pki.oids['desCBC']:
+      case forge.pki.oids['des-EDE3-CBC']:
+        ciph = forge.des.createDecryptionCipher(msg.encryptedContent.key);
+        break;
+
+      default:
+        throw new Error('Unsupported symmetric cipher, OID ' +
+          msg.encryptedContent.algorithm);
+    }
+    ciph.start(msg.encryptedContent.parameter);
+    ciph.update(msg.encryptedContent.content);
+
+    if(!ciph.finish()) {
+      throw new Error('Symmetric decryption failed.');
+    }
+
+    msg.content = ciph.output;
+  }
+}
+
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Functions to output keys in SSH-friendly formats.
+ *
+ * This is part of the Forge project which may be used under the terms of
+ * either the BSD License or the GNU General Public License (GPL) Version 2.
+ *
+ * See: https://github.com/digitalbazaar/forge/blob/cbebca3780658703d925b61b2caffb1d263a6c1d/LICENSE
+ *
+ * @author https://github.com/shellac
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(16);
+__webpack_require__(23);
+__webpack_require__(33);
+__webpack_require__(24);
+__webpack_require__(1);
+
+var ssh = module.exports = forge.ssh = forge.ssh || {};
+
+/**
+ * Encodes (and optionally encrypts) a private RSA key as a Putty PPK file.
+ *
+ * @param privateKey the key.
+ * @param passphrase a passphrase to protect the key (falsy for no encryption).
+ * @param comment a comment to include in the key file.
+ *
+ * @return the PPK file as a string.
+ */
+ssh.privateKeyToPutty = function(privateKey, passphrase, comment) {
+  comment = comment || '';
+  passphrase = passphrase || '';
+  var algorithm = 'ssh-rsa';
+  var encryptionAlgorithm = (passphrase === '') ? 'none' : 'aes256-cbc';
+
+  var ppk = 'PuTTY-User-Key-File-2: ' + algorithm + '\r\n';
+  ppk += 'Encryption: ' + encryptionAlgorithm + '\r\n';
+  ppk += 'Comment: ' + comment + '\r\n';
+
+  // public key into buffer for ppk
+  var pubbuffer = forge.util.createBuffer();
+  _addStringToBuffer(pubbuffer, algorithm);
+  _addBigIntegerToBuffer(pubbuffer, privateKey.e);
+  _addBigIntegerToBuffer(pubbuffer, privateKey.n);
+
+  // write public key
+  var pub = forge.util.encode64(pubbuffer.bytes(), 64);
+  var length = Math.floor(pub.length / 66) + 1; // 66 = 64 + \r\n
+  ppk += 'Public-Lines: ' + length + '\r\n';
+  ppk += pub;
+
+  // private key into a buffer
+  var privbuffer = forge.util.createBuffer();
+  _addBigIntegerToBuffer(privbuffer, privateKey.d);
+  _addBigIntegerToBuffer(privbuffer, privateKey.p);
+  _addBigIntegerToBuffer(privbuffer, privateKey.q);
+  _addBigIntegerToBuffer(privbuffer, privateKey.qInv);
+
+  // optionally encrypt the private key
+  var priv;
+  if(!passphrase) {
+    // use the unencrypted buffer
+    priv = forge.util.encode64(privbuffer.bytes(), 64);
+  } else {
+    // encrypt RSA key using passphrase
+    var encLen = privbuffer.length() + 16 - 1;
+    encLen -= encLen % 16;
+
+    // pad private key with sha1-d data -- needs to be a multiple of 16
+    var padding = _sha1(privbuffer.bytes());
+
+    padding.truncate(padding.length() - encLen + privbuffer.length());
+    privbuffer.putBuffer(padding);
+
+    var aeskey = forge.util.createBuffer();
+    aeskey.putBuffer(_sha1('\x00\x00\x00\x00', passphrase));
+    aeskey.putBuffer(_sha1('\x00\x00\x00\x01', passphrase));
+
+    // encrypt some bytes using CBC mode
+    // key is 40 bytes, so truncate *by* 8 bytes
+    var cipher = forge.aes.createEncryptionCipher(aeskey.truncate(8), 'CBC');
+    cipher.start(forge.util.createBuffer().fillWithByte(0, 16));
+    cipher.update(privbuffer.copy());
+    cipher.finish();
+    var encrypted = cipher.output;
+
+    // Note: this appears to differ from Putty -- is forge wrong, or putty?
+    // due to padding we finish as an exact multiple of 16
+    encrypted.truncate(16); // all padding
+
+    priv = forge.util.encode64(encrypted.bytes(), 64);
+  }
+
+  // output private key
+  length = Math.floor(priv.length / 66) + 1; // 64 + \r\n
+  ppk += '\r\nPrivate-Lines: ' + length + '\r\n';
+  ppk += priv;
+
+  // MAC
+  var mackey = _sha1('putty-private-key-file-mac-key', passphrase);
+
+  var macbuffer = forge.util.createBuffer();
+  _addStringToBuffer(macbuffer, algorithm);
+  _addStringToBuffer(macbuffer, encryptionAlgorithm);
+  _addStringToBuffer(macbuffer, comment);
+  macbuffer.putInt32(pubbuffer.length());
+  macbuffer.putBuffer(pubbuffer);
+  macbuffer.putInt32(privbuffer.length());
+  macbuffer.putBuffer(privbuffer);
+
+  var hmac = forge.hmac.create();
+  hmac.start('sha1', mackey);
+  hmac.update(macbuffer.bytes());
+
+  ppk += '\r\nPrivate-MAC: ' + hmac.digest().toHex() + '\r\n';
+
+  return ppk;
+};
+
+/**
+ * Encodes a public RSA key as an OpenSSH file.
+ *
+ * @param key the key.
+ * @param comment a comment.
+ *
+ * @return the public key in OpenSSH format.
+ */
+ssh.publicKeyToOpenSSH = function(key, comment) {
+  var type = 'ssh-rsa';
+  comment = comment || '';
+
+  var buffer = forge.util.createBuffer();
+  _addStringToBuffer(buffer, type);
+  _addBigIntegerToBuffer(buffer, key.e);
+  _addBigIntegerToBuffer(buffer, key.n);
+
+  return type + ' ' + forge.util.encode64(buffer.bytes()) + ' ' + comment;
+};
+
+/**
+ * Encodes a private RSA key as an OpenSSH file.
+ *
+ * @param key the key.
+ * @param passphrase a passphrase to protect the key (falsy for no encryption).
+ *
+ * @return the public key in OpenSSH format.
+ */
+ssh.privateKeyToOpenSSH = function(privateKey, passphrase) {
+  if(!passphrase) {
+    return forge.pki.privateKeyToPem(privateKey);
+  }
+  // OpenSSH private key is just a legacy format, it seems
+  return forge.pki.encryptRsaPrivateKey(privateKey, passphrase,
+    {legacy: true, algorithm: 'aes128'});
+};
+
+/**
+ * Gets the SSH fingerprint for the given public key.
+ *
+ * @param options the options to use.
+ *          [md] the message digest object to use (defaults to forge.md.md5).
+ *          [encoding] an alternative output encoding, such as 'hex'
+ *            (defaults to none, outputs a byte buffer).
+ *          [delimiter] the delimiter to use between bytes for 'hex' encoded
+ *            output, eg: ':' (defaults to none).
+ *
+ * @return the fingerprint as a byte buffer or other encoding based on options.
+ */
+ssh.getPublicKeyFingerprint = function(key, options) {
+  options = options || {};
+  var md = options.md || forge.md.md5.create();
+
+  var type = 'ssh-rsa';
+  var buffer = forge.util.createBuffer();
+  _addStringToBuffer(buffer, type);
+  _addBigIntegerToBuffer(buffer, key.e);
+  _addBigIntegerToBuffer(buffer, key.n);
+
+  // hash public key bytes
+  md.start();
+  md.update(buffer.getBytes());
+  var digest = md.digest();
+  if(options.encoding === 'hex') {
+    var hex = digest.toHex();
+    if(options.delimiter) {
+      return hex.match(/.{2}/g).join(options.delimiter);
+    }
+    return hex;
+  } else if(options.encoding === 'binary') {
+    return digest.getBytes();
+  } else if(options.encoding) {
+    throw new Error('Unknown encoding "' + options.encoding + '".');
+  }
+  return digest;
+};
+
+/**
+ * Adds len(val) then val to a buffer.
+ *
+ * @param buffer the buffer to add to.
+ * @param val a big integer.
+ */
+function _addBigIntegerToBuffer(buffer, val) {
+  var hexVal = val.toString(16);
+  // ensure 2s complement +ve
+  if(hexVal[0] >= '8') {
+    hexVal = '00' + hexVal;
+  }
+  var bytes = forge.util.hexToBytes(hexVal);
+  buffer.putInt32(bytes.length);
+  buffer.putBytes(bytes);
+}
+
+/**
+ * Adds len(val) then val to a buffer.
+ *
+ * @param buffer the buffer to add to.
+ * @param val a string.
+ */
+function _addStringToBuffer(buffer, val) {
+  buffer.putInt32(val.length);
+  buffer.putString(val);
+}
+
+/**
+ * Hashes the arguments into one value using SHA-1.
+ *
+ * @return the sha1 hash of the provided arguments.
+ */
+function _sha1() {
+  var sha = forge.md.sha1.create();
+  var num = arguments.length;
+  for (var i = 0; i < num; ++i) {
+    sha.update(arguments[i]);
+  }
+  return sha.digest();
+}
+
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Support for concurrent task management and synchronization in web
+ * applications.
+ *
+ * @author Dave Longley
+ * @author David I. Lehn <dlehn@digitalbazaar.com>
+ *
+ * Copyright (c) 2009-2013 Digital Bazaar, Inc.
+ */
+var forge = __webpack_require__(0);
+__webpack_require__(72);
+__webpack_require__(74);
+__webpack_require__(1);
+
+// logging category
+var cat = 'forge.task';
+
+// verbose level
+// 0: off, 1: a little, 2: a whole lot
+// Verbose debug logging is surrounded by a level check to avoid the
+// performance issues with even calling the logging code regardless if it
+// is actually logged.  For performance reasons this should not be set to 2
+// for production use.
+// ex: if(sVL >= 2) forge.log.verbose(....)
+var sVL = 0;
+
+// track tasks for debugging
+var sTasks = {};
+var sNextTaskId = 0;
+// debug access
+forge.debug.set(cat, 'tasks', sTasks);
+
+// a map of task type to task queue
+var sTaskQueues = {};
+// debug access
+forge.debug.set(cat, 'queues', sTaskQueues);
+
+// name for unnamed tasks
+var sNoTaskName = '?';
+
+// maximum number of doNext() recursions before a context swap occurs
+// FIXME: might need to tweak this based on the browser
+var sMaxRecursions = 30;
+
+// time slice for doing tasks before a context swap occurs
+// FIXME: might need to tweak this based on the browser
+var sTimeSlice = 20;
+
+/**
+ * Task states.
+ *
+ * READY: ready to start processing
+ * RUNNING: task or a subtask is running
+ * BLOCKED: task is waiting to acquire N permits to continue
+ * SLEEPING: task is sleeping for a period of time
+ * DONE: task is done
+ * ERROR: task has an error
+ */
+var READY = 'ready';
+var RUNNING = 'running';
+var BLOCKED = 'blocked';
+var SLEEPING = 'sleeping';
+var DONE = 'done';
+var ERROR = 'error';
+
+/**
+ * Task actions.  Used to control state transitions.
+ *
+ * STOP: stop processing
+ * START: start processing tasks
+ * BLOCK: block task from continuing until 1 or more permits are released
+ * UNBLOCK: release one or more permits
+ * SLEEP: sleep for a period of time
+ * WAKEUP: wakeup early from SLEEPING state
+ * CANCEL: cancel further tasks
+ * FAIL: a failure occured
+ */
+var STOP = 'stop';
+var START = 'start';
+var BLOCK = 'block';
+var UNBLOCK = 'unblock';
+var SLEEP = 'sleep';
+var WAKEUP = 'wakeup';
+var CANCEL = 'cancel';
+var FAIL = 'fail';
+
+/**
+ * State transition table.
+ *
+ * nextState = sStateTable[currentState][action]
+ */
+var sStateTable = {};
+
+sStateTable[READY] = {};
+sStateTable[READY][STOP] = READY;
+sStateTable[READY][START] = RUNNING;
+sStateTable[READY][CANCEL] = DONE;
+sStateTable[READY][FAIL] = ERROR;
+
+sStateTable[RUNNING] = {};
+sStateTable[RUNNING][STOP] = READY;
+sStateTable[RUNNING][START] = RUNNING;
+sStateTable[RUNNING][BLOCK] = BLOCKED;
+sStateTable[RUNNING][UNBLOCK] = RUNNING;
+sStateTable[RUNNING][SLEEP] = SLEEPING;
+sStateTable[RUNNING][WAKEUP] = RUNNING;
+sStateTable[RUNNING][CANCEL] = DONE;
+sStateTable[RUNNING][FAIL] = ERROR;
+
+sStateTable[BLOCKED] = {};
+sStateTable[BLOCKED][STOP] = BLOCKED;
+sStateTable[BLOCKED][START] = BLOCKED;
+sStateTable[BLOCKED][BLOCK] = BLOCKED;
+sStateTable[BLOCKED][UNBLOCK] = BLOCKED;
+sStateTable[BLOCKED][SLEEP] = BLOCKED;
+sStateTable[BLOCKED][WAKEUP] = BLOCKED;
+sStateTable[BLOCKED][CANCEL] = DONE;
+sStateTable[BLOCKED][FAIL] = ERROR;
+
+sStateTable[SLEEPING] = {};
+sStateTable[SLEEPING][STOP] = SLEEPING;
+sStateTable[SLEEPING][START] = SLEEPING;
+sStateTable[SLEEPING][BLOCK] = SLEEPING;
+sStateTable[SLEEPING][UNBLOCK] = SLEEPING;
+sStateTable[SLEEPING][SLEEP] = SLEEPING;
+sStateTable[SLEEPING][WAKEUP] = SLEEPING;
+sStateTable[SLEEPING][CANCEL] = DONE;
+sStateTable[SLEEPING][FAIL] = ERROR;
+
+sStateTable[DONE] = {};
+sStateTable[DONE][STOP] = DONE;
+sStateTable[DONE][START] = DONE;
+sStateTable[DONE][BLOCK] = DONE;
+sStateTable[DONE][UNBLOCK] = DONE;
+sStateTable[DONE][SLEEP] = DONE;
+sStateTable[DONE][WAKEUP] = DONE;
+sStateTable[DONE][CANCEL] = DONE;
+sStateTable[DONE][FAIL] = ERROR;
+
+sStateTable[ERROR] = {};
+sStateTable[ERROR][STOP] = ERROR;
+sStateTable[ERROR][START] = ERROR;
+sStateTable[ERROR][BLOCK] = ERROR;
+sStateTable[ERROR][UNBLOCK] = ERROR;
+sStateTable[ERROR][SLEEP] = ERROR;
+sStateTable[ERROR][WAKEUP] = ERROR;
+sStateTable[ERROR][CANCEL] = ERROR;
+sStateTable[ERROR][FAIL] = ERROR;
+
+/**
+ * Creates a new task.
+ *
+ * @param options options for this task
+ *   run: the run function for the task (required)
+ *   name: the run function for the task (optional)
+ *   parent: parent of this task (optional)
+ *
+ * @return the empty task.
+ */
+var Task = function(options) {
+  // task id
+  this.id = -1;
+
+  // task name
+  this.name = options.name || sNoTaskName;
+
+  // task has no parent
+  this.parent = options.parent || null;
+
+  // save run function
+  this.run = options.run;
+
+  // create a queue of subtasks to run
+  this.subtasks = [];
+
+  // error flag
+  this.error = false;
+
+  // state of the task
+  this.state = READY;
+
+  // number of times the task has been blocked (also the number
+  // of permits needed to be released to continue running)
+  this.blocks = 0;
+
+  // timeout id when sleeping
+  this.timeoutId = null;
+
+  // no swap time yet
+  this.swapTime = null;
+
+  // no user data
+  this.userData = null;
+
+  // initialize task
+  // FIXME: deal with overflow
+  this.id = sNextTaskId++;
+  sTasks[this.id] = this;
+  if(sVL >= 1) {
+    forge.log.verbose(cat, '[%s][%s] init', this.id, this.name, this);
+  }
+};
+
+/**
+ * Logs debug information on this task and the system state.
+ */
+Task.prototype.debug = function(msg) {
+  msg = msg || '';
+  forge.log.debug(cat, msg,
+    '[%s][%s] task:', this.id, this.name, this,
+    'subtasks:', this.subtasks.length,
+    'queue:', sTaskQueues);
+};
+
+/**
+ * Adds a subtask to run after task.doNext() or task.fail() is called.
+ *
+ * @param name human readable name for this task (optional).
+ * @param subrun a function to run that takes the current task as
+ *          its first parameter.
+ *
+ * @return the current task (useful for chaining next() calls).
+ */
+Task.prototype.next = function(name, subrun) {
+  // juggle parameters if it looks like no name is given
+  if(typeof(name) === 'function') {
+    subrun = name;
+
+    // inherit parent's name
+    name = this.name;
+  }
+  // create subtask, set parent to this task, propagate callbacks
+  var subtask = new Task({
+    run: subrun,
+    name: name,
+    parent: this
+  });
+  // start subtasks running
+  subtask.state = RUNNING;
+  subtask.type = this.type;
+  subtask.successCallback = this.successCallback || null;
+  subtask.failureCallback = this.failureCallback || null;
+
+  // queue a new subtask
+  this.subtasks.push(subtask);
+
+  return this;
+};
+
+/**
+ * Adds subtasks to run in parallel after task.doNext() or task.fail()
+ * is called.
+ *
+ * @param name human readable name for this task (optional).
+ * @param subrun functions to run that take the current task as
+ *          their first parameter.
+ *
+ * @return the current task (useful for chaining next() calls).
+ */
+Task.prototype.parallel = function(name, subrun) {
+  // juggle parameters if it looks like no name is given
+  if(forge.util.isArray(name)) {
+    subrun = name;
+
+    // inherit parent's name
+    name = this.name;
+  }
+  // Wrap parallel tasks in a regular task so they are started at the
+  // proper time.
+  return this.next(name, function(task) {
+    // block waiting for subtasks
+    var ptask = task;
+    ptask.block(subrun.length);
+
+    // we pass the iterator from the loop below as a parameter
+    // to a function because it is otherwise included in the
+    // closure and changes as the loop changes -- causing i
+    // to always be set to its highest value
+    var startParallelTask = function(pname, pi) {
+      forge.task.start({
+        type: pname,
+        run: function(task) {
+           subrun[pi](task);
+        },
+        success: function(task) {
+           ptask.unblock();
+        },
+        failure: function(task) {
+           ptask.unblock();
+        }
+      });
+    };
+
+    for(var i = 0; i < subrun.length; i++) {
+      // Type must be unique so task starts in parallel:
+      //    name + private string + task id + sub-task index
+      // start tasks in parallel and unblock when the finish
+      var pname = name + '__parallel-' + task.id + '-' + i;
+      var pi = i;
+      startParallelTask(pname, pi);
+    }
+  });
+};
+
+/**
+ * Stops a running task.
+ */
+Task.prototype.stop = function() {
+  this.state = sStateTable[this.state][STOP];
+};
+
+/**
+ * Starts running a task.
+ */
+Task.prototype.start = function() {
+  this.error = false;
+  this.state = sStateTable[this.state][START];
+
+  // try to restart
+  if(this.state === RUNNING) {
+    this.start = new Date();
+    this.run(this);
+    runNext(this, 0);
+  }
+};
+
+/**
+ * Blocks a task until it one or more permits have been released. The
+ * task will not resume until the requested number of permits have
+ * been released with call(s) to unblock().
+ *
+ * @param n number of permits to wait for(default: 1).
+ */
+Task.prototype.block = function(n) {
+  n = typeof(n) === 'undefined' ? 1 : n;
+  this.blocks += n;
+  if(this.blocks > 0) {
+    this.state = sStateTable[this.state][BLOCK];
+  }
+};
+
+/**
+ * Releases a permit to unblock a task. If a task was blocked by
+ * requesting N permits via block(), then it will only continue
+ * running once enough permits have been released via unblock() calls.
+ *
+ * If multiple processes need to synchronize with a single task then
+ * use a condition variable (see forge.task.createCondition). It is
+ * an error to unblock a task more times than it has been blocked.
+ *
+ * @param n number of permits to release (default: 1).
+ *
+ * @return the current block count (task is unblocked when count is 0)
+ */
+Task.prototype.unblock = function(n) {
+  n = typeof(n) === 'undefined' ? 1 : n;
+  this.blocks -= n;
+  if(this.blocks === 0 && this.state !== DONE) {
+    this.state = RUNNING;
+    runNext(this, 0);
+  }
+  return this.blocks;
+};
+
+/**
+ * Sleep for a period of time before resuming tasks.
+ *
+ * @param n number of milliseconds to sleep (default: 0).
+ */
+Task.prototype.sleep = function(n) {
+  n = typeof(n) === 'undefined' ? 0 : n;
+  this.state = sStateTable[this.state][SLEEP];
+  var self = this;
+  this.timeoutId = setTimeout(function() {
+    self.timeoutId = null;
+    self.state = RUNNING;
+    runNext(self, 0);
+  }, n);
+};
+
+/**
+ * Waits on a condition variable until notified. The next task will
+ * not be scheduled until notification. A condition variable can be
+ * created with forge.task.createCondition().
+ *
+ * Once cond.notify() is called, the task will continue.
+ *
+ * @param cond the condition variable to wait on.
+ */
+Task.prototype.wait = function(cond) {
+  cond.wait(this);
+};
+
+/**
+ * If sleeping, wakeup and continue running tasks.
+ */
+Task.prototype.wakeup = function() {
+  if(this.state === SLEEPING) {
+    cancelTimeout(this.timeoutId);
+    this.timeoutId = null;
+    this.state = RUNNING;
+    runNext(this, 0);
+  }
+};
+
+/**
+ * Cancel all remaining subtasks of this task.
+ */
+Task.prototype.cancel = function() {
+  this.state = sStateTable[this.state][CANCEL];
+  // remove permits needed
+  this.permitsNeeded = 0;
+  // cancel timeouts
+  if(this.timeoutId !== null) {
+    cancelTimeout(this.timeoutId);
+    this.timeoutId = null;
+  }
+  // remove subtasks
+  this.subtasks = [];
+};
+
+/**
+ * Finishes this task with failure and sets error flag. The entire
+ * task will be aborted unless the next task that should execute
+ * is passed as a parameter. This allows levels of subtasks to be
+ * skipped. For instance, to abort only this tasks's subtasks, then
+ * call fail(task.parent). To abort this task's subtasks and its
+ * parent's subtasks, call fail(task.parent.parent). To abort
+ * all tasks and simply call the task callback, call fail() or
+ * fail(null).
+ *
+ * The task callback (success or failure) will always, eventually, be
+ * called.
+ *
+ * @param next the task to continue at, or null to abort entirely.
+ */
+Task.prototype.fail = function(next) {
+  // set error flag
+  this.error = true;
+
+  // finish task
+  finish(this, true);
+
+  if(next) {
+    // propagate task info
+    next.error = this.error;
+    next.swapTime = this.swapTime;
+    next.userData = this.userData;
+
+    // do next task as specified
+    runNext(next, 0);
+  } else {
+    if(this.parent !== null) {
+      // finish root task (ensures it is removed from task queue)
+      var parent = this.parent;
+      while(parent.parent !== null) {
+        // propagate task info
+        parent.error = this.error;
+        parent.swapTime = this.swapTime;
+        parent.userData = this.userData;
+        parent = parent.parent;
+      }
+      finish(parent, true);
+    }
+
+    // call failure callback if one exists
+    if(this.failureCallback) {
+      this.failureCallback(this);
+    }
+  }
+};
+
+/**
+ * Asynchronously start a task.
+ *
+ * @param task the task to start.
+ */
+var start = function(task) {
+  task.error = false;
+  task.state = sStateTable[task.state][START];
+  setTimeout(function() {
+    if(task.state === RUNNING) {
+      task.swapTime = +new Date();
+      task.run(task);
+      runNext(task, 0);
+    }
+  }, 0);
+};
+
+/**
+ * Run the next subtask or finish this task.
+ *
+ * @param task the task to process.
+ * @param recurse the recursion count.
+ */
+var runNext = function(task, recurse) {
+  // get time since last context swap (ms), if enough time has passed set
+  // swap to true to indicate that doNext was performed asynchronously
+  // also, if recurse is too high do asynchronously
+  var swap =
+    (recurse > sMaxRecursions) ||
+    (+new Date() - task.swapTime) > sTimeSlice;
+
+  var doNext = function(recurse) {
+    recurse++;
+    if(task.state === RUNNING) {
+      if(swap) {
+        // update swap time
+        task.swapTime = +new Date();
+      }
+
+      if(task.subtasks.length > 0) {
+        // run next subtask
+        var subtask = task.subtasks.shift();
+        subtask.error = task.error;
+        subtask.swapTime = task.swapTime;
+        subtask.userData = task.userData;
+        subtask.run(subtask);
+        if(!subtask.error) {
+           runNext(subtask, recurse);
+        }
+      } else {
+        finish(task);
+
+        if(!task.error) {
+          // chain back up and run parent
+          if(task.parent !== null) {
+            // propagate task info
+            task.parent.error = task.error;
+            task.parent.swapTime = task.swapTime;
+            task.parent.userData = task.userData;
+
+            // no subtasks left, call run next subtask on parent
+            runNext(task.parent, recurse);
+          }
+        }
+      }
+    }
+  };
+
+  if(swap) {
+    // we're swapping, so run asynchronously
+    setTimeout(doNext, 0);
+  } else {
+    // not swapping, so run synchronously
+    doNext(recurse);
+  }
+};
+
+/**
+ * Finishes a task and looks for the next task in the queue to start.
+ *
+ * @param task the task to finish.
+ * @param suppressCallbacks true to suppress callbacks.
+ */
+var finish = function(task, suppressCallbacks) {
+  // subtask is now done
+  task.state = DONE;
+
+  delete sTasks[task.id];
+  if(sVL >= 1) {
+    forge.log.verbose(cat, '[%s][%s] finish',
+      task.id, task.name, task);
+  }
+
+  // only do queue processing for root tasks
+  if(task.parent === null) {
+    // report error if queue is missing
+    if(!(task.type in sTaskQueues)) {
+      forge.log.error(cat,
+        '[%s][%s] task queue missing [%s]',
+        task.id, task.name, task.type);
+    } else if(sTaskQueues[task.type].length === 0) {
+      // report error if queue is empty
+      forge.log.error(cat,
+        '[%s][%s] task queue empty [%s]',
+        task.id, task.name, task.type);
+    } else if(sTaskQueues[task.type][0] !== task) {
+      // report error if this task isn't the first in the queue
+      forge.log.error(cat,
+        '[%s][%s] task not first in queue [%s]',
+        task.id, task.name, task.type);
+    } else {
+      // remove ourselves from the queue
+      sTaskQueues[task.type].shift();
+      // clean up queue if it is empty
+      if(sTaskQueues[task.type].length === 0) {
+        if(sVL >= 1) {
+          forge.log.verbose(cat, '[%s][%s] delete queue [%s]',
+            task.id, task.name, task.type);
+        }
+        /* Note: Only a task can delete a queue of its own type. This
+         is used as a way to synchronize tasks. If a queue for a certain
+         task type exists, then a task of that type is running.
+         */
+        delete sTaskQueues[task.type];
+      } else {
+        // dequeue the next task and start it
+        if(sVL >= 1) {
+          forge.log.verbose(cat,
+            '[%s][%s] queue start next [%s] remain:%s',
+            task.id, task.name, task.type,
+            sTaskQueues[task.type].length);
+        }
+        sTaskQueues[task.type][0].start();
+      }
+    }
+
+    if(!suppressCallbacks) {
+      // call final callback if one exists
+      if(task.error && task.failureCallback) {
+        task.failureCallback(task);
+      } else if(!task.error && task.successCallback) {
+        task.successCallback(task);
+      }
+    }
+  }
+};
+
+/* Tasks API */
+module.exports = forge.task = forge.task || {};
+
+/**
+ * Starts a new task that will run the passed function asynchronously.
+ *
+ * In order to finish the task, either task.doNext() or task.fail()
+ * *must* be called.
+ *
+ * The task must have a type (a string identifier) that can be used to
+ * synchronize it with other tasks of the same type. That type can also
+ * be used to cancel tasks that haven't started yet.
+ *
+ * To start a task, the following object must be provided as a parameter
+ * (each function takes a task object as its first parameter):
+ *
+ * {
+ *   type: the type of task.
+ *   run: the function to run to execute the task.
+ *   success: a callback to call when the task succeeds (optional).
+ *   failure: a callback to call when the task fails (optional).
+ * }
+ *
+ * @param options the object as described above.
+ */
+forge.task.start = function(options) {
+  // create a new task
+  var task = new Task({
+    run: options.run,
+    name: options.name || sNoTaskName
+  });
+  task.type = options.type;
+  task.successCallback = options.success || null;
+  task.failureCallback = options.failure || null;
+
+  // append the task onto the appropriate queue
+  if(!(task.type in sTaskQueues)) {
+    if(sVL >= 1) {
+      forge.log.verbose(cat, '[%s][%s] create queue [%s]',
+        task.id, task.name, task.type);
+    }
+    // create the queue with the new task
+    sTaskQueues[task.type] = [task];
+    start(task);
+  } else {
+    // push the task onto the queue, it will be run after a task
+    // with the same type completes
+    sTaskQueues[options.type].push(task);
+  }
+};
+
+/**
+ * Cancels all tasks of the given type that haven't started yet.
+ *
+ * @param type the type of task to cancel.
+ */
+forge.task.cancel = function(type) {
+  // find the task queue
+  if(type in sTaskQueues) {
+    // empty all but the current task from the queue
+    sTaskQueues[type] = [sTaskQueues[type][0]];
+  }
+};
+
+/**
+ * Creates a condition variable to synchronize tasks. To make a task wait
+ * on the condition variable, call task.wait(condition). To notify all
+ * tasks that are waiting, call condition.notify().
+ *
+ * @return the condition variable.
+ */
+forge.task.createCondition = function() {
+  var cond = {
+    // all tasks that are blocked
+    tasks: {}
+  };
+
+  /**
+   * Causes the given task to block until notify is called. If the task
+   * is already waiting on this condition then this is a no-op.
+   *
+   * @param task the task to cause to wait.
+   */
+  cond.wait = function(task) {
+    // only block once
+    if(!(task.id in cond.tasks)) {
+       task.block();
+       cond.tasks[task.id] = task;
+    }
+  };
+
+  /**
+   * Notifies all waiting tasks to wake up.
+   */
+  cond.notify = function() {
+    // since unblock() will run the next task from here, make sure to
+    // clear the condition's blocked task list before unblocking
+    var tmp = cond.tasks;
+    cond.tasks = {};
+    for(var id in tmp) {
+      tmp[id].unblock();
+    }
+  };
+
+  return cond;
+};
+
+
+/***/ }),
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -48335,5561 +54002,6 @@ return jQuery;
 
 
 /***/ }),
-/* 100 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const CenterIdentity = __webpack_require__(101).default;
-module.exports = CenterIdentity;
-
-/***/ }),
-/* 101 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CenterIdentity; });
-/* harmony import */ var node_forge__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9);
-/* harmony import */ var node_forge__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(node_forge__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(99);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(10);
-/* harmony import */ var bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var base64_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(31);
-/* harmony import */ var base64_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(base64_js__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var js_x25519__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(57);
-/* harmony import */ var js_x25519__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(js_x25519__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var buffer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6);
-/* harmony import */ var buffer__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(buffer__WEBPACK_IMPORTED_MODULE_5__);
-
-
-
-
-
-
-var $ = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
-class CenterIdentity {
-    constructor(url_prefix, strength) {
-        switch(strength) {
-            case 'low':
-                this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-                break;
-            case 'medium':
-                this.strength = 0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-                break;
-            case 'high':
-                this.strength = 0x000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-                break;
-            default:
-                this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
-                break;
-        }
-        this.url_prefix = url_prefix || 'https://centeridentity.com';
-        this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
-    }
-
-    async createRelationship(me, user, extra_data) {
-        let relationship = {
-            their_username: user.username,
-            their_username_signature: user.username_signature,
-            their_public_key: user.public_key,
-            my_username: me.username,
-            my_username_signature: me.username_signature,
-            my_public_key: me.public_key
-        }
-        Object.assign(relationship, extra_data);
-        user.relationship = relationship;
-        return user;
-    }
-
-    async createRelationshipTransaction(me, user, group, extra_data) {
-        var join = await this.createRelationship(me, user, extra_data);
-        var dh_keys = this.get_dh_keys(me, user);
-        join.relationship.dh_private_key = dh_keys.dh_private_key
-        var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
-        var meObject = this.toObject(me)
-        var requested_rid = null;
-        var requester_rid = null;
-        if (group) {
-            requested_rid = this.generate_rid(
-                group,
-                user,
-            )
-            requester_rid = this.generate_rid(
-                group,
-                me,
-            )
-        }
-        return await this.generateTransaction(
-            me,
-            meObject.public_key,
-            dh_keys.dh_public_key,
-            this.generate_rid(me, user),
-            encryptedRelationship,
-            0,
-            requester_rid,
-            requested_rid
-        );
-    }
-
-    async approveRelationshipTransaction(me, user, request) {
-        var join = await this.createRelationship(me, user);
-        var dh_keys = this.get_dh_keys(me, user);
-        join.relationship.dh_private_key = dh_keys.dh_private_key
-        var encryptedRelationship = await this.encrypt(me.wif, JSON.stringify(join.relationship));
-        var meObject = this.toObject(me)
-        var requested_rid = request.requested_rid;
-        var requester_rid = request.requester_rid;
-        return await this.generateTransaction(
-            me,
-            meObject.public_key,
-            dh_keys.dh_public_key,
-            this.generate_rid(me, user),
-            encryptedRelationship,
-            0,
-            requester_rid,
-            requested_rid
-        );
-    }
-
-    async createRelationshipFromNew(me, name, extra_data) {
-        let user = await this.createUser(name);
-        let relationship = {
-            their_username: user.username,
-            their_username_signature: user.username_signature,
-            their_public_key: user.public_key,
-            their_wif: user.wif,
-            my_username: me.username,
-            my_username_signature: me.username_signature,
-            my_public_key: me.public_key
-        }
-        Object.assign(relationship, extra_data);
-        user.relationship = relationship;
-        return user;
-    }
-
-    async set(user, latitude, longitude) {
-        return new Promise(function(resolve, reject){
-            this.user = user;
-            this.longitude = longitude;
-            this.latitude = latitude;
-            return resolve();
-        }.bind(this))
-        .then(function(){
-            return this.getLocation();
-        }.bind(this))
-        .then(function(position){
-            return this.showPosition(this.user.username, position);
-        }.bind(this))
-        .then(function(position){
-            return this.generateRecovery()
-        }.bind(this))
-        .then(function(position){
-            return this.encryptSeed();
-        }.bind(this))
-        .catch(function(err) {
-            console.log(err)
-        }.bind(this));
-    }
-
-    async setFromNew(username, latitude, longitude) {
-        this.username = username;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        return this.createUser(username)
-        .then(function(user) {
-            this.user = user;
-            window.localStorage.setItem('wif', user.wif);
-            window.localStorage.setItem('username', user.username);
-            return this.set(
-                this.user,
-                this.latitude,
-                this.longitude
-            )
-        }.bind(this))
-        .then(function() {
-            return new Promise(function(resolve, reject) {
-                return resolve(this.user);
-            }.bind(this));
-        }.bind(this))
-        .catch(function(err) {
-            console.log(err)
-        }.bind(this));
-    }
-
-    async get(username, latitude, longitude) {
-        return new Promise(function(resolve, reject){
-            this.longitude = longitude;
-            this.latitude = latitude;
-            return resolve();
-        }.bind(this))
-        .then(function(){
-            return this.getLocation();
-        }.bind(this))
-        .then(function(position){
-            return this.showPosition(username, position);
-        }.bind(this))
-        .then(function(){
-            return this.generateRecovery();
-        }.bind(this))
-        .then(function(position){
-            return this.decryptSeed();
-        }.bind(this))
-        .then(async function(wif){
-            window.localStorage.setItem('wif', wif);
-            window.localStorage.setItem('username', username);
-            return await this.reviveUser(wif, username);
-        }.bind(this));
-    }
-
-    async getLocation() {
-        return new Promise(function(resolve, reject){
-            if (typeof navigator !== 'undefined' && navigator.geolocation && !(this.longitude && this.latitude)) {
-                navigator.geolocation.getCurrentPosition(function(position) { 
-                    return resolve(position); 
-                });
-            } else {
-                return resolve({
-                    coords: {
-                        longitude: parseFloat(this.longitude),
-                        latitude: parseFloat(this.latitude)
-                    }
-                })
-            }
-        }.bind(this));
-    }
-
-    async showPosition(username, position) {
-        return new Promise(function(resolve, reject){
-            var lat = position.coords.latitude.toFixed(5);
-            var long = position.coords.longitude.toFixed(5);
-            this.header = long + (lat + username);
-            return resolve();
-        }.bind(this));
-    }
-
-    async generateRecovery() {
-        this.symmetric_key = '';
-        this.rid = '';
-        return new Promise(function(resolve, reject){
-            for(var i=0; i === i; i++) {
-                this.header = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(this.header).digest().toHex();
-                if (parseInt(this.header, 16) < this.strength && this.symmetric_key) {
-                    this.header = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(this.header).digest().toHex();
-                    this.rid = this.header;
-                    break
-                }
-                if (parseInt(this.header, 16) < this.strength && !this.symmetric_key) {
-                    this.header = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(this.header).digest().toHex();
-                    this.symmetric_key = this.header;
-                }
-            }
-            return resolve();
-        }.bind(this));
-    }
-
-    async encryptSeed() {
-        return new Promise(function(resolve, reject){
-            var encrypted_seed = this.encrypt(this.symmetric_key, this.user.wif);
-            var payload =  `{
-                "rid": "` + this.rid + `",
-                "relationship": "` + encrypted_seed + `"
-            }`;
-            $.ajax({
-                url: this.url_prefix + '/bury',
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                data: payload,
-                success: function(data, textStatus, jqXHR) {
-                    return resolve(data);
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    return reject(errorThrown);
-                }
-            });
-        }.bind(this));
-    }
-
-    encrypt(keyStr, message) {
-        var key = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.pkcs5.pbkdf2(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(keyStr).digest().toHex(), 'salt', 400, 32);
-        var cipher = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.cipher.createCipher('AES-CBC', key);
-        var iv = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.random.getBytesSync(16);
-        cipher.start({iv: iv});
-        cipher.update(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.util.createBuffer(iv + btoa(message)));
-        cipher.finish()
-        return cipher.output.toHex();
-    }
-
-    async decryptSeed() {
-        return new Promise(function(resolve, reject){
-            $.ajax({
-                url: this.url_prefix + '/digup?rid=' + this.rid,
-                dataType: 'json',
-                type: 'GET',
-                success: function(data, textStatus, jqXHR) {
-                    if (data.status === 'error') {
-                        return reject(data);
-                    }
-                    let decryptedData = this.decrypt(this.symmetric_key, data.relationship);
-                    return resolve(decryptedData);
-                }.bind(this),
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    return reject(errorThrown);
-                }.bind(this)
-            });
-        }.bind(this));
-    }
-
-    decrypt(keyStr, message) {
-        var key = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.pkcs5.pbkdf2(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(keyStr).digest().toHex(), 'salt', 400, 32);
-        var decipher = node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.cipher.createDecipher('AES-CBC', key);
-        var enc = this.hexToBytes(message);
-        decipher.start({iv: enc.slice(0,16)});
-        decipher.update(node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.util.createBuffer(enc.slice(16)));
-        decipher.finish();
-        return atob(decipher.output.data);
-    }
-
-    createUser(username) {
-        return new Promise(function(resolve, reject){
-            var key = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECPair"].makeRandom();
-            var wif = key.toWIF();
-            var public_key = key.getPublicKeyBuffer().toString('hex');
-            return resolve({
-                username_signature: this.generate_username_signature(key, username),
-                username: username,
-                wif: wif,
-                public_key: public_key,
-                key: key
-            })
-        }.bind(this));
-    }
-
-    reviveUser(wif, username) {
-        return new Promise(function(resolve, reject){
-            var key = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECPair"].fromWIF(wif);
-            var public_key = key.getPublicKeyBuffer().toString('hex');
-            this.user = {
-                username_signature: this.generate_username_signature(key, username),
-                username: username,
-                wif: wif,
-                public_key: public_key,
-                key: key
-            }
-            return resolve(this.user);
-        }.bind(this));
-    }
-
-    sign(message, user) {
-        return new Promise(function(resolve, reject){
-            var hash = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(message).toString('hex')
-            var combine = new Uint8Array(hash.length);
-            for (var i = 0; i < hash.length; i++) {
-                combine[i] = hash.charCodeAt(i)
-            }
-            var shaMessage = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(combine);
-            var der = user.key.sign(shaMessage).toDER();
-            return resolve(base64_js__WEBPACK_IMPORTED_MODULE_3___default.a.fromByteArray(der));
-        }.bind(this));
-    }
-
-    verify(message, user, signature) {
-        var hash = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(message).toString('hex')
-        var combine = new Uint8Array(hash.length);
-        for (var i = 0; i < hash.length; i++) {
-            combine[i] = hash.charCodeAt(i)
-        }
-        var shaMessage = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(combine);
-        var pubKey = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECPair"].fromPublicKeyBuffer(buffer__WEBPACK_IMPORTED_MODULE_5___default.a.Buffer.from(user.public_key, 'hex'));
-        var sig = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["ECSignature"].fromDER(base64_js__WEBPACK_IMPORTED_MODULE_3___default.a.toByteArray(signature));
-        var result = pubKey.verify(shaMessage, sig);
-        return result;
-    }
-
-    verifyIssuedCredential(issuer, message, issuer_signature) {
-        return this.verify(message, issuer, issuer_signature);
-    }
-
-    verifySubjectRequestedCredential(subject, message, subject_signature) {
-        return this.verify(message, subject, subject_signature);
-    }
-
-    verifyVerifierRequestedCredential(verifier, message, verifier_signature) {
-        return this.verify(message, verifier, verifier_signature);
-    }
-
-    signSession(session_id, user) {
-        return this.sign(session_id, user)
-    }
-
-    signIn(session_id, user, signin_url) {
-        return this.signSession(session_id, user)
-        .then(function(signature) {
-            return new Promise(async function(resolve, reject){
-                var res = await $.ajax({
-                    url: signin_url || '/sign-in',
-                    dataType: 'json',
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                        username_signature: user.username_signature,
-                        session_id_signature: signature
-                    }),
-                    type: 'POST'
-                });
-                return resolve(res);
-            }.bind(this));
-        }.bind(this));
-    }
-
-    signInWithLocation(session_id, username, lat, long, signin_url) {
-        return this.get(username, lat, long)
-        .then(function(user) {
-            return this.sign(session_id, user);
-        }.bind(this))
-        .then(function(signature) {
-            return new Promise(async function(resolve, reject){
-                var res = await $.ajax({
-                    url: signin_url || '/sign-in',
-                    dataType: 'json',
-                    contentType: "application/json",
-                    data: JSON.stringify({
-                        username_signature: this.user.username_signature,
-                        session_id_signature: signature
-                    }),
-                    type: 'POST'
-                });
-                return resolve(res);
-            }.bind(this));
-        }.bind(this))
-        .catch(function(err) {
-            return err
-        }.bind(this));
-    }
-
-    registerWithLocation(private_username, public_username, lat, long, other_args, register_url) {
-        return this.setFromNew(private_username, lat, long)
-        .then(function(user) {
-            return new Promise(async (resolve, reject) => {
-                var public_user = await this.reviveUser(
-                  user.wif,
-                  public_username
-                )
-                var post_vars = {
-                    username: public_user.username,
-                    public_key: public_user.public_key,
-                    username_signature: public_user.username_signature
-                }
-                post_vars = {...post_vars, ...other_args}
-                return resolve(await $.ajax({
-                    url: register_url || '/create-customer',
-                    dataType: 'json',
-                    contentType: "application/json",
-                    data: JSON.stringify(post_vars),
-                    type: 'POST'
-                }));
-            })
-        }.bind(this))
-        .catch(function(err) {
-            return err
-        }.bind(this));
-    }
-
-    addUser(user, url=null) {
-        return $.ajax({
-            url: url || this.url_prefix + '/add-user',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify({
-                username_signature: user.username_signature,
-                username: user.username, // sha256 this in the future
-                public_key: user.public_key
-            }),
-            type: 'POST',
-            success: function(data, textStatus, jqXHR) {
-                if (data.status === 'error') {
-                    throw data;
-                }
-            }.bind(this),
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                throw XMLHttpRequest;
-            }.bind(this)
-        });
-    }
-
-    getUser(user, url=null) {
-        return $.ajax({
-            url: url || this.url_prefix + '/get-user',
-            dataType: 'json',
-            contentType: "application/json",
-            data: JSON.stringify({
-                username_signature: user.username_signature
-            }),
-            type: 'POST',
-            success: function(data, textStatus, jqXHR) {
-                if (data.status === 'error') {
-                    throw data;
-                }
-            }.bind(this),
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-                throw errorThrown;
-            }.bind(this)
-        });
-    }
-
-    get_dh_keys(me, them) {
-        var raw_dh_private_key = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(me.wif + them.username_signature);
-        var raw_dh_public_key = js_x25519__WEBPACK_IMPORTED_MODULE_4___default.a.getPublic(raw_dh_private_key);
-        return {
-            dh_private_key: this.toHex(raw_dh_private_key),
-            dh_public_key: this.toHex(raw_dh_public_key)
-        }
-    }
-
-    getSharedSecret(me, them, their_txn) {
-        var dh_keys = this.get_dh_keys(me, them);
-        var privk = new Uint8Array(dh_keys.dh_private_key.match(/[\da-f]{2}/gi).map(function (h) {
-            return parseInt(h, 16)
-        }));
-        var pubk = new Uint8Array(their_txn.dh_public_key.match(/[\da-f]{2}/gi).map(function (h) {
-            return parseInt(h, 16)
-        }));
-        return this.toHex(js_x25519__WEBPACK_IMPORTED_MODULE_4___default.a.getSharedKey(privk, pubk));
-    }
-
-    generate_username_signature(key, username) {
-        return base64_js__WEBPACK_IMPORTED_MODULE_3___default.a.fromByteArray(key.sign(bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(username)).toDER());
-    }
-
-    toHex(byteArray) {
-        var callback = function(byte) {
-            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-        }
-        return Array.from(byteArray, callback).join('')
-    }
-
-    hexToBytes(s) {
-        var arr = []
-        for (var i = 0; i < s.length; i += 2) {
-            var c = s.substr(i, 2);
-            arr.push(parseInt(c, 16));
-        }
-        return String.fromCharCode.apply(null, arr);
-    }
-
-    generate_rid(user1, user2, extra_data='') {
-        var bulletin_secrets = [user1.username_signature, user2.username_signature].sort(function (a, b) {
-            return a.toLowerCase().localeCompare(b.toLowerCase());
-        });
-        return node_forge__WEBPACK_IMPORTED_MODULE_0___default.a.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1] + extra_data).digest().toHex();
-    }
-
-    async generateTransaction(
-        user,
-        public_key,
-        dh_public_key,
-        rid,
-        relationship,
-        fee,
-        requester_rid,
-        requested_rid
-    ) {
-        var transaction = {
-            rid:  rid,
-            fee: fee,
-            dh_public_key: dh_public_key,
-            requester_rid: requester_rid || '',
-            requested_rid: requested_rid || '',
-            outputs: [],
-            inputs: [],
-            time: parseInt(((+ new Date()) / 1000).toString()).toString(),
-            public_key: public_key,
-            relationship: relationship
-        };
-        var header = (
-            transaction.public_key +
-            transaction.time +
-            transaction.dh_public_key +
-            transaction.rid +
-            transaction.relationship +
-            transaction.fee.toFixed(8) +
-            transaction.requester_rid +
-            transaction.requested_rid
-        )
-        transaction.hash = bitcoinjs_lib__WEBPACK_IMPORTED_MODULE_2__["crypto"].sha256(header).toString('hex')
-
-        transaction.id = await this.sign(header, user);
-        return transaction;
-    }
-
-    theirIdentityFromTransaction(txn, their_txn) {
-        var out = {
-            username: txn.relationship.their_username,
-            username_signature: txn.relationship.their_username_signature,
-            public_key: txn.relationship.their_public_key,
-            dh_private_key: txn.relationship.dh_private_key
-        }
-        if (their_txn) {
-            out.dh_public_key = their_txn.dh_public_key
-        }
-        return out;
-    }
-
-    theirIdentityFromEncryptedTransaction(me, txn, their_txn) {
-      var copy_txn = JSON.parse(JSON.stringify(txn));
-      var relationship = JSON.parse(this.decrypt(me.wif, copy_txn.relationship));
-      copy_txn.relationship = relationship;
-      return this.theirIdentityFromTransaction(copy_txn, their_txn);
-    }
-
-    myIdentityFromTransaction(txn) {
-        return {
-            username: txn.relationship.my_username,
-            username_signature: txn.relationship.my_username_signature,
-            public_key: txn.relationship.my_public_key,
-        }
-    }
-
-    messageFromEncryptedTransaction(me, them, their_txn, txn) {
-      var copy_txn = JSON.parse(JSON.stringify(txn));
-      var shared_secret = this.getSharedSecret(me, them, their_txn);
-      var relationship = JSON.parse(this.decrypt(shared_secret, copy_txn.relationship));
-      return relationship;
-    }
-
-    async generateGroupMessageTransaction(me, them, group, message) {
-        var shared_secret = this.getSharedSecret(me, them, their_txn);
-        var encryptedChatRelationship = await this.encrypt(shared_secret, message);
-
-        if (group) {
-            requested_rid = this.generate_rid(
-                group,
-                user,
-            )
-            requester_rid = this.generate_rid(
-                group,
-                me,
-            )
-        } else {
-          requester_rid = '';
-          requested_rid = '';
-        }
-
-        return await this.generateTransaction(
-            me,
-            me.public_key,
-            '',
-            this.generate_rid(me, them),
-            encryptedChatRelationship,
-            0,
-            requester_rid,
-            requested_rid
-        );
-    }
-
-    async generatePrivateMessageTransaction(me, them, their_txn, message, collection) {
-        var shared_secret = this.getSharedSecret(me, them, their_txn);
-        var encryptedChatRelationship = await this.encrypt(shared_secret, message);
-        return await this.generateTransaction(
-            me,
-            me.public_key,
-            '',
-            this.generate_rid(me, them, collection),
-            encryptedChatRelationship,
-            0,
-            '',
-            ''
-        );
-    }
-
-    async getTransactionsByRid(rid) {
-      return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + rid)
-    }
-
-    async getTransactionsByRequestedRid(rid) {
-      return fetch(this.url_prefix + '/get-transaction-by-rid?requested_rid=' + rid)
-    }
-
-    async getTransactionsByRequesterRid(rid) {
-      return fetch(this.url_prefix + '/get-transaction-by-rid?requester_rid=' + rid)
-    }
-
-    async getRelationshipTransactions(me, them, collection) {
-      var theirRel = '';
-      var myRel = '';
-      var rid = this.generate_rid(me, them, collection);
-
-      return this.getTransactionsByRid(rid)
-      .then(async (res) => {
-        var txns = await res.json()
-        for (var i=0;i<txns.length;i++) {
-          if (me.public_key === txns[i].public_key && txns[i].dh_public_key) {
-            myRel = txns[i];
-            if (theirRel) break;
-          }
-          if (me.public_key !== txns[i].public_key && txns[i].dh_public_key) {
-            theirRel = txns[i];
-            if (myRel) break;
-          }
-        }
-        if (!myRel) throw {
-          status: false,
-          message: 'relationship not complete: you have not added them',
-          mine: myRel,
-          theirs: theirRel
-        };
-        if (!theirRel) throw {
-          status: false,
-          message: 'relationship not complete: they have not added you',
-          mine: myRel,
-          theirs: theirRel
-        };
-        return {mine: myRel, theirs: theirRel}
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }
-    async getIdentitiesByCollection(me, collection, friendList) {
-      var group = await this.reviveUser(this.friends_list_wif, collection);
-      if(friendList) {
-        group = friendList;
-      }
-      var rid = this.generate_rid(me, group);
-      var result = await this.getTransactionsByRequesterRid(rid);
-      var txns = await result.json();
-      var collection = await Promise.all(txns.map(async (txn) => {
-        return await this.theirIdentityFromEncryptedTransaction(me, txn)
-      }));
-      return collection;
-    }
-
-    async getDataByCollection(me, collection, friendList) {
-      var group = await this.reviveUser(this.friends_list_wif, collection);
-      if(friendList) {
-        group = friendList;
-      }
-      var rid = this.generate_rid(me, group);
-      var result = await this.getTransactionsByRequesterRid(rid);
-      var txns = await result.json();
-      var collection = await Promise.all(txns.map(async (txn) => {
-        var copy_txn = JSON.parse(JSON.stringify(txn));
-        var relationship = JSON.parse(this.decrypt(me.wif, copy_txn.relationship));
-        return relationship;
-      }));
-      return collection;
-    }
-
-    async getFriendsLists(me, listName) {
-      var friendsList = await this.reviveUser(this.friends_list_wif, listName);
-      var rid = this.generate_rid(me, friendsList, me.wif + ':all_friends_lists');
-      return this.getTransactionsByRid(rid)
-      .then(async (txns) => {
-        return txns;
-      });
-    }
-
-    async getFriendsList(me, listName) {
-      var friendsList = await this.reviveUser(this.friends_list_wif, listName);
-      var rid = this.generate_rid(me, friendsList, me.wif + ':all_friends_lists');
-      return this.getTransactionsByRid(rid)
-      .then(async (txns) => {
-        if (txns.length === 0) {
-          var friendsList = await this.reviveUser(this.friends_list_wif, 'default');
-          return this.createRelationshipTransaction(me, friendsList, null, me.wif + ':all_friends_lists');
-        }
-        for(var i=0; i < txns.length; i++) {
-          var friendList = await this.theirIdentityFromEncryptedTransaction(me);
-          if (friendList.username === listName) {
-            return friendList;
-          }
-        }
-      });
-    }
-
-    async setFriendsList(me, listName) {
-      var friendsList = await this.createUser(listName);
-      return this.createRelationshipTransaction(me, friendsList, null, me.wif + ':all_friends_lists');
-    }
-
-    async getPrivateMessages(me, them, collection, filter) {
-      var res = {};
-      return fetch(this.url_prefix + '/get-transaction-by-rid?rid=' + this.generate_rid(me, them, collection))
-      .then(async (res) => {
-        return this.getRelationshipTransactions(me, them);
-      })
-      .then(async (rels) => {
-        myRel = rels.mine;
-        theirRel = rels.theirs;
-        var txn = await res.json()
-        var messages = []
-        for (var i=0; i < txn.length; i++) {
-          if(txn[i].dh_public_key === '') {
-            var messageTxn = txn[i];
-            var theirIdentity = this.theirIdentityFromEncryptedTransaction(me, myRel);
-            var message = this.messageFromEncryptedTransaction(me, theirIdentity, theirRel, messageTxn);
-            //if (filter && !filter(message)) continue;
-            messages.push(message);
-          }
-        }
-        return messages;
-      });
-    }
-
-    async sendPrivateMessage(me, them, collection, message) {
-      var myRel = {};
-      var theirRel = {}
-      return this.getRelationshipTransactions(me, them)
-      .then(async (rels) => {
-        myRel = rels.mine;
-        theirRel = rels.theirs;
-        //get verifier identity for subject
-        var theirIdentity = this.theirIdentityFromEncryptedTransaction(me, myRel);
-        ///create message
-        var privateMessage = await this.generatePrivateMessageTransaction(
-          me,
-          theirIdentity,
-          theirRel,
-          message,
-          collection
-        );
-        return fetch(this.url_prefix + '/transaction?bulletin_secret=fu&origin=' + window.location.origin, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(privateMessage)
-        });
-      })
-      .then(async (res) => {
-        var privateMessage = await res.json();
-        return privateMessage;
-      });
-    }
-
-    async issueCredential(me, them, credential, credentialMessage) {
-      var collection = 'credential_issues';
-      credential = {
-        ...credential,
-        issuer: this.toObject(me),
-        subject: this.toObject(them)
-      };
-      var issuerSignature = await this.sign(credentialMessage, me);
-      var relationshipMessage = JSON.stringify({
-        ...credential,
-        issuer_signature: issuerSignature
-      });
-      return {
-        transaction: await this.sendPrivateMessage(me, them, collection, relationshipMessage),
-        message: relationshipMessage
-      };
-    }
-
-    async getCredentialsIssued(me, them, credential) {
-      return this.getPrivateMessages(
-        me,
-        them,
-        'credential_issues',
-        credential
-      )
-    }
-
-    async getCredentialsRequested(me, them, credential) {
-      return this.getPrivateMessages(
-        me,
-        them,
-        'credential_requests',
-        credential
-      )
-    }
-
-    async requestCredentialFromIssuer(me, issuer, credential) { // me = subject
-      var collection = 'credential_requests';
-      credential = {
-        ...credential,
-        issuer: this.toObject(issuer),
-        subject: this.toObject(me)
-      };
-      var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        credential: credential,
-        subject_signature: signedCredential
-      });
-      return await this.sendPrivateMessage(me, issuer, collection, message);
-    }
-
-    async requestCredentialThroughSubject(me, issuer, subject, credential) { // me = verifier
-      var collection = 'credential_requests';
-      credential = {
-        ...credential,
-        issuer: this.toObject(issuer),
-        subject: this.toObject(subject),
-        verifier: this.toObject(me)
-      };
-      var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        credential: credential,
-        verifier_signature: signedCredential
-      });
-      return await this.sendPrivateMessage(me, subject, collection, message);
-    }
-
-    async forwardIssuedCredential(me, issuer, verifier, credential) { // me = subject, them = verifier
-      var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        ...credential,
-        subject_signature: signedCredential
-      });
-      return await this.sendPrivateMessage(me, verifier, 'credential_issues', message);
-    }
-  
-    async forwardRequestedCredential(me, issuer, verifier, credential) { // me = subject, them = issuer
-      var signedCredential = await this.sign(JSON.stringify(credential), me);
-      var message = JSON.stringify({
-        ...credential,
-        subject_signature: signedCredential
-      });
-      return await this.sendPrivateMessage(me, issuer, 'credential_requests', message);
-    }
-
-    async getIdentityLink(identity) {
-      return fetch(this.url_prefix + '/sia-upload?filename=' + encodeURIComponent(identity.username_signature), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({file: btoa(JSON.stringify(this.toObject(identity)))})
-      })
-      .then(async (res) => {
-        var json = await res.json();
-        return json.skylink;
-      });
-    }
-
-    async getCredentialLink(credential) {
-      return fetch(this.url_prefix + '/sia-upload?filename=' + encodeURIComponent(credential.identity.username_signature), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({file: btoa(JSON.stringify(credential))})
-      })
-      .then(async (res) => {
-        var json = await res.json();
-        return json.skylink;
-      });
-    }
-
-    async connectIdentities(me, them, friendList, collection, extra_data) {
-      if (!friendList) {
-        friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
-      }
-      var myRel = await this.createRelationshipTransaction(me, them, friendList, extra_data);
-      fetch(this.url_prefix + '/transaction?bulletin_secret=fu&origin=' + window.location.origin, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(myRel)
-      });
-      return them;
-    }
-
-    async addCredential(me, credential, friendList, collection) {
-      await this.connectIdentities(
-        me,
-        this.copy(credential.identity),
-        friendList,
-        collection || 'credentials',
-        this.copy({credential: credential})
-      )
-    }
-
-    async importConnectionFromSkylink(me, skylink, collection, friendList, extra_data) {
-      var group = await this.reviveUser(this.friends_list_wif, collection || 'default');
-      if(friendList) {
-        group = friendList;
-      }
-      return fetch('https://siasky.net/' + skylink)
-      .then(async (res) => {
-        var them = await res.json();
-        return this.connectIdentities(me, them, group, collection, extra_data);
-      });
-    }
-
-    async signOut() {
-      window.localStorage.removeItem('wif');
-      window.localStorage.removeItem('username');
-    }
-
-    copy(data) {
-      return JSON.parse(JSON.stringify(data));
-    }
-
-    toObject(user) {
-        return {
-            username: user.username,
-            username_signature: user.username_signature,
-            public_key: user.public_key
-        }
-    }
-
-    toJson(user) {
-        return JSON.stringify({
-            username: user.username,
-            username_signature: user.username_signature,
-            public_key: user.public_key,
-            wif: user.wif
-        })
-    }
-}
-
-
-/***/ }),
-/* 102 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
-    "use strict";
-
-    if (global.setImmediate) {
-        return;
-    }
-
-    var nextHandle = 1; // Spec says greater than zero
-    var tasksByHandle = {};
-    var currentlyRunningATask = false;
-    var doc = global.document;
-    var registerImmediate;
-
-    function setImmediate(callback) {
-      // Callback can either be a function or a string
-      if (typeof callback !== "function") {
-        callback = new Function("" + callback);
-      }
-      // Copy function arguments
-      var args = new Array(arguments.length - 1);
-      for (var i = 0; i < args.length; i++) {
-          args[i] = arguments[i + 1];
-      }
-      // Store and register the task
-      var task = { callback: callback, args: args };
-      tasksByHandle[nextHandle] = task;
-      registerImmediate(nextHandle);
-      return nextHandle++;
-    }
-
-    function clearImmediate(handle) {
-        delete tasksByHandle[handle];
-    }
-
-    function run(task) {
-        var callback = task.callback;
-        var args = task.args;
-        switch (args.length) {
-        case 0:
-            callback();
-            break;
-        case 1:
-            callback(args[0]);
-            break;
-        case 2:
-            callback(args[0], args[1]);
-            break;
-        case 3:
-            callback(args[0], args[1], args[2]);
-            break;
-        default:
-            callback.apply(undefined, args);
-            break;
-        }
-    }
-
-    function runIfPresent(handle) {
-        // From the spec: "Wait until any invocations of this algorithm started before this one have completed."
-        // So if we're currently running a task, we'll need to delay this invocation.
-        if (currentlyRunningATask) {
-            // Delay by doing a setTimeout. setImmediate was tried instead, but in Firefox 7 it generated a
-            // "too much recursion" error.
-            setTimeout(runIfPresent, 0, handle);
-        } else {
-            var task = tasksByHandle[handle];
-            if (task) {
-                currentlyRunningATask = true;
-                try {
-                    run(task);
-                } finally {
-                    clearImmediate(handle);
-                    currentlyRunningATask = false;
-                }
-            }
-        }
-    }
-
-    function installNextTickImplementation() {
-        registerImmediate = function(handle) {
-            process.nextTick(function () { runIfPresent(handle); });
-        };
-    }
-
-    function canUsePostMessage() {
-        // The test against `importScripts` prevents this implementation from being installed inside a web worker,
-        // where `global.postMessage` means something completely different and can't be used for this purpose.
-        if (global.postMessage && !global.importScripts) {
-            var postMessageIsAsynchronous = true;
-            var oldOnMessage = global.onmessage;
-            global.onmessage = function() {
-                postMessageIsAsynchronous = false;
-            };
-            global.postMessage("", "*");
-            global.onmessage = oldOnMessage;
-            return postMessageIsAsynchronous;
-        }
-    }
-
-    function installPostMessageImplementation() {
-        // Installs an event handler on `global` for the `message` event: see
-        // * https://developer.mozilla.org/en/DOM/window.postMessage
-        // * http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#crossDocumentMessages
-
-        var messagePrefix = "setImmediate$" + Math.random() + "$";
-        var onGlobalMessage = function(event) {
-            if (event.source === global &&
-                typeof event.data === "string" &&
-                event.data.indexOf(messagePrefix) === 0) {
-                runIfPresent(+event.data.slice(messagePrefix.length));
-            }
-        };
-
-        if (global.addEventListener) {
-            global.addEventListener("message", onGlobalMessage, false);
-        } else {
-            global.attachEvent("onmessage", onGlobalMessage);
-        }
-
-        registerImmediate = function(handle) {
-            global.postMessage(messagePrefix + handle, "*");
-        };
-    }
-
-    function installMessageChannelImplementation() {
-        var channel = new MessageChannel();
-        channel.port1.onmessage = function(event) {
-            var handle = event.data;
-            runIfPresent(handle);
-        };
-
-        registerImmediate = function(handle) {
-            channel.port2.postMessage(handle);
-        };
-    }
-
-    function installReadyStateChangeImplementation() {
-        var html = doc.documentElement;
-        registerImmediate = function(handle) {
-            // Create a <script> element; its readystatechange event will be fired asynchronously once it is inserted
-            // into the document. Do so, thus queuing up the task. Remember to clean up once it's been called.
-            var script = doc.createElement("script");
-            script.onreadystatechange = function () {
-                runIfPresent(handle);
-                script.onreadystatechange = null;
-                html.removeChild(script);
-                script = null;
-            };
-            html.appendChild(script);
-        };
-    }
-
-    function installSetTimeoutImplementation() {
-        registerImmediate = function(handle) {
-            setTimeout(runIfPresent, 0, handle);
-        };
-    }
-
-    // If supported, we should attach to the prototype of global, since that is where setTimeout et al. live.
-    var attachTo = Object.getPrototypeOf && Object.getPrototypeOf(global);
-    attachTo = attachTo && attachTo.setTimeout ? attachTo : global;
-
-    // Don't get fooled by e.g. browserify environments.
-    if ({}.toString.call(global.process) === "[object process]") {
-        // For Node.js before 0.9
-        installNextTickImplementation();
-
-    } else if (canUsePostMessage()) {
-        // For non-IE10 modern browsers
-        installPostMessageImplementation();
-
-    } else if (global.MessageChannel) {
-        // For web workers, where supported
-        installMessageChannelImplementation();
-
-    } else if (doc && "onreadystatechange" in doc.createElement("script")) {
-        // For IE 6–8
-        installReadyStateChangeImplementation();
-
-    } else {
-        // For older browsers
-        installSetTimeoutImplementation();
-    }
-
-    attachTo.setImmediate = setImmediate;
-    attachTo.clearImmediate = clearImmediate;
-}(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13), __webpack_require__(15)))
-
-/***/ }),
-/* 103 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.byteLength = byteLength
-exports.toByteArray = toByteArray
-exports.fromByteArray = fromByteArray
-
-var lookup = []
-var revLookup = []
-var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
-
-var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
-for (var i = 0, len = code.length; i < len; ++i) {
-  lookup[i] = code[i]
-  revLookup[code.charCodeAt(i)] = i
-}
-
-// Support decoding URL-safe base64 strings, as Node.js does.
-// See: https://en.wikipedia.org/wiki/Base64#URL_applications
-revLookup['-'.charCodeAt(0)] = 62
-revLookup['_'.charCodeAt(0)] = 63
-
-function getLens (b64) {
-  var len = b64.length
-
-  if (len % 4 > 0) {
-    throw new Error('Invalid string. Length must be a multiple of 4')
-  }
-
-  // Trim off extra bytes after placeholder bytes are found
-  // See: https://github.com/beatgammit/base64-js/issues/42
-  var validLen = b64.indexOf('=')
-  if (validLen === -1) validLen = len
-
-  var placeHoldersLen = validLen === len
-    ? 0
-    : 4 - (validLen % 4)
-
-  return [validLen, placeHoldersLen]
-}
-
-// base64 is 4/3 + up to two characters of the original data
-function byteLength (b64) {
-  var lens = getLens(b64)
-  var validLen = lens[0]
-  var placeHoldersLen = lens[1]
-  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
-}
-
-function _byteLength (b64, validLen, placeHoldersLen) {
-  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
-}
-
-function toByteArray (b64) {
-  var tmp
-  var lens = getLens(b64)
-  var validLen = lens[0]
-  var placeHoldersLen = lens[1]
-
-  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
-
-  var curByte = 0
-
-  // if there are placeholders, only get up to the last complete 4 chars
-  var len = placeHoldersLen > 0
-    ? validLen - 4
-    : validLen
-
-  var i
-  for (i = 0; i < len; i += 4) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 18) |
-      (revLookup[b64.charCodeAt(i + 1)] << 12) |
-      (revLookup[b64.charCodeAt(i + 2)] << 6) |
-      revLookup[b64.charCodeAt(i + 3)]
-    arr[curByte++] = (tmp >> 16) & 0xFF
-    arr[curByte++] = (tmp >> 8) & 0xFF
-    arr[curByte++] = tmp & 0xFF
-  }
-
-  if (placeHoldersLen === 2) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 2) |
-      (revLookup[b64.charCodeAt(i + 1)] >> 4)
-    arr[curByte++] = tmp & 0xFF
-  }
-
-  if (placeHoldersLen === 1) {
-    tmp =
-      (revLookup[b64.charCodeAt(i)] << 10) |
-      (revLookup[b64.charCodeAt(i + 1)] << 4) |
-      (revLookup[b64.charCodeAt(i + 2)] >> 2)
-    arr[curByte++] = (tmp >> 8) & 0xFF
-    arr[curByte++] = tmp & 0xFF
-  }
-
-  return arr
-}
-
-function tripletToBase64 (num) {
-  return lookup[num >> 18 & 0x3F] +
-    lookup[num >> 12 & 0x3F] +
-    lookup[num >> 6 & 0x3F] +
-    lookup[num & 0x3F]
-}
-
-function encodeChunk (uint8, start, end) {
-  var tmp
-  var output = []
-  for (var i = start; i < end; i += 3) {
-    tmp =
-      ((uint8[i] << 16) & 0xFF0000) +
-      ((uint8[i + 1] << 8) & 0xFF00) +
-      (uint8[i + 2] & 0xFF)
-    output.push(tripletToBase64(tmp))
-  }
-  return output.join('')
-}
-
-function fromByteArray (uint8) {
-  var tmp
-  var len = uint8.length
-  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
-  var parts = []
-  var maxChunkLength = 16383 // must be multiple of 3
-
-  // go through the array every three bytes, we'll deal with trailing stuff later
-  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
-    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
-  }
-
-  // pad the end with zeros, but make sure to not forget the extra bytes
-  if (extraBytes === 1) {
-    tmp = uint8[len - 1]
-    parts.push(
-      lookup[tmp >> 2] +
-      lookup[(tmp << 4) & 0x3F] +
-      '=='
-    )
-  } else if (extraBytes === 2) {
-    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
-    parts.push(
-      lookup[tmp >> 10] +
-      lookup[(tmp >> 4) & 0x3F] +
-      lookup[(tmp << 2) & 0x3F] +
-      '='
-    )
-  }
-
-  return parts.join('')
-}
-
-
-/***/ }),
-/* 104 */
-/***/ (function(module, exports) {
-
-/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
-exports.read = function (buffer, offset, isLE, mLen, nBytes) {
-  var e, m
-  var eLen = (nBytes * 8) - mLen - 1
-  var eMax = (1 << eLen) - 1
-  var eBias = eMax >> 1
-  var nBits = -7
-  var i = isLE ? (nBytes - 1) : 0
-  var d = isLE ? -1 : 1
-  var s = buffer[offset + i]
-
-  i += d
-
-  e = s & ((1 << (-nBits)) - 1)
-  s >>= (-nBits)
-  nBits += eLen
-  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
-
-  m = e & ((1 << (-nBits)) - 1)
-  e >>= (-nBits)
-  nBits += mLen
-  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
-
-  if (e === 0) {
-    e = 1 - eBias
-  } else if (e === eMax) {
-    return m ? NaN : ((s ? -1 : 1) * Infinity)
-  } else {
-    m = m + Math.pow(2, mLen)
-    e = e - eBias
-  }
-  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
-}
-
-exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
-  var e, m, c
-  var eLen = (nBytes * 8) - mLen - 1
-  var eMax = (1 << eLen) - 1
-  var eBias = eMax >> 1
-  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
-  var i = isLE ? 0 : (nBytes - 1)
-  var d = isLE ? 1 : -1
-  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
-
-  value = Math.abs(value)
-
-  if (isNaN(value) || value === Infinity) {
-    m = isNaN(value) ? 1 : 0
-    e = eMax
-  } else {
-    e = Math.floor(Math.log(value) / Math.LN2)
-    if (value * (c = Math.pow(2, -e)) < 1) {
-      e--
-      c *= 2
-    }
-    if (e + eBias >= 1) {
-      value += rt / c
-    } else {
-      value += rt * Math.pow(2, 1 - eBias)
-    }
-    if (value * c >= 2) {
-      e++
-      c /= 2
-    }
-
-    if (e + eBias >= eMax) {
-      m = 0
-      e = eMax
-    } else if (e + eBias >= 1) {
-      m = ((value * c) - 1) * Math.pow(2, mLen)
-      e = e + eBias
-    } else {
-      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
-      e = 0
-    }
-  }
-
-  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
-
-  e = (e << mLen) | m
-  eLen += mLen
-  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
-
-  buffer[offset + i - d] |= s * 128
-}
-
-
-/***/ }),
-/* 105 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {/**
- * Base-N/Base-X encoding/decoding functions.
- *
- * Original implementation from base-x:
- * https://github.com/cryptocoinjs/base-x
- *
- * Which is MIT licensed:
- *
- * The MIT License (MIT)
- *
- * Copyright base-x contributors (c) 2016
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- */
-var api = {};
-module.exports = api;
-
-// baseN alphabet indexes
-var _reverseAlphabets = {};
-
-/**
- * BaseN-encodes a Uint8Array using the given alphabet.
- *
- * @param input the Uint8Array to encode.
- * @param maxline the maximum number of encoded characters per line to use,
- *          defaults to none.
- *
- * @return the baseN-encoded output string.
- */
-api.encode = function(input, alphabet, maxline) {
-  if(typeof alphabet !== 'string') {
-    throw new TypeError('"alphabet" must be a string.');
-  }
-  if(maxline !== undefined && typeof maxline !== 'number') {
-    throw new TypeError('"maxline" must be a number.');
-  }
-
-  var output = '';
-
-  if(!(input instanceof Uint8Array)) {
-    // assume forge byte buffer
-    output = _encodeWithByteBuffer(input, alphabet);
-  } else {
-    var i = 0;
-    var base = alphabet.length;
-    var first = alphabet.charAt(0);
-    var digits = [0];
-    for(i = 0; i < input.length; ++i) {
-      for(var j = 0, carry = input[i]; j < digits.length; ++j) {
-        carry += digits[j] << 8;
-        digits[j] = carry % base;
-        carry = (carry / base) | 0;
-      }
-
-      while(carry > 0) {
-        digits.push(carry % base);
-        carry = (carry / base) | 0;
-      }
-    }
-
-    // deal with leading zeros
-    for(i = 0; input[i] === 0 && i < input.length - 1; ++i) {
-      output += first;
-    }
-    // convert digits to a string
-    for(i = digits.length - 1; i >= 0; --i) {
-      output += alphabet[digits[i]];
-    }
-  }
-
-  if(maxline) {
-    var regex = new RegExp('.{1,' + maxline + '}', 'g');
-    output = output.match(regex).join('\r\n');
-  }
-
-  return output;
-};
-
-/**
- * Decodes a baseN-encoded (using the given alphabet) string to a
- * Uint8Array.
- *
- * @param input the baseN-encoded input string.
- *
- * @return the Uint8Array.
- */
-api.decode = function(input, alphabet) {
-  if(typeof input !== 'string') {
-    throw new TypeError('"input" must be a string.');
-  }
-  if(typeof alphabet !== 'string') {
-    throw new TypeError('"alphabet" must be a string.');
-  }
-
-  var table = _reverseAlphabets[alphabet];
-  if(!table) {
-    // compute reverse alphabet
-    table = _reverseAlphabets[alphabet] = [];
-    for(var i = 0; i < alphabet.length; ++i) {
-      table[alphabet.charCodeAt(i)] = i;
-    }
-  }
-
-  // remove whitespace characters
-  input = input.replace(/\s/g, '');
-
-  var base = alphabet.length;
-  var first = alphabet.charAt(0);
-  var bytes = [0];
-  for(var i = 0; i < input.length; i++) {
-    var value = table[input.charCodeAt(i)];
-    if(value === undefined) {
-      return;
-    }
-
-    for(var j = 0, carry = value; j < bytes.length; ++j) {
-      carry += bytes[j] * base;
-      bytes[j] = carry & 0xff;
-      carry >>= 8;
-    }
-
-    while(carry > 0) {
-      bytes.push(carry & 0xff);
-      carry >>= 8;
-    }
-  }
-
-  // deal with leading zeros
-  for(var k = 0; input[k] === first && k < input.length - 1; ++k) {
-    bytes.push(0);
-  }
-
-  if(typeof Buffer !== 'undefined') {
-    return Buffer.from(bytes.reverse());
-  }
-
-  return new Uint8Array(bytes.reverse());
-};
-
-function _encodeWithByteBuffer(input, alphabet) {
-  var i = 0;
-  var base = alphabet.length;
-  var first = alphabet.charAt(0);
-  var digits = [0];
-  for(i = 0; i < input.length(); ++i) {
-    for(var j = 0, carry = input.at(i); j < digits.length; ++j) {
-      carry += digits[j] << 8;
-      digits[j] = carry % base;
-      carry = (carry / base) | 0;
-    }
-
-    while(carry > 0) {
-      digits.push(carry % base);
-      carry = (carry / base) | 0;
-    }
-  }
-
-  var output = '';
-
-  // deal with leading zeros
-  for(i = 0; input.at(i) === 0 && i < input.length() - 1; ++i) {
-    output += first;
-  }
-  // convert digits to a string
-  for(i = digits.length - 1; i >= 0; --i) {
-    output += alphabet[digits[i]];
-  }
-
-  return output;
-}
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6).Buffer))
-
-/***/ }),
-/* 106 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * A Javascript implementation of AES Cipher Suites for TLS.
- *
- * @author Dave Longley
- *
- * Copyright (c) 2009-2015 Digital Bazaar, Inc.
- *
- */
-var forge = __webpack_require__(0);
-__webpack_require__(16);
-__webpack_require__(61);
-
-var tls = module.exports = forge.tls;
-
-/**
- * Supported cipher suites.
- */
-tls.CipherSuites['TLS_RSA_WITH_AES_128_CBC_SHA'] = {
-  id: [0x00, 0x2f],
-  name: 'TLS_RSA_WITH_AES_128_CBC_SHA',
-  initSecurityParameters: function(sp) {
-    sp.bulk_cipher_algorithm = tls.BulkCipherAlgorithm.aes;
-    sp.cipher_type = tls.CipherType.block;
-    sp.enc_key_length = 16;
-    sp.block_length = 16;
-    sp.fixed_iv_length = 16;
-    sp.record_iv_length = 16;
-    sp.mac_algorithm = tls.MACAlgorithm.hmac_sha1;
-    sp.mac_length = 20;
-    sp.mac_key_length = 20;
-  },
-  initConnectionState: initConnectionState
-};
-tls.CipherSuites['TLS_RSA_WITH_AES_256_CBC_SHA'] = {
-  id: [0x00, 0x35],
-  name: 'TLS_RSA_WITH_AES_256_CBC_SHA',
-  initSecurityParameters: function(sp) {
-    sp.bulk_cipher_algorithm = tls.BulkCipherAlgorithm.aes;
-    sp.cipher_type = tls.CipherType.block;
-    sp.enc_key_length = 32;
-    sp.block_length = 16;
-    sp.fixed_iv_length = 16;
-    sp.record_iv_length = 16;
-    sp.mac_algorithm = tls.MACAlgorithm.hmac_sha1;
-    sp.mac_length = 20;
-    sp.mac_key_length = 20;
-  },
-  initConnectionState: initConnectionState
-};
-
-function initConnectionState(state, c, sp) {
-  var client = (c.entity === forge.tls.ConnectionEnd.client);
-
-  // cipher setup
-  state.read.cipherState = {
-    init: false,
-    cipher: forge.cipher.createDecipher('AES-CBC', client ?
-      sp.keys.server_write_key : sp.keys.client_write_key),
-    iv: client ? sp.keys.server_write_IV : sp.keys.client_write_IV
-  };
-  state.write.cipherState = {
-    init: false,
-    cipher: forge.cipher.createCipher('AES-CBC', client ?
-      sp.keys.client_write_key : sp.keys.server_write_key),
-    iv: client ? sp.keys.client_write_IV : sp.keys.server_write_IV
-  };
-  state.read.cipherFunction = decrypt_aes_cbc_sha1;
-  state.write.cipherFunction = encrypt_aes_cbc_sha1;
-
-  // MAC setup
-  state.read.macLength = state.write.macLength = sp.mac_length;
-  state.read.macFunction = state.write.macFunction = tls.hmac_sha1;
-}
-
-/**
- * Encrypts the TLSCompressed record into a TLSCipherText record using AES
- * in CBC mode.
- *
- * @param record the TLSCompressed record to encrypt.
- * @param s the ConnectionState to use.
- *
- * @return true on success, false on failure.
- */
-function encrypt_aes_cbc_sha1(record, s) {
-  var rval = false;
-
-  // append MAC to fragment, update sequence number
-  var mac = s.macFunction(s.macKey, s.sequenceNumber, record);
-  record.fragment.putBytes(mac);
-  s.updateSequenceNumber();
-
-  // TLS 1.1+ use an explicit IV every time to protect against CBC attacks
-  var iv;
-  if(record.version.minor === tls.Versions.TLS_1_0.minor) {
-    // use the pre-generated IV when initializing for TLS 1.0, otherwise use
-    // the residue from the previous encryption
-    iv = s.cipherState.init ? null : s.cipherState.iv;
-  } else {
-    iv = forge.random.getBytesSync(16);
-  }
-
-  s.cipherState.init = true;
-
-  // start cipher
-  var cipher = s.cipherState.cipher;
-  cipher.start({iv: iv});
-
-  // TLS 1.1+ write IV into output
-  if(record.version.minor >= tls.Versions.TLS_1_1.minor) {
-    cipher.output.putBytes(iv);
-  }
-
-  // do encryption (default padding is appropriate)
-  cipher.update(record.fragment);
-  if(cipher.finish(encrypt_aes_cbc_sha1_padding)) {
-    // set record fragment to encrypted output
-    record.fragment = cipher.output;
-    record.length = record.fragment.length();
-    rval = true;
-  }
-
-  return rval;
-}
-
-/**
- * Handles padding for aes_cbc_sha1 in encrypt mode.
- *
- * @param blockSize the block size.
- * @param input the input buffer.
- * @param decrypt true in decrypt mode, false in encrypt mode.
- *
- * @return true on success, false on failure.
- */
-function encrypt_aes_cbc_sha1_padding(blockSize, input, decrypt) {
-  /* The encrypted data length (TLSCiphertext.length) is one more than the sum
-   of SecurityParameters.block_length, TLSCompressed.length,
-   SecurityParameters.mac_length, and padding_length.
-
-   The padding may be any length up to 255 bytes long, as long as it results in
-   the TLSCiphertext.length being an integral multiple of the block length.
-   Lengths longer than necessary might be desirable to frustrate attacks on a
-   protocol based on analysis of the lengths of exchanged messages. Each uint8
-   in the padding data vector must be filled with the padding length value.
-
-   The padding length should be such that the total size of the
-   GenericBlockCipher structure is a multiple of the cipher's block length.
-   Legal values range from zero to 255, inclusive. This length specifies the
-   length of the padding field exclusive of the padding_length field itself.
-
-   This is slightly different from PKCS#7 because the padding value is 1
-   less than the actual number of padding bytes if you include the
-   padding_length uint8 itself as a padding byte. */
-  if(!decrypt) {
-    // get the number of padding bytes required to reach the blockSize and
-    // subtract 1 for the padding value (to make room for the padding_length
-    // uint8)
-    var padding = blockSize - (input.length() % blockSize);
-    input.fillWithByte(padding - 1, padding);
-  }
-  return true;
-}
-
-/**
- * Handles padding for aes_cbc_sha1 in decrypt mode.
- *
- * @param blockSize the block size.
- * @param output the output buffer.
- * @param decrypt true in decrypt mode, false in encrypt mode.
- *
- * @return true on success, false on failure.
- */
-function decrypt_aes_cbc_sha1_padding(blockSize, output, decrypt) {
-  var rval = true;
-  if(decrypt) {
-    /* The last byte in the output specifies the number of padding bytes not
-      including itself. Each of the padding bytes has the same value as that
-      last byte (known as the padding_length). Here we check all padding
-      bytes to ensure they have the value of padding_length even if one of
-      them is bad in order to ward-off timing attacks. */
-    var len = output.length();
-    var paddingLength = output.last();
-    for(var i = len - 1 - paddingLength; i < len - 1; ++i) {
-      rval = rval && (output.at(i) == paddingLength);
-    }
-    if(rval) {
-      // trim off padding bytes and last padding length byte
-      output.truncate(paddingLength + 1);
-    }
-  }
-  return rval;
-}
-
-/**
- * Decrypts a TLSCipherText record into a TLSCompressed record using
- * AES in CBC mode.
- *
- * @param record the TLSCipherText record to decrypt.
- * @param s the ConnectionState to use.
- *
- * @return true on success, false on failure.
- */
-function decrypt_aes_cbc_sha1(record, s) {
-  var rval = false;
-
-  var iv;
-  if(record.version.minor === tls.Versions.TLS_1_0.minor) {
-    // use pre-generated IV when initializing for TLS 1.0, otherwise use the
-    // residue from the previous decryption
-    iv = s.cipherState.init ? null : s.cipherState.iv;
-  } else {
-    // TLS 1.1+ use an explicit IV every time to protect against CBC attacks
-    // that is appended to the record fragment
-    iv = record.fragment.getBytes(16);
-  }
-
-  s.cipherState.init = true;
-
-  // start cipher
-  var cipher = s.cipherState.cipher;
-  cipher.start({iv: iv});
-
-  // do decryption
-  cipher.update(record.fragment);
-  rval = cipher.finish(decrypt_aes_cbc_sha1_padding);
-
-  // even if decryption fails, keep going to minimize timing attacks
-
-  // decrypted data:
-  // first (len - 20) bytes = application data
-  // last 20 bytes          = MAC
-  var macLen = s.macLength;
-
-  // create a random MAC to check against should the mac length check fail
-  // Note: do this regardless of the failure to keep timing consistent
-  var mac = forge.random.getBytesSync(macLen);
-
-  // get fragment and mac
-  var len = cipher.output.length();
-  if(len >= macLen) {
-    record.fragment = cipher.output.getBytes(len - macLen);
-    mac = cipher.output.getBytes(macLen);
-  } else {
-    // bad data, but get bytes anyway to try to keep timing consistent
-    record.fragment = cipher.output.getBytes();
-  }
-  record.fragment = forge.util.createBuffer(record.fragment);
-  record.length = record.fragment.length();
-
-  // see if data integrity checks out, update sequence number
-  var mac2 = s.macFunction(s.macKey, s.sequenceNumber, record);
-  s.updateSequenceNumber();
-  rval = compareMacs(s.macKey, mac, mac2) && rval;
-  return rval;
-}
-
-/**
- * Safely compare two MACs. This function will compare two MACs in a way
- * that protects against timing attacks.
- *
- * TODO: Expose elsewhere as a utility API.
- *
- * See: https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2011/february/double-hmac-verification/
- *
- * @param key the MAC key to use.
- * @param mac1 as a binary-encoded string of bytes.
- * @param mac2 as a binary-encoded string of bytes.
- *
- * @return true if the MACs are the same, false if not.
- */
-function compareMacs(key, mac1, mac2) {
-  var hmac = forge.hmac.create();
-
-  hmac.start('SHA1', key);
-  hmac.update(mac1);
-  mac1 = hmac.digest().getBytes();
-
-  hmac.start(null, null);
-  hmac.update(mac2);
-  mac2 = hmac.digest().getBytes();
-
-  return mac1 === mac2;
-}
-
-
-/***/ }),
-/* 107 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Node.js module for Forge mask generation functions.
- *
- * @author Stefan Siegl
- *
- * Copyright 2012 Stefan Siegl <stesie@brokenpipe.de>
- */
-var forge = __webpack_require__(0);
-__webpack_require__(71);
-
-module.exports = forge.mgf = forge.mgf || {};
-forge.mgf.mgf1 = forge.mgf1;
-
-
-/***/ }),
-/* 108 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/* WEBPACK VAR INJECTION */(function(Buffer) {/**
- * JavaScript implementation of Ed25519.
- *
- * Copyright (c) 2017-2019 Digital Bazaar, Inc.
- *
- * This implementation is based on the most excellent TweetNaCl which is
- * in the public domain. Many thanks to its contributors:
- *
- * https://github.com/dchest/tweetnacl-js
- */
-var forge = __webpack_require__(0);
-__webpack_require__(29);
-__webpack_require__(11);
-__webpack_require__(73);
-__webpack_require__(1);
-var asn1Validator = __webpack_require__(109);
-var publicKeyValidator = asn1Validator.publicKeyValidator;
-var privateKeyValidator = asn1Validator.privateKeyValidator;
-
-if(typeof BigInteger === 'undefined') {
-  var BigInteger = forge.jsbn.BigInteger;
-}
-
-var ByteBuffer = forge.util.ByteBuffer;
-var NativeBuffer = typeof Buffer === 'undefined' ? Uint8Array : Buffer;
-
-/*
- * Ed25519 algorithms, see RFC 8032:
- * https://tools.ietf.org/html/rfc8032
- */
-forge.pki = forge.pki || {};
-module.exports = forge.pki.ed25519 = forge.ed25519 = forge.ed25519 || {};
-var ed25519 = forge.ed25519;
-
-ed25519.constants = {};
-ed25519.constants.PUBLIC_KEY_BYTE_LENGTH = 32;
-ed25519.constants.PRIVATE_KEY_BYTE_LENGTH = 64;
-ed25519.constants.SEED_BYTE_LENGTH = 32;
-ed25519.constants.SIGN_BYTE_LENGTH = 64;
-ed25519.constants.HASH_BYTE_LENGTH = 64;
-
-ed25519.generateKeyPair = function(options) {
-  options = options || {};
-  var seed = options.seed;
-  if(seed === undefined) {
-    // generate seed
-    seed = forge.random.getBytesSync(ed25519.constants.SEED_BYTE_LENGTH);
-  } else if(typeof seed === 'string') {
-    if(seed.length !== ed25519.constants.SEED_BYTE_LENGTH) {
-      throw new TypeError(
-        '"seed" must be ' + ed25519.constants.SEED_BYTE_LENGTH +
-        ' bytes in length.');
-    }
-  } else if(!(seed instanceof Uint8Array)) {
-    throw new TypeError(
-      '"seed" must be a node.js Buffer, Uint8Array, or a binary string.');
-  }
-
-  seed = messageToNativeBuffer({message: seed, encoding: 'binary'});
-
-  var pk = new NativeBuffer(ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
-  var sk = new NativeBuffer(ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
-  for(var i = 0; i < 32; ++i) {
-    sk[i] = seed[i];
-  }
-  crypto_sign_keypair(pk, sk);
-  return {publicKey: pk, privateKey: sk};
-};
-
-/**
- * Converts a private key from a RFC8410 ASN.1 encoding.
- *
- * @param obj - The asn1 representation of a private key.
- *
- * @returns {Object} keyInfo - The key information.
- * @returns {Buffer|Uint8Array} keyInfo.privateKeyBytes - 32 private key bytes.
- */
-ed25519.privateKeyFromAsn1 = function(obj) {
-  var capture = {};
-  var errors = [];
-  var valid = forge.asn1.validate(obj, privateKeyValidator, capture, errors);
-  if(!valid) {
-    var error = new Error('Invalid Key.');
-    error.errors = errors;
-    throw error;
-  }
-  var oid = forge.asn1.derToOid(capture.privateKeyOid);
-  var ed25519Oid = forge.oids.EdDSA25519;
-  if(oid !== ed25519Oid) {
-    throw new Error('Invalid OID "' + oid + '"; OID must be "' +
-      ed25519Oid + '".');
-  }
-  var privateKey = capture.privateKey;
-  // manually extract the private key bytes from nested octet string, see FIXME:
-  // https://github.com/digitalbazaar/forge/blob/master/lib/asn1.js#L542
-  var privateKeyBytes = messageToNativeBuffer({
-    message: forge.asn1.fromDer(privateKey).value,
-    encoding: 'binary'
-  });
-  // TODO: RFC8410 specifies a format for encoding the public key bytes along
-  // with the private key bytes. `publicKeyBytes` can be returned in the
-  // future. https://tools.ietf.org/html/rfc8410#section-10.3
-  return {privateKeyBytes: privateKeyBytes};
-};
-
-/**
- * Converts a public key from a RFC8410 ASN.1 encoding.
- *
- * @param obj - The asn1 representation of a public key.
- *
- * @return {Buffer|Uint8Array} - 32 public key bytes.
- */
-ed25519.publicKeyFromAsn1 = function(obj) {
-  // get SubjectPublicKeyInfo
-  var capture = {};
-  var errors = [];
-  var valid = forge.asn1.validate(obj, publicKeyValidator, capture, errors);
-  if(!valid) {
-    var error = new Error('Invalid Key.');
-    error.errors = errors;
-    throw error;
-  }
-  var oid = forge.asn1.derToOid(capture.publicKeyOid);
-  var ed25519Oid = forge.oids.EdDSA25519;
-  if(oid !== ed25519Oid) {
-    throw new Error('Invalid OID "' + oid + '"; OID must be "' +
-      ed25519Oid + '".');
-  }
-  var publicKeyBytes = capture.ed25519PublicKey;
-  if(publicKeyBytes.length !== ed25519.constants.PUBLIC_KEY_BYTE_LENGTH) {
-    throw new Error('Key length is invalid.');
-  }
-  return messageToNativeBuffer({
-    message: publicKeyBytes,
-    encoding: 'binary'
-  });
-};
-
-ed25519.publicKeyFromPrivateKey = function(options) {
-  options = options || {};
-  var privateKey = messageToNativeBuffer({
-    message: options.privateKey, encoding: 'binary'
-  });
-  if(privateKey.length !== ed25519.constants.PRIVATE_KEY_BYTE_LENGTH) {
-    throw new TypeError(
-      '"options.privateKey" must have a byte length of ' +
-      ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
-  }
-
-  var pk = new NativeBuffer(ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
-  for(var i = 0; i < pk.length; ++i) {
-    pk[i] = privateKey[32 + i];
-  }
-  return pk;
-};
-
-ed25519.sign = function(options) {
-  options = options || {};
-  var msg = messageToNativeBuffer(options);
-  var privateKey = messageToNativeBuffer({
-    message: options.privateKey,
-    encoding: 'binary'
-  });
-  if(privateKey.length === ed25519.constants.SEED_BYTE_LENGTH) {
-    var keyPair = ed25519.generateKeyPair({seed: privateKey});
-    privateKey = keyPair.privateKey;
-  } else if(privateKey.length !== ed25519.constants.PRIVATE_KEY_BYTE_LENGTH) {
-    throw new TypeError(
-      '"options.privateKey" must have a byte length of ' +
-      ed25519.constants.SEED_BYTE_LENGTH + ' or ' +
-      ed25519.constants.PRIVATE_KEY_BYTE_LENGTH);
-  }
-
-  var signedMsg = new NativeBuffer(
-    ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
-  crypto_sign(signedMsg, msg, msg.length, privateKey);
-
-  var sig = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH);
-  for(var i = 0; i < sig.length; ++i) {
-    sig[i] = signedMsg[i];
-  }
-  return sig;
-};
-
-ed25519.verify = function(options) {
-  options = options || {};
-  var msg = messageToNativeBuffer(options);
-  if(options.signature === undefined) {
-    throw new TypeError(
-      '"options.signature" must be a node.js Buffer, a Uint8Array, a forge ' +
-      'ByteBuffer, or a binary string.');
-  }
-  var sig = messageToNativeBuffer({
-    message: options.signature,
-    encoding: 'binary'
-  });
-  if(sig.length !== ed25519.constants.SIGN_BYTE_LENGTH) {
-    throw new TypeError(
-      '"options.signature" must have a byte length of ' +
-      ed25519.constants.SIGN_BYTE_LENGTH);
-  }
-  var publicKey = messageToNativeBuffer({
-    message: options.publicKey,
-    encoding: 'binary'
-  });
-  if(publicKey.length !== ed25519.constants.PUBLIC_KEY_BYTE_LENGTH) {
-    throw new TypeError(
-      '"options.publicKey" must have a byte length of ' +
-      ed25519.constants.PUBLIC_KEY_BYTE_LENGTH);
-  }
-
-  var sm = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
-  var m = new NativeBuffer(ed25519.constants.SIGN_BYTE_LENGTH + msg.length);
-  var i;
-  for(i = 0; i < ed25519.constants.SIGN_BYTE_LENGTH; ++i) {
-    sm[i] = sig[i];
-  }
-  for(i = 0; i < msg.length; ++i) {
-    sm[i + ed25519.constants.SIGN_BYTE_LENGTH] = msg[i];
-  }
-  return (crypto_sign_open(m, sm, sm.length, publicKey) >= 0);
-};
-
-function messageToNativeBuffer(options) {
-  var message = options.message;
-  if(message instanceof Uint8Array || message instanceof NativeBuffer) {
-    return message;
-  }
-
-  var encoding = options.encoding;
-  if(message === undefined) {
-    if(options.md) {
-      // TODO: more rigorous validation that `md` is a MessageDigest
-      message = options.md.digest().getBytes();
-      encoding = 'binary';
-    } else {
-      throw new TypeError('"options.message" or "options.md" not specified.');
-    }
-  }
-
-  if(typeof message === 'string' && !encoding) {
-    throw new TypeError('"options.encoding" must be "binary" or "utf8".');
-  }
-
-  if(typeof message === 'string') {
-    if(typeof Buffer !== 'undefined') {
-      return Buffer.from(message, encoding);
-    }
-    message = new ByteBuffer(message, encoding);
-  } else if(!(message instanceof ByteBuffer)) {
-    throw new TypeError(
-      '"options.message" must be a node.js Buffer, a Uint8Array, a forge ' +
-      'ByteBuffer, or a string with "options.encoding" specifying its ' +
-      'encoding.');
-  }
-
-  // convert to native buffer
-  var buffer = new NativeBuffer(message.length());
-  for(var i = 0; i < buffer.length; ++i) {
-    buffer[i] = message.at(i);
-  }
-  return buffer;
-}
-
-var gf0 = gf();
-var gf1 = gf([1]);
-var D = gf([
-  0x78a3, 0x1359, 0x4dca, 0x75eb, 0xd8ab, 0x4141, 0x0a4d, 0x0070,
-  0xe898, 0x7779, 0x4079, 0x8cc7, 0xfe73, 0x2b6f, 0x6cee, 0x5203]);
-var D2 = gf([
-  0xf159, 0x26b2, 0x9b94, 0xebd6, 0xb156, 0x8283, 0x149a, 0x00e0,
-  0xd130, 0xeef3, 0x80f2, 0x198e, 0xfce7, 0x56df, 0xd9dc, 0x2406]);
-var X = gf([
-  0xd51a, 0x8f25, 0x2d60, 0xc956, 0xa7b2, 0x9525, 0xc760, 0x692c,
-  0xdc5c, 0xfdd6, 0xe231, 0xc0a4, 0x53fe, 0xcd6e, 0x36d3, 0x2169]);
-var Y = gf([
-  0x6658, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666,
-  0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666, 0x6666]);
-var L = new Float64Array([
-  0xed, 0xd3, 0xf5, 0x5c, 0x1a, 0x63, 0x12, 0x58,
-  0xd6, 0x9c, 0xf7, 0xa2, 0xde, 0xf9, 0xde, 0x14,
-  0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x10]);
-var I = gf([
-  0xa0b0, 0x4a0e, 0x1b27, 0xc4ee, 0xe478, 0xad2f, 0x1806, 0x2f43,
-  0xd7a7, 0x3dfb, 0x0099, 0x2b4d, 0xdf0b, 0x4fc1, 0x2480, 0x2b83]);
-
-// TODO: update forge buffer implementation to use `Buffer` or `Uint8Array`,
-// whichever is available, to improve performance
-function sha512(msg, msgLen) {
-  // Note: `out` and `msg` are NativeBuffer
-  var md = forge.md.sha512.create();
-  var buffer = new ByteBuffer(msg);
-  md.update(buffer.getBytes(msgLen), 'binary');
-  var hash = md.digest().getBytes();
-  if(typeof Buffer !== 'undefined') {
-    return Buffer.from(hash, 'binary');
-  }
-  var out = new NativeBuffer(ed25519.constants.HASH_BYTE_LENGTH);
-  for(var i = 0; i < 64; ++i) {
-    out[i] = hash.charCodeAt(i);
-  }
-  return out;
-}
-
-function crypto_sign_keypair(pk, sk) {
-  var p = [gf(), gf(), gf(), gf()];
-  var i;
-
-  var d = sha512(sk, 32);
-  d[0] &= 248;
-  d[31] &= 127;
-  d[31] |= 64;
-
-  scalarbase(p, d);
-  pack(pk, p);
-
-  for(i = 0; i < 32; ++i) {
-    sk[i + 32] = pk[i];
-  }
-  return 0;
-}
-
-// Note: difference from C - smlen returned, not passed as argument.
-function crypto_sign(sm, m, n, sk) {
-  var i, j, x = new Float64Array(64);
-  var p = [gf(), gf(), gf(), gf()];
-
-  var d = sha512(sk, 32);
-  d[0] &= 248;
-  d[31] &= 127;
-  d[31] |= 64;
-
-  var smlen = n + 64;
-  for(i = 0; i < n; ++i) {
-    sm[64 + i] = m[i];
-  }
-  for(i = 0; i < 32; ++i) {
-    sm[32 + i] = d[32 + i];
-  }
-
-  var r = sha512(sm.subarray(32), n + 32);
-  reduce(r);
-  scalarbase(p, r);
-  pack(sm, p);
-
-  for(i = 32; i < 64; ++i) {
-    sm[i] = sk[i];
-  }
-  var h = sha512(sm, n + 64);
-  reduce(h);
-
-  for(i = 32; i < 64; ++i) {
-    x[i] = 0;
-  }
-  for(i = 0; i < 32; ++i) {
-    x[i] = r[i];
-  }
-  for(i = 0; i < 32; ++i) {
-    for(j = 0; j < 32; j++) {
-      x[i + j] += h[i] * d[j];
-    }
-  }
-
-  modL(sm.subarray(32), x);
-  return smlen;
-}
-
-function crypto_sign_open(m, sm, n, pk) {
-  var i, mlen;
-  var t = new NativeBuffer(32);
-  var p = [gf(), gf(), gf(), gf()],
-      q = [gf(), gf(), gf(), gf()];
-
-  mlen = -1;
-  if(n < 64) {
-    return -1;
-  }
-
-  if(unpackneg(q, pk)) {
-    return -1;
-  }
-
-  for(i = 0; i < n; ++i) {
-    m[i] = sm[i];
-  }
-  for(i = 0; i < 32; ++i) {
-    m[i + 32] = pk[i];
-  }
-  var h = sha512(m, n);
-  reduce(h);
-  scalarmult(p, q, h);
-
-  scalarbase(q, sm.subarray(32));
-  add(p, q);
-  pack(t, p);
-
-  n -= 64;
-  if(crypto_verify_32(sm, 0, t, 0)) {
-    for(i = 0; i < n; ++i) {
-      m[i] = 0;
-    }
-    return -1;
-  }
-
-  for(i = 0; i < n; ++i) {
-    m[i] = sm[i + 64];
-  }
-  mlen = n;
-  return mlen;
-}
-
-function modL(r, x) {
-  var carry, i, j, k;
-  for(i = 63; i >= 32; --i) {
-    carry = 0;
-    for(j = i - 32, k = i - 12; j < k; ++j) {
-      x[j] += carry - 16 * x[i] * L[j - (i - 32)];
-      carry = (x[j] + 128) >> 8;
-      x[j] -= carry * 256;
-    }
-    x[j] += carry;
-    x[i] = 0;
-  }
-  carry = 0;
-  for(j = 0; j < 32; ++j) {
-    x[j] += carry - (x[31] >> 4) * L[j];
-    carry = x[j] >> 8;
-    x[j] &= 255;
-  }
-  for(j = 0; j < 32; ++j) {
-    x[j] -= carry * L[j];
-  }
-  for(i = 0; i < 32; ++i) {
-    x[i + 1] += x[i] >> 8;
-    r[i] = x[i] & 255;
-  }
-}
-
-function reduce(r) {
-  var x = new Float64Array(64);
-  for(var i = 0; i < 64; ++i) {
-    x[i] = r[i];
-    r[i] = 0;
-  }
-  modL(r, x);
-}
-
-function add(p, q) {
-  var a = gf(), b = gf(), c = gf(),
-      d = gf(), e = gf(), f = gf(),
-      g = gf(), h = gf(), t = gf();
-
-  Z(a, p[1], p[0]);
-  Z(t, q[1], q[0]);
-  M(a, a, t);
-  A(b, p[0], p[1]);
-  A(t, q[0], q[1]);
-  M(b, b, t);
-  M(c, p[3], q[3]);
-  M(c, c, D2);
-  M(d, p[2], q[2]);
-  A(d, d, d);
-  Z(e, b, a);
-  Z(f, d, c);
-  A(g, d, c);
-  A(h, b, a);
-
-  M(p[0], e, f);
-  M(p[1], h, g);
-  M(p[2], g, f);
-  M(p[3], e, h);
-}
-
-function cswap(p, q, b) {
-  for(var i = 0; i < 4; ++i) {
-    sel25519(p[i], q[i], b);
-  }
-}
-
-function pack(r, p) {
-  var tx = gf(), ty = gf(), zi = gf();
-  inv25519(zi, p[2]);
-  M(tx, p[0], zi);
-  M(ty, p[1], zi);
-  pack25519(r, ty);
-  r[31] ^= par25519(tx) << 7;
-}
-
-function pack25519(o, n) {
-  var i, j, b;
-  var m = gf(), t = gf();
-  for(i = 0; i < 16; ++i) {
-    t[i] = n[i];
-  }
-  car25519(t);
-  car25519(t);
-  car25519(t);
-  for(j = 0; j < 2; ++j) {
-    m[0] = t[0] - 0xffed;
-    for(i = 1; i < 15; ++i) {
-      m[i] = t[i] - 0xffff - ((m[i - 1] >> 16) & 1);
-      m[i-1] &= 0xffff;
-    }
-    m[15] = t[15] - 0x7fff - ((m[14] >> 16) & 1);
-    b = (m[15] >> 16) & 1;
-    m[14] &= 0xffff;
-    sel25519(t, m, 1 - b);
-  }
-  for (i = 0; i < 16; i++) {
-    o[2 * i] = t[i] & 0xff;
-    o[2 * i + 1] = t[i] >> 8;
-  }
-}
-
-function unpackneg(r, p) {
-  var t = gf(), chk = gf(), num = gf(),
-      den = gf(), den2 = gf(), den4 = gf(),
-      den6 = gf();
-
-  set25519(r[2], gf1);
-  unpack25519(r[1], p);
-  S(num, r[1]);
-  M(den, num, D);
-  Z(num, num, r[2]);
-  A(den, r[2], den);
-
-  S(den2, den);
-  S(den4, den2);
-  M(den6, den4, den2);
-  M(t, den6, num);
-  M(t, t, den);
-
-  pow2523(t, t);
-  M(t, t, num);
-  M(t, t, den);
-  M(t, t, den);
-  M(r[0], t, den);
-
-  S(chk, r[0]);
-  M(chk, chk, den);
-  if(neq25519(chk, num)) {
-    M(r[0], r[0], I);
-  }
-
-  S(chk, r[0]);
-  M(chk, chk, den);
-  if(neq25519(chk, num)) {
-    return -1;
-  }
-
-  if(par25519(r[0]) === (p[31] >> 7)) {
-    Z(r[0], gf0, r[0]);
-  }
-
-  M(r[3], r[0], r[1]);
-  return 0;
-}
-
-function unpack25519(o, n) {
-  var i;
-  for(i = 0; i < 16; ++i) {
-    o[i] = n[2 * i] + (n[2 * i + 1] << 8);
-  }
-  o[15] &= 0x7fff;
-}
-
-function pow2523(o, i) {
-  var c = gf();
-  var a;
-  for(a = 0; a < 16; ++a) {
-    c[a] = i[a];
-  }
-  for(a = 250; a >= 0; --a) {
-    S(c, c);
-    if(a !== 1) {
-      M(c, c, i);
-    }
-  }
-  for(a = 0; a < 16; ++a) {
-    o[a] = c[a];
-  }
-}
-
-function neq25519(a, b) {
-  var c = new NativeBuffer(32);
-  var d = new NativeBuffer(32);
-  pack25519(c, a);
-  pack25519(d, b);
-  return crypto_verify_32(c, 0, d, 0);
-}
-
-function crypto_verify_32(x, xi, y, yi) {
-  return vn(x, xi, y, yi, 32);
-}
-
-function vn(x, xi, y, yi, n) {
-  var i, d = 0;
-  for(i = 0; i < n; ++i) {
-    d |= x[xi + i] ^ y[yi + i];
-  }
-  return (1 & ((d - 1) >>> 8)) - 1;
-}
-
-function par25519(a) {
-  var d = new NativeBuffer(32);
-  pack25519(d, a);
-  return d[0] & 1;
-}
-
-function scalarmult(p, q, s) {
-  var b, i;
-  set25519(p[0], gf0);
-  set25519(p[1], gf1);
-  set25519(p[2], gf1);
-  set25519(p[3], gf0);
-  for(i = 255; i >= 0; --i) {
-    b = (s[(i / 8)|0] >> (i & 7)) & 1;
-    cswap(p, q, b);
-    add(q, p);
-    add(p, p);
-    cswap(p, q, b);
-  }
-}
-
-function scalarbase(p, s) {
-  var q = [gf(), gf(), gf(), gf()];
-  set25519(q[0], X);
-  set25519(q[1], Y);
-  set25519(q[2], gf1);
-  M(q[3], X, Y);
-  scalarmult(p, q, s);
-}
-
-function set25519(r, a) {
-  var i;
-  for(i = 0; i < 16; i++) {
-    r[i] = a[i] | 0;
-  }
-}
-
-function inv25519(o, i) {
-  var c = gf();
-  var a;
-  for(a = 0; a < 16; ++a) {
-    c[a] = i[a];
-  }
-  for(a = 253; a >= 0; --a) {
-    S(c, c);
-    if(a !== 2 && a !== 4) {
-      M(c, c, i);
-    }
-  }
-  for(a = 0; a < 16; ++a) {
-    o[a] = c[a];
-  }
-}
-
-function car25519(o) {
-  var i, v, c = 1;
-  for(i = 0; i < 16; ++i) {
-    v = o[i] + c + 65535;
-    c = Math.floor(v / 65536);
-    o[i] = v - c * 65536;
-  }
-  o[0] += c - 1 + 37 * (c - 1);
-}
-
-function sel25519(p, q, b) {
-  var t, c = ~(b - 1);
-  for(var i = 0; i < 16; ++i) {
-    t = c & (p[i] ^ q[i]);
-    p[i] ^= t;
-    q[i] ^= t;
-  }
-}
-
-function gf(init) {
-  var i, r = new Float64Array(16);
-  if(init) {
-    for(i = 0; i < init.length; ++i) {
-      r[i] = init[i];
-    }
-  }
-  return r;
-}
-
-function A(o, a, b) {
-  for(var i = 0; i < 16; ++i) {
-    o[i] = a[i] + b[i];
-  }
-}
-
-function Z(o, a, b) {
-  for(var i = 0; i < 16; ++i) {
-    o[i] = a[i] - b[i];
-  }
-}
-
-function S(o, a) {
-  M(o, a, a);
-}
-
-function M(o, a, b) {
-  var v, c,
-     t0 = 0,  t1 = 0,  t2 = 0,  t3 = 0,  t4 = 0,  t5 = 0,  t6 = 0,  t7 = 0,
-     t8 = 0,  t9 = 0, t10 = 0, t11 = 0, t12 = 0, t13 = 0, t14 = 0, t15 = 0,
-    t16 = 0, t17 = 0, t18 = 0, t19 = 0, t20 = 0, t21 = 0, t22 = 0, t23 = 0,
-    t24 = 0, t25 = 0, t26 = 0, t27 = 0, t28 = 0, t29 = 0, t30 = 0,
-    b0 = b[0],
-    b1 = b[1],
-    b2 = b[2],
-    b3 = b[3],
-    b4 = b[4],
-    b5 = b[5],
-    b6 = b[6],
-    b7 = b[7],
-    b8 = b[8],
-    b9 = b[9],
-    b10 = b[10],
-    b11 = b[11],
-    b12 = b[12],
-    b13 = b[13],
-    b14 = b[14],
-    b15 = b[15];
-
-  v = a[0];
-  t0 += v * b0;
-  t1 += v * b1;
-  t2 += v * b2;
-  t3 += v * b3;
-  t4 += v * b4;
-  t5 += v * b5;
-  t6 += v * b6;
-  t7 += v * b7;
-  t8 += v * b8;
-  t9 += v * b9;
-  t10 += v * b10;
-  t11 += v * b11;
-  t12 += v * b12;
-  t13 += v * b13;
-  t14 += v * b14;
-  t15 += v * b15;
-  v = a[1];
-  t1 += v * b0;
-  t2 += v * b1;
-  t3 += v * b2;
-  t4 += v * b3;
-  t5 += v * b4;
-  t6 += v * b5;
-  t7 += v * b6;
-  t8 += v * b7;
-  t9 += v * b8;
-  t10 += v * b9;
-  t11 += v * b10;
-  t12 += v * b11;
-  t13 += v * b12;
-  t14 += v * b13;
-  t15 += v * b14;
-  t16 += v * b15;
-  v = a[2];
-  t2 += v * b0;
-  t3 += v * b1;
-  t4 += v * b2;
-  t5 += v * b3;
-  t6 += v * b4;
-  t7 += v * b5;
-  t8 += v * b6;
-  t9 += v * b7;
-  t10 += v * b8;
-  t11 += v * b9;
-  t12 += v * b10;
-  t13 += v * b11;
-  t14 += v * b12;
-  t15 += v * b13;
-  t16 += v * b14;
-  t17 += v * b15;
-  v = a[3];
-  t3 += v * b0;
-  t4 += v * b1;
-  t5 += v * b2;
-  t6 += v * b3;
-  t7 += v * b4;
-  t8 += v * b5;
-  t9 += v * b6;
-  t10 += v * b7;
-  t11 += v * b8;
-  t12 += v * b9;
-  t13 += v * b10;
-  t14 += v * b11;
-  t15 += v * b12;
-  t16 += v * b13;
-  t17 += v * b14;
-  t18 += v * b15;
-  v = a[4];
-  t4 += v * b0;
-  t5 += v * b1;
-  t6 += v * b2;
-  t7 += v * b3;
-  t8 += v * b4;
-  t9 += v * b5;
-  t10 += v * b6;
-  t11 += v * b7;
-  t12 += v * b8;
-  t13 += v * b9;
-  t14 += v * b10;
-  t15 += v * b11;
-  t16 += v * b12;
-  t17 += v * b13;
-  t18 += v * b14;
-  t19 += v * b15;
-  v = a[5];
-  t5 += v * b0;
-  t6 += v * b1;
-  t7 += v * b2;
-  t8 += v * b3;
-  t9 += v * b4;
-  t10 += v * b5;
-  t11 += v * b6;
-  t12 += v * b7;
-  t13 += v * b8;
-  t14 += v * b9;
-  t15 += v * b10;
-  t16 += v * b11;
-  t17 += v * b12;
-  t18 += v * b13;
-  t19 += v * b14;
-  t20 += v * b15;
-  v = a[6];
-  t6 += v * b0;
-  t7 += v * b1;
-  t8 += v * b2;
-  t9 += v * b3;
-  t10 += v * b4;
-  t11 += v * b5;
-  t12 += v * b6;
-  t13 += v * b7;
-  t14 += v * b8;
-  t15 += v * b9;
-  t16 += v * b10;
-  t17 += v * b11;
-  t18 += v * b12;
-  t19 += v * b13;
-  t20 += v * b14;
-  t21 += v * b15;
-  v = a[7];
-  t7 += v * b0;
-  t8 += v * b1;
-  t9 += v * b2;
-  t10 += v * b3;
-  t11 += v * b4;
-  t12 += v * b5;
-  t13 += v * b6;
-  t14 += v * b7;
-  t15 += v * b8;
-  t16 += v * b9;
-  t17 += v * b10;
-  t18 += v * b11;
-  t19 += v * b12;
-  t20 += v * b13;
-  t21 += v * b14;
-  t22 += v * b15;
-  v = a[8];
-  t8 += v * b0;
-  t9 += v * b1;
-  t10 += v * b2;
-  t11 += v * b3;
-  t12 += v * b4;
-  t13 += v * b5;
-  t14 += v * b6;
-  t15 += v * b7;
-  t16 += v * b8;
-  t17 += v * b9;
-  t18 += v * b10;
-  t19 += v * b11;
-  t20 += v * b12;
-  t21 += v * b13;
-  t22 += v * b14;
-  t23 += v * b15;
-  v = a[9];
-  t9 += v * b0;
-  t10 += v * b1;
-  t11 += v * b2;
-  t12 += v * b3;
-  t13 += v * b4;
-  t14 += v * b5;
-  t15 += v * b6;
-  t16 += v * b7;
-  t17 += v * b8;
-  t18 += v * b9;
-  t19 += v * b10;
-  t20 += v * b11;
-  t21 += v * b12;
-  t22 += v * b13;
-  t23 += v * b14;
-  t24 += v * b15;
-  v = a[10];
-  t10 += v * b0;
-  t11 += v * b1;
-  t12 += v * b2;
-  t13 += v * b3;
-  t14 += v * b4;
-  t15 += v * b5;
-  t16 += v * b6;
-  t17 += v * b7;
-  t18 += v * b8;
-  t19 += v * b9;
-  t20 += v * b10;
-  t21 += v * b11;
-  t22 += v * b12;
-  t23 += v * b13;
-  t24 += v * b14;
-  t25 += v * b15;
-  v = a[11];
-  t11 += v * b0;
-  t12 += v * b1;
-  t13 += v * b2;
-  t14 += v * b3;
-  t15 += v * b4;
-  t16 += v * b5;
-  t17 += v * b6;
-  t18 += v * b7;
-  t19 += v * b8;
-  t20 += v * b9;
-  t21 += v * b10;
-  t22 += v * b11;
-  t23 += v * b12;
-  t24 += v * b13;
-  t25 += v * b14;
-  t26 += v * b15;
-  v = a[12];
-  t12 += v * b0;
-  t13 += v * b1;
-  t14 += v * b2;
-  t15 += v * b3;
-  t16 += v * b4;
-  t17 += v * b5;
-  t18 += v * b6;
-  t19 += v * b7;
-  t20 += v * b8;
-  t21 += v * b9;
-  t22 += v * b10;
-  t23 += v * b11;
-  t24 += v * b12;
-  t25 += v * b13;
-  t26 += v * b14;
-  t27 += v * b15;
-  v = a[13];
-  t13 += v * b0;
-  t14 += v * b1;
-  t15 += v * b2;
-  t16 += v * b3;
-  t17 += v * b4;
-  t18 += v * b5;
-  t19 += v * b6;
-  t20 += v * b7;
-  t21 += v * b8;
-  t22 += v * b9;
-  t23 += v * b10;
-  t24 += v * b11;
-  t25 += v * b12;
-  t26 += v * b13;
-  t27 += v * b14;
-  t28 += v * b15;
-  v = a[14];
-  t14 += v * b0;
-  t15 += v * b1;
-  t16 += v * b2;
-  t17 += v * b3;
-  t18 += v * b4;
-  t19 += v * b5;
-  t20 += v * b6;
-  t21 += v * b7;
-  t22 += v * b8;
-  t23 += v * b9;
-  t24 += v * b10;
-  t25 += v * b11;
-  t26 += v * b12;
-  t27 += v * b13;
-  t28 += v * b14;
-  t29 += v * b15;
-  v = a[15];
-  t15 += v * b0;
-  t16 += v * b1;
-  t17 += v * b2;
-  t18 += v * b3;
-  t19 += v * b4;
-  t20 += v * b5;
-  t21 += v * b6;
-  t22 += v * b7;
-  t23 += v * b8;
-  t24 += v * b9;
-  t25 += v * b10;
-  t26 += v * b11;
-  t27 += v * b12;
-  t28 += v * b13;
-  t29 += v * b14;
-  t30 += v * b15;
-
-  t0  += 38 * t16;
-  t1  += 38 * t17;
-  t2  += 38 * t18;
-  t3  += 38 * t19;
-  t4  += 38 * t20;
-  t5  += 38 * t21;
-  t6  += 38 * t22;
-  t7  += 38 * t23;
-  t8  += 38 * t24;
-  t9  += 38 * t25;
-  t10 += 38 * t26;
-  t11 += 38 * t27;
-  t12 += 38 * t28;
-  t13 += 38 * t29;
-  t14 += 38 * t30;
-  // t15 left as is
-
-  // first car
-  c = 1;
-  v =  t0 + c + 65535; c = Math.floor(v / 65536);  t0 = v - c * 65536;
-  v =  t1 + c + 65535; c = Math.floor(v / 65536);  t1 = v - c * 65536;
-  v =  t2 + c + 65535; c = Math.floor(v / 65536);  t2 = v - c * 65536;
-  v =  t3 + c + 65535; c = Math.floor(v / 65536);  t3 = v - c * 65536;
-  v =  t4 + c + 65535; c = Math.floor(v / 65536);  t4 = v - c * 65536;
-  v =  t5 + c + 65535; c = Math.floor(v / 65536);  t5 = v - c * 65536;
-  v =  t6 + c + 65535; c = Math.floor(v / 65536);  t6 = v - c * 65536;
-  v =  t7 + c + 65535; c = Math.floor(v / 65536);  t7 = v - c * 65536;
-  v =  t8 + c + 65535; c = Math.floor(v / 65536);  t8 = v - c * 65536;
-  v =  t9 + c + 65535; c = Math.floor(v / 65536);  t9 = v - c * 65536;
-  v = t10 + c + 65535; c = Math.floor(v / 65536); t10 = v - c * 65536;
-  v = t11 + c + 65535; c = Math.floor(v / 65536); t11 = v - c * 65536;
-  v = t12 + c + 65535; c = Math.floor(v / 65536); t12 = v - c * 65536;
-  v = t13 + c + 65535; c = Math.floor(v / 65536); t13 = v - c * 65536;
-  v = t14 + c + 65535; c = Math.floor(v / 65536); t14 = v - c * 65536;
-  v = t15 + c + 65535; c = Math.floor(v / 65536); t15 = v - c * 65536;
-  t0 += c-1 + 37 * (c-1);
-
-  // second car
-  c = 1;
-  v =  t0 + c + 65535; c = Math.floor(v / 65536);  t0 = v - c * 65536;
-  v =  t1 + c + 65535; c = Math.floor(v / 65536);  t1 = v - c * 65536;
-  v =  t2 + c + 65535; c = Math.floor(v / 65536);  t2 = v - c * 65536;
-  v =  t3 + c + 65535; c = Math.floor(v / 65536);  t3 = v - c * 65536;
-  v =  t4 + c + 65535; c = Math.floor(v / 65536);  t4 = v - c * 65536;
-  v =  t5 + c + 65535; c = Math.floor(v / 65536);  t5 = v - c * 65536;
-  v =  t6 + c + 65535; c = Math.floor(v / 65536);  t6 = v - c * 65536;
-  v =  t7 + c + 65535; c = Math.floor(v / 65536);  t7 = v - c * 65536;
-  v =  t8 + c + 65535; c = Math.floor(v / 65536);  t8 = v - c * 65536;
-  v =  t9 + c + 65535; c = Math.floor(v / 65536);  t9 = v - c * 65536;
-  v = t10 + c + 65535; c = Math.floor(v / 65536); t10 = v - c * 65536;
-  v = t11 + c + 65535; c = Math.floor(v / 65536); t11 = v - c * 65536;
-  v = t12 + c + 65535; c = Math.floor(v / 65536); t12 = v - c * 65536;
-  v = t13 + c + 65535; c = Math.floor(v / 65536); t13 = v - c * 65536;
-  v = t14 + c + 65535; c = Math.floor(v / 65536); t14 = v - c * 65536;
-  v = t15 + c + 65535; c = Math.floor(v / 65536); t15 = v - c * 65536;
-  t0 += c-1 + 37 * (c-1);
-
-  o[ 0] = t0;
-  o[ 1] = t1;
-  o[ 2] = t2;
-  o[ 3] = t3;
-  o[ 4] = t4;
-  o[ 5] = t5;
-  o[ 6] = t6;
-  o[ 7] = t7;
-  o[ 8] = t8;
-  o[ 9] = t9;
-  o[10] = t10;
-  o[11] = t11;
-  o[12] = t12;
-  o[13] = t13;
-  o[14] = t14;
-  o[15] = t15;
-}
-
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(6).Buffer))
-
-/***/ }),
-/* 109 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2019 Digital Bazaar, Inc.
- */
-
-var forge = __webpack_require__(0);
-__webpack_require__(12);
-var asn1 = forge.asn1;
-
-exports.privateKeyValidator = {
-  // PrivateKeyInfo
-  name: 'PrivateKeyInfo',
-  tagClass: asn1.Class.UNIVERSAL,
-  type: asn1.Type.SEQUENCE,
-  constructed: true,
-  value: [{
-    // Version (INTEGER)
-    name: 'PrivateKeyInfo.version',
-    tagClass: asn1.Class.UNIVERSAL,
-    type: asn1.Type.INTEGER,
-    constructed: false,
-    capture: 'privateKeyVersion'
-  }, {
-    // privateKeyAlgorithm
-    name: 'PrivateKeyInfo.privateKeyAlgorithm',
-    tagClass: asn1.Class.UNIVERSAL,
-    type: asn1.Type.SEQUENCE,
-    constructed: true,
-    value: [{
-      name: 'AlgorithmIdentifier.algorithm',
-      tagClass: asn1.Class.UNIVERSAL,
-      type: asn1.Type.OID,
-      constructed: false,
-      capture: 'privateKeyOid'
-    }]
-  }, {
-    // PrivateKey
-    name: 'PrivateKeyInfo',
-    tagClass: asn1.Class.UNIVERSAL,
-    type: asn1.Type.OCTETSTRING,
-    constructed: false,
-    capture: 'privateKey'
-  }]
-};
-
-exports.publicKeyValidator = {
-  name: 'SubjectPublicKeyInfo',
-  tagClass: asn1.Class.UNIVERSAL,
-  type: asn1.Type.SEQUENCE,
-  constructed: true,
-  captureAsn1: 'subjectPublicKeyInfo',
-  value: [{
-    name: 'SubjectPublicKeyInfo.AlgorithmIdentifier',
-    tagClass: asn1.Class.UNIVERSAL,
-    type: asn1.Type.SEQUENCE,
-    constructed: true,
-    value: [{
-      name: 'AlgorithmIdentifier.algorithm',
-      tagClass: asn1.Class.UNIVERSAL,
-      type: asn1.Type.OID,
-      constructed: false,
-      capture: 'publicKeyOid'
-    }]
-  },
-  // capture group for ed25519PublicKey
-  {
-    tagClass: asn1.Class.UNIVERSAL,
-    type: asn1.Type.BITSTRING,
-    constructed: false,
-    composed: true,
-    captureBitStringValue: 'ed25519PublicKey'
-  }
-  // FIXME: this is capture group for rsaPublicKey, use it in this API or
-  // discard?
-  /* {
-    // subjectPublicKey
-    name: 'SubjectPublicKeyInfo.subjectPublicKey',
-    tagClass: asn1.Class.UNIVERSAL,
-    type: asn1.Type.BITSTRING,
-    constructed: false,
-    value: [{
-      // RSAPublicKey
-      name: 'SubjectPublicKeyInfo.subjectPublicKey.RSAPublicKey',
-      tagClass: asn1.Class.UNIVERSAL,
-      type: asn1.Type.SEQUENCE,
-      constructed: true,
-      optional: true,
-      captureAsn1: 'rsaPublicKey'
-    }]
-  } */
-  ]
-};
-
-
-/***/ }),
-/* 110 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Javascript implementation of RSA-KEM.
- *
- * @author Lautaro Cozzani Rodriguez
- * @author Dave Longley
- *
- * Copyright (c) 2014 Lautaro Cozzani <lautaro.cozzani@scytl.com>
- * Copyright (c) 2014 Digital Bazaar, Inc.
- */
-var forge = __webpack_require__(0);
-__webpack_require__(1);
-__webpack_require__(11);
-__webpack_require__(29);
-
-module.exports = forge.kem = forge.kem || {};
-
-var BigInteger = forge.jsbn.BigInteger;
-
-/**
- * The API for the RSA Key Encapsulation Mechanism (RSA-KEM) from ISO 18033-2.
- */
-forge.kem.rsa = {};
-
-/**
- * Creates an RSA KEM API object for generating a secret asymmetric key.
- *
- * The symmetric key may be generated via a call to 'encrypt', which will
- * produce a ciphertext to be transmitted to the recipient and a key to be
- * kept secret. The ciphertext is a parameter to be passed to 'decrypt' which
- * will produce the same secret key for the recipient to use to decrypt a
- * message that was encrypted with the secret key.
- *
- * @param kdf the KDF API to use (eg: new forge.kem.kdf1()).
- * @param options the options to use.
- *          [prng] a custom crypto-secure pseudo-random number generator to use,
- *            that must define "getBytesSync".
- */
-forge.kem.rsa.create = function(kdf, options) {
-  options = options || {};
-  var prng = options.prng || forge.random;
-
-  var kem = {};
-
-  /**
-   * Generates a secret key and its encapsulation.
-   *
-   * @param publicKey the RSA public key to encrypt with.
-   * @param keyLength the length, in bytes, of the secret key to generate.
-   *
-   * @return an object with:
-   *   encapsulation: the ciphertext for generating the secret key, as a
-   *     binary-encoded string of bytes.
-   *   key: the secret key to use for encrypting a message.
-   */
-  kem.encrypt = function(publicKey, keyLength) {
-    // generate a random r where 1 < r < n
-    var byteLength = Math.ceil(publicKey.n.bitLength() / 8);
-    var r;
-    do {
-      r = new BigInteger(
-        forge.util.bytesToHex(prng.getBytesSync(byteLength)),
-        16).mod(publicKey.n);
-    } while(r.compareTo(BigInteger.ONE) <= 0);
-
-    // prepend r with zeros
-    r = forge.util.hexToBytes(r.toString(16));
-    var zeros = byteLength - r.length;
-    if(zeros > 0) {
-      r = forge.util.fillString(String.fromCharCode(0), zeros) + r;
-    }
-
-    // encrypt the random
-    var encapsulation = publicKey.encrypt(r, 'NONE');
-
-    // generate the secret key
-    var key = kdf.generate(r, keyLength);
-
-    return {encapsulation: encapsulation, key: key};
-  };
-
-  /**
-   * Decrypts an encapsulated secret key.
-   *
-   * @param privateKey the RSA private key to decrypt with.
-   * @param encapsulation the ciphertext for generating the secret key, as
-   *          a binary-encoded string of bytes.
-   * @param keyLength the length, in bytes, of the secret key to generate.
-   *
-   * @return the secret key as a binary-encoded string of bytes.
-   */
-  kem.decrypt = function(privateKey, encapsulation, keyLength) {
-    // decrypt the encapsulation and generate the secret key
-    var r = privateKey.decrypt(encapsulation, 'NONE');
-    return kdf.generate(r, keyLength);
-  };
-
-  return kem;
-};
-
-// TODO: add forge.kem.kdf.create('KDF1', {md: ..., ...}) API?
-
-/**
- * Creates a key derivation API object that implements KDF1 per ISO 18033-2.
- *
- * @param md the hash API to use.
- * @param [digestLength] an optional digest length that must be positive and
- *          less than or equal to md.digestLength.
- *
- * @return a KDF1 API object.
- */
-forge.kem.kdf1 = function(md, digestLength) {
-  _createKDF(this, md, 0, digestLength || md.digestLength);
-};
-
-/**
- * Creates a key derivation API object that implements KDF2 per ISO 18033-2.
- *
- * @param md the hash API to use.
- * @param [digestLength] an optional digest length that must be positive and
- *          less than or equal to md.digestLength.
- *
- * @return a KDF2 API object.
- */
-forge.kem.kdf2 = function(md, digestLength) {
-  _createKDF(this, md, 1, digestLength || md.digestLength);
-};
-
-/**
- * Creates a KDF1 or KDF2 API object.
- *
- * @param md the hash API to use.
- * @param counterStart the starting index for the counter.
- * @param digestLength the digest length to use.
- *
- * @return the KDF API object.
- */
-function _createKDF(kdf, md, counterStart, digestLength) {
-  /**
-   * Generate a key of the specified length.
-   *
-   * @param x the binary-encoded byte string to generate a key from.
-   * @param length the number of bytes to generate (the size of the key).
-   *
-   * @return the key as a binary-encoded string.
-   */
-  kdf.generate = function(x, length) {
-    var key = new forge.util.ByteBuffer();
-
-    // run counter from counterStart to ceil(length / Hash.len)
-    var k = Math.ceil(length / digestLength) + counterStart;
-
-    var c = new forge.util.ByteBuffer();
-    for(var i = counterStart; i < k; ++i) {
-      // I2OSP(i, 4): convert counter to an octet string of 4 octets
-      c.putInt32(i);
-
-      // digest 'x' and the counter and add the result to the key
-      md.start();
-      md.update(x + c.getBytes());
-      var hash = md.digest();
-      key.putBytes(hash.getBytes(digestLength));
-    }
-
-    // truncate to the correct key length
-    key.truncate(key.length() - length);
-    return key.getBytes();
-  };
-}
-
-
-/***/ }),
-/* 111 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Node.js module for all known Forge message digests.
- *
- * @author Dave Longley
- *
- * Copyright 2011-2017 Digital Bazaar, Inc.
- */
-module.exports = __webpack_require__(14);
-
-__webpack_require__(33);
-__webpack_require__(24);
-__webpack_require__(64);
-__webpack_require__(73);
-
-
-/***/ }),
-/* 112 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Javascript implementation of PKCS#7 v1.5.
- *
- * @author Stefan Siegl
- * @author Dave Longley
- *
- * Copyright (c) 2012 Stefan Siegl <stesie@brokenpipe.de>
- * Copyright (c) 2012-2015 Digital Bazaar, Inc.
- *
- * Currently this implementation only supports ContentType of EnvelopedData,
- * EncryptedData, or SignedData at the root level. The top level elements may
- * contain only a ContentInfo of ContentType Data, i.e. plain data. Further
- * nesting is not (yet) supported.
- *
- * The Forge validators for PKCS #7's ASN.1 structures are available from
- * a separate file pkcs7asn1.js, since those are referenced from other
- * PKCS standards like PKCS #12.
- */
-var forge = __webpack_require__(0);
-__webpack_require__(16);
-__webpack_require__(12);
-__webpack_require__(27);
-__webpack_require__(17);
-__webpack_require__(20);
-__webpack_require__(70);
-__webpack_require__(11);
-__webpack_require__(1);
-__webpack_require__(36);
-
-// shortcut for ASN.1 API
-var asn1 = forge.asn1;
-
-// shortcut for PKCS#7 API
-var p7 = module.exports = forge.pkcs7 = forge.pkcs7 || {};
-
-/**
- * Converts a PKCS#7 message from PEM format.
- *
- * @param pem the PEM-formatted PKCS#7 message.
- *
- * @return the PKCS#7 message.
- */
-p7.messageFromPem = function(pem) {
-  var msg = forge.pem.decode(pem)[0];
-
-  if(msg.type !== 'PKCS7') {
-    var error = new Error('Could not convert PKCS#7 message from PEM; PEM ' +
-      'header type is not "PKCS#7".');
-    error.headerType = msg.type;
-    throw error;
-  }
-  if(msg.procType && msg.procType.type === 'ENCRYPTED') {
-    throw new Error('Could not convert PKCS#7 message from PEM; PEM is encrypted.');
-  }
-
-  // convert DER to ASN.1 object
-  var obj = asn1.fromDer(msg.body);
-
-  return p7.messageFromAsn1(obj);
-};
-
-/**
- * Converts a PKCS#7 message to PEM format.
- *
- * @param msg The PKCS#7 message object
- * @param maxline The maximum characters per line, defaults to 64.
- *
- * @return The PEM-formatted PKCS#7 message.
- */
-p7.messageToPem = function(msg, maxline) {
-  // convert to ASN.1, then DER, then PEM-encode
-  var pemObj = {
-    type: 'PKCS7',
-    body: asn1.toDer(msg.toAsn1()).getBytes()
-  };
-  return forge.pem.encode(pemObj, {maxline: maxline});
-};
-
-/**
- * Converts a PKCS#7 message from an ASN.1 object.
- *
- * @param obj the ASN.1 representation of a ContentInfo.
- *
- * @return the PKCS#7 message.
- */
-p7.messageFromAsn1 = function(obj) {
-  // validate root level ContentInfo and capture data
-  var capture = {};
-  var errors = [];
-  if(!asn1.validate(obj, p7.asn1.contentInfoValidator, capture, errors)) {
-    var error = new Error('Cannot read PKCS#7 message. ' +
-      'ASN.1 object is not an PKCS#7 ContentInfo.');
-    error.errors = errors;
-    throw error;
-  }
-
-  var contentType = asn1.derToOid(capture.contentType);
-  var msg;
-
-  switch(contentType) {
-    case forge.pki.oids.envelopedData:
-      msg = p7.createEnvelopedData();
-      break;
-
-    case forge.pki.oids.encryptedData:
-      msg = p7.createEncryptedData();
-      break;
-
-    case forge.pki.oids.signedData:
-      msg = p7.createSignedData();
-      break;
-
-    default:
-      throw new Error('Cannot read PKCS#7 message. ContentType with OID ' +
-        contentType + ' is not (yet) supported.');
-  }
-
-  msg.fromAsn1(capture.content.value[0]);
-  return msg;
-};
-
-p7.createSignedData = function() {
-  var msg = null;
-  msg = {
-    type: forge.pki.oids.signedData,
-    version: 1,
-    certificates: [],
-    crls: [],
-    // TODO: add json-formatted signer stuff here?
-    signers: [],
-    // populated during sign()
-    digestAlgorithmIdentifiers: [],
-    contentInfo: null,
-    signerInfos: [],
-
-    fromAsn1: function(obj) {
-      // validate SignedData content block and capture data.
-      _fromAsn1(msg, obj, p7.asn1.signedDataValidator);
-      msg.certificates = [];
-      msg.crls = [];
-      msg.digestAlgorithmIdentifiers = [];
-      msg.contentInfo = null;
-      msg.signerInfos = [];
-
-      if(msg.rawCapture.certificates) {
-        var certs = msg.rawCapture.certificates.value;
-        for(var i = 0; i < certs.length; ++i) {
-          msg.certificates.push(forge.pki.certificateFromAsn1(certs[i]));
-        }
-      }
-
-      // TODO: parse crls
-    },
-
-    toAsn1: function() {
-      // degenerate case with no content
-      if(!msg.contentInfo) {
-        msg.sign();
-      }
-
-      var certs = [];
-      for(var i = 0; i < msg.certificates.length; ++i) {
-        certs.push(forge.pki.certificateToAsn1(msg.certificates[i]));
-      }
-
-      var crls = [];
-      // TODO: implement CRLs
-
-      // [0] SignedData
-      var signedData = asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
-        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-          // Version
-          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
-            asn1.integerToDer(msg.version).getBytes()),
-          // DigestAlgorithmIdentifiers
-          asn1.create(
-            asn1.Class.UNIVERSAL, asn1.Type.SET, true,
-            msg.digestAlgorithmIdentifiers),
-          // ContentInfo
-          msg.contentInfo
-        ])
-      ]);
-      if(certs.length > 0) {
-        // [0] IMPLICIT ExtendedCertificatesAndCertificates OPTIONAL
-        signedData.value[0].value.push(
-          asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, certs));
-      }
-      if(crls.length > 0) {
-        // [1] IMPLICIT CertificateRevocationLists OPTIONAL
-        signedData.value[0].value.push(
-          asn1.create(asn1.Class.CONTEXT_SPECIFIC, 1, true, crls));
-      }
-      // SignerInfos
-      signedData.value[0].value.push(
-        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SET, true,
-          msg.signerInfos));
-
-      // ContentInfo
-      return asn1.create(
-        asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-          // ContentType
-          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-            asn1.oidToDer(msg.type).getBytes()),
-          // [0] SignedData
-          signedData
-        ]);
-    },
-
-    /**
-     * Add (another) entity to list of signers.
-     *
-     * Note: If authenticatedAttributes are provided, then, per RFC 2315,
-     * they must include at least two attributes: content type and
-     * message digest. The message digest attribute value will be
-     * auto-calculated during signing and will be ignored if provided.
-     *
-     * Here's an example of providing these two attributes:
-     *
-     * forge.pkcs7.createSignedData();
-     * p7.addSigner({
-     *   issuer: cert.issuer.attributes,
-     *   serialNumber: cert.serialNumber,
-     *   key: privateKey,
-     *   digestAlgorithm: forge.pki.oids.sha1,
-     *   authenticatedAttributes: [{
-     *     type: forge.pki.oids.contentType,
-     *     value: forge.pki.oids.data
-     *   }, {
-     *     type: forge.pki.oids.messageDigest
-     *   }]
-     * });
-     *
-     * TODO: Support [subjectKeyIdentifier] as signer's ID.
-     *
-     * @param signer the signer information:
-     *          key the signer's private key.
-     *          [certificate] a certificate containing the public key
-     *            associated with the signer's private key; use this option as
-     *            an alternative to specifying signer.issuer and
-     *            signer.serialNumber.
-     *          [issuer] the issuer attributes (eg: cert.issuer.attributes).
-     *          [serialNumber] the signer's certificate's serial number in
-     *           hexadecimal (eg: cert.serialNumber).
-     *          [digestAlgorithm] the message digest OID, as a string, to use
-     *            (eg: forge.pki.oids.sha1).
-     *          [authenticatedAttributes] an optional array of attributes
-     *            to also sign along with the content.
-     */
-    addSigner: function(signer) {
-      var issuer = signer.issuer;
-      var serialNumber = signer.serialNumber;
-      if(signer.certificate) {
-        var cert = signer.certificate;
-        if(typeof cert === 'string') {
-          cert = forge.pki.certificateFromPem(cert);
-        }
-        issuer = cert.issuer.attributes;
-        serialNumber = cert.serialNumber;
-      }
-      var key = signer.key;
-      if(!key) {
-        throw new Error(
-          'Could not add PKCS#7 signer; no private key specified.');
-      }
-      if(typeof key === 'string') {
-        key = forge.pki.privateKeyFromPem(key);
-      }
-
-      // ensure OID known for digest algorithm
-      var digestAlgorithm = signer.digestAlgorithm || forge.pki.oids.sha1;
-      switch(digestAlgorithm) {
-      case forge.pki.oids.sha1:
-      case forge.pki.oids.sha256:
-      case forge.pki.oids.sha384:
-      case forge.pki.oids.sha512:
-      case forge.pki.oids.md5:
-        break;
-      default:
-        throw new Error(
-          'Could not add PKCS#7 signer; unknown message digest algorithm: ' +
-          digestAlgorithm);
-      }
-
-      // if authenticatedAttributes is present, then the attributes
-      // must contain at least PKCS #9 content-type and message-digest
-      var authenticatedAttributes = signer.authenticatedAttributes || [];
-      if(authenticatedAttributes.length > 0) {
-        var contentType = false;
-        var messageDigest = false;
-        for(var i = 0; i < authenticatedAttributes.length; ++i) {
-          var attr = authenticatedAttributes[i];
-          if(!contentType && attr.type === forge.pki.oids.contentType) {
-            contentType = true;
-            if(messageDigest) {
-              break;
-            }
-            continue;
-          }
-          if(!messageDigest && attr.type === forge.pki.oids.messageDigest) {
-            messageDigest = true;
-            if(contentType) {
-              break;
-            }
-            continue;
-          }
-        }
-
-        if(!contentType || !messageDigest) {
-          throw new Error('Invalid signer.authenticatedAttributes. If ' +
-            'signer.authenticatedAttributes is specified, then it must ' +
-            'contain at least two attributes, PKCS #9 content-type and ' +
-            'PKCS #9 message-digest.');
-        }
-      }
-
-      msg.signers.push({
-        key: key,
-        version: 1,
-        issuer: issuer,
-        serialNumber: serialNumber,
-        digestAlgorithm: digestAlgorithm,
-        signatureAlgorithm: forge.pki.oids.rsaEncryption,
-        signature: null,
-        authenticatedAttributes: authenticatedAttributes,
-        unauthenticatedAttributes: []
-      });
-    },
-
-    /**
-     * Signs the content.
-     * @param options Options to apply when signing:
-     *    [detached] boolean. If signing should be done in detached mode. Defaults to false.
-     */
-    sign: function(options) {
-      options = options || {};
-      // auto-generate content info
-      if(typeof msg.content !== 'object' || msg.contentInfo === null) {
-        // use Data ContentInfo
-        msg.contentInfo = asn1.create(
-          asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-            // ContentType
-            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-              asn1.oidToDer(forge.pki.oids.data).getBytes())
-          ]);
-
-        // add actual content, if present
-        if('content' in msg) {
-          var content;
-          if(msg.content instanceof forge.util.ByteBuffer) {
-            content = msg.content.bytes();
-          } else if(typeof msg.content === 'string') {
-            content = forge.util.encodeUtf8(msg.content);
-          }
-
-          if (options.detached) {
-            msg.detachedContent = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false, content);
-          } else {
-            msg.contentInfo.value.push(
-              // [0] EXPLICIT content
-              asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
-                asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
-                  content)
-              ]));
-          }
-        }
-      }
-
-      // no signers, return early (degenerate case for certificate container)
-      if(msg.signers.length === 0) {
-        return;
-      }
-
-      // generate digest algorithm identifiers
-      var mds = addDigestAlgorithmIds();
-
-      // generate signerInfos
-      addSignerInfos(mds);
-    },
-
-    verify: function() {
-      throw new Error('PKCS#7 signature verification not yet implemented.');
-    },
-
-    /**
-     * Add a certificate.
-     *
-     * @param cert the certificate to add.
-     */
-    addCertificate: function(cert) {
-      // convert from PEM
-      if(typeof cert === 'string') {
-        cert = forge.pki.certificateFromPem(cert);
-      }
-      msg.certificates.push(cert);
-    },
-
-    /**
-     * Add a certificate revokation list.
-     *
-     * @param crl the certificate revokation list to add.
-     */
-    addCertificateRevokationList: function(crl) {
-      throw new Error('PKCS#7 CRL support not yet implemented.');
-    }
-  };
-  return msg;
-
-  function addDigestAlgorithmIds() {
-    var mds = {};
-
-    for(var i = 0; i < msg.signers.length; ++i) {
-      var signer = msg.signers[i];
-      var oid = signer.digestAlgorithm;
-      if(!(oid in mds)) {
-        // content digest
-        mds[oid] = forge.md[forge.pki.oids[oid]].create();
-      }
-      if(signer.authenticatedAttributes.length === 0) {
-        // no custom attributes to digest; use content message digest
-        signer.md = mds[oid];
-      } else {
-        // custom attributes to be digested; use own message digest
-        // TODO: optimize to just copy message digest state if that
-        // feature is ever supported with message digests
-        signer.md = forge.md[forge.pki.oids[oid]].create();
-      }
-    }
-
-    // add unique digest algorithm identifiers
-    msg.digestAlgorithmIdentifiers = [];
-    for(var oid in mds) {
-      msg.digestAlgorithmIdentifiers.push(
-        // AlgorithmIdentifier
-        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-          // algorithm
-          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-            asn1.oidToDer(oid).getBytes()),
-          // parameters (null)
-          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
-        ]));
-    }
-
-    return mds;
-  }
-
-  function addSignerInfos(mds) {
-    var content;
-
-    if (msg.detachedContent) {
-      // Signature has been made in detached mode.
-      content = msg.detachedContent;
-    } else {
-      // Note: ContentInfo is a SEQUENCE with 2 values, second value is
-      // the content field and is optional for a ContentInfo but required here
-      // since signers are present
-      // get ContentInfo content
-      content = msg.contentInfo.value[1];
-      // skip [0] EXPLICIT content wrapper
-      content = content.value[0];
-    }
-
-    if(!content) {
-      throw new Error(
-        'Could not sign PKCS#7 message; there is no content to sign.');
-    }
-
-    // get ContentInfo content type
-    var contentType = asn1.derToOid(msg.contentInfo.value[0].value);
-
-    // serialize content
-    var bytes = asn1.toDer(content);
-
-    // skip identifier and length per RFC 2315 9.3
-    // skip identifier (1 byte)
-    bytes.getByte();
-    // read and discard length bytes
-    asn1.getBerValueLength(bytes);
-    bytes = bytes.getBytes();
-
-    // digest content DER value bytes
-    for(var oid in mds) {
-      mds[oid].start().update(bytes);
-    }
-
-    // sign content
-    var signingTime = new Date();
-    for(var i = 0; i < msg.signers.length; ++i) {
-      var signer = msg.signers[i];
-
-      if(signer.authenticatedAttributes.length === 0) {
-        // if ContentInfo content type is not "Data", then
-        // authenticatedAttributes must be present per RFC 2315
-        if(contentType !== forge.pki.oids.data) {
-          throw new Error(
-            'Invalid signer; authenticatedAttributes must be present ' +
-            'when the ContentInfo content type is not PKCS#7 Data.');
-        }
-      } else {
-        // process authenticated attributes
-        // [0] IMPLICIT
-        signer.authenticatedAttributesAsn1 = asn1.create(
-          asn1.Class.CONTEXT_SPECIFIC, 0, true, []);
-
-        // per RFC 2315, attributes are to be digested using a SET container
-        // not the above [0] IMPLICIT container
-        var attrsAsn1 = asn1.create(
-          asn1.Class.UNIVERSAL, asn1.Type.SET, true, []);
-
-        for(var ai = 0; ai < signer.authenticatedAttributes.length; ++ai) {
-          var attr = signer.authenticatedAttributes[ai];
-          if(attr.type === forge.pki.oids.messageDigest) {
-            // use content message digest as value
-            attr.value = mds[signer.digestAlgorithm].digest();
-          } else if(attr.type === forge.pki.oids.signingTime) {
-            // auto-populate signing time if not already set
-            if(!attr.value) {
-              attr.value = signingTime;
-            }
-          }
-
-          // convert to ASN.1 and push onto Attributes SET (for signing) and
-          // onto authenticatedAttributesAsn1 to complete SignedData ASN.1
-          // TODO: optimize away duplication
-          attrsAsn1.value.push(_attributeToAsn1(attr));
-          signer.authenticatedAttributesAsn1.value.push(_attributeToAsn1(attr));
-        }
-
-        // DER-serialize and digest SET OF attributes only
-        bytes = asn1.toDer(attrsAsn1).getBytes();
-        signer.md.start().update(bytes);
-      }
-
-      // sign digest
-      signer.signature = signer.key.sign(signer.md, 'RSASSA-PKCS1-V1_5');
-    }
-
-    // add signer info
-    msg.signerInfos = _signersToAsn1(msg.signers);
-  }
-};
-
-/**
- * Creates an empty PKCS#7 message of type EncryptedData.
- *
- * @return the message.
- */
-p7.createEncryptedData = function() {
-  var msg = null;
-  msg = {
-    type: forge.pki.oids.encryptedData,
-    version: 0,
-    encryptedContent: {
-      algorithm: forge.pki.oids['aes256-CBC']
-    },
-
-    /**
-     * Reads an EncryptedData content block (in ASN.1 format)
-     *
-     * @param obj The ASN.1 representation of the EncryptedData content block
-     */
-    fromAsn1: function(obj) {
-      // Validate EncryptedData content block and capture data.
-      _fromAsn1(msg, obj, p7.asn1.encryptedDataValidator);
-    },
-
-    /**
-     * Decrypt encrypted content
-     *
-     * @param key The (symmetric) key as a byte buffer
-     */
-    decrypt: function(key) {
-      if(key !== undefined) {
-        msg.encryptedContent.key = key;
-      }
-      _decryptContent(msg);
-    }
-  };
-  return msg;
-};
-
-/**
- * Creates an empty PKCS#7 message of type EnvelopedData.
- *
- * @return the message.
- */
-p7.createEnvelopedData = function() {
-  var msg = null;
-  msg = {
-    type: forge.pki.oids.envelopedData,
-    version: 0,
-    recipients: [],
-    encryptedContent: {
-      algorithm: forge.pki.oids['aes256-CBC']
-    },
-
-    /**
-     * Reads an EnvelopedData content block (in ASN.1 format)
-     *
-     * @param obj the ASN.1 representation of the EnvelopedData content block.
-     */
-    fromAsn1: function(obj) {
-      // validate EnvelopedData content block and capture data
-      var capture = _fromAsn1(msg, obj, p7.asn1.envelopedDataValidator);
-      msg.recipients = _recipientsFromAsn1(capture.recipientInfos.value);
-    },
-
-    toAsn1: function() {
-      // ContentInfo
-      return asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-        // ContentType
-        asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-          asn1.oidToDer(msg.type).getBytes()),
-        // [0] EnvelopedData
-        asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
-          asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-            // Version
-            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
-              asn1.integerToDer(msg.version).getBytes()),
-            // RecipientInfos
-            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SET, true,
-              _recipientsToAsn1(msg.recipients)),
-            // EncryptedContentInfo
-            asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true,
-              _encryptedContentToAsn1(msg.encryptedContent))
-          ])
-        ])
-      ]);
-    },
-
-    /**
-     * Find recipient by X.509 certificate's issuer.
-     *
-     * @param cert the certificate with the issuer to look for.
-     *
-     * @return the recipient object.
-     */
-    findRecipient: function(cert) {
-      var sAttr = cert.issuer.attributes;
-
-      for(var i = 0; i < msg.recipients.length; ++i) {
-        var r = msg.recipients[i];
-        var rAttr = r.issuer;
-
-        if(r.serialNumber !== cert.serialNumber) {
-          continue;
-        }
-
-        if(rAttr.length !== sAttr.length) {
-          continue;
-        }
-
-        var match = true;
-        for(var j = 0; j < sAttr.length; ++j) {
-          if(rAttr[j].type !== sAttr[j].type ||
-            rAttr[j].value !== sAttr[j].value) {
-            match = false;
-            break;
-          }
-        }
-
-        if(match) {
-          return r;
-        }
-      }
-
-      return null;
-    },
-
-    /**
-     * Decrypt enveloped content
-     *
-     * @param recipient The recipient object related to the private key
-     * @param privKey The (RSA) private key object
-     */
-    decrypt: function(recipient, privKey) {
-      if(msg.encryptedContent.key === undefined && recipient !== undefined &&
-        privKey !== undefined) {
-        switch(recipient.encryptedContent.algorithm) {
-          case forge.pki.oids.rsaEncryption:
-          case forge.pki.oids.desCBC:
-            var key = privKey.decrypt(recipient.encryptedContent.content);
-            msg.encryptedContent.key = forge.util.createBuffer(key);
-            break;
-
-          default:
-            throw new Error('Unsupported asymmetric cipher, ' +
-              'OID ' + recipient.encryptedContent.algorithm);
-        }
-      }
-
-      _decryptContent(msg);
-    },
-
-    /**
-     * Add (another) entity to list of recipients.
-     *
-     * @param cert The certificate of the entity to add.
-     */
-    addRecipient: function(cert) {
-      msg.recipients.push({
-        version: 0,
-        issuer: cert.issuer.attributes,
-        serialNumber: cert.serialNumber,
-        encryptedContent: {
-          // We simply assume rsaEncryption here, since forge.pki only
-          // supports RSA so far.  If the PKI module supports other
-          // ciphers one day, we need to modify this one as well.
-          algorithm: forge.pki.oids.rsaEncryption,
-          key: cert.publicKey
-        }
-      });
-    },
-
-    /**
-     * Encrypt enveloped content.
-     *
-     * This function supports two optional arguments, cipher and key, which
-     * can be used to influence symmetric encryption.  Unless cipher is
-     * provided, the cipher specified in encryptedContent.algorithm is used
-     * (defaults to AES-256-CBC).  If no key is provided, encryptedContent.key
-     * is (re-)used.  If that one's not set, a random key will be generated
-     * automatically.
-     *
-     * @param [key] The key to be used for symmetric encryption.
-     * @param [cipher] The OID of the symmetric cipher to use.
-     */
-    encrypt: function(key, cipher) {
-      // Part 1: Symmetric encryption
-      if(msg.encryptedContent.content === undefined) {
-        cipher = cipher || msg.encryptedContent.algorithm;
-        key = key || msg.encryptedContent.key;
-
-        var keyLen, ivLen, ciphFn;
-        switch(cipher) {
-          case forge.pki.oids['aes128-CBC']:
-            keyLen = 16;
-            ivLen = 16;
-            ciphFn = forge.aes.createEncryptionCipher;
-            break;
-
-          case forge.pki.oids['aes192-CBC']:
-            keyLen = 24;
-            ivLen = 16;
-            ciphFn = forge.aes.createEncryptionCipher;
-            break;
-
-          case forge.pki.oids['aes256-CBC']:
-            keyLen = 32;
-            ivLen = 16;
-            ciphFn = forge.aes.createEncryptionCipher;
-            break;
-
-          case forge.pki.oids['des-EDE3-CBC']:
-            keyLen = 24;
-            ivLen = 8;
-            ciphFn = forge.des.createEncryptionCipher;
-            break;
-
-          default:
-            throw new Error('Unsupported symmetric cipher, OID ' + cipher);
-        }
-
-        if(key === undefined) {
-          key = forge.util.createBuffer(forge.random.getBytes(keyLen));
-        } else if(key.length() != keyLen) {
-          throw new Error('Symmetric key has wrong length; ' +
-            'got ' + key.length() + ' bytes, expected ' + keyLen + '.');
-        }
-
-        // Keep a copy of the key & IV in the object, so the caller can
-        // use it for whatever reason.
-        msg.encryptedContent.algorithm = cipher;
-        msg.encryptedContent.key = key;
-        msg.encryptedContent.parameter = forge.util.createBuffer(
-          forge.random.getBytes(ivLen));
-
-        var ciph = ciphFn(key);
-        ciph.start(msg.encryptedContent.parameter.copy());
-        ciph.update(msg.content);
-
-        // The finish function does PKCS#7 padding by default, therefore
-        // no action required by us.
-        if(!ciph.finish()) {
-          throw new Error('Symmetric encryption failed.');
-        }
-
-        msg.encryptedContent.content = ciph.output;
-      }
-
-      // Part 2: asymmetric encryption for each recipient
-      for(var i = 0; i < msg.recipients.length; ++i) {
-        var recipient = msg.recipients[i];
-
-        // Nothing to do, encryption already done.
-        if(recipient.encryptedContent.content !== undefined) {
-          continue;
-        }
-
-        switch(recipient.encryptedContent.algorithm) {
-          case forge.pki.oids.rsaEncryption:
-            recipient.encryptedContent.content =
-              recipient.encryptedContent.key.encrypt(
-                msg.encryptedContent.key.data);
-            break;
-
-          default:
-            throw new Error('Unsupported asymmetric cipher, OID ' +
-              recipient.encryptedContent.algorithm);
-        }
-      }
-    }
-  };
-  return msg;
-};
-
-/**
- * Converts a single recipient from an ASN.1 object.
- *
- * @param obj the ASN.1 RecipientInfo.
- *
- * @return the recipient object.
- */
-function _recipientFromAsn1(obj) {
-  // validate EnvelopedData content block and capture data
-  var capture = {};
-  var errors = [];
-  if(!asn1.validate(obj, p7.asn1.recipientInfoValidator, capture, errors)) {
-    var error = new Error('Cannot read PKCS#7 RecipientInfo. ' +
-      'ASN.1 object is not an PKCS#7 RecipientInfo.');
-    error.errors = errors;
-    throw error;
-  }
-
-  return {
-    version: capture.version.charCodeAt(0),
-    issuer: forge.pki.RDNAttributesAsArray(capture.issuer),
-    serialNumber: forge.util.createBuffer(capture.serial).toHex(),
-    encryptedContent: {
-      algorithm: asn1.derToOid(capture.encAlgorithm),
-      parameter: capture.encParameter.value,
-      content: capture.encKey
-    }
-  };
-}
-
-/**
- * Converts a single recipient object to an ASN.1 object.
- *
- * @param obj the recipient object.
- *
- * @return the ASN.1 RecipientInfo.
- */
-function _recipientToAsn1(obj) {
-  return asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-    // Version
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
-      asn1.integerToDer(obj.version).getBytes()),
-    // IssuerAndSerialNumber
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-      // Name
-      forge.pki.distinguishedNameToAsn1({attributes: obj.issuer}),
-      // Serial
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
-        forge.util.hexToBytes(obj.serialNumber))
-    ]),
-    // KeyEncryptionAlgorithmIdentifier
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-      // Algorithm
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-        asn1.oidToDer(obj.encryptedContent.algorithm).getBytes()),
-      // Parameter, force NULL, only RSA supported for now.
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
-    ]),
-    // EncryptedKey
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
-      obj.encryptedContent.content)
-  ]);
-}
-
-/**
- * Map a set of RecipientInfo ASN.1 objects to recipient objects.
- *
- * @param infos an array of ASN.1 representations RecipientInfo (i.e. SET OF).
- *
- * @return an array of recipient objects.
- */
-function _recipientsFromAsn1(infos) {
-  var ret = [];
-  for(var i = 0; i < infos.length; ++i) {
-    ret.push(_recipientFromAsn1(infos[i]));
-  }
-  return ret;
-}
-
-/**
- * Map an array of recipient objects to ASN.1 RecipientInfo objects.
- *
- * @param recipients an array of recipientInfo objects.
- *
- * @return an array of ASN.1 RecipientInfos.
- */
-function _recipientsToAsn1(recipients) {
-  var ret = [];
-  for(var i = 0; i < recipients.length; ++i) {
-    ret.push(_recipientToAsn1(recipients[i]));
-  }
-  return ret;
-}
-
-/**
- * Converts a single signer from an ASN.1 object.
- *
- * @param obj the ASN.1 representation of a SignerInfo.
- *
- * @return the signer object.
- */
-function _signerFromAsn1(obj) {
-  // validate EnvelopedData content block and capture data
-  var capture = {};
-  var errors = [];
-  if(!asn1.validate(obj, p7.asn1.signerInfoValidator, capture, errors)) {
-    var error = new Error('Cannot read PKCS#7 SignerInfo. ' +
-      'ASN.1 object is not an PKCS#7 SignerInfo.');
-    error.errors = errors;
-    throw error;
-  }
-
-  var rval = {
-    version: capture.version.charCodeAt(0),
-    issuer: forge.pki.RDNAttributesAsArray(capture.issuer),
-    serialNumber: forge.util.createBuffer(capture.serial).toHex(),
-    digestAlgorithm: asn1.derToOid(capture.digestAlgorithm),
-    signatureAlgorithm: asn1.derToOid(capture.signatureAlgorithm),
-    signature: capture.signature,
-    authenticatedAttributes: [],
-    unauthenticatedAttributes: []
-  };
-
-  // TODO: convert attributes
-  var authenticatedAttributes = capture.authenticatedAttributes || [];
-  var unauthenticatedAttributes = capture.unauthenticatedAttributes || [];
-
-  return rval;
-}
-
-/**
- * Converts a single signerInfo object to an ASN.1 object.
- *
- * @param obj the signerInfo object.
- *
- * @return the ASN.1 representation of a SignerInfo.
- */
-function _signerToAsn1(obj) {
-  // SignerInfo
-  var rval = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-    // version
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
-      asn1.integerToDer(obj.version).getBytes()),
-    // issuerAndSerialNumber
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-      // name
-      forge.pki.distinguishedNameToAsn1({attributes: obj.issuer}),
-      // serial
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.INTEGER, false,
-        forge.util.hexToBytes(obj.serialNumber))
-    ]),
-    // digestAlgorithm
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-      // algorithm
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-        asn1.oidToDer(obj.digestAlgorithm).getBytes()),
-      // parameters (null)
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
-    ])
-  ]);
-
-  // authenticatedAttributes (OPTIONAL)
-  if(obj.authenticatedAttributesAsn1) {
-    // add ASN.1 previously generated during signing
-    rval.value.push(obj.authenticatedAttributesAsn1);
-  }
-
-  // digestEncryptionAlgorithm
-  rval.value.push(asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-    // algorithm
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-      asn1.oidToDer(obj.signatureAlgorithm).getBytes()),
-    // parameters (null)
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.NULL, false, '')
-  ]));
-
-  // encryptedDigest
-  rval.value.push(asn1.create(
-    asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false, obj.signature));
-
-  // unauthenticatedAttributes (OPTIONAL)
-  if(obj.unauthenticatedAttributes.length > 0) {
-    // [1] IMPLICIT
-    var attrsAsn1 = asn1.create(asn1.Class.CONTEXT_SPECIFIC, 1, true, []);
-    for(var i = 0; i < obj.unauthenticatedAttributes.length; ++i) {
-      var attr = obj.unauthenticatedAttributes[i];
-      attrsAsn1.values.push(_attributeToAsn1(attr));
-    }
-    rval.value.push(attrsAsn1);
-  }
-
-  return rval;
-}
-
-/**
- * Map a set of SignerInfo ASN.1 objects to an array of signer objects.
- *
- * @param signerInfoAsn1s an array of ASN.1 SignerInfos (i.e. SET OF).
- *
- * @return an array of signers objects.
- */
-function _signersFromAsn1(signerInfoAsn1s) {
-  var ret = [];
-  for(var i = 0; i < signerInfoAsn1s.length; ++i) {
-    ret.push(_signerFromAsn1(signerInfoAsn1s[i]));
-  }
-  return ret;
-}
-
-/**
- * Map an array of signer objects to ASN.1 objects.
- *
- * @param signers an array of signer objects.
- *
- * @return an array of ASN.1 SignerInfos.
- */
-function _signersToAsn1(signers) {
-  var ret = [];
-  for(var i = 0; i < signers.length; ++i) {
-    ret.push(_signerToAsn1(signers[i]));
-  }
-  return ret;
-}
-
-/**
- * Convert an attribute object to an ASN.1 Attribute.
- *
- * @param attr the attribute object.
- *
- * @return the ASN.1 Attribute.
- */
-function _attributeToAsn1(attr) {
-  var value;
-
-  // TODO: generalize to support more attributes
-  if(attr.type === forge.pki.oids.contentType) {
-    value = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-      asn1.oidToDer(attr.value).getBytes());
-  } else if(attr.type === forge.pki.oids.messageDigest) {
-    value = asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
-      attr.value.bytes());
-  } else if(attr.type === forge.pki.oids.signingTime) {
-    /* Note per RFC 2985: Dates between 1 January 1950 and 31 December 2049
-      (inclusive) MUST be encoded as UTCTime. Any dates with year values
-      before 1950 or after 2049 MUST be encoded as GeneralizedTime. [Further,]
-      UTCTime values MUST be expressed in Greenwich Mean Time (Zulu) and MUST
-      include seconds (i.e., times are YYMMDDHHMMSSZ), even where the
-      number of seconds is zero.  Midnight (GMT) must be represented as
-      "YYMMDD000000Z". */
-    // TODO: make these module-level constants
-    var jan_1_1950 = new Date('1950-01-01T00:00:00Z');
-    var jan_1_2050 = new Date('2050-01-01T00:00:00Z');
-    var date = attr.value;
-    if(typeof date === 'string') {
-      // try to parse date
-      var timestamp = Date.parse(date);
-      if(!isNaN(timestamp)) {
-        date = new Date(timestamp);
-      } else if(date.length === 13) {
-        // YYMMDDHHMMSSZ (13 chars for UTCTime)
-        date = asn1.utcTimeToDate(date);
-      } else {
-        // assume generalized time
-        date = asn1.generalizedTimeToDate(date);
-      }
-    }
-
-    if(date >= jan_1_1950 && date < jan_1_2050) {
-      value = asn1.create(
-        asn1.Class.UNIVERSAL, asn1.Type.UTCTIME, false,
-        asn1.dateToUtcTime(date));
-    } else {
-      value = asn1.create(
-        asn1.Class.UNIVERSAL, asn1.Type.GENERALIZEDTIME, false,
-        asn1.dateToGeneralizedTime(date));
-    }
-  }
-
-  // TODO: expose as common API call
-  // create a RelativeDistinguishedName set
-  // each value in the set is an AttributeTypeAndValue first
-  // containing the type (an OID) and second the value
-  return asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-    // AttributeType
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-      asn1.oidToDer(attr.type).getBytes()),
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SET, true, [
-      // AttributeValue
-      value
-    ])
-  ]);
-}
-
-/**
- * Map messages encrypted content to ASN.1 objects.
- *
- * @param ec The encryptedContent object of the message.
- *
- * @return ASN.1 representation of the encryptedContent object (SEQUENCE).
- */
-function _encryptedContentToAsn1(ec) {
-  return [
-    // ContentType, always Data for the moment
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-      asn1.oidToDer(forge.pki.oids.data).getBytes()),
-    // ContentEncryptionAlgorithmIdentifier
-    asn1.create(asn1.Class.UNIVERSAL, asn1.Type.SEQUENCE, true, [
-      // Algorithm
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OID, false,
-        asn1.oidToDer(ec.algorithm).getBytes()),
-      // Parameters (IV)
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
-        ec.parameter.getBytes())
-    ]),
-    // [0] EncryptedContent
-    asn1.create(asn1.Class.CONTEXT_SPECIFIC, 0, true, [
-      asn1.create(asn1.Class.UNIVERSAL, asn1.Type.OCTETSTRING, false,
-        ec.content.getBytes())
-    ])
-  ];
-}
-
-/**
- * Reads the "common part" of an PKCS#7 content block (in ASN.1 format)
- *
- * This function reads the "common part" of the PKCS#7 content blocks
- * EncryptedData and EnvelopedData, i.e. version number and symmetrically
- * encrypted content block.
- *
- * The result of the ASN.1 validate and capture process is returned
- * to allow the caller to extract further data, e.g. the list of recipients
- * in case of a EnvelopedData object.
- *
- * @param msg the PKCS#7 object to read the data to.
- * @param obj the ASN.1 representation of the content block.
- * @param validator the ASN.1 structure validator object to use.
- *
- * @return the value map captured by validator object.
- */
-function _fromAsn1(msg, obj, validator) {
-  var capture = {};
-  var errors = [];
-  if(!asn1.validate(obj, validator, capture, errors)) {
-    var error = new Error('Cannot read PKCS#7 message. ' +
-      'ASN.1 object is not a supported PKCS#7 message.');
-    error.errors = error;
-    throw error;
-  }
-
-  // Check contentType, so far we only support (raw) Data.
-  var contentType = asn1.derToOid(capture.contentType);
-  if(contentType !== forge.pki.oids.data) {
-    throw new Error('Unsupported PKCS#7 message. ' +
-      'Only wrapped ContentType Data supported.');
-  }
-
-  if(capture.encryptedContent) {
-    var content = '';
-    if(forge.util.isArray(capture.encryptedContent)) {
-      for(var i = 0; i < capture.encryptedContent.length; ++i) {
-        if(capture.encryptedContent[i].type !== asn1.Type.OCTETSTRING) {
-          throw new Error('Malformed PKCS#7 message, expecting encrypted ' +
-            'content constructed of only OCTET STRING objects.');
-        }
-        content += capture.encryptedContent[i].value;
-      }
-    } else {
-      content = capture.encryptedContent;
-    }
-    msg.encryptedContent = {
-      algorithm: asn1.derToOid(capture.encAlgorithm),
-      parameter: forge.util.createBuffer(capture.encParameter.value),
-      content: forge.util.createBuffer(content)
-    };
-  }
-
-  if(capture.content) {
-    var content = '';
-    if(forge.util.isArray(capture.content)) {
-      for(var i = 0; i < capture.content.length; ++i) {
-        if(capture.content[i].type !== asn1.Type.OCTETSTRING) {
-          throw new Error('Malformed PKCS#7 message, expecting ' +
-            'content constructed of only OCTET STRING objects.');
-        }
-        content += capture.content[i].value;
-      }
-    } else {
-      content = capture.content;
-    }
-    msg.content = forge.util.createBuffer(content);
-  }
-
-  msg.version = capture.version.charCodeAt(0);
-  msg.rawCapture = capture;
-
-  return capture;
-}
-
-/**
- * Decrypt the symmetrically encrypted content block of the PKCS#7 message.
- *
- * Decryption is skipped in case the PKCS#7 message object already has a
- * (decrypted) content attribute.  The algorithm, key and cipher parameters
- * (probably the iv) are taken from the encryptedContent attribute of the
- * message object.
- *
- * @param The PKCS#7 message object.
- */
-function _decryptContent(msg) {
-  if(msg.encryptedContent.key === undefined) {
-    throw new Error('Symmetric key not available.');
-  }
-
-  if(msg.content === undefined) {
-    var ciph;
-
-    switch(msg.encryptedContent.algorithm) {
-      case forge.pki.oids['aes128-CBC']:
-      case forge.pki.oids['aes192-CBC']:
-      case forge.pki.oids['aes256-CBC']:
-        ciph = forge.aes.createDecryptionCipher(msg.encryptedContent.key);
-        break;
-
-      case forge.pki.oids['desCBC']:
-      case forge.pki.oids['des-EDE3-CBC']:
-        ciph = forge.des.createDecryptionCipher(msg.encryptedContent.key);
-        break;
-
-      default:
-        throw new Error('Unsupported symmetric cipher, OID ' +
-          msg.encryptedContent.algorithm);
-    }
-    ciph.start(msg.encryptedContent.parameter);
-    ciph.update(msg.encryptedContent.content);
-
-    if(!ciph.finish()) {
-      throw new Error('Symmetric decryption failed.');
-    }
-
-    msg.content = ciph.output;
-  }
-}
-
-
-/***/ }),
-/* 113 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Functions to output keys in SSH-friendly formats.
- *
- * This is part of the Forge project which may be used under the terms of
- * either the BSD License or the GNU General Public License (GPL) Version 2.
- *
- * See: https://github.com/digitalbazaar/forge/blob/cbebca3780658703d925b61b2caffb1d263a6c1d/LICENSE
- *
- * @author https://github.com/shellac
- */
-var forge = __webpack_require__(0);
-__webpack_require__(16);
-__webpack_require__(23);
-__webpack_require__(33);
-__webpack_require__(24);
-__webpack_require__(1);
-
-var ssh = module.exports = forge.ssh = forge.ssh || {};
-
-/**
- * Encodes (and optionally encrypts) a private RSA key as a Putty PPK file.
- *
- * @param privateKey the key.
- * @param passphrase a passphrase to protect the key (falsy for no encryption).
- * @param comment a comment to include in the key file.
- *
- * @return the PPK file as a string.
- */
-ssh.privateKeyToPutty = function(privateKey, passphrase, comment) {
-  comment = comment || '';
-  passphrase = passphrase || '';
-  var algorithm = 'ssh-rsa';
-  var encryptionAlgorithm = (passphrase === '') ? 'none' : 'aes256-cbc';
-
-  var ppk = 'PuTTY-User-Key-File-2: ' + algorithm + '\r\n';
-  ppk += 'Encryption: ' + encryptionAlgorithm + '\r\n';
-  ppk += 'Comment: ' + comment + '\r\n';
-
-  // public key into buffer for ppk
-  var pubbuffer = forge.util.createBuffer();
-  _addStringToBuffer(pubbuffer, algorithm);
-  _addBigIntegerToBuffer(pubbuffer, privateKey.e);
-  _addBigIntegerToBuffer(pubbuffer, privateKey.n);
-
-  // write public key
-  var pub = forge.util.encode64(pubbuffer.bytes(), 64);
-  var length = Math.floor(pub.length / 66) + 1; // 66 = 64 + \r\n
-  ppk += 'Public-Lines: ' + length + '\r\n';
-  ppk += pub;
-
-  // private key into a buffer
-  var privbuffer = forge.util.createBuffer();
-  _addBigIntegerToBuffer(privbuffer, privateKey.d);
-  _addBigIntegerToBuffer(privbuffer, privateKey.p);
-  _addBigIntegerToBuffer(privbuffer, privateKey.q);
-  _addBigIntegerToBuffer(privbuffer, privateKey.qInv);
-
-  // optionally encrypt the private key
-  var priv;
-  if(!passphrase) {
-    // use the unencrypted buffer
-    priv = forge.util.encode64(privbuffer.bytes(), 64);
-  } else {
-    // encrypt RSA key using passphrase
-    var encLen = privbuffer.length() + 16 - 1;
-    encLen -= encLen % 16;
-
-    // pad private key with sha1-d data -- needs to be a multiple of 16
-    var padding = _sha1(privbuffer.bytes());
-
-    padding.truncate(padding.length() - encLen + privbuffer.length());
-    privbuffer.putBuffer(padding);
-
-    var aeskey = forge.util.createBuffer();
-    aeskey.putBuffer(_sha1('\x00\x00\x00\x00', passphrase));
-    aeskey.putBuffer(_sha1('\x00\x00\x00\x01', passphrase));
-
-    // encrypt some bytes using CBC mode
-    // key is 40 bytes, so truncate *by* 8 bytes
-    var cipher = forge.aes.createEncryptionCipher(aeskey.truncate(8), 'CBC');
-    cipher.start(forge.util.createBuffer().fillWithByte(0, 16));
-    cipher.update(privbuffer.copy());
-    cipher.finish();
-    var encrypted = cipher.output;
-
-    // Note: this appears to differ from Putty -- is forge wrong, or putty?
-    // due to padding we finish as an exact multiple of 16
-    encrypted.truncate(16); // all padding
-
-    priv = forge.util.encode64(encrypted.bytes(), 64);
-  }
-
-  // output private key
-  length = Math.floor(priv.length / 66) + 1; // 64 + \r\n
-  ppk += '\r\nPrivate-Lines: ' + length + '\r\n';
-  ppk += priv;
-
-  // MAC
-  var mackey = _sha1('putty-private-key-file-mac-key', passphrase);
-
-  var macbuffer = forge.util.createBuffer();
-  _addStringToBuffer(macbuffer, algorithm);
-  _addStringToBuffer(macbuffer, encryptionAlgorithm);
-  _addStringToBuffer(macbuffer, comment);
-  macbuffer.putInt32(pubbuffer.length());
-  macbuffer.putBuffer(pubbuffer);
-  macbuffer.putInt32(privbuffer.length());
-  macbuffer.putBuffer(privbuffer);
-
-  var hmac = forge.hmac.create();
-  hmac.start('sha1', mackey);
-  hmac.update(macbuffer.bytes());
-
-  ppk += '\r\nPrivate-MAC: ' + hmac.digest().toHex() + '\r\n';
-
-  return ppk;
-};
-
-/**
- * Encodes a public RSA key as an OpenSSH file.
- *
- * @param key the key.
- * @param comment a comment.
- *
- * @return the public key in OpenSSH format.
- */
-ssh.publicKeyToOpenSSH = function(key, comment) {
-  var type = 'ssh-rsa';
-  comment = comment || '';
-
-  var buffer = forge.util.createBuffer();
-  _addStringToBuffer(buffer, type);
-  _addBigIntegerToBuffer(buffer, key.e);
-  _addBigIntegerToBuffer(buffer, key.n);
-
-  return type + ' ' + forge.util.encode64(buffer.bytes()) + ' ' + comment;
-};
-
-/**
- * Encodes a private RSA key as an OpenSSH file.
- *
- * @param key the key.
- * @param passphrase a passphrase to protect the key (falsy for no encryption).
- *
- * @return the public key in OpenSSH format.
- */
-ssh.privateKeyToOpenSSH = function(privateKey, passphrase) {
-  if(!passphrase) {
-    return forge.pki.privateKeyToPem(privateKey);
-  }
-  // OpenSSH private key is just a legacy format, it seems
-  return forge.pki.encryptRsaPrivateKey(privateKey, passphrase,
-    {legacy: true, algorithm: 'aes128'});
-};
-
-/**
- * Gets the SSH fingerprint for the given public key.
- *
- * @param options the options to use.
- *          [md] the message digest object to use (defaults to forge.md.md5).
- *          [encoding] an alternative output encoding, such as 'hex'
- *            (defaults to none, outputs a byte buffer).
- *          [delimiter] the delimiter to use between bytes for 'hex' encoded
- *            output, eg: ':' (defaults to none).
- *
- * @return the fingerprint as a byte buffer or other encoding based on options.
- */
-ssh.getPublicKeyFingerprint = function(key, options) {
-  options = options || {};
-  var md = options.md || forge.md.md5.create();
-
-  var type = 'ssh-rsa';
-  var buffer = forge.util.createBuffer();
-  _addStringToBuffer(buffer, type);
-  _addBigIntegerToBuffer(buffer, key.e);
-  _addBigIntegerToBuffer(buffer, key.n);
-
-  // hash public key bytes
-  md.start();
-  md.update(buffer.getBytes());
-  var digest = md.digest();
-  if(options.encoding === 'hex') {
-    var hex = digest.toHex();
-    if(options.delimiter) {
-      return hex.match(/.{2}/g).join(options.delimiter);
-    }
-    return hex;
-  } else if(options.encoding === 'binary') {
-    return digest.getBytes();
-  } else if(options.encoding) {
-    throw new Error('Unknown encoding "' + options.encoding + '".');
-  }
-  return digest;
-};
-
-/**
- * Adds len(val) then val to a buffer.
- *
- * @param buffer the buffer to add to.
- * @param val a big integer.
- */
-function _addBigIntegerToBuffer(buffer, val) {
-  var hexVal = val.toString(16);
-  // ensure 2s complement +ve
-  if(hexVal[0] >= '8') {
-    hexVal = '00' + hexVal;
-  }
-  var bytes = forge.util.hexToBytes(hexVal);
-  buffer.putInt32(bytes.length);
-  buffer.putBytes(bytes);
-}
-
-/**
- * Adds len(val) then val to a buffer.
- *
- * @param buffer the buffer to add to.
- * @param val a string.
- */
-function _addStringToBuffer(buffer, val) {
-  buffer.putInt32(val.length);
-  buffer.putString(val);
-}
-
-/**
- * Hashes the arguments into one value using SHA-1.
- *
- * @return the sha1 hash of the provided arguments.
- */
-function _sha1() {
-  var sha = forge.md.sha1.create();
-  var num = arguments.length;
-  for (var i = 0; i < num; ++i) {
-    sha.update(arguments[i]);
-  }
-  return sha.digest();
-}
-
-
-/***/ }),
-/* 114 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Support for concurrent task management and synchronization in web
- * applications.
- *
- * @author Dave Longley
- * @author David I. Lehn <dlehn@digitalbazaar.com>
- *
- * Copyright (c) 2009-2013 Digital Bazaar, Inc.
- */
-var forge = __webpack_require__(0);
-__webpack_require__(72);
-__webpack_require__(74);
-__webpack_require__(1);
-
-// logging category
-var cat = 'forge.task';
-
-// verbose level
-// 0: off, 1: a little, 2: a whole lot
-// Verbose debug logging is surrounded by a level check to avoid the
-// performance issues with even calling the logging code regardless if it
-// is actually logged.  For performance reasons this should not be set to 2
-// for production use.
-// ex: if(sVL >= 2) forge.log.verbose(....)
-var sVL = 0;
-
-// track tasks for debugging
-var sTasks = {};
-var sNextTaskId = 0;
-// debug access
-forge.debug.set(cat, 'tasks', sTasks);
-
-// a map of task type to task queue
-var sTaskQueues = {};
-// debug access
-forge.debug.set(cat, 'queues', sTaskQueues);
-
-// name for unnamed tasks
-var sNoTaskName = '?';
-
-// maximum number of doNext() recursions before a context swap occurs
-// FIXME: might need to tweak this based on the browser
-var sMaxRecursions = 30;
-
-// time slice for doing tasks before a context swap occurs
-// FIXME: might need to tweak this based on the browser
-var sTimeSlice = 20;
-
-/**
- * Task states.
- *
- * READY: ready to start processing
- * RUNNING: task or a subtask is running
- * BLOCKED: task is waiting to acquire N permits to continue
- * SLEEPING: task is sleeping for a period of time
- * DONE: task is done
- * ERROR: task has an error
- */
-var READY = 'ready';
-var RUNNING = 'running';
-var BLOCKED = 'blocked';
-var SLEEPING = 'sleeping';
-var DONE = 'done';
-var ERROR = 'error';
-
-/**
- * Task actions.  Used to control state transitions.
- *
- * STOP: stop processing
- * START: start processing tasks
- * BLOCK: block task from continuing until 1 or more permits are released
- * UNBLOCK: release one or more permits
- * SLEEP: sleep for a period of time
- * WAKEUP: wakeup early from SLEEPING state
- * CANCEL: cancel further tasks
- * FAIL: a failure occured
- */
-var STOP = 'stop';
-var START = 'start';
-var BLOCK = 'block';
-var UNBLOCK = 'unblock';
-var SLEEP = 'sleep';
-var WAKEUP = 'wakeup';
-var CANCEL = 'cancel';
-var FAIL = 'fail';
-
-/**
- * State transition table.
- *
- * nextState = sStateTable[currentState][action]
- */
-var sStateTable = {};
-
-sStateTable[READY] = {};
-sStateTable[READY][STOP] = READY;
-sStateTable[READY][START] = RUNNING;
-sStateTable[READY][CANCEL] = DONE;
-sStateTable[READY][FAIL] = ERROR;
-
-sStateTable[RUNNING] = {};
-sStateTable[RUNNING][STOP] = READY;
-sStateTable[RUNNING][START] = RUNNING;
-sStateTable[RUNNING][BLOCK] = BLOCKED;
-sStateTable[RUNNING][UNBLOCK] = RUNNING;
-sStateTable[RUNNING][SLEEP] = SLEEPING;
-sStateTable[RUNNING][WAKEUP] = RUNNING;
-sStateTable[RUNNING][CANCEL] = DONE;
-sStateTable[RUNNING][FAIL] = ERROR;
-
-sStateTable[BLOCKED] = {};
-sStateTable[BLOCKED][STOP] = BLOCKED;
-sStateTable[BLOCKED][START] = BLOCKED;
-sStateTable[BLOCKED][BLOCK] = BLOCKED;
-sStateTable[BLOCKED][UNBLOCK] = BLOCKED;
-sStateTable[BLOCKED][SLEEP] = BLOCKED;
-sStateTable[BLOCKED][WAKEUP] = BLOCKED;
-sStateTable[BLOCKED][CANCEL] = DONE;
-sStateTable[BLOCKED][FAIL] = ERROR;
-
-sStateTable[SLEEPING] = {};
-sStateTable[SLEEPING][STOP] = SLEEPING;
-sStateTable[SLEEPING][START] = SLEEPING;
-sStateTable[SLEEPING][BLOCK] = SLEEPING;
-sStateTable[SLEEPING][UNBLOCK] = SLEEPING;
-sStateTable[SLEEPING][SLEEP] = SLEEPING;
-sStateTable[SLEEPING][WAKEUP] = SLEEPING;
-sStateTable[SLEEPING][CANCEL] = DONE;
-sStateTable[SLEEPING][FAIL] = ERROR;
-
-sStateTable[DONE] = {};
-sStateTable[DONE][STOP] = DONE;
-sStateTable[DONE][START] = DONE;
-sStateTable[DONE][BLOCK] = DONE;
-sStateTable[DONE][UNBLOCK] = DONE;
-sStateTable[DONE][SLEEP] = DONE;
-sStateTable[DONE][WAKEUP] = DONE;
-sStateTable[DONE][CANCEL] = DONE;
-sStateTable[DONE][FAIL] = ERROR;
-
-sStateTable[ERROR] = {};
-sStateTable[ERROR][STOP] = ERROR;
-sStateTable[ERROR][START] = ERROR;
-sStateTable[ERROR][BLOCK] = ERROR;
-sStateTable[ERROR][UNBLOCK] = ERROR;
-sStateTable[ERROR][SLEEP] = ERROR;
-sStateTable[ERROR][WAKEUP] = ERROR;
-sStateTable[ERROR][CANCEL] = ERROR;
-sStateTable[ERROR][FAIL] = ERROR;
-
-/**
- * Creates a new task.
- *
- * @param options options for this task
- *   run: the run function for the task (required)
- *   name: the run function for the task (optional)
- *   parent: parent of this task (optional)
- *
- * @return the empty task.
- */
-var Task = function(options) {
-  // task id
-  this.id = -1;
-
-  // task name
-  this.name = options.name || sNoTaskName;
-
-  // task has no parent
-  this.parent = options.parent || null;
-
-  // save run function
-  this.run = options.run;
-
-  // create a queue of subtasks to run
-  this.subtasks = [];
-
-  // error flag
-  this.error = false;
-
-  // state of the task
-  this.state = READY;
-
-  // number of times the task has been blocked (also the number
-  // of permits needed to be released to continue running)
-  this.blocks = 0;
-
-  // timeout id when sleeping
-  this.timeoutId = null;
-
-  // no swap time yet
-  this.swapTime = null;
-
-  // no user data
-  this.userData = null;
-
-  // initialize task
-  // FIXME: deal with overflow
-  this.id = sNextTaskId++;
-  sTasks[this.id] = this;
-  if(sVL >= 1) {
-    forge.log.verbose(cat, '[%s][%s] init', this.id, this.name, this);
-  }
-};
-
-/**
- * Logs debug information on this task and the system state.
- */
-Task.prototype.debug = function(msg) {
-  msg = msg || '';
-  forge.log.debug(cat, msg,
-    '[%s][%s] task:', this.id, this.name, this,
-    'subtasks:', this.subtasks.length,
-    'queue:', sTaskQueues);
-};
-
-/**
- * Adds a subtask to run after task.doNext() or task.fail() is called.
- *
- * @param name human readable name for this task (optional).
- * @param subrun a function to run that takes the current task as
- *          its first parameter.
- *
- * @return the current task (useful for chaining next() calls).
- */
-Task.prototype.next = function(name, subrun) {
-  // juggle parameters if it looks like no name is given
-  if(typeof(name) === 'function') {
-    subrun = name;
-
-    // inherit parent's name
-    name = this.name;
-  }
-  // create subtask, set parent to this task, propagate callbacks
-  var subtask = new Task({
-    run: subrun,
-    name: name,
-    parent: this
-  });
-  // start subtasks running
-  subtask.state = RUNNING;
-  subtask.type = this.type;
-  subtask.successCallback = this.successCallback || null;
-  subtask.failureCallback = this.failureCallback || null;
-
-  // queue a new subtask
-  this.subtasks.push(subtask);
-
-  return this;
-};
-
-/**
- * Adds subtasks to run in parallel after task.doNext() or task.fail()
- * is called.
- *
- * @param name human readable name for this task (optional).
- * @param subrun functions to run that take the current task as
- *          their first parameter.
- *
- * @return the current task (useful for chaining next() calls).
- */
-Task.prototype.parallel = function(name, subrun) {
-  // juggle parameters if it looks like no name is given
-  if(forge.util.isArray(name)) {
-    subrun = name;
-
-    // inherit parent's name
-    name = this.name;
-  }
-  // Wrap parallel tasks in a regular task so they are started at the
-  // proper time.
-  return this.next(name, function(task) {
-    // block waiting for subtasks
-    var ptask = task;
-    ptask.block(subrun.length);
-
-    // we pass the iterator from the loop below as a parameter
-    // to a function because it is otherwise included in the
-    // closure and changes as the loop changes -- causing i
-    // to always be set to its highest value
-    var startParallelTask = function(pname, pi) {
-      forge.task.start({
-        type: pname,
-        run: function(task) {
-           subrun[pi](task);
-        },
-        success: function(task) {
-           ptask.unblock();
-        },
-        failure: function(task) {
-           ptask.unblock();
-        }
-      });
-    };
-
-    for(var i = 0; i < subrun.length; i++) {
-      // Type must be unique so task starts in parallel:
-      //    name + private string + task id + sub-task index
-      // start tasks in parallel and unblock when the finish
-      var pname = name + '__parallel-' + task.id + '-' + i;
-      var pi = i;
-      startParallelTask(pname, pi);
-    }
-  });
-};
-
-/**
- * Stops a running task.
- */
-Task.prototype.stop = function() {
-  this.state = sStateTable[this.state][STOP];
-};
-
-/**
- * Starts running a task.
- */
-Task.prototype.start = function() {
-  this.error = false;
-  this.state = sStateTable[this.state][START];
-
-  // try to restart
-  if(this.state === RUNNING) {
-    this.start = new Date();
-    this.run(this);
-    runNext(this, 0);
-  }
-};
-
-/**
- * Blocks a task until it one or more permits have been released. The
- * task will not resume until the requested number of permits have
- * been released with call(s) to unblock().
- *
- * @param n number of permits to wait for(default: 1).
- */
-Task.prototype.block = function(n) {
-  n = typeof(n) === 'undefined' ? 1 : n;
-  this.blocks += n;
-  if(this.blocks > 0) {
-    this.state = sStateTable[this.state][BLOCK];
-  }
-};
-
-/**
- * Releases a permit to unblock a task. If a task was blocked by
- * requesting N permits via block(), then it will only continue
- * running once enough permits have been released via unblock() calls.
- *
- * If multiple processes need to synchronize with a single task then
- * use a condition variable (see forge.task.createCondition). It is
- * an error to unblock a task more times than it has been blocked.
- *
- * @param n number of permits to release (default: 1).
- *
- * @return the current block count (task is unblocked when count is 0)
- */
-Task.prototype.unblock = function(n) {
-  n = typeof(n) === 'undefined' ? 1 : n;
-  this.blocks -= n;
-  if(this.blocks === 0 && this.state !== DONE) {
-    this.state = RUNNING;
-    runNext(this, 0);
-  }
-  return this.blocks;
-};
-
-/**
- * Sleep for a period of time before resuming tasks.
- *
- * @param n number of milliseconds to sleep (default: 0).
- */
-Task.prototype.sleep = function(n) {
-  n = typeof(n) === 'undefined' ? 0 : n;
-  this.state = sStateTable[this.state][SLEEP];
-  var self = this;
-  this.timeoutId = setTimeout(function() {
-    self.timeoutId = null;
-    self.state = RUNNING;
-    runNext(self, 0);
-  }, n);
-};
-
-/**
- * Waits on a condition variable until notified. The next task will
- * not be scheduled until notification. A condition variable can be
- * created with forge.task.createCondition().
- *
- * Once cond.notify() is called, the task will continue.
- *
- * @param cond the condition variable to wait on.
- */
-Task.prototype.wait = function(cond) {
-  cond.wait(this);
-};
-
-/**
- * If sleeping, wakeup and continue running tasks.
- */
-Task.prototype.wakeup = function() {
-  if(this.state === SLEEPING) {
-    cancelTimeout(this.timeoutId);
-    this.timeoutId = null;
-    this.state = RUNNING;
-    runNext(this, 0);
-  }
-};
-
-/**
- * Cancel all remaining subtasks of this task.
- */
-Task.prototype.cancel = function() {
-  this.state = sStateTable[this.state][CANCEL];
-  // remove permits needed
-  this.permitsNeeded = 0;
-  // cancel timeouts
-  if(this.timeoutId !== null) {
-    cancelTimeout(this.timeoutId);
-    this.timeoutId = null;
-  }
-  // remove subtasks
-  this.subtasks = [];
-};
-
-/**
- * Finishes this task with failure and sets error flag. The entire
- * task will be aborted unless the next task that should execute
- * is passed as a parameter. This allows levels of subtasks to be
- * skipped. For instance, to abort only this tasks's subtasks, then
- * call fail(task.parent). To abort this task's subtasks and its
- * parent's subtasks, call fail(task.parent.parent). To abort
- * all tasks and simply call the task callback, call fail() or
- * fail(null).
- *
- * The task callback (success or failure) will always, eventually, be
- * called.
- *
- * @param next the task to continue at, or null to abort entirely.
- */
-Task.prototype.fail = function(next) {
-  // set error flag
-  this.error = true;
-
-  // finish task
-  finish(this, true);
-
-  if(next) {
-    // propagate task info
-    next.error = this.error;
-    next.swapTime = this.swapTime;
-    next.userData = this.userData;
-
-    // do next task as specified
-    runNext(next, 0);
-  } else {
-    if(this.parent !== null) {
-      // finish root task (ensures it is removed from task queue)
-      var parent = this.parent;
-      while(parent.parent !== null) {
-        // propagate task info
-        parent.error = this.error;
-        parent.swapTime = this.swapTime;
-        parent.userData = this.userData;
-        parent = parent.parent;
-      }
-      finish(parent, true);
-    }
-
-    // call failure callback if one exists
-    if(this.failureCallback) {
-      this.failureCallback(this);
-    }
-  }
-};
-
-/**
- * Asynchronously start a task.
- *
- * @param task the task to start.
- */
-var start = function(task) {
-  task.error = false;
-  task.state = sStateTable[task.state][START];
-  setTimeout(function() {
-    if(task.state === RUNNING) {
-      task.swapTime = +new Date();
-      task.run(task);
-      runNext(task, 0);
-    }
-  }, 0);
-};
-
-/**
- * Run the next subtask or finish this task.
- *
- * @param task the task to process.
- * @param recurse the recursion count.
- */
-var runNext = function(task, recurse) {
-  // get time since last context swap (ms), if enough time has passed set
-  // swap to true to indicate that doNext was performed asynchronously
-  // also, if recurse is too high do asynchronously
-  var swap =
-    (recurse > sMaxRecursions) ||
-    (+new Date() - task.swapTime) > sTimeSlice;
-
-  var doNext = function(recurse) {
-    recurse++;
-    if(task.state === RUNNING) {
-      if(swap) {
-        // update swap time
-        task.swapTime = +new Date();
-      }
-
-      if(task.subtasks.length > 0) {
-        // run next subtask
-        var subtask = task.subtasks.shift();
-        subtask.error = task.error;
-        subtask.swapTime = task.swapTime;
-        subtask.userData = task.userData;
-        subtask.run(subtask);
-        if(!subtask.error) {
-           runNext(subtask, recurse);
-        }
-      } else {
-        finish(task);
-
-        if(!task.error) {
-          // chain back up and run parent
-          if(task.parent !== null) {
-            // propagate task info
-            task.parent.error = task.error;
-            task.parent.swapTime = task.swapTime;
-            task.parent.userData = task.userData;
-
-            // no subtasks left, call run next subtask on parent
-            runNext(task.parent, recurse);
-          }
-        }
-      }
-    }
-  };
-
-  if(swap) {
-    // we're swapping, so run asynchronously
-    setTimeout(doNext, 0);
-  } else {
-    // not swapping, so run synchronously
-    doNext(recurse);
-  }
-};
-
-/**
- * Finishes a task and looks for the next task in the queue to start.
- *
- * @param task the task to finish.
- * @param suppressCallbacks true to suppress callbacks.
- */
-var finish = function(task, suppressCallbacks) {
-  // subtask is now done
-  task.state = DONE;
-
-  delete sTasks[task.id];
-  if(sVL >= 1) {
-    forge.log.verbose(cat, '[%s][%s] finish',
-      task.id, task.name, task);
-  }
-
-  // only do queue processing for root tasks
-  if(task.parent === null) {
-    // report error if queue is missing
-    if(!(task.type in sTaskQueues)) {
-      forge.log.error(cat,
-        '[%s][%s] task queue missing [%s]',
-        task.id, task.name, task.type);
-    } else if(sTaskQueues[task.type].length === 0) {
-      // report error if queue is empty
-      forge.log.error(cat,
-        '[%s][%s] task queue empty [%s]',
-        task.id, task.name, task.type);
-    } else if(sTaskQueues[task.type][0] !== task) {
-      // report error if this task isn't the first in the queue
-      forge.log.error(cat,
-        '[%s][%s] task not first in queue [%s]',
-        task.id, task.name, task.type);
-    } else {
-      // remove ourselves from the queue
-      sTaskQueues[task.type].shift();
-      // clean up queue if it is empty
-      if(sTaskQueues[task.type].length === 0) {
-        if(sVL >= 1) {
-          forge.log.verbose(cat, '[%s][%s] delete queue [%s]',
-            task.id, task.name, task.type);
-        }
-        /* Note: Only a task can delete a queue of its own type. This
-         is used as a way to synchronize tasks. If a queue for a certain
-         task type exists, then a task of that type is running.
-         */
-        delete sTaskQueues[task.type];
-      } else {
-        // dequeue the next task and start it
-        if(sVL >= 1) {
-          forge.log.verbose(cat,
-            '[%s][%s] queue start next [%s] remain:%s',
-            task.id, task.name, task.type,
-            sTaskQueues[task.type].length);
-        }
-        sTaskQueues[task.type][0].start();
-      }
-    }
-
-    if(!suppressCallbacks) {
-      // call final callback if one exists
-      if(task.error && task.failureCallback) {
-        task.failureCallback(task);
-      } else if(!task.error && task.successCallback) {
-        task.successCallback(task);
-      }
-    }
-  }
-};
-
-/* Tasks API */
-module.exports = forge.task = forge.task || {};
-
-/**
- * Starts a new task that will run the passed function asynchronously.
- *
- * In order to finish the task, either task.doNext() or task.fail()
- * *must* be called.
- *
- * The task must have a type (a string identifier) that can be used to
- * synchronize it with other tasks of the same type. That type can also
- * be used to cancel tasks that haven't started yet.
- *
- * To start a task, the following object must be provided as a parameter
- * (each function takes a task object as its first parameter):
- *
- * {
- *   type: the type of task.
- *   run: the function to run to execute the task.
- *   success: a callback to call when the task succeeds (optional).
- *   failure: a callback to call when the task fails (optional).
- * }
- *
- * @param options the object as described above.
- */
-forge.task.start = function(options) {
-  // create a new task
-  var task = new Task({
-    run: options.run,
-    name: options.name || sNoTaskName
-  });
-  task.type = options.type;
-  task.successCallback = options.success || null;
-  task.failureCallback = options.failure || null;
-
-  // append the task onto the appropriate queue
-  if(!(task.type in sTaskQueues)) {
-    if(sVL >= 1) {
-      forge.log.verbose(cat, '[%s][%s] create queue [%s]',
-        task.id, task.name, task.type);
-    }
-    // create the queue with the new task
-    sTaskQueues[task.type] = [task];
-    start(task);
-  } else {
-    // push the task onto the queue, it will be run after a task
-    // with the same type completes
-    sTaskQueues[options.type].push(task);
-  }
-};
-
-/**
- * Cancels all tasks of the given type that haven't started yet.
- *
- * @param type the type of task to cancel.
- */
-forge.task.cancel = function(type) {
-  // find the task queue
-  if(type in sTaskQueues) {
-    // empty all but the current task from the queue
-    sTaskQueues[type] = [sTaskQueues[type][0]];
-  }
-};
-
-/**
- * Creates a condition variable to synchronize tasks. To make a task wait
- * on the condition variable, call task.wait(condition). To notify all
- * tasks that are waiting, call condition.notify().
- *
- * @return the condition variable.
- */
-forge.task.createCondition = function() {
-  var cond = {
-    // all tasks that are blocked
-    tasks: {}
-  };
-
-  /**
-   * Causes the given task to block until notify is called. If the task
-   * is already waiting on this condition then this is a no-op.
-   *
-   * @param task the task to cause to wait.
-   */
-  cond.wait = function(task) {
-    // only block once
-    if(!(task.id in cond.tasks)) {
-       task.block();
-       cond.tasks[task.id] = task;
-    }
-  };
-
-  /**
-   * Notifies all waiting tasks to wake up.
-   */
-  cond.notify = function() {
-    // since unblock() will run the next task from here, make sure to
-    // clear the condition's blocked task list before unblocking
-    var tmp = cond.tasks;
-    cond.tasks = {};
-    for(var id in tmp) {
-      tmp[id].unblock();
-    }
-  };
-
-  return cond;
-};
-
-
-/***/ }),
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -55036,7 +55148,7 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14)))
 
 /***/ }),
 /* 138 */
@@ -57039,7 +57151,7 @@ function callbackify(original) {
 }
 exports.callbackify = callbackify;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
 
 /***/ }),
 /* 160 */
@@ -57170,7 +57282,7 @@ function randomBytes (size, cb) {
   return bytes
 }
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13), __webpack_require__(15)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(14), __webpack_require__(13)))
 
 /***/ }),
 /* 165 */
@@ -58417,6 +58529,315 @@ TransactionBuilder.prototype.__overMaximumFees = function (bytes) {
 
 module.exports = TransactionBuilder
 
+
+/***/ }),
+/* 169 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
+// backported and transplited with Babel, with backwards-compat fixes
+
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  if (path.length === 0) return '.';
+  var code = path.charCodeAt(0);
+  var hasRoot = code === 47 /*/*/;
+  var end = -1;
+  var matchedSlash = true;
+  for (var i = path.length - 1; i >= 1; --i) {
+    code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        if (!matchedSlash) {
+          end = i;
+          break;
+        }
+      } else {
+      // We saw the first non-path separator
+      matchedSlash = false;
+    }
+  }
+
+  if (end === -1) return hasRoot ? '/' : '.';
+  if (hasRoot && end === 1) {
+    // return '//';
+    // Backwards-compat fix:
+    return '/';
+  }
+  return path.slice(0, end);
+};
+
+function basename(path) {
+  if (typeof path !== 'string') path = path + '';
+
+  var start = 0;
+  var end = -1;
+  var matchedSlash = true;
+  var i;
+
+  for (i = path.length - 1; i >= 0; --i) {
+    if (path.charCodeAt(i) === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          start = i + 1;
+          break;
+        }
+      } else if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // path component
+      matchedSlash = false;
+      end = i + 1;
+    }
+  }
+
+  if (end === -1) return '';
+  return path.slice(start, end);
+}
+
+// Uses a mixed approach for backwards-compatibility, as ext behavior changed
+// in new Node.js versions, so only basename() above is backported here
+exports.basename = function (path, ext) {
+  var f = basename(path);
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+exports.extname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  var startDot = -1;
+  var startPart = 0;
+  var end = -1;
+  var matchedSlash = true;
+  // Track the state of characters (if any) we see before our first dot and
+  // after any path separator we find
+  var preDotState = 0;
+  for (var i = path.length - 1; i >= 0; --i) {
+    var code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+    if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // extension
+      matchedSlash = false;
+      end = i + 1;
+    }
+    if (code === 46 /*.*/) {
+        // If this is our first dot, mark it as the start of our extension
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+    } else if (startDot !== -1) {
+      // We saw a non-dot and non-path separator before our dot, so we should
+      // have a good chance at having a non-empty extension
+      preDotState = -1;
+    }
+  }
+
+  if (startDot === -1 || end === -1 ||
+      // We saw a non-dot character immediately before the dot
+      preDotState === 0 ||
+      // The (right-most) trimmed path component is exactly '..'
+      preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return '';
+  }
+  return path.slice(startDot, end);
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(13)))
 
 /***/ })
 /******/ ]);
