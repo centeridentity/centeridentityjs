@@ -1,14 +1,17 @@
 import forge from 'node-forge';
+import sjcl from 'sjcl'
+import { ec } from 'elliptic';
 import jQuery from 'jquery';
-import * as bitcoin from 'bitcoinjs-lib';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
 import Buffer from 'buffer';
-import { resolve } from 'path';
+import wif from 'wif';
+import { base58_to_binary, binary_to_base58 } from 'base58-js'
 
 
 export default class CenterIdentity {
-    constructor(api_key, url_prefix, use_local_storage, strength, selfGenerateTransaction) {
+    constructor(kwargs) {
+        const {api_key, url_prefix, use_local_storage, strength, selfGenerateTransaction} = kwargs;
         switch(strength) {
             case 'low':
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
@@ -337,29 +340,34 @@ export default class CenterIdentity {
 
     createUser(username) {
         return new Promise(function(resolve, reject){
-            var key = bitcoin.ECPair.makeRandom();
-            var wif = key.toWIF();
-            var public_key = key.getPublicKeyBuffer().toString('hex');
+            const ECPair = ec('secp256k1')
+            var key = ECPair.genKeyPair();
+            var private_key = key.getPrivate().toString('hex')
+            var public_key = key.getPublic().encode('hex');
+            var wif = this.toWif(private_key)
             return resolve({
                 username_signature: this.generate_username_signature(key, username),
                 username: username,
-                wif: wif,
+                private_key: private_key,
                 public_key: public_key,
-                key: key
+                key: key,
+                wif: wif
             })
         }.bind(this));
     }
 
     reviveUser(wif, username) {
         return new Promise(function(resolve, reject){
-            var key = bitcoin.ECPair.fromWIF(wif);
-            var public_key = key.getPublicKeyBuffer().toString('hex');
+            const ECPair = ec('secp256k1')
+            var private_key = this.fromWif(wif);
+            var key = ECPair.keyFromPrivate(private_key)
+            var public_key = key.getPublic().encode('hex');
             this.user = {
                 username_signature: this.generate_username_signature(key, username),
                 username: username,
-                wif: wif,
                 public_key: public_key,
-                key: key
+                key: key,
+                wif: wif
             }
             return resolve(this.user);
         }.bind(this));
@@ -367,18 +375,39 @@ export default class CenterIdentity {
 
     sign(message, user) {
         return new Promise(function(resolve, reject){
-            var hash = bitcoin.crypto.sha256(message)
+            var hash = sjcl.hash.sha256.hash(message)
             var der = user.key.sign(hash).toDER();
             return resolve(base64.fromByteArray(der));
         }.bind(this));
     }
 
     verify(message, user, signature) {
-        var hash = bitcoin.crypto.sha256(message)
-        var pubKey = bitcoin.ECPair.fromPublicKeyBuffer(Buffer.Buffer.from(user.public_key, 'hex'));
-        var sig = bitcoin.ECSignature.fromDER(base64.toByteArray(signature));
+        var hash = sjcl.hash.sha256.hash(message)
+        var pubKey = ECPair.fromPublicKeyBuffer(Buffer.Buffer.from(user.public_key, 'hex'));
+        var sig = ECSignature.fromDER(base64.toByteArray(signature));
         var result = pubKey.verify(hash, sig);
         return result;
+    }
+
+    toWif(private_key) {
+      var privateKeyAndVersion = "80" + private_key
+      var firstSHA = sjcl.hash.sha256.hash(this.hexToByteArray(privateKeyAndVersion))
+      var secondSHA = sjcl.hash.sha256.hash(firstSHA)
+      var checksum = this.toHex(secondSHA).substr(0, 8).toLowerCase()
+      console.log(checksum) //"206EC97E"
+
+      //append checksum to end of the private key and version
+      var keyWithChecksum = privateKeyAndVersion + checksum
+      console.log(keyWithChecksum) //"801184CD2CDD640CA42CFC3A091C51D549B2F016D454B2774019C2B2D2E08529FD206EC97E"
+
+      return binary_to_base58(this.hexToByteArray(keyWithChecksum))
+    }
+
+    fromWif(wif) {
+      var private_key = this.toHex(base58_to_binary(wif))
+      console.log(private_key) //"801184CD2CDD640CA42CFC3A091C51D549B2F016D454B2774019C2B2D2E08529FD206EC97E"
+
+      return private_key.substr(2, private_key.length-8)
     }
 
     verifyIssuedCredential(issuer, message, issuer_signature) {
@@ -588,7 +617,7 @@ export default class CenterIdentity {
     }
 
     get_dh_keys(me, them) {
-        var raw_dh_private_key = bitcoin.crypto.sha256(me.wif + them.username_signature);
+        var raw_dh_private_key = sjcl.hash.sha256.hash(me.wif + them.username_signature);
         var raw_dh_public_key = X25519.getPublic(raw_dh_private_key);
         return {
             dh_private_key: this.toHex(raw_dh_private_key),
@@ -608,23 +637,33 @@ export default class CenterIdentity {
     }
 
     generate_username_signature(key, username) {
-        return base64.fromByteArray(key.sign(bitcoin.crypto.sha256(username)).toDER());
+        return base64.fromByteArray(key.sign(sjcl.hash.sha256.hash(username)).toDER());
     }
 
     toHex(byteArray) {
-        var callback = function(byte) {
-            return ('0' + (byte & 0xFF).toString(16)).slice(-2);
-        }
-        return Array.from(byteArray, callback).join('')
+      var callback = function(byte) {
+        return ('0' + (byte & 0xFF).toString(16)).slice(-2);
+      }
+      return Array.from(byteArray, callback).join('')
     }
 
     hexToBytes(s) {
-        var arr = []
-        for (var i = 0; i < s.length; i += 2) {
-            var c = s.substr(i, 2);
-            arr.push(parseInt(c, 16));
-        }
-        return String.fromCharCode.apply(null, arr);
+      var arr = []
+      for (var i = 0; i < s.length; i += 2) {
+        var c = s.substr(i, 2);
+        arr.push(parseInt(c, 16));
+      }
+      var result = String.fromCharCode.apply(null, arr);
+      return result
+    }
+
+    hexToByteArray(s) {
+      var arr = []
+      for (var i = 0; i < s.length; i += 2) {
+        var c = s.substr(i, 2);
+        arr.push(parseInt(c, 16));
+      }
+      return new Uint8Array(arr)
     }
 
     generate_rid(user1, user2, extra_data='') {
@@ -666,7 +705,7 @@ export default class CenterIdentity {
             transaction.requester_rid +
             transaction.requested_rid
         )
-        transaction.hash = bitcoin.crypto.sha256(header).toString('hex')
+        transaction.hash = sjcl.hash.sha256.hash(header).toString('hex')
 
         transaction.id = await this.sign(header, user);
         return transaction;
