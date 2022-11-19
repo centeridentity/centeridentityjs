@@ -1,10 +1,7 @@
 import forge from 'node-forge';
-import sjcl from 'sjcl'
 import { ec } from 'elliptic';
-import jQuery from 'jquery';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
-import Buffer from 'buffer';
 import wif from 'wif';
 import { base58_to_binary, binary_to_base58 } from 'base58-js'
 
@@ -617,8 +614,8 @@ export default class CenterIdentity {
     }
 
     get_dh_keys(me, them) {
-        var raw_dh_private_key = sjcl.hash.sha256.hash(me.wif + them.username_signature);
-        var raw_dh_public_key = X25519.getPublic(raw_dh_private_key);
+        var raw_dh_private_key = forge.sha256.create().update(me.wif + them.username_signature).digest().toHex();
+        var raw_dh_public_key = X25519.getPublic(this.hexToByteArray(raw_dh_private_key));
         return {
             dh_private_key: this.toHex(raw_dh_private_key),
             dh_public_key: this.toHex(raw_dh_public_key)
