@@ -339,12 +339,12 @@ export default class CenterIdentity {
     }
 
     createUser(username) {
-        return new Promise(function(resolve, reject){
-            const ECPair = ec('secp256k1')
+        return new Promise(async function(resolve, reject){
+            const ECPair = ec('secp256k1');
             var key = ECPair.genKeyPair();
-            var private_key = key.getPrivate().toString('hex')
+            var private_key = key.getPrivate().toString('hex');
             var public_key = key.getPublic().encode('hex');
-            var wif = this.toWif(private_key)
+            var wif = this.toWif(private_key);
             return resolve({
                 username_signature: this.generate_username_signature(key, username),
                 username: username,
@@ -375,25 +375,25 @@ export default class CenterIdentity {
 
     sign(message, user) {
         return new Promise(function(resolve, reject){
-            var hash = sjcl.hash.sha256.hash(message)
+            var hash = forge.sha256.create().update(message).digest().toHex()
             var der = user.key.sign(hash).toDER();
             return resolve(base64.fromByteArray(der));
         }.bind(this));
     }
 
     verify(message, user, signature) {
-        var hash = sjcl.hash.sha256.hash(message)
-        var pubKey = ECPair.fromPublicKeyBuffer(Buffer.Buffer.from(user.public_key, 'hex'));
-        var sig = ECSignature.fromDER(base64.toByteArray(signature));
-        var result = pubKey.verify(hash, sig);
+        const ECPair = ec('secp256k1');
+        var hash = forge.sha256.create().update(message).digest().toHex()
+        var pubKey = ECPair.keyFromPublic(user.public_key, 'hex');
+        var result = pubKey.verify(hash, base64.toByteArray(signature));
         return result;
     }
 
     toWif(private_key) {
       var privateKeyAndVersion = "80" + private_key
-      var firstSHA = sjcl.hash.sha256.hash(this.hexToByteArray(privateKeyAndVersion))
-      var secondSHA = sjcl.hash.sha256.hash(firstSHA)
-      var checksum = this.toHex(secondSHA).substr(0, 8).toLowerCase()
+      var firstSHA = forge.sha256.create().update(privateKeyAndVersion).digest()
+      var secondSHA = forge.sha256.create().update(firstSHA.toHex()).digest()
+      var checksum = secondSHA.toHex().substr(0, 8).toLowerCase()
       console.log(checksum) //"206EC97E"
 
       //append checksum to end of the private key and version
@@ -637,7 +637,7 @@ export default class CenterIdentity {
     }
 
     generate_username_signature(key, username) {
-        return base64.fromByteArray(key.sign(sjcl.hash.sha256.hash(username)).toDER());
+        return base64.fromByteArray(key.sign(forge.sha256.create().update(username).digest().toHex()).toDER());
     }
 
     toHex(byteArray) {
@@ -705,7 +705,7 @@ export default class CenterIdentity {
             transaction.requester_rid +
             transaction.requested_rid
         )
-        transaction.hash = sjcl.hash.sha256.hash(header).toString('hex')
+        transaction.hash = forge.sha256.create().update(header).digest().toHex()
 
         transaction.id = await this.sign(header, user);
         return transaction;
