@@ -633,6 +633,38 @@ export default class CenterIdentity {
         return this.toHex(X25519.getSharedKey(privk, pubk));
     }
 
+    async authenticate(service_url='', challenge_url='') {
+      const userJson = JSON.parse(localStorage.getItem('identity'));
+      const user = this.reviveUser(userJson.wif, userJson.username);
+      const result = await fetch(
+        service_url,
+        {
+          body: JSON.stringify({
+            challenge,
+            identity: this.toObject(user)
+          }),
+          headers: {
+            'Content-type': 'application/json'
+          },
+        }
+      );
+      const challenge = await result.json()
+      const signature = this.sign(challenge.message, user);
+      challenge.signature = signature
+      await fetch(
+        challenge_url + '/challenge',
+        {
+          body: JSON.stringify({
+            challenge,
+            identity: this.toObject(user)
+          }),
+          headers: {
+            'Content-type': 'application/json'
+          },
+        }
+      );
+    }
+
     generate_username_signature(key, username) {
         return base64.fromByteArray(key.sign(forge.sha256.create().update(username).digest().toHex()).toDER());
     }
