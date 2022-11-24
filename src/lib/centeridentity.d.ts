@@ -68,6 +68,7 @@ export default class CenterIdentity {
         dh_public_key: string;
     };
     getSharedSecret(me: any, them: any, their_txn: any): string;
+    authenticate(service_url?: string, challenge_url?: string): Promise<any>;
     generate_username_signature(key: any, username: any): any;
     toHex(byteArray: any): string;
     hexToBytes(s: any): any;

@@ -635,34 +635,37 @@ export default class CenterIdentity {
 
     async authenticate(service_url='', challenge_url='') {
       const userJson = JSON.parse(localStorage.getItem('identity'));
-      const user = this.reviveUser(userJson.wif, userJson.username);
+      const user = await this.reviveUser(userJson.wif, userJson.username);
       const result = await fetch(
+        challenge_url || 'https://centeridentity.com/challenge',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            identity: this.toObject(user)
+          }),
+          headers: {
+            'Content-type': 'application/json'
+          },
+        }
+      );
+      const data = (await result.json()).challenge
+      const signature = await this.sign(data.challenge.message, user);
+      data.challenge.signature = signature
+      await fetch(
         service_url,
         {
+          method: 'POST',
           body: JSON.stringify({
-            challenge,
+            challenge: data.challenge,
             identity: this.toObject(user)
           }),
           headers: {
             'Content-type': 'application/json'
           },
+          credentials: 'include'
         }
       );
-      const challenge = await result.json()
-      const signature = this.sign(challenge.message, user);
-      challenge.signature = signature
-      await fetch(
-        challenge_url + '/challenge',
-        {
-          body: JSON.stringify({
-            challenge,
-            identity: this.toObject(user)
-          }),
-          headers: {
-            'Content-type': 'application/json'
-          },
-        }
-      );
+      return user;
     }
 
     generate_username_signature(key, username) {
