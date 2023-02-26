@@ -35,7 +35,7 @@
     "jest": "^25.3.0",
     "js-x25519": "https://github.com/CryptoEsel/js-x25519",
     "noble-ripemd160": "^0.2.0",
-    "node-forge": "^0.9.1",
+    "node-forge": "^1.3.0",
     "stream": "^0.0.2",
     "stream-browserify": "^3.0.0",
     "terser-webpack-plugin": "^5.1.1",
