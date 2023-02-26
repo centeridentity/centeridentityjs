@@ -481,7 +481,7 @@ export default class CenterIdentity {
       var private_key = this.toHex(base58_to_binary(wif))
       console.log(private_key) //"801184CD2CDD640CA42CFC3A091C51D549B2F016D454B2774019C2B2D2E08529FD206EC97E"
 
-      return private_key.substr(2, private_key.length-12)
+      return private_key.substr(2, private_key.length-10)
     }
 
     verifyIssuedCredential(issuer, message, issuer_signature) {
