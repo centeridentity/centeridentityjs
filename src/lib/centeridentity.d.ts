@@ -7,6 +7,7 @@ export default class CenterIdentity {
     friends_list_wif: string;
     origin: string;
     selfGenerateTransaction: any;
+    precision: any;
     createRelationship(me: any, user: any, extra_data: any): Promise<any>;
     createRelationshipTransaction(me: any, user: any, group: any, extra_data: any): Promise<{
         rid: any;
@@ -38,13 +39,15 @@ export default class CenterIdentity {
     username: any;
     latitude: any;
     longitude: any;
+    setAsset(username: any, latitude: any, longitude: any, asset: any): Promise<any>;
+    getAsset(username: any, latitude: any, longitude: any): Promise<any>;
     get(username: any, latitude: any, longitude: any): Promise<any>;
     getLocation(): Promise<any>;
     showPosition(username: any, position: any): Promise<any>;
     generateRecovery(): Promise<any>;
     symmetric_key: string;
     rid: string;
-    encryptSeed(): Promise<any>;
+    encryptSeed(seed: any): Promise<any>;
     encrypt(keyStr: any, message: any): any;
     decryptSeed(): Promise<any>;
     decrypt(keyStr: any, message: any): string;
@@ -68,8 +71,19 @@ export default class CenterIdentity {
         dh_public_key: string;
     };
     getSharedSecret(me: any, them: any, their_txn: any): string;
-    authenticate(service_url?: string, challenge_url?: string): Promise<any>;
-    generate_username_signature(key: any, username: any): any;
+    authenticate(challenge_url?: string): Promise<{
+        api_key: any;
+        challenge: any;
+        identity: {
+            username: any;
+            username_signature: any;
+            public_key: any;
+        };
+    }>;
+    generate_username_signature(key: any, username: any): Promise<any>;
+    getAddress(pubKey: any): Promise<any>;
+    arbuf2hex(buffer: any): Promise<string>;
+    sha256(hexstr: any): Promise<string>;
     toHex(byteArray: any): string;
     hexToBytes(s: any): any;
     hexToByteArray(s: any): Uint8Array;

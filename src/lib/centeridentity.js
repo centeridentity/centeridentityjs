@@ -4,11 +4,13 @@ import base64 from 'base64-js';
 import X25519 from 'js-x25519';
 import wif from 'wif';
 import { base58_to_binary, binary_to_base58 } from 'base58-js'
+import ripemd160 from "noble-ripemd160";
+import bs58 from 'bs58'
 
 
 export default class CenterIdentity {
     constructor(kwargs) {
-        const {api_key, url_prefix, use_local_storage, strength, selfGenerateTransaction} = kwargs;
+        const {api_key, url_prefix, use_local_storage, strength, selfGenerateTransaction, precision} = kwargs;
         switch(strength) {
             case 'low':
                 this.strength = 0x0000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff;
@@ -24,11 +26,12 @@ export default class CenterIdentity {
                 break;
         }
         this.api_key = api_key;
-        this.url_prefix = url_prefix || 'https://centeridentity.com';
+        this.url_prefix = url_prefix || '';
         this.use_local_storage = use_local_storage || false;
         this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
         this.origin = window && window.location ? 'origin=' + encodeURIComponent(window.location.origin) : '';
         this.selfGenerateTransaction = selfGenerateTransaction || false;
+        this.precision = precision || 4
     }
 
     async createRelationship(me, user, extra_data) {
@@ -128,7 +131,7 @@ export default class CenterIdentity {
             return this.generateRecovery()
         }.bind(this))
         .then(function(position){
-            return this.encryptSeed();
+            return this.encryptSeed(this.user.wif);
         }.bind(this))
         .then(function(encryptedSeed){
           return new Promise(async function(resolve, reject){
@@ -169,7 +172,8 @@ export default class CenterIdentity {
             } else {
               var payload =  `{
                   "rid": "` + this.rid + `",
-                  "relationship": "` + encryptedSeed + `"
+                  "relationship": "` + encryptedSeed + `",
+                  "api_key": "` + this.api_key + `"
               }`;
               return fetch(this.url_prefix + '/bury', {
                   headers: {
@@ -216,6 +220,73 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
+    async setAsset(username, latitude, longitude, asset) {
+      return new Promise(function(resolve, reject){
+          this.username = username;
+          this.longitude = longitude;
+          this.latitude = latitude;
+          return resolve();
+      }.bind(this))
+      .then(function(){
+          return this.getLocation();
+      }.bind(this))
+      .then(function(position){
+          return this.showPosition(this.username, position);
+      }.bind(this))
+      .then(function(position){
+          return this.generateRecovery()
+      }.bind(this))
+      .then(function(position){
+          return this.encryptSeed(asset);
+      }.bind(this))
+      .then(function(encryptedSeed){
+        return new Promise(async function(resolve, reject){
+          var payload =  `{
+              "rid": "` + this.rid + `",
+              "relationship": "` + encryptedSeed + `",
+              "api_key": "` + this.api_key + `"
+          }`;
+          return fetch(this.url_prefix + '/bury', {
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              method: 'POST',
+              body: payload,
+          })
+          .then(async (res) => {
+              const data = await res.json();
+              return resolve(data);
+          })
+          .catch((err) => {
+              return reject(err);
+          })
+        }.bind(this));
+      }.bind(this))
+      .catch(function(err) {
+          console.log(err)
+      }.bind(this));
+    }
+
+    async getAsset(username, latitude, longitude) {
+        return new Promise(function(resolve, reject){
+            this.longitude = longitude;
+            this.latitude = latitude;
+            return resolve();
+        }.bind(this))
+        .then(function(){
+            return this.getLocation();
+        }.bind(this))
+        .then(function(position){
+            return this.showPosition(username, position);
+        }.bind(this))
+        .then(function(){
+            return this.generateRecovery();
+        }.bind(this))
+        .then(function(position){
+            return this.decryptSeed();
+        }.bind(this));
+    }
+
     async get(username, latitude, longitude) {
         return new Promise(function(resolve, reject){
             this.longitude = longitude;
@@ -258,9 +329,9 @@ export default class CenterIdentity {
 
     async showPosition(username, position) {
         return new Promise(function(resolve, reject){
-            var lat = position.coords.latitude.toFixed(5);
-            var long = position.coords.longitude.toFixed(5);
-            this.header = long + (lat + username);
+            var lat = position.coords.latitude.toFixed(this.precision);
+            var long = position.coords.longitude.toFixed(this.precision);
+            this.header = long + (lat + username) + this.api_key;
             return resolve();
         }.bind(this));
     }
@@ -285,9 +356,9 @@ export default class CenterIdentity {
         }.bind(this));
     }
 
-    async encryptSeed() {
+    async encryptSeed(seed) {
         return new Promise(function(resolve, reject){
-            var encrypted_seed = this.encrypt(this.symmetric_key, this.user.wif);
+            var encrypted_seed = this.encrypt(this.symmetric_key, seed);
             return resolve(encrypted_seed)
         }.bind(this));
     }
@@ -304,11 +375,15 @@ export default class CenterIdentity {
 
     async decryptSeed() {
         return new Promise(function(resolve, reject){
-            fetch(this.url_prefix + '/digup?rid=' + this.rid, {
-                method: 'GET',
+            fetch(this.url_prefix + '/digup', {
+                method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                }
+                },
+                body: JSON.stringify({
+                  api_key: this.api_key,
+                  rid: this.rid
+                })
             })
             .then(async (result) => {
                 var data = await result.json();
@@ -336,54 +411,56 @@ export default class CenterIdentity {
     }
 
     createUser(username) {
-        return new Promise(async function(resolve, reject){
-            const ECPair = ec('secp256k1');
-            var key = ECPair.genKeyPair();
-            var private_key = key.getPrivate().toString('hex');
-            var public_key = key.getPublic().encode('hex');
-            var wif = this.toWif(private_key);
-            return resolve({
-                username_signature: this.generate_username_signature(key, username),
-                username: username,
-                private_key: private_key,
-                public_key: public_key,
-                key: key,
-                wif: wif
-            })
-        }.bind(this));
+      return new Promise(async function(resolve, reject){
+        const ECPair = new ec('secp256k1');
+        var key = ECPair.genKeyPair();
+        var private_key = key.getPrivate().toString('hex');
+        var public_key = key.getPublic(true, 'hex').encode('hex');
+        var wif = this.toWif(private_key);
+        return resolve({
+          username_signature: await this.generate_username_signature(key, username),
+          username: username,
+          private_key: private_key,
+          public_key: public_key,
+          key: key,
+          wif: wif,
+          address: await this.getAddress(public_key)
+        })
+      }.bind(this));
     }
 
     reviveUser(wif, username) {
-        return new Promise(function(resolve, reject){
-            const ECPair = ec('secp256k1')
-            var private_key = this.fromWif(wif);
-            var key = ECPair.keyFromPrivate(private_key)
-            var public_key = key.getPublic().encode('hex');
-            this.user = {
-                username_signature: this.generate_username_signature(key, username),
-                username: username,
-                public_key: public_key,
-                key: key,
-                wif: wif
-            }
-            return resolve(this.user);
-        }.bind(this));
+      return new Promise(async function(resolve, reject){
+        const ECPair = new ec('secp256k1');
+        var private_key = this.fromWif(wif);
+        var key = ECPair.keyFromPrivate(private_key)
+        var public_key = key.getPublic(true, 'hex');
+        this.user = {
+          username_signature: await this.generate_username_signature(key, username),
+          username: username,
+          public_key: public_key,
+          key: key,
+          wif: wif,
+          address: await this.getAddress(public_key)
+        }
+        return resolve(this.user);
+      }.bind(this));
     }
 
     sign(message, user) {
-        return new Promise(function(resolve, reject){
-            var hash = forge.sha256.create().update(message).digest().toHex()
-            var der = user.key.sign(hash).toDER();
-            return resolve(base64.fromByteArray(der));
-        }.bind(this));
+      return new Promise(function(resolve, reject){
+        var hash = forge.sha256.create().update(message).digest().toHex()
+        var der = user.key.sign(hash).toDER();
+        return resolve(base64.fromByteArray(der));
+      }.bind(this));
     }
 
     verify(message, user, signature) {
-        const ECPair = ec('secp256k1');
-        var hash = forge.sha256.create().update(message).digest().toHex()
-        var pubKey = ECPair.keyFromPublic(user.public_key, 'hex');
-        var result = pubKey.verify(hash, base64.toByteArray(signature));
-        return result;
+      const ECPair = new ec('secp256k1');
+      var hash = forge.sha256.create().update(message).digest().toHex()
+      var pubKey = ECPair.keyFromPublic(user.public_key, 'hex');
+      var result = pubKey.verify(hash, base64.toByteArray(signature));
+      return result;
     }
 
     toWif(private_key) {
@@ -404,7 +481,7 @@ export default class CenterIdentity {
       var private_key = this.toHex(base58_to_binary(wif))
       console.log(private_key) //"801184CD2CDD640CA42CFC3A091C51D549B2F016D454B2774019C2B2D2E08529FD206EC97E"
 
-      return private_key.substr(2, private_key.length-8)
+      return private_key.substr(2, private_key.length-12)
     }
 
     verifyIssuedCredential(issuer, message, issuer_signature) {
@@ -633,14 +710,15 @@ export default class CenterIdentity {
         return this.toHex(X25519.getSharedKey(privk, pubk));
     }
 
-    async authenticate(service_url='', challenge_url='') {
+    async authenticate(challenge_url='') {
       const userJson = JSON.parse(localStorage.getItem('identity'));
       const user = await this.reviveUser(userJson.wif, userJson.username);
       const result = await fetch(
-        challenge_url || 'https://centeridentity.com/challenge',
+        challenge_url || '/challenge',
         {
           method: 'POST',
           body: JSON.stringify({
+            api_key: this.api_key,
             identity: this.toObject(user)
           }),
           headers: {
@@ -651,25 +729,54 @@ export default class CenterIdentity {
       const data = (await result.json()).challenge
       const signature = await this.sign(data.challenge.message, user);
       data.challenge.signature = signature
-      await fetch(
-        service_url,
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            challenge: data.challenge,
-            identity: this.toObject(user)
-          }),
-          headers: {
-            'Content-type': 'application/json'
-          },
-          credentials: 'include'
-        }
-      );
-      return user;
+      return {
+        api_key: this.api_key,
+        challenge: data.challenge,
+        identity: this.toObject(user)
+      };
     }
 
-    generate_username_signature(key, username) {
-        return base64.fromByteArray(key.sign(forge.sha256.create().update(username).digest().toHex()).toDER());
+    async generate_username_signature(key, username) {
+        return await this.sign(username, {key: key});
+    }
+
+    async getAddress(pubKey) {
+      const pubkey256 = await this.sha256(pubKey)
+      const hash160 = ripemd160(this.hexToByteArray(pubkey256))
+      console.log(this.toHex(hash160))
+      const first = await this.sha256('00' + this.toHex(hash160))
+      console.log(first)
+      const pubkey2562 = await this.sha256(first)
+      console.log(this.toHex(pubkey2562))
+      const unencodedAddress = "00" + this.toHex(hash160) + pubkey2562.substring(0,8)
+      return bs58.encode(this.hexToByteArray(unencodedAddress))
+    }
+
+    async arbuf2hex(buffer) {
+      var hexCodes = [];
+      var view = new DataView(buffer);
+      for (var i = 0; i < view.byteLength; i += 4) {
+        // Using getUint32 reduces the number of iterations needed (we process 4 bytes each time)
+        var value = view.getUint32(i)
+        // toString(16) will give the hex representation of the number without padding
+        var stringValue = value.toString(16)
+        // We use concatenation and slice for padding
+        var padding = '00000000'
+        var paddedValue = (padding + stringValue).slice(-padding.length)
+        hexCodes.push(paddedValue);
+      }
+
+      // Join all the hex strings into one
+      return hexCodes.join("");
+    }
+
+    async sha256(hexstr) {
+      // We transform the string into an arraybuffer.
+      var buffer = new Uint8Array(hexstr.match(/[\da-f]{2}/gi).map(function (h) {
+          return parseInt(h, 16)
+      }));
+      const hash = await crypto.subtle.digest("SHA-256", buffer)
+      return this.arbuf2hex(hash);
     }
 
     toHex(byteArray) {
@@ -699,10 +806,10 @@ export default class CenterIdentity {
     }
 
     generate_rid(user1, user2, extra_data='') {
-        var bulletin_secrets = [user1.username_signature, user2.username_signature].sort(function (a, b) {
+        var username_signatures = [user1.username_signature, user2.username_signature].sort(function (a, b) {
             return a.toLowerCase().localeCompare(b.toLowerCase());
         });
-        return forge.sha256.create().update(bulletin_secrets[0] + bulletin_secrets[1] + extra_data).digest().toHex();
+        return forge.sha256.create().update(username_signatures[0] + username_signatures[1] + extra_data).digest().toHex();
     }
 
     async generateTransaction(
@@ -974,7 +1081,7 @@ export default class CenterIdentity {
           message,
           collection
         );
-        return await fetch(this.url_prefix + '/transaction?bulletin_secret=fu&' + this.origin, {
+        return await fetch(this.url_prefix + '/transaction?username_signature=fu&' + this.origin, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1100,7 +1207,8 @@ export default class CenterIdentity {
         friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
       }
       var myRel = await this.createRelationshipTransaction(me, them, friendList, extra_data);
-      await fetch(this.url_prefix + '/transaction?bulletin_secret=fu&' + this.origin, {
+      myRel.api_key = this.api_key
+      await fetch(this.url_prefix + '/bury?' + this.origin, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

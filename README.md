@@ -2,6 +2,8 @@ Center identity makes it easy for developers to manager their users without losi
 
 #Build
 `export NODE_OPTIONS=--openssl-legacy-provider`
+`eval $(ssh-agent)`
+`ssh-add ssh/private_key`
 Issue this command:
 `webpack`
 

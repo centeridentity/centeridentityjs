@@ -11,5 +11,6 @@ module.exports = {
   optimization: {
       minimize: false
   },
-  mode: 'production'
+  mode: 'production',
+  devtool: 'eval-source-map'
 };
