@@ -415,7 +415,7 @@ export default class CenterIdentity {
         const ECPair = new ec('secp256k1');
         var key = ECPair.genKeyPair();
         var private_key = key.getPrivate().toString('hex');
-        var public_key = key.getPublic(true, 'hex').encode('hex');
+        var public_key = key.getPublic(true, 'hex');
         var wif = this.toWif(private_key);
         return resolve({
           username_signature: await this.generate_username_signature(key, username),
