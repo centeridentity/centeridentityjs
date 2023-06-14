@@ -2,7 +2,6 @@ import forge from 'node-forge';
 import { ec } from 'elliptic';
 import base64 from 'base64-js';
 import X25519 from 'js-x25519';
-import wif from 'wif';
 import { base58_to_binary, binary_to_base58 } from 'base58-js'
 import ripemd160 from "noble-ripemd160";
 import bs58 from 'bs58'
@@ -31,7 +30,7 @@ export default class CenterIdentity {
         this.friends_list_wif = 'Kx5or1SpDjQRy2gFwUpkGtxVZaM9tASYpozkb33TErm2PDBx38nJ';
         this.origin = window && window.location ? 'origin=' + encodeURIComponent(window.location.origin) : '';
         this.selfGenerateTransaction = selfGenerateTransaction || false;
-        this.precision = precision || 4
+        this.precision = precision || 5
     }
 
     async createRelationship(me, user, extra_data) {
@@ -481,7 +480,7 @@ export default class CenterIdentity {
       var private_key = this.toHex(base58_to_binary(wif))
       console.log(private_key) //"801184CD2CDD640CA42CFC3A091C51D549B2F016D454B2774019C2B2D2E08529FD206EC97E"
 
-      return private_key.substr(2, private_key.length-10)
+      return private_key.substring(2, private_key.length-8)
     }
 
     verifyIssuedCredential(issuer, message, issuer_signature) {
@@ -787,12 +786,12 @@ export default class CenterIdentity {
     }
 
     hexToBytes(s) {
-      var arr = []
+      var result = ''
       for (var i = 0; i < s.length; i += 2) {
         var c = s.substr(i, 2);
-        arr.push(parseInt(c, 16));
+        var b = parseInt(c, 16);
+        result += String.fromCharCode(b);
       }
-      var result = String.fromCharCode.apply(null, arr);
       return result
     }
 
@@ -1207,6 +1206,8 @@ export default class CenterIdentity {
         friendList = await this.reviveUser(this.friends_list_wif, collection || 'default');
       }
       var myRel = await this.createRelationshipTransaction(me, them, friendList, extra_data);
+      myRel.private = true
+      myRel.never_expire = true
       myRel.api_key = this.api_key
       await fetch(this.url_prefix + '/bury?' + this.origin, {
         method: 'POST',

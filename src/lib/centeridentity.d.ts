@@ -85,7 +85,7 @@ export default class CenterIdentity {
     arbuf2hex(buffer: any): Promise<string>;
     sha256(hexstr: any): Promise<string>;
     toHex(byteArray: any): string;
-    hexToBytes(s: any): any;
+    hexToBytes(s: any): string;
     hexToByteArray(s: any): Uint8Array;
     generate_rid(user1: any, user2: any, extra_data?: string): any;
     generateTransaction(user: any, public_key: any, dh_public_key: any, rid: any, relationship: any, fee: any, requester_rid: any, requested_rid: any): Promise<{
