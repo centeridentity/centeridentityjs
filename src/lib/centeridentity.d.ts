@@ -39,11 +39,16 @@ export default class CenterIdentity {
     username: any;
     latitude: any;
     longitude: any;
+    setV2(user: any, entropy: any): Promise<any>;
+    setFromNewV2(username: any, entropy: any): Promise<any>;
+    entropy: any;
     setAsset(username: any, latitude: any, longitude: any, asset: any): Promise<any>;
     getAsset(username: any, latitude: any, longitude: any): Promise<any>;
     get(username: any, latitude: any, longitude: any): Promise<any>;
+    getV2(username: any, entropy: any): Promise<any>;
     getLocation(): Promise<any>;
     showPosition(username: any, position: any): Promise<any>;
+    showPositionV2(entropy: any): Promise<any>;
     generateRecovery(): Promise<any>;
     symmetric_key: string;
     rid: string;
